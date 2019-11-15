@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
-import { DosaService } from '../../../servicio/dosa/dosa.service';
+import { DosaService, WDosa } from '../../../servicio/dosa/dosa.service';
 
 interface TreeNode<T> {
   data: T;
@@ -32,7 +32,7 @@ export class LstdosaComponent implements OnInit{
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private dosa : DosaService) {
-    this.dataSource = this.dataSourceBuilder.create(this.data);
+    
   }
   ngOnInit(){
     this.obtenerDatos() 
@@ -50,14 +50,23 @@ export class LstdosaComponent implements OnInit{
   }
 
   obtenerDatos(){
-    
-    this.dosa.listar().subscribe(
+    var wDosa : WDosa = {
+      desde: "2019-10-10",
+      hasta: "2019-10-11",
+    };
+
+    this.dosa.listar(wDosa).subscribe(
       (resp) => {
         console.log(resp)
         sessionStorage.setItem('key-iaim', resp.token)
         resp.Lista.forEach(d => {
           console.log(d.Cliente)
+          var registro = d.Cliente;
+          this.data.push({
+              data: { codigo: registro.codigo, cliente: registro.nombre, forma: registro.formapago },      
+          });
 
+          this.dataSource = this.dataSourceBuilder.create(this.data);
         });
         //this.router.navigateByUrl("/pages/")
         //this.loading = false;
@@ -70,19 +79,7 @@ export class LstdosaComponent implements OnInit{
   }
 
 
-  private data: TreeNode<FSEntry>[] = [
-    {
-      data: { codigo: 'Projects', cliente: '1.8 MB', forma: 'dir' },      
-    },
-    {
-      data: { codigo: 'Reports', forma: 'dir', cliente: '400 KB'},
-      
-    },
-    {
-      data: { codigo: 'Other', forma: 'dir', cliente: '109 MB'},
-      
-    },
-  ];
+  private data: TreeNode<FSEntry>[] = [ ];
 
   getShowOn(index: number) {
     const minWithForMultipleColumns = 400;

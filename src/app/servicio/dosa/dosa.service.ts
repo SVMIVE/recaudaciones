@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
+
+
+export interface WDosa  {
+  desde : string
+  hasta : string
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +19,7 @@ export class DosaService {
   obtener(id:string){
 
   }
-  listar() : any{
-    return this.httpClient.post<any>(this.url +  "dosa/listar", {})
+  listar(wDosa: WDosa) : any{
+    return this.httpClient.post<any>(this.url +  "dosa/listar", wDosa)
   }
 }
