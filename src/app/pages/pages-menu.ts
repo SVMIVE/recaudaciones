@@ -4,7 +4,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Principal',
     icon: 'grid-outline',
-    link: '/pages/home',
+    link: '/home/tasa',
     home: true,
   },
   {

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { TasaService } from '../../../servicio/tasa/tasa.service';
+
+interface Tasa {
+  descripcion : string
+  monto: string
+  fecha: string
+}
 
 @Component({
   selector: 'ngx-tasa',
@@ -7,9 +14,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TasaComponent implements OnInit {
 
-  constructor() { }
+  lstTasa = []
+  
+  constructor(private tasaService : TasaService) { }
 
   ngOnInit() {
+    this.tasaService.listar().subscribe(     
+      (resp) => {
+        console.log(resp)
+        
+        this.lstTasa = [
+          {
+            descripcion : "Dolar ",
+            fecha : resp[0].fecha_aplica_dol,
+            monto : parseFloat( resp[0].ta_dollar ).toFixed(2) + ' Bs. ' + resp[0].fecha_aplica_dol.substring(0, 10),
+          },
+          {
+            descripcion : "Euro ",
+            fecha : resp[0].fecha_aplica_eur,
+            monto : parseFloat(  resp[0].mn_euro ).toFixed(2) + ' Bs.  ' +  resp[0].fecha_aplica_eur.substring(0, 10),
+          },
+          {
+            descripcion : "Petro ",
+            fecha : resp[0].fecha_aplica_ptr,
+            monto : parseFloat( resp[0].mn_petro ).toFixed(2) + ' Bs.  ' +  resp[0].fecha_aplica_ptr.substring(0, 10),
+          }        
+        ]
+        console.log(this.lstTasa)
+      },
+      (error) =>{
+        console.log("Error del sistema")
+      }
+    );
   }
+
 
 }

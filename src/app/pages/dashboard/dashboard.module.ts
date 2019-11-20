@@ -31,6 +31,7 @@ import { TrafficComponent } from './traffic/traffic.component';
 import { TrafficChartComponent } from './traffic/traffic-chart.component';
 import { FormsModule } from '@angular/forms';
 import { TasaComponent } from './tasa/tasa.component';
+import { DosanoprocesadaComponent } from './dosanoprocesada/dosanoprocesada.component';
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import { TasaComponent } from './tasa/tasa.component';
     TrafficComponent,
     TrafficChartComponent,
     TasaComponent,
+    DosanoprocesadaComponent,
   ],
 })
 export class DashboardModule { }

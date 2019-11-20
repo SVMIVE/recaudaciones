@@ -1,12 +1,14 @@
+
 <div class="row">
   <div class="col-md-12">
     <nb-card>
-      <nb-card-header>Tasa de Cambio</nb-card-header>
+      <nb-card-header>Dosas No Procesadas</nb-card-header>
       <nb-card-body>
         <nb-list>
-          <nb-list-item *ngFor="let lst of lstTasa">
-            <nb-user [name]="lst.descripcion" [title]="lst.monto" color="#cccccc">
+          <nb-list-item *ngFor="let lst of lstDosa">
+            <nb-user [name]="lst.nombre" [title]="lst.codigo" color="#2EBB5D">
             </nb-user>
+           
           </nb-list-item>
         </nb-list>
              

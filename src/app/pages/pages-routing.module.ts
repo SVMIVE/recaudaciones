@@ -15,7 +15,7 @@ const routes: Routes = [{
       component: ECommerceComponent,
     },
     {
-      path: 'home',
+      path: 'tasa',
       component: DashboardComponent,
     },
     {

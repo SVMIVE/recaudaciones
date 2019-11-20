@@ -22,4 +22,8 @@ export class DosaService {
   listar(wDosa: WDosa) : any{
     return this.httpClient.post<any>(this.url +  "dosa/listar", wDosa)
   }
+
+  NoProcesadas(wDosa: WDosa) : any{
+    return this.httpClient.post<any>(this.url +  "dosa/noprocesadas", wDosa)
+  }
 }
