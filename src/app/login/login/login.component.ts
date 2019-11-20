@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 //        console.log(resp.token)
         sessionStorage.setItem('key-iaim', resp.token)
 
-        this.router.navigateByUrl("/pages/")
+        this.router.navigateByUrl("home")
         this.loading = false;
       },
       (error) => {

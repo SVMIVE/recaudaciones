@@ -5,5 +5,5 @@
  */
 export const environment = {
   production: true,
-  url : "https://192.168.41.27:2608/iaim/api/",
+  url : "https://192.168.41.14:2608/iaim/api/",
 };
