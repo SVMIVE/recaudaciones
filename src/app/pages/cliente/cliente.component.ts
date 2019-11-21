@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource } from '@nebular/theme';
 import { DosaService, WDosa } from '../../servicio/dosa/dosa.service';
+import { FormControl } from '@angular/forms';
 
 interface TreeNode<T> {
   data: T;
@@ -28,6 +29,8 @@ export class ClienteComponent implements OnInit {
   @ViewChild('escClose', { read: TemplateRef  , static: false }) escCloseTemplate: TemplateRef<HTMLElement>;
   @ViewChild('disabledEsc', { read: TemplateRef, static: false }) disabledEscTemplate: TemplateRef<HTMLElement>;
 
+  formControl = new FormControl(new Date());
+  ngModelDate = new Date();
   customColumn = 'Codigo';
   defaultColumns = [ 'Razon Social', 'Rif', 'Acciones' ];
   allColumns = [ this.customColumn, ...this.defaultColumns ];

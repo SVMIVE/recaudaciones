@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbTreeGridModule, NbCardModule, NbInputModule, NbTableModule, NbButtonModule, NbWindowModule, NbIconModule, NbSelectModule } from '@nebular/theme';
+import { NbMenuModule, NbTreeGridModule, NbCardModule, NbInputModule, NbTableModule, NbButtonModule, NbWindowModule, NbIconModule, NbSelectModule, NbDatepickerModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -28,6 +28,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbEvaIconsModule,
     NbIconModule,
     NbSelectModule,
+    NbDatepickerModule,
   ],
   declarations: [
     PagesComponent,

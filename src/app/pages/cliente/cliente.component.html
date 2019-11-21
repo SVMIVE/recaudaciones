@@ -101,25 +101,58 @@
                             </nb-select>
                         </div>
                     </div>
-                </div>
-
+                </div> <!-- Fin -->
 
                 <div class="row">
+                    
                      <div class="col-md-4">
                         <div class="form-group">
-                            <div class="full-name-inputs">
-                                <input type="text" nbInput fullWidth id="txtDireccion" placeholder="Dirección">
+                            <label for="exampleInputEstatus" class="label">Estatus</label><br>
+                            <nb-select placeholder="Estatus" [(selected)]="selectedItem" fullWidth>
+                                <nb-option value="0">Activo</nb-option>
+                                <nb-option value="1">Inactivo</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group">
+                            <label for="exampleInputActividad" class="label">Actividad</label><br>
+                            <nb-select placeholder="Actividad" [(selected)]="selectedItem" fullWidth>
+                                <nb-option value="0">030</nb-option>
+                                <nb-option value="1">043</nb-option>
+                            </nb-select>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="exampleInputIngresos" class="label">Declara Ingresos Brutos</label>
+                                <input type="text" nbInput fullWidth id="txtIngresos" placeholder="Declara Ingresos Brutos">
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputTelefono" class="label">Teléfono</label>
-                            <input type="text" nbInput fullWidth id="txtTeléfono" placeholder="Teléfono">
+                            <label for="exampleInputIngresos" class="label">Fecha de Inicio Contrato</label><br>
+                            <input nbInput fullWidth placeholder="Fecha de Inicio Contrato" [nbDatepicker]="formpicker">
+                                <nb-rangepicker #formpicker></nb-rangepicker>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputIngresos" class="label">Fecha de Modificación Contrato</label><br>
+                            <input nbInput fullWidth placeholder="Fecha de Modificación Contrato" [nbDatepicker]="formpickerR">
+                                <nb-rangepicker #formpickerR></nb-rangepicker>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputEmail" class="label">Email</label>
@@ -128,8 +161,26 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
+
+                            <label for="exampleInputTelefono" class="label">Teléfono</label>
+                            <input type="text" nbInput fullWidth id="txtTeléfono" placeholder="Teléfono">
+                        </div>
+                    </div>                    
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label for="exampleInputCodigoPostal" class="label">Código Postal</label>
                             <input type="text" nbInput fullWidth id="txtCodigoPostal" placeholder="Código Postal">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                     <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="full-name-inputs">
+                                <label for="exampleInputDireccion" class="label">Dirección Fiscal</label><br>
+                                <textarea nbInput fullWidth id="txtDireccion" placeholder="Dirección Fiscal"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
