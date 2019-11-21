@@ -11,4 +11,5 @@
 export const environment = {
   production: false,
   url : "https://192.168.41.27:2608/iaim/api/",
+  configWindow : { },
 };

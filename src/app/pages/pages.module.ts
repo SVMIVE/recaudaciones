@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbTreeGridModule } from '@nebular/theme';
+import { NbMenuModule, NbTreeGridModule, NbCardModule, NbInputModule, NbTableModule, NbButtonModule, NbWindowModule, NbIconModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -7,6 +7,9 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
+import { ClienteComponent } from './cliente/cliente.component';
+import { environment } from '../../environments/environment';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   imports: [
@@ -17,9 +20,17 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
     ECommerceModule,
     MiscellaneousModule,
     NbTreeGridModule,
+    NbCardModule,
+    NbInputModule,
+    NbTableModule,
+    NbButtonModule,
+    NbWindowModule.forRoot(environment.configWindow),
+    NbEvaIconsModule,
+    NbIconModule,
   ],
   declarations: [
     PagesComponent,
+    ClienteComponent,
   ],
 })
 export class PagesModule {

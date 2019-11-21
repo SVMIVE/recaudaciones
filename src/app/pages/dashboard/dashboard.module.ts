@@ -9,6 +9,7 @@ import {
   NbSelectModule,
   NbListModule,
   NbIconModule,
+  NbInputModule,
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
 
@@ -43,6 +44,7 @@ import { DosanoprocesadaComponent } from './dosanoprocesada/dosanoprocesada.comp
     NbTabsetModule,
     NbActionsModule,
     NbRadioModule,
+    NbInputModule,
     NbSelectModule,
     NbListModule,
     NbIconModule,

@@ -17,8 +17,7 @@ import {
   NbDialogModule,
   NbMenuModule,
   NbSidebarModule,
-  NbToastrModule,
-  NbWindowModule,
+  NbToastrModule,  
   NbLayoutModule,
   NbInputModule,
   NbButtonModule,
@@ -26,11 +25,15 @@ import {
   NbCardModule,
   NbTreeGridModule,
   NbSpinnerModule,
+  NbWindowModule,
+  
 } from '@nebular/theme';
 
 import { NotadebitoComponent } from './pages/notadebito/notadebito.component';
 import { LoginComponent } from './login/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../environments/environment';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   declarations: [
@@ -55,15 +58,16 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    
     NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
-    NbWindowModule.forRoot(),
+    NbWindowModule.forRoot(environment.configWindow),
     NbToastrModule.forRoot(),
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
+    NbEvaIconsModule,
+    NbIconModule,
   ],
   bootstrap: [AppComponent],
 })

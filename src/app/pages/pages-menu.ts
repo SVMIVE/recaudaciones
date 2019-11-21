@@ -10,7 +10,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Cliente',
     icon: 'person-add-outline',
-    link: '/pages/forms/layouts',
+    link: '/home/cliente',
     home: true,
   },
   {

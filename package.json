@@ -42,7 +42,7 @@
     "@asymmetrik/ngx-leaflet": "3.0.1",
     "@auth0/angular-jwt": "^3.0.1",
     "@nebular/auth": "4.4.0",
-    "@nebular/eva-icons": "4.4.0",
+    "@nebular/eva-icons": "^4.4.0",
     "@nebular/security": "4.4.0",
     "@nebular/theme": "4.4.0",
     "@schematics/angular": "^8.3.17",
