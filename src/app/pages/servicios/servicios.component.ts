@@ -10,21 +10,17 @@ interface TreeNode<T> {
 }
 
 interface FSEntry {
-  codigo: string;
-  razonsocial: string;
-  rif: string;
-  acciones?: boolean;
-  //items?: number;
+  Codigo: string;
+  Nombre: string;
+  Estatus: boolean;
+  Acciones: number;
 }
-
-
 @Component({
-  selector: 'ngx-cliente',
-  templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.scss']
+  selector: 'ngx-servicios',
+  templateUrl: './servicios.component.html',
+  styleUrls: ['./servicios.component.scss']
 })
-export class ClienteComponent implements OnInit {
-
+export class ServiciosComponent implements OnInit {
 
   @ViewChild('escClose', { read: TemplateRef  , static: false }) escCloseTemplate: TemplateRef<HTMLElement>;
   @ViewChild('disabledEsc', { read: TemplateRef, static: false }) disabledEscTemplate: TemplateRef<HTMLElement>;
@@ -32,7 +28,7 @@ export class ClienteComponent implements OnInit {
   formControl = new FormControl(new Date());
   ngModelDate = new Date();
   customColumn = 'Codigo';
-  defaultColumns = [ 'Razon Social', 'Rif', 'Acciones' ];
+  defaultColumns = [ 'Nombre', 'Estatus', 'Acciones'];
   allColumns = [ this.customColumn, ...this.defaultColumns ];
 
   dataSource: NbTreeGridDataSource<FSEntry>;
@@ -74,10 +70,10 @@ export class ClienteComponent implements OnInit {
           console.log(d.Cliente)
           var registro = d.Cliente; 
           /**
-            this.data.push({
-                data: { codigo: registro.codigo, razonsocial: registro.nombre, rif: registro.formapago },      
-            });
-          */
+          this.data.push({
+              data: { codigo: registro.numero },      
+          });
+           */
           this.dataSource = this.dataSourceBuilder.create(this.data);
         });
         //this.router.navigateByUrl("/pages/")
@@ -104,9 +100,16 @@ export class ClienteComponent implements OnInit {
   openWindowWithBackdrop() {
     this.windowService.open(
       this.escCloseTemplate,
-      { title: 'Datos del cliente', hasBackdrop: true },
+      { title: 'Crear documentos', hasBackdrop: true },
     );
   }
 
- 
+  add(){
+    console.log("Hola mundo")
+    this.data.push({
+      data: { Codigo: 'Erick', Nombre: "Hola", Estatus : true, Acciones: 1 },      
+    });
+    this.dataSource = this.dataSourceBuilder.create(this.data);
+
+  }
 }

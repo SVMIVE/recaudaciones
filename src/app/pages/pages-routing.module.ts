@@ -3,10 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { DocumentosComponent } from './documentos/documentos.component';
+import { BancosComponent } from './bancos/bancos.component';
+import { ActividadesComponent } from './actividades/actividades.component';
+import { ServiciosComponent } from './servicios/servicios.component';
+
 
 const routes: Routes = [{
   path: '',
@@ -25,8 +28,16 @@ const routes: Routes = [{
       component: DocumentosComponent,
     },
     {
-      path: 'dashboard',
-      component: ECommerceComponent,
+      path: 'bancos',
+      component: BancosComponent,
+    },
+    {
+      path: 'actividades',
+      component: ActividadesComponent,
+    },
+    {
+      path: 'servicios',
+      component: ServiciosComponent,
     },
     {
       path: 'layout',

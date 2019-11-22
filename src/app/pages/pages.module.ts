@@ -11,6 +11,9 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { environment } from '../../environments/environment';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { DocumentosComponent } from './documentos/documentos.component';
+import { BancosComponent } from './bancos/bancos.component';
+import { ActividadesComponent } from './actividades/actividades.component';
+import { ServiciosComponent } from './servicios/servicios.component';
 
 @NgModule({
   imports: [
@@ -35,6 +38,9 @@ import { DocumentosComponent } from './documentos/documentos.component';
     PagesComponent,
     ClienteComponent,
     DocumentosComponent,
+    BancosComponent,
+    ActividadesComponent,
+    ServiciosComponent,
   ],
 })
 export class PagesModule {

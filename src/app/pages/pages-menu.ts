@@ -25,15 +25,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },{
         title: 'Bancos',
         icon: 'inbox',
-        link: '/pages/forms/inputs',
+        link: '/home/bancos',
       },{
         title: 'Actividades',
         icon: 'bulb-outline',
-        link: '/pages/forms/inputs',
+        link: '/home/actividades',
       },{
         title: 'Servicios',
         icon: 'briefcase',
-        link: '/pages/forms/inputs',
+        link:'/home/servicios',
       },{
         title: 'Monedas',
         icon: 'hash',
