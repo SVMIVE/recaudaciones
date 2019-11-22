@@ -3,32 +3,67 @@ import { NbMenuItem } from '@nebular/theme';
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Principal',
-    icon: 'grid-outline',
+    icon: 'home',
     link: '/home/tasa',
     home: true,
+  },{
+    title: 'Documentos',
+    icon: 'book-outline',
+    link: '/home/documentos',
+  },{
+    title: 'Configuración',
+    icon: 'settings-2-outline',
+    children: [      
+      {
+        title: 'Cliente',
+        icon: 'person-add-outline',
+        link: '/home/cliente',
+      },{
+        title: 'Conceptos',
+        icon: 'layers',
+        link: '/pages/forms/inputs',
+      },{
+        title: 'Bancos',
+        icon: 'inbox',
+        link: '/pages/forms/inputs',
+      },{
+        title: 'Actividades',
+        icon: 'bulb-outline',
+        link: '/pages/forms/inputs',
+      },{
+        title: 'Servicios',
+        icon: 'briefcase',
+        link: '/pages/forms/inputs',
+      },{
+        title: 'Monedas',
+        icon: 'hash',
+        link: '/pages/forms/inputs',
+      },{
+        title: 'Pagadores',
+        icon: 'credit-card',
+        link: '/pages/forms/inputs',
+      },{
+        title: 'Control',
+        icon: 'options',
+        link: '/pages/forms/inputs',
+      },      
+      {
+        title: 'Seguirdad',
+        icon: 'shield',
+        link: '/auth/seguridad',
+      },
+    ],
+  },{
+    title: 'Cerrar Sesión',
+    icon: 'log-out',
+    link: '/home/documentos',
   },
-  {
-    title: 'Cliente',
-    icon: 'person-add-outline',
-    link: '/home/cliente',
-    home: true,
-  },
-  {
-    title: 'Conceptos',
-    icon: 'list-outline',
-    link: '/pages/forms/inputs',
-    home: true,
-  },
-  {
-    title: 'Maps',
-    icon: 'map-outline',
-    link: '/pages/iot-dashboard',
-  },
-  {
-    title: 'OTROS',
-    group: true,
-  },
-  {
+];
+
+
+/**
+ * 
+ {
     title: 'Documentos',
     icon: 'book-outline',
     children: [
@@ -59,26 +94,4 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-  {
-    title: 'Seguridad',
-    icon: 'lock-outline',
-    children: [
-      {
-        title: 'Login',
-        link: '/auth/login',
-      },
-      {
-        title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
-  },
-];
+ */

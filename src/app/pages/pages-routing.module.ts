@@ -6,15 +6,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { DocumentosComponent } from './documentos/documentos.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
-  children: [
-    {
-      path: 'dashboard',
-      component: ECommerceComponent,
-    },
+  children: [    
     {
       path: 'tasa',
       component: DashboardComponent,
@@ -22,6 +19,14 @@ const routes: Routes = [{
     {
       path: 'cliente',
       component: ClienteComponent,
+    },    
+    {
+      path: 'documentos',
+      component: DocumentosComponent,
+    },
+    {
+      path: 'dashboard',
+      component: ECommerceComponent,
     },
     {
       path: 'layout',
@@ -75,7 +80,7 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'tasa',
       pathMatch: 'full',
     },
     {

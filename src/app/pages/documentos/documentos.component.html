@@ -1,0 +1,148 @@
+<nb-card>
+    <nb-card-header>Documentos</nb-card-header>
+    <nb-card-body>
+
+            <div class="row">
+                    
+                     <div class="col-md-5">
+                        <div class="form-group">                            
+                            <nb-select placeholder="Tipo de Documento" [(selected)]="selectedItem" fullWidth>
+                                <nb-option value="0">Factura</nb-option>
+                                <nb-option value="1">Nota de Crédito</nb-option>
+                                <nb-option value="2">Nota de Debito</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                     <div class="col-md-5">
+                        <div class="form-group">
+                            <input placeholder="Contenido a filtrar" nbInput [nbFilterInput]="dataSource" id="search" class="search-input" fullWidth>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <button nbButton (click)="openWindowWithBackdrop()" shape="semi-round" size="medium" hero status="primary">
+                                <nb-icon icon="plus-outline"></nb-icon>
+                            </button>
+                        </div>
+                    </div>
+
+
+
+            </div>
+
+
+                
+     
+
+        <br><br>
+        <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
+
+        <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+        <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+
+        <ng-container [nbTreeGridColumnDef]="customColumn">
+            <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
+            {{customColumn}}
+            </th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
+            <!-- <nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></nb-fs-icon>-->    
+            {{row.data[customColumn]}}
+            </td>
+        </ng-container>
+
+        <ng-container *ngFor="let column of defaultColumns; let index = index"
+                        [nbTreeGridColumnDef]="column"
+                        [showOn]="getShowOn(index)">
+            <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
+            {{column}}
+            </th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column] || '-'}}</td>
+        </ng-container>
+
+        </table>
+
+    </nb-card-body>
+</nb-card>
+
+
+<ng-template #escClose>
+     <div class="row">
+        <div class="col-md-12">                
+            <form>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputTipo" class="label">Tipo de Documento:</label>
+                            <nb-select placeholder="Tipo de Documento" [(selected)]="selectedItem" fullWidth>
+                                <nb-option value="0">Factura</nb-option>
+                                <nb-option value="1">Nota de Crédito</nb-option>
+                                <nb-option value="2">Nota de Debito</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputTipo" class="label">Cliente:</label>
+                            <nb-select placeholder="Cliente" [(selected)]="selectedItem" fullWidth>
+                                <nb-option value="0"></nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputTipo" class="label">Servicio:</label>
+                            <nb-select placeholder="Servicio" [(selected)]="selectedItem" fullWidth>
+                                <nb-option value="0"></nb-option>
+                            </nb-select>
+                            
+                        </div>
+                    </div>
+                </div><!-- fin de la fila -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="exampleInputTipo" class="label">Concepto:</label>
+                            <nb-select placeholder="Concepto" [(selected)]="selectedItem" fullWidth>
+                                <nb-option value="0"></nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="exampleInputTipo" class="label">Cantidad:</label>
+                            <input placeholder="0" nbInput fullWidth>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="exampleInputTipo" class="label">Monto:</label>
+                            <input placeholder="0" nbInput fullWidth>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                             <label for="exampleInputTipo" class="label">% IVA:</label>
+                            <input placeholder="0" nbInput fullWidth>
+                        </div>
+                    </div>
+
+                </div><!-- fin de la fila -->
+
+                <div  class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2">
+                        <button nbButton fullWidth  (click)="Guardar()" type="button" class="home-button pull-right" status="danger">
+                        Cancelar
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button nbButton fullWidth  (click)="Guardar()" type="submit" class="home-button pull-right" status="success">
+                        Guardar
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</ng-template>

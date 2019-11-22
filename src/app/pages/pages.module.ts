@@ -10,6 +10,7 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { ClienteComponent } from './cliente/cliente.component';
 import { environment } from '../../environments/environment';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { DocumentosComponent } from './documentos/documentos.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
   declarations: [
     PagesComponent,
     ClienteComponent,
+    DocumentosComponent,
   ],
 })
 export class PagesModule {
