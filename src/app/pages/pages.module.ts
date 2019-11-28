@@ -1,20 +1,6 @@
 import { NgModule } from '@angular/core';
-<<<<<<< HEAD
-import {
-  NbMenuModule,
-  NbTreeGridModule,
-  NbCardModule,
-  NbInputModule,
-  NbTableModule,
-  NbButtonModule,
-  NbWindowModule,
-  NbIconModule,
-  NbSelectModule,
-  NbDatepickerModule,
-} from '@nebular/theme';
-=======
+
 import { NbMenuModule, NbTreeGridModule, NbCardModule, NbInputModule, NbTableModule, NbButtonModule, NbWindowModule, NbIconModule, NbSelectModule, NbDatepickerModule, NbToastrModule } from '@nebular/theme';
->>>>>>> bd3c32eb3f9c0906e99b99be0f4741e78e6c6c69
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
