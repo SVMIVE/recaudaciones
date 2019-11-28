@@ -5,24 +5,24 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
-                   <input placeholder="0" nbInput placeholder="Codigo" id="txtCodigo" fullWidth>
+                   <input placeholder="0" nbInput placeholder="Codigo" id="txtCodigo" [(ngModel)]="codigo" fullWidth>
                     
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input placeholder="0" nbInput placeholder="Nombre" id="txtNombre" fullWidth>
+                    <input placeholder="0" nbInput placeholder="Nombre" id="txtNombre"  [(ngModel)]="nombre" fullWidth>
                     
                 </div>
             </div>
            <div class="col-md-2">
                 <div class="form-group">
-                    <input placeholder="0" nbInput placeholder="Abreviatura" id="txtAbreviatura" fullWidth>                    
+                    <input placeholder="0" nbInput placeholder="Abreviatura" id="txtAbreviatura"  [(ngModel)]="abreviatura" fullWidth>                    
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <nb-select placeholder="Estatus" [(selected)]="selectedItem" fullWidth>
+                    <nb-select placeholder="Estatus" [(selected)]="selectedItem" fullWidth  [(ngModel)]="estatus" >
                         <nb-option value="0">Activo</nb-option>
                         <nb-option value="1">Inactivo</nb-option>
                     </nb-select>

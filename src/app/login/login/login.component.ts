@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   login () {
     this.loading = true;
     //setTimeout(() => this.loading = false, 3000);
-    var usr : Usuario = {
+    const usr : Usuario = {
       nombre : this.nombre,
       clave : this.clave
     }
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 //        console.log(resp.token)
         sessionStorage.setItem('key-iaim', resp.token)
 
-        this.router.navigateByUrl("home")
+        this.router.navigateByUrl("/home/tasa")
         this.loading = false;
       },
       (error) => {

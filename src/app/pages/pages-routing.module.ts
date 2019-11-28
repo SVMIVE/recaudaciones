@@ -40,21 +40,6 @@ const routes: Routes = [{
       component: ServiciosComponent,
     },
     {
-      path: 'layout',
-      loadChildren: () => import('./layout/layout.module')
-        .then(m => m.LayoutModule),
-    },
-    {
-      path: 'forms',
-      loadChildren: () => import('./forms/forms.module')
-        .then(m => m.FormsModule),
-    },
-    {
-      path: 'ui-features',
-      loadChildren: () => import('./ui-features/ui-features.module')
-        .then(m => m.UiFeaturesModule),
-    },
-    {
       path: 'modal-overlays',
       loadChildren: () => import('./modal-overlays/modal-overlays.module')
         .then(m => m.ModalOverlaysModule),

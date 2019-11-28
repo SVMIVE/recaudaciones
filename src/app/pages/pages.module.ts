@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbTreeGridModule, NbCardModule, NbInputModule, NbTableModule, NbButtonModule, NbWindowModule, NbIconModule, NbSelectModule, NbDatepickerModule } from '@nebular/theme';
+import { NbMenuModule, NbTreeGridModule, NbCardModule, NbInputModule, NbTableModule, NbButtonModule, NbWindowModule, NbIconModule, NbSelectModule, NbDatepickerModule, NbToastrModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -14,6 +14,7 @@ import { DocumentosComponent } from './documentos/documentos.component';
 import { BancosComponent } from './bancos/bancos.component';
 import { ActividadesComponent } from './actividades/actividades.component';
 import { ServiciosComponent } from './servicios/servicios.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -33,6 +34,8 @@ import { ServiciosComponent } from './servicios/servicios.component';
     NbIconModule,
     NbSelectModule,
     NbDatepickerModule,
+    FormsModule,
+    NbToastrModule,
   ],
   declarations: [
     PagesComponent,
