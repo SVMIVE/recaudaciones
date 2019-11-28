@@ -10,6 +10,9 @@ import {
   NbListModule,
   NbIconModule,
   NbInputModule,
+  NbTableModule,
+  NbTreeGridModule,
+  NbSpinnerModule,
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
 
@@ -33,6 +36,7 @@ import { TrafficChartComponent } from './traffic/traffic-chart.component';
 import { FormsModule } from '@angular/forms';
 import { TasaComponent } from './tasa/tasa.component';
 import { DosanoprocesadaComponent } from './dosanoprocesada/dosanoprocesada.component';
+import { ClienteComponent } from './cliente/cliente.component';
 
 @NgModule({
   imports: [
@@ -44,9 +48,12 @@ import { DosanoprocesadaComponent } from './dosanoprocesada/dosanoprocesada.comp
     NbTabsetModule,
     NbActionsModule,
     NbRadioModule,
+    NbTreeGridModule,
     NbInputModule,
     NbSelectModule,
     NbListModule,
+    NbSpinnerModule,
+    NbTableModule,
     NbIconModule,
     NbButtonModule,
     NgxEchartsModule,
@@ -70,6 +77,7 @@ import { DosanoprocesadaComponent } from './dosanoprocesada/dosanoprocesada.comp
     TrafficChartComponent,
     TasaComponent,
     DosanoprocesadaComponent,
+    ClienteComponent,
   ],
 })
 export class DashboardModule { }

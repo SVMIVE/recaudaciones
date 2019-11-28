@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment'
+import { environment } from '../../../environments/environment';
 
 export interface Usuario  {
-  nombre: string
-  clave : string
+  nombre: string;
+  clave: string;
+  clase: string;
 }
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 
 
@@ -21,7 +22,7 @@ export class LoginService {
 
   constructor(protected httpdClient: HttpClient, private router: Router) { }
 
-  Validar(usuario: Usuario): any{
-    return this.httpdClient.post<any>(this.url + "wusuario/login", usuario)
+  Validar(usuario: Usuario): any {
+   return this.httpdClient.post<any>(this.url + 'wusuario/login', usuario);
   }
 }

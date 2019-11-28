@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+<<<<<<< HEAD
 import {
   NbMenuModule,
   NbTreeGridModule,
@@ -11,6 +12,9 @@ import {
   NbSelectModule,
   NbDatepickerModule,
 } from '@nebular/theme';
+=======
+import { NbMenuModule, NbTreeGridModule, NbCardModule, NbInputModule, NbTableModule, NbButtonModule, NbWindowModule, NbIconModule, NbSelectModule, NbDatepickerModule, NbToastrModule } from '@nebular/theme';
+>>>>>>> bd3c32eb3f9c0906e99b99be0f4741e78e6c6c69
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -25,6 +29,7 @@ import { DocumentosComponent } from './documentos/documentos.component';
 import { BancosComponent } from './bancos/bancos.component';
 import { ActividadesComponent } from './actividades/actividades.component';
 import { ServiciosComponent } from './servicios/servicios.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -44,6 +49,8 @@ import { ServiciosComponent } from './servicios/servicios.component';
     NbIconModule,
     NbSelectModule,
     NbDatepickerModule,
+    FormsModule,
+    NbToastrModule,
   ],
   declarations: [
     PagesComponent,

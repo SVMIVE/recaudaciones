@@ -20,9 +20,7 @@ export class TasaComponent implements OnInit {
 
   ngOnInit() {
     this.tasaService.listar().subscribe(     
-      (resp) => {
-        console.log(resp)
-        
+      (resp) => {        
         this.lstTasa = [
           {
             descripcion : "Dolar ",
@@ -40,7 +38,6 @@ export class TasaComponent implements OnInit {
             monto : parseFloat( resp[0].mn_petro ).toFixed(2) + ' Bs.  ' +  resp[0].fecha_aplica_ptr.substring(0, 10),
           }        
         ]
-        console.log(this.lstTasa)
       },
       (error) =>{
         console.log("Error del sistema")
