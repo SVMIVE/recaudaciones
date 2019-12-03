@@ -1,7 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource } from '@nebular/theme';
-import { DosaService, WDosa } from '../../servicio/dosa/dosa.service';
-import { FormControl } from '@angular/forms';
+import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource, NbToastrService } from '@nebular/theme';
+
+import { FormControl, FormsModule } from '@angular/forms';
+import { ClienteService, WCliente } from '../../servicio/sysbase/cliente.service';
 
 interface TreeNode<T> {
   data: T;
@@ -10,10 +11,11 @@ interface TreeNode<T> {
 }
 
 interface FSEntry {
-  codigo: string;
-  razonsocial: string;
-  rif: string;
-  acciones?: boolean;
+  Rif: string;
+  Razonsocial: string;
+  Nit: string;
+  Codigo: string;
+  Acciones?: boolean;
   //items?: number;
 }
 
@@ -31,8 +33,8 @@ export class ClienteComponent implements OnInit {
 
   formControl = new FormControl(new Date());
   ngModelDate = new Date();
-  customColumn = 'Codigo';
-  defaultColumns = [ 'Razon Social', 'Rif', 'Acciones' ];
+  customColumn = 'Rif';
+  defaultColumns = [ 'Razonsocial', 'Nit', 'Codigo', 'Acciones' ];
   allColumns = [ this.customColumn, ...this.defaultColumns ];
 
   dataSource: NbTreeGridDataSource<FSEntry>;
@@ -40,9 +42,23 @@ export class ClienteComponent implements OnInit {
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
+  codigox = ""
+  razonSocialx = ""
+  rifx  = ""
+  nitx  = ""
+  tipox = ""
+  estatusx = ""
+  actividadx = ""
+  declararx  = ""
+  fechaIniciox = ""
+  fechaModificionx = ""
+  emailx = ""
+  telefonox = ""
+  codigoPostalx = ""
+  direccionx = ""
 
 
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private dosa : DosaService, private windowService: NbWindowService) {
+  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private cliente : ClienteService, private windowService: NbWindowService) {
     
   }
   ngOnInit(){
@@ -61,23 +77,16 @@ export class ClienteComponent implements OnInit {
   }
 
   obtenerDatos(){
-    var wDosa : WDosa = {
-      desde: "2019-10-10",
-      hasta: "2019-10-11",
-    };
 
-    this.dosa.listar(wDosa).subscribe(
+    this.cliente.listar().subscribe(
       (resp) => {
-        console.log(resp)
-        sessionStorage.setItem('key-iaim', resp.token)
-        resp.Lista.forEach(d => {
-          console.log(d.Cliente)
-          var registro = d.Cliente; 
-          /**
+        resp.forEach(d => {
+          console.log(d)
+          
             this.data.push({
-                data: { codigo: registro.codigo, razonsocial: registro.nombre, rif: registro.formapago },      
+                data: { Rif: d.cedula_rif, Razonsocial: d.razon_social, Nit: d.nit, Codigo: d.auxiliar_contable },      
             });
-          */
+          
           this.dataSource = this.dataSourceBuilder.create(this.data);
         });
         //this.router.navigateByUrl("/pages/")
@@ -107,6 +116,34 @@ export class ClienteComponent implements OnInit {
       { title: 'Datos del cliente', hasBackdrop: true },
     );
   }
+
+
+  add(){
+    var wCli : WCliente = {
+      Codigo: this.codigox,
+      RazonSocial: this.razonSocialx,
+      Rif: this.rifx,
+      Nit : this.nitx,
+      Tipo : this.tipox,
+      Estatus: this.estatusx,
+      Actividad: this.actividadx,
+      Declarar: this.declararx,
+      FechaInicio : this.fechaIniciox,
+      FechaModificacion: this.fechaModificionx,
+      Email: this.emailx,
+      Telefono: this.telefonox,
+      CodigoPostal: this.codigoPostalx,
+      Direccion: this.direccionx
+    }
+    console.log(wCli)
+    //this.cliente.add(wCli)
+
+  }
+
+  actualizar(){
+
+  }
+
 
  
 }

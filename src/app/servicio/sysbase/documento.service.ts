@@ -14,7 +14,7 @@ export class DocumentoService {
 
   }
   listar() : any{
-    return this.httpClient.get<any>(this.url +  "sybase/factura/listar")
+    return this.httpClient.get<any>(this.url +  "sybase/documento/lstdocactivos")
   }
 
 }

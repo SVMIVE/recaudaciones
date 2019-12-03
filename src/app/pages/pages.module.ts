@@ -15,6 +15,11 @@ import { BancosComponent } from './bancos/bancos.component';
 import { ActividadesComponent } from './actividades/actividades.component';
 import { ServiciosComponent } from './servicios/servicios.component';
 import { FormsModule } from '@angular/forms';
+import { ConceptoComponent } from './concepto/concepto.component';
+import { MonedaComponent } from './moneda/moneda.component';
+import { PagadoresComponent } from './pagadores/pagadores.component';
+import { ControlComponent } from './control/control.component';
+import { SeguridadComponent } from './seguridad/seguridad.component';
 
 @NgModule({
   imports: [
@@ -44,6 +49,11 @@ import { FormsModule } from '@angular/forms';
     BancosComponent,
     ActividadesComponent,
     ServiciosComponent,
+    ConceptoComponent,
+    MonedaComponent,
+    PagadoresComponent,
+    ControlComponent,
+    SeguridadComponent,
   ],
 })
 export class PagesModule {
