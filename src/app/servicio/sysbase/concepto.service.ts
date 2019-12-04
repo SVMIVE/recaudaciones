@@ -2,8 +2,15 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-export interface WCliente  {
-
+export interface WConcepto {
+  Descripcion : string
+  Servicio : number
+  Monto : number
+  Tipo : number
+  Estatus : number
+  Iva : number
+  Descuento : number
+  Numero : string
 }
 
 @Injectable({

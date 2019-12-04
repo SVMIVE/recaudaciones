@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource } from '@nebular/theme';
 import { FormControl } from '@angular/forms';
-import { ConceptoService } from '../../servicio/sysbase/concepto.service';
+import { ConceptoService, WConcepto } from '../../servicio/sysbase/concepto.service';
 
 interface TreeNode<T> {
   data: T;
@@ -40,6 +40,14 @@ export class ConceptoComponent implements OnInit {
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
+  Descripcion = ""
+  Servicio = 0
+  Monto = 0
+  Tipo = 0
+  Estatus = 0
+  Iva = 0
+  Descuento = 0
+  Numero = ""
 
 
   constructor(
@@ -102,6 +110,21 @@ export class ConceptoComponent implements OnInit {
       this.escCloseTemplate,
       { title: 'Crear Concepto', hasBackdrop: true },
     );
+  }
+
+  agregar(){
+    var wCon : WConcepto = {
+      Descripcion : this.Descripcion,
+      Servicio :  this.Servicio,
+      Monto : this.Monto,
+      Tipo : this.Tipo,
+      Estatus : this.Estatus,
+      Iva : this.Iva,
+      Descuento : this.Descuento,
+      Numero : this.Numero
+    }
+    
+
   }
 
 }

@@ -11,6 +11,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'book-outline',
     link: '/home/documentos',
   },{
+    title: 'Pagos',
+    icon: 'credit-card',
+    link: '/home/pagos',
+  },{
     title: 'Configuración',
     icon: 'settings-2-outline',
     children: [      
@@ -40,7 +44,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/home/moneda',
       },{
         title: 'Pagadores',
-        icon: 'credit-card',
+        icon: 'layers',
         link: '/home/pagadores',
       },{
         title: 'Control',

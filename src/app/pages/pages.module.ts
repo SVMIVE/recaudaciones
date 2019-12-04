@@ -20,6 +20,7 @@ import { MonedaComponent } from './moneda/moneda.component';
 import { PagadoresComponent } from './pagadores/pagadores.component';
 import { ControlComponent } from './control/control.component';
 import { SeguridadComponent } from './seguridad/seguridad.component';
+import { PagosComponent } from './pagos/pagos.component';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { SeguridadComponent } from './seguridad/seguridad.component';
     PagadoresComponent,
     ControlComponent,
     SeguridadComponent,
+    PagosComponent,
   ],
 })
 export class PagesModule {

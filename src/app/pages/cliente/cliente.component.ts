@@ -89,11 +89,8 @@ export class ClienteComponent implements OnInit {
           
           this.dataSource = this.dataSourceBuilder.create(this.data);
         });
-        //this.router.navigateByUrl("/pages/")
-        //this.loading = false;
       },
       (error) => {
-        //this.loading = false;
         console.error("No se logro conectar...")
       }
     )

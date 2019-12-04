@@ -13,6 +13,7 @@ import { ConceptoComponent } from './concepto/concepto.component';
 import { MonedaComponent } from './moneda/moneda.component';
 import { PagadoresComponent } from './pagadores/pagadores.component';
 import { ControlComponent } from './control/control.component';
+import { PagosComponent } from './pagos/pagos.component';
 
 
 const routes: Routes = [{
@@ -22,6 +23,10 @@ const routes: Routes = [{
     {
       path: 'tasa',
       component: DashboardComponent,
+    },
+    {
+      path: 'pagos',
+      component: PagosComponent,
     },
     {
       path: 'cliente',
