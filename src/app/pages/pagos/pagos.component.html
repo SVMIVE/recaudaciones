@@ -25,24 +25,19 @@
      <div class="row">
                     
  
-                     <div class="col-md-5">
-                        <div class="form-group">
-                            <input placeholder="Contenido a filtrar" nbInput [nbFilterInput]="dataSource" id="search" class="search-input" fullWidth>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
+                     
+                    <div class="col-md-3">
+                     
                             <button nbButton (click)="openWindowWithBackdrop()" shape="semi-round" size="medium" hero status="primary">
-                                <nb-icon icon="search-outline"></nb-icon>
+                               Seleccionar Cliente <nb-icon icon="search-outline"></nb-icon>
                             </button>
-                        </div>
                     </div>
 
 
 
             </div>
 
-      
+        <br>
         <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
 
         <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
