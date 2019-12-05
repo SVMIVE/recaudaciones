@@ -3,6 +3,9 @@ import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowSe
 
 import { FormControl, FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 interface TreeNode<T> {
   data: T;
@@ -21,6 +24,20 @@ interface FSEntry {
   Total?: number
 }
 
+
+export interface PeriodicElement {
+  Reglon: number
+  Numero: string
+  Forma: number
+  Banco: string
+}
+
+var ELEMENT_DATA: PeriodicElement[] = [
+  {Reglon: 1, Numero: 'Hydrogen', Forma: 1.0079, Banco: 'H'},
+  {Reglon: 2, Numero: 'Helium', Forma: 4.0026, Banco: 'He'},
+  {Reglon: 3, Numero: 'Lithium', Forma: 6.941, Banco: 'Li'},
+  {Reglon: 4, Numero: 'Beryllium', Forma: 9.0122, Banco: 'Be'},
+];
 
 @Component({
   selector: 'ngx-pagos',
@@ -45,9 +62,40 @@ export class PagosComponent implements OnInit {
 
   cantidad = ""
 
+  displayedColumns: string[] = ['select', 'Reglon', 'Numero', 'Forma', 'Banco'];
+  dataSources = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  selection = new SelectionModel<PeriodicElement>(true, []);
+
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private docu : DocumentoService, private windowService: NbWindowService) {
     
   }
+
+
+   /** Whether the number of selected elements matches the total number of rows. */
+   isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSources.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSources.data.forEach(row => this.selection.select(row));
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: PeriodicElement): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.reglon + 1}`;
+  }
+
+
+
+
   ngOnInit(){
     //this.obtenerDatos() 
   }
@@ -71,4 +119,15 @@ export class PagosComponent implements OnInit {
     return minWithForMultipleColumns + (nextColumnStep * index);
   }
 
+  openWindowWithBackdrop() {
+    this.windowService.open(
+      this.escCloseTemplate,
+      { title: 'Buscar Cliente', hasBackdrop: true },
+    );
+  }
+
+  Procesar(){
+    this.dataSources.data.forEach(row => console.log(row));
+    console.log(this.selection);
+  }
 }

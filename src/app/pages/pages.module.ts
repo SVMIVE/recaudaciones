@@ -21,6 +21,8 @@ import { PagadoresComponent } from './pagadores/pagadores.component';
 import { ControlComponent } from './control/control.component';
 import { SeguridadComponent } from './seguridad/seguridad.component';
 import { PagosComponent } from './pagos/pagos.component';
+import {MatTableModule} from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -42,6 +44,9 @@ import { PagosComponent } from './pagos/pagos.component';
     NbDatepickerModule,
     FormsModule,
     NbToastrModule,
+    MatTableModule,
+    MatCheckboxModule,
+    
   ],
   declarations: [
     PagesComponent,
