@@ -11,6 +11,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'book-outline',
     link: '/home/documentos',
   },{
+    title: 'Pagos',
+    icon: 'credit-card',
+    link: '/home/pagos',
+  },{
     title: 'Configuración',
     icon: 'settings-2-outline',
     children: [      
@@ -21,7 +25,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },{
         title: 'Conceptos',
         icon: 'layers',
-        link: '/pages/forms/inputs',
+        link: '/home/concepto',
       },{
         title: 'Bancos',
         icon: 'inbox',
@@ -37,26 +41,26 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },{
         title: 'Monedas',
         icon: 'hash',
-        link: '/pages/forms/inputs',
+        link: '/home/moneda',
       },{
         title: 'Pagadores',
-        icon: 'credit-card',
-        link: '/pages/forms/inputs',
+        icon: 'layers',
+        link: '/home/pagadores',
       },{
         title: 'Control',
         icon: 'options',
-        link: '/pages/forms/inputs',
+        link: '/home/control',
       },      
       {
         title: 'Seguirdad',
         icon: 'shield',
-        link: '/auth/seguridad',
+        link: '/home/seguridad',
       },
     ],
   },{
     title: 'Cerrar Sesión',
     icon: 'log-out',
-    link: '/home/documentos',
+    link: '/home/salir',
   },
 ];
 

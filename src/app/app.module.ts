@@ -34,6 +34,7 @@ import { LoginComponent } from './login/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbSpinnerModule,
     NbTreeGridModule,
     FormsModule,
+    Ng2SmartTableModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),

@@ -1,38 +1,43 @@
-<nb-card  accent="success"  >
-    <nb-card-header>Actividades</nb-card-header>
+<nb-card>
+    <nb-card-header>Pagos</nb-card-header>
     <nb-card-body>
 
-
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                   <input placeholder="0" nbInput placeholder="Codigo" id="txtCodigo" fullWidth>
+            <div class="row">
                     
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <input placeholder="0" nbInput placeholder="Nombre" id="txtNombre" fullWidth>
+                     <div class="col-md-6">
+                        <div class="form-group">                            
+                           <input placeholder="Fecha de Pago" nbInput  id="search" fullWidth>
+                        </div>
+                    </div>
+                     <div class="col-md-6">
+                        <div class="form-group">
+                            <input placeholder="Número de Pago" nbInput  id="search" fullWidth>
+                        </div>
+                    </div>
                     
-                </div>
-            </div>
-           <div class="col-md-3">
-                <div class="form-group">
-                    <input placeholder="0" nbInput placeholder="Moneda" id="txtMoneda" fullWidth>                    
-                </div>
+
+
+
             </div>
 
-            <div class="col-md-3">
-                <button nbButton (click)="add()" type="button" hero status="primary" size="small">
-                    <nb-icon icon="plus-outline"></nb-icon>
-                </button>
+        <hr>
+                
+     <div class="row">
+                    
+ 
+                     
+                    <div class="col-md-3">
+                     
+                            <button nbButton (click)="openWindowWithBackdrop()" shape="semi-round" size="medium" hero status="primary">
+                               Seleccionar Cliente <nb-icon icon="search-outline"></nb-icon>
+                            </button>
+                    </div>
+
+
+
             </div>
-           
-        </div><!-- fin de la fila -->
 
-
-
-        <br><br>
+        <br>
         <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
 
         <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>

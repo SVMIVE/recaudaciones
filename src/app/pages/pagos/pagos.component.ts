@@ -12,24 +12,22 @@ interface TreeNode<T> {
 
 interface FSEntry {
   Numero: string
-  Fecha?: string
   Tipo?: string
-  Cliente?: boolean
-  Codigo?: number
-  Estatus?: number
-  Monto?: number
+  Servicio?: string
+  Fecha?: boolean
+  Moneda?: number
   Iva?: number
-  Moneda: string
+  Monto?: number
+  Total?: number
 }
 
-@Component({
-  selector: 'ngx-documentos',
-  templateUrl: './documentos.component.html',
-  styleUrls: ['./documentos.component.scss']
-})
-export class DocumentosComponent implements OnInit {
 
-  
+@Component({
+  selector: 'ngx-pagos',
+  templateUrl: './pagos.component.html',
+  styleUrls: ['./pagos.component.scss']
+})
+export class PagosComponent implements OnInit {
 
   @ViewChild('escClose', { read: TemplateRef  , static: false }) escCloseTemplate: TemplateRef<HTMLElement>;
   @ViewChild('disabledEsc', { read: TemplateRef, static: false }) disabledEscTemplate: TemplateRef<HTMLElement>;
@@ -51,7 +49,7 @@ export class DocumentosComponent implements OnInit {
     
   }
   ngOnInit(){
-    this.obtenerDatos() 
+    //this.obtenerDatos() 
   }
   updateSort(sortRequest: NbSortRequest): void {
     this.sortColumn = sortRequest.column;
@@ -65,56 +63,12 @@ export class DocumentosComponent implements OnInit {
     return NbSortDirection.NONE;
   }
 
-  obtenerDatos(){
-    console.log("Errr")
-     this.docu.listar().subscribe(
-      (resp) => {
-        
-        resp.data.forEach(d => {
-          console.log(d)
-          
-          this.data.push({
-              data: { 
-                Numero: d.nu_documento, 
-                Fecha: d.fe_documento, 
-                Tipo: d.tp_documento, 
-                Cliente: d.razon_social, 
-                Codigo: d.cd_cliente, 
-                Estatus: d.st_documento, 
-                Monto: d.mn_documento_bf,
-                Iva : d.mn_iva_bf,
-                Moneda: d.moneda  
-            },      
-          });
-
-          this.dataSource = this.dataSourceBuilder.create(this.data);
-        });
-        //this.router.navigateByUrl("/pages/")
-        //this.loading = false;
-      },
-      (error) => {
-        //this.loading = false;
-        console.error("No se logro conectar...")
-      }
-    )
-  }
-
-
   private data: TreeNode<FSEntry>[] = [ ];
 
   getShowOn(index: number) {
     const minWithForMultipleColumns = 10;
     const nextColumnStep = 10;
     return minWithForMultipleColumns + (nextColumnStep * index);
-  }
-
-
-
-  openWindowWithBackdrop() {
-    this.windowService.open(
-      this.escCloseTemplate,
-      { title: 'Crear documentos', hasBackdrop: true },
-    );
   }
 
 }

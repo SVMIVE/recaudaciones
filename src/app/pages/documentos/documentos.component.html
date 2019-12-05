@@ -6,7 +6,7 @@
                     
                      <div class="col-md-5">
                         <div class="form-group">                            
-                            <nb-select placeholder="Tipo de Documento" [(selected)]="selectedItem" fullWidth>
+                            <nb-select placeholder="Tipo de Documento" [(selected)]="selectedItem" fullWidth  [(ngModel)]="codigo" >
                                 <nb-option value="0">Factura</nb-option>
                                 <nb-option value="1">Nota de Crédito</nb-option>
                                 <nb-option value="2">Nota de Debito</nb-option>
@@ -110,7 +110,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="exampleInputTipo" class="label">Cantidad:</label>
-                            <input placeholder="0" nbInput fullWidth>
+                            <input placeholder="0" nbInput fullWidth   >
                         </div>
                     </div>
                     <div class="col-md-3">
