@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card  accent="success" >
     <nb-card-header>Listar Clientes</nb-card-header>
     <nb-card-body>
 
@@ -29,7 +29,7 @@
             {{customColumn}}
             </th>
             <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            <!-- <nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></nb-fs-icon>-->    
+                <!-- <nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></nb-fs-icon>-->    
             {{row.data[customColumn]}}
             </td>
         </ng-container>
@@ -59,19 +59,19 @@
         <div class="col-md-12">
             
                 
-                <form >
+          
 
                 <div class="row">
                     <div class="col-md-4">
                     <div class="form-group">
                         <label for="exampleInputCodigo" class="label">Codigo:</label>
-                        <input type="text" nbInput fullWidth id="txtCodigo" placeholder="Codigo">
+                        <input type="text" nbInput fullWidth id="txtCodigo" [(ngModel)]="codigox" placeholder="Codigo">
                     </div>
                     </div>
                     <div class="col-md-8">
                     <div class="form-group">
                         <label for="exampleInputRazonSocial" class="label">Razón Social</label>
-                        <input type="text" nbInput fullWidth id="txtRazonSocial" placeholder="Razón Social">
+                        <input type="text" nbInput fullWidth id="txtRazonSocial"  [(ngModel)]="razonSocialx" placeholder="Razón Social">
                     </div>
                     </div>
                     <div class="col-md-4">
@@ -82,19 +82,19 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputRif" class="label">Rif:</label>
-                        <input type="text" nbInput fullWidth id="txtRif" placeholder="Rif">
+                        <input type="text" nbInput fullWidth id="txtRif"   [(ngModel)]="rif"  placeholder="Rif">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputNit" class="label">Nit</label>
-                            <input type="text" nbInput fullWidth id="txtNit" placeholder="Nit">
+                            <input type="text" nbInput fullWidth id="txtNit"   [(ngModel)]="nit"  placeholder="Nit">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputTipoCliente" class="label">Tipo Cliente</label><br>
-                            <nb-select placeholder="Tipo Cliente" [(selected)]="selectedItem" fullWidth>
+                            <nb-select placeholder="Tipo Cliente" [(selected)]="selectedItem" [(ngModel)]="razonSocialx" fullWidth>
                                 <nb-option value="0">Fijo</nb-option>
                                 <nb-option value="1">Temporal</nb-option>
                                 <nb-option value="2">Terminal Auxiliar</nb-option>
@@ -108,7 +108,7 @@
                      <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputEstatus" class="label">Estatus</label><br>
-                            <nb-select placeholder="Estatus" [(selected)]="selectedItem" fullWidth>
+                            <nb-select placeholder="Estatus" [(selected)]="selectedItem" [(ngModel)]="estatusx" fullWidth>
                                 <nb-option value="0">Activo</nb-option>
                                 <nb-option value="1">Inactivo</nb-option>
                             </nb-select>
@@ -118,7 +118,7 @@
                         <div class="form-group">
                             <div class="form-group">
                             <label for="exampleInputActividad" class="label">Actividad</label><br>
-                            <nb-select placeholder="Actividad" [(selected)]="selectedItem" fullWidth>
+                            <nb-select placeholder="Actividad" [(selected)]="selectedItem" [(ngModel)]="actividadx" fullWidth>
                                 <nb-option value="0">030</nb-option>
                                 <nb-option value="1">043</nb-option>
                             </nb-select>
@@ -129,7 +129,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="exampleInputIngresos" class="label">Declara Ingresos Brutos</label>
-                                <input type="text" nbInput fullWidth id="txtIngresos" placeholder="Declara Ingresos Brutos">
+                                <input type="text" nbInput fullWidth id="txtIngresos"  [(ngModel)]="declararx" placeholder="Declara Ingresos Brutos">
                             </div>
                         </div>
                     </div>
@@ -139,14 +139,16 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleInputIngresos" class="label">Fecha de Inicio Contrato</label><br>
-                            <input nbInput fullWidth placeholder="Fecha de Inicio Contrato" [nbDatepicker]="formpicker">
+                            <input nbInput fullWidth placeholder="Fecha de Inicio Contrato" [(ngModel)]="fechaIniciox" 
+                                [nbDatepicker]="formpicker">
                                 <nb-rangepicker #formpicker></nb-rangepicker>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleInputIngresos" class="label">Fecha de Modificación Contrato</label><br>
-                            <input nbInput fullWidth placeholder="Fecha de Modificación Contrato" [nbDatepicker]="formpickerR">
+                            <input nbInput fullWidth placeholder="Fecha de Modificación Contrato" [(ngModel)]="fechaModificionx" 
+                                [nbDatepicker]="formpickerR">
                                 <nb-rangepicker #formpickerR></nb-rangepicker>
                         </div>
                     </div>
@@ -156,20 +158,20 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputEmail" class="label">Email</label>
-                            <input type="text" nbInput fullWidth id="txtEmail" placeholder="Email">
+                            <input type="text" nbInput fullWidth id="txtEmail" [(ngModel)]="emailx" placeholder="Email">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
 
                             <label for="exampleInputTelefono" class="label">Teléfono</label>
-                            <input type="text" nbInput fullWidth id="txtTeléfono" placeholder="Teléfono">
+                            <input type="text" nbInput fullWidth id="txtTeléfono" [(ngModel)]="telefonox" placeholder="Teléfono">
                         </div>
                     </div>                    
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputCodigoPostal" class="label">Código Postal</label>
-                            <input type="text" nbInput fullWidth id="txtCodigoPostal" placeholder="Código Postal">
+                            <input type="text" nbInput fullWidth id="txtCodigoPostal" [(ngModel)]="codigoPostalx" placeholder="Código Postal">
                         </div>
                     </div>
                 </div>
@@ -179,13 +181,12 @@
                         <div class="form-group">
                             <div class="full-name-inputs">
                                 <label for="exampleInputDireccion" class="label">Dirección Fiscal</label><br>
-                                <textarea nbInput fullWidth id="txtDireccion" placeholder="Dirección Fiscal"></textarea>
+                                <textarea nbInput fullWidth id="txtDireccion"  [(ngModel)]="direccionx" placeholder="Dirección Fiscal"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-            </form>
                 
                 
         </div>
@@ -194,13 +195,13 @@
         <div  class="row">
             <div class="col-md-8"></div>
             <div class="col-md-2">
-                <button nbButton fullWidth  (click)="Guardar()" type="button" class="home-button pull-right" status="danger">
-                Cancelar
+                <button nbButton fullWidth  (click)="Cancelar()" type="button" class="home-button pull-right" status="danger">
+                    Cancelar
                 </button>
             </div>
             <div class="col-md-2">
                 <button nbButton fullWidth  (click)="Guardar()" type="submit" class="home-button pull-right" status="success">
-                Guardar
+                    Guardar
                 </button>
             </div>
         </div>

@@ -9,6 +9,11 @@ import { DocumentosComponent } from './documentos/documentos.component';
 import { BancosComponent } from './bancos/bancos.component';
 import { ActividadesComponent } from './actividades/actividades.component';
 import { ServiciosComponent } from './servicios/servicios.component';
+import { ConceptoComponent } from './concepto/concepto.component';
+import { MonedaComponent } from './moneda/moneda.component';
+import { PagadoresComponent } from './pagadores/pagadores.component';
+import { ControlComponent } from './control/control.component';
+import { PagosComponent } from './pagos/pagos.component';
 
 
 const routes: Routes = [{
@@ -18,6 +23,10 @@ const routes: Routes = [{
     {
       path: 'tasa',
       component: DashboardComponent,
+    },
+    {
+      path: 'pagos',
+      component: PagosComponent,
     },
     {
       path: 'cliente',
@@ -40,39 +49,20 @@ const routes: Routes = [{
       component: ServiciosComponent,
     },
     {
-      path: 'modal-overlays',
-      loadChildren: () => import('./modal-overlays/modal-overlays.module')
-        .then(m => m.ModalOverlaysModule),
+      path: 'concepto',
+      component: ConceptoComponent,
     },
     {
-      path: 'extra-components',
-      loadChildren: () => import('./extra-components/extra-components.module')
-        .then(m => m.ExtraComponentsModule),
+      path: 'moneda',
+      component: MonedaComponent,
     },
     {
-      path: 'maps',
-      loadChildren: () => import('./maps/maps.module')
-        .then(m => m.MapsModule),
+      path: 'pagadores',
+      component: PagadoresComponent,
     },
     {
-      path: 'charts',
-      loadChildren: () => import('./charts/charts.module')
-        .then(m => m.ChartsModule),
-    },
-    {
-      path: 'editors',
-      loadChildren: () => import('./editors/editors.module')
-        .then(m => m.EditorsModule),
-    },
-    {
-      path: 'tables',
-      loadChildren: () => import('./tables/tables.module')
-        .then(m => m.TablesModule),
-    },
-    {
-      path: 'miscellaneous',
-      loadChildren: () => import('./miscellaneous/miscellaneous.module')
-        .then(m => m.MiscellaneousModule),
+      path: 'control',
+      component: ControlComponent,
     },
     {
       path: '',

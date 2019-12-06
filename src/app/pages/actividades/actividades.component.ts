@@ -1,7 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource } from '@nebular/theme';
-import { DosaService, WDosa } from '../../servicio/dosa/dosa.service';
+
 import { FormControl } from '@angular/forms';
+import { ActividadService } from '../../servicio/sysbase/actividad.service';
 
 interface TreeNode<T> {
   data: T;
@@ -13,7 +14,7 @@ interface FSEntry {
   Codigo: string;
   Nombre: string;
   Moneda: string;
-  Acciones: number;
+  Acciones?: number;
 }
 
 @Component({
@@ -39,7 +40,7 @@ export class ActividadesComponent implements OnInit {
 
 
 
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private dosa : DosaService, private windowService: NbWindowService) {
+  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private actividad : ActividadService, private windowService: NbWindowService) {
     
   }
   ngOnInit(){
@@ -58,23 +59,16 @@ export class ActividadesComponent implements OnInit {
   }
 
   obtenerDatos(){
-    var wDosa : WDosa = {
-      desde: "2019-10-10",
-      hasta: "2019-10-11",
-    };
 
-    this.dosa.listar(wDosa).subscribe(
+
+    this.actividad.listar().subscribe(
       (resp) => {
-        console.log(resp)
-        sessionStorage.setItem('key-iaim', resp.token)
-        resp.Lista.forEach(d => {
-          console.log(d.Cliente)
-          var registro = d.Cliente; 
-          /**
+        resp .forEach(d => {
+          console.log(d)
+          
           this.data.push({
-              data: { codigo: registro.numero },      
+              data: { Codigo: d.codigo, Nombre: d.actividad, Moneda: d.moneda },      
           });
-           */
           this.dataSource = this.dataSourceBuilder.create(this.data);
         });
         //this.router.navigateByUrl("/pages/")
@@ -107,10 +101,7 @@ export class ActividadesComponent implements OnInit {
 
   add(){
     console.log("Hola mundo")
-    this.data.push({
-      data: { Codigo: 'Erick', Nombre: "Hola", Moneda : "kkk", Acciones: 1 },      
-    });
-    this.dataSource = this.dataSourceBuilder.create(this.data);
+   
 
   }
 

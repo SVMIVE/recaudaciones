@@ -34,6 +34,10 @@ import { LoginComponent } from './login/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { MatTableModule } from '@angular/material/table';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @NgModule({
   declarations: [
@@ -52,11 +56,14 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbLayoutModule,
     NbInputModule,
     NbButtonModule,
+    MatTableModule,
+    MatCheckboxModule,
     NbIconModule,
     NbCardModule,
     NbSpinnerModule,
     NbTreeGridModule,
     FormsModule,
+    Ng2SmartTableModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
