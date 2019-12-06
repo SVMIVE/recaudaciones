@@ -6,58 +6,66 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'home',
     link: '/home/tasa',
     home: true,
-  },{
+  }, {
     title: 'Documentos',
     icon: 'book-outline',
     link: '/home/documentos',
-  },{
+  }, {
     title: 'Pagos',
     icon: 'credit-card',
     link: '/home/pagos',
-  },{
+  }, {
     title: 'Configuración',
     icon: 'settings-2-outline',
-    children: [      
+    children: [
       {
         title: 'Cliente',
         icon: 'person-add-outline',
         link: '/home/cliente',
-      },{
+      },
+      {
         title: 'Conceptos',
         icon: 'layers',
         link: '/home/concepto',
-      },{
+      },
+      {
         title: 'Bancos',
         icon: 'inbox',
         link: '/home/bancos',
-      },{
+      },
+      {
         title: 'Actividades',
         icon: 'bulb-outline',
         link: '/home/actividades',
-      },{
+      },
+      {
         title: 'Servicios',
         icon: 'briefcase',
-        link:'/home/servicios',
-      },{
+        link: '/home/servicios',
+      },
+      {
         title: 'Monedas',
         icon: 'hash',
         link: '/home/moneda',
-      },{
+      },
+      {
         title: 'Pagadores',
         icon: 'layers',
         link: '/home/pagadores',
-      },{
+      },
+      {
         title: 'Control',
         icon: 'options',
         link: '/home/control',
-      },      
+      },
       {
         title: 'Seguirdad',
         icon: 'shield',
         link: '/home/seguridad',
       },
     ],
-  },{
+  },
+  {
     title: 'Cerrar Sesión',
     icon: 'log-out',
     link: '/home/salir',
@@ -66,7 +74,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
 
 /**
- * 
+ *
  {
     title: 'Documentos',
     icon: 'book-outline',
@@ -83,7 +91,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Nota Credito',
-        icon: 'file-text-outline',        
+        icon: 'file-text-outline',
         link: '/pages/forms/buttons',
       },
       {
