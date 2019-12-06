@@ -1,11 +1,10 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource } from '@nebular/theme';
-
+import '~@angular/material/theming';
 import { FormControl, FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 interface TreeNode<T> {
   data: T;
@@ -14,25 +13,25 @@ interface TreeNode<T> {
 }
 
 interface FSEntry {
-  Numero: string
-  Tipo?: string
-  Servicio?: string
-  Fecha?: boolean
-  Moneda?: number
-  Iva?: number
-  Monto?: number
-  Total?: number
+  Numero: string;
+  Tipo?: string;
+  Servicio?: string;
+  Fecha?: boolean;
+  Moneda?: number;
+  Iva?: number;
+  Monto?: number;
+  Total?: number;
 }
 
 
 export interface PeriodicElement {
-  Reglon: number
-  Numero: string
-  Forma: number
-  Banco: string
+  Reglon: number;
+  Numero: string;
+  Forma: number;
+  Banco: string;
 }
 
-var ELEMENT_DATA: PeriodicElement[] = [
+const ELEMENT_DATA: PeriodicElement[] = [
   {Reglon: 1, Numero: 'Hydrogen', Forma: 1.0079, Banco: 'H'},
   {Reglon: 2, Numero: 'Helium', Forma: 4.0026, Banco: 'He'},
   {Reglon: 3, Numero: 'Lithium', Forma: 6.941, Banco: 'Li'},
@@ -42,7 +41,7 @@ var ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'ngx-pagos',
   templateUrl: './pagos.component.html',
-  styleUrls: ['./pagos.component.scss']
+  styleUrls: ['./pagos.component.scss'],
 })
 export class PagosComponent implements OnInit {
 
@@ -60,14 +59,14 @@ export class PagosComponent implements OnInit {
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
-  cantidad = ""
+  cantidad = '';
 
   displayedColumns: string[] = ['select', 'Reglon', 'Numero', 'Forma', 'Banco'];
   dataSources = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private docu : DocumentoService, private windowService: NbWindowService) {
-    
+  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
+  private docu: DocumentoService, private windowService: NbWindowService) {
   }
 
 
@@ -96,8 +95,8 @@ export class PagosComponent implements OnInit {
 
 
 
-  ngOnInit(){
-    //this.obtenerDatos() 
+  ngOnInit() {
+  // this.obtenerDatos()
   }
   updateSort(sortRequest: NbSortRequest): void {
     this.sortColumn = sortRequest.column;
@@ -126,7 +125,7 @@ export class PagosComponent implements OnInit {
     );
   }
 
-  Procesar(){
+  Procesar() {
     this.dataSources.data.forEach(row => console.log(row));
     console.log(this.selection);
   }

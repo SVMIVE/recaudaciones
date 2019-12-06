@@ -36,8 +36,8 @@ import { environment } from '../environments/environment';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { MatTableModule } from '@angular/material/table';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @NgModule({
   declarations: [
@@ -58,6 +58,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     NbButtonModule,
     MatTableModule,
     MatCheckboxModule,
+    THIS_EXPR,
     NbIconModule,
     NbCardModule,
     NbSpinnerModule,
