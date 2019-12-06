@@ -1,5 +1,16 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbTreeGridModule, NbCardModule, NbInputModule, NbTableModule, NbButtonModule, NbWindowModule, NbIconModule, NbSelectModule, NbDatepickerModule, NbToastrModule } from '@nebular/theme';
+import {
+  NbMenuModule,
+  NbTreeGridModule,
+  NbCardModule,
+  NbInputModule,
+  NbTableModule,
+  NbButtonModule,
+  NbWindowModule,
+  NbIconModule,
+  NbSelectModule,
+  NbDatepickerModule,
+  NbToastrModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
