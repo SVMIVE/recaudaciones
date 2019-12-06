@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource } from '@nebular/theme';
-import '~@angular/material/theming';
 import { FormControl, FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -89,7 +88,7 @@ export class PagosComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.reglon + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.Reglon + 1}`;
   }
 
 
@@ -126,7 +125,7 @@ export class PagosComponent implements OnInit {
   }
 
   Procesar() {
-    this.dataSources.data.forEach(row => console.log(row));
-    console.log(this.selection);
+    this.dataSources.data.forEach(row => 'console.log(row)');
+    'console.log(this.selection)';
   }
 }
