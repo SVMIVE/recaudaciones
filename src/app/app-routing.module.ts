@@ -1,7 +1,7 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login/login.component';
-
+import { NbSelectModule } from '@nebular/theme';
 
 const routes: Routes = [
   {
@@ -24,7 +24,10 @@ const config: ExtraOptions = {
 };
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, config)],
+  imports: [
+    RouterModule.forRoot(routes, config),
+    NbSelectModule],
+
   exports: [RouterModule],
 })
 export class AppRoutingModule {

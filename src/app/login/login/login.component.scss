@@ -42,8 +42,7 @@
         background-color: #FFFFFF;
     }
     .background{
-
-        background: radial-gradient(left, black, white);
+        background-image: url('assets/images/sede1.jpg');
     }
     .cintillo{
         width: 100%;
@@ -52,6 +51,9 @@
         -moz-transform: rotate(-90deg);
         -ms-transform: rotate(-90deg);
         transform: rotate(-90deg);*/
-          
+    .sede{
+        width: 100%;
+    
+    }
     }
 }

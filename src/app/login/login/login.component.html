@@ -3,23 +3,23 @@
   <p style="text-align:right "><img src="assets/images/cintillo.png" class="banner"> </p>
 </div>-->
 
-<nb-layout center>  
-  <nb-layout-column size="giant">
-    <img src="assets/images/cintillo.png" class="cintillo" >
+<nb-layout center class="background">
+      <nb-layout-column size="giant">
+        <img src="assets/images/cintillo.png" class="cintillo" >
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"></div>
-        <!--<div class="Space">-->
-            <form (ngSubmit)="login()"  aria-labelledby="title">
-                        <nb-card size="giant" accent="info" [nbSpinner]="loading"
+        
+                      <form (ngSubmit)="login()"  aria-labelledby="title">
+                         <nb-card size="giant" accent="success" [nbSpinner]="loading"
                              nbSpinnerStatus="danger"
                              nbSpinnerSize="large"
                              nbSpinnerMessage="loading">
                             <nb-card-header>
                             <p style="text-align:center"><img src="assets/images/logo.jpg" class="logo"></p>
-                            <h2 id="title" class="title">Bienvenido</h2>
+                            <h2 id="title" class="text-info" style="text-align:center">Bienvenido</h2>
                             </nb-card-header>
-                        <nb-card-body>
+                        <nb-card-body size="giant">
                 
                 
                 <!--
@@ -38,7 +38,7 @@
                 -->
                     <div class="container">
                        
-                        <div class="col-xs-4">
+                        <div class="col-xs-12" size="large">
                           <!--<label class="label" for="input-nombre">Usuario:</label>-->
                           <input nbInput
                            class="form-control"
@@ -54,35 +54,34 @@
                            type="password"
                            id="input-clave"
                            placeholder="Contraseña">
-
-                          <input nbInput
-                           class="form-control"
-                           [(ngModel)]="clase"
-                           name="clase"
-                           type="clase"
-                           id="input-clave"
-                           placeholder="Contraseña">
+                         
+                          <nb-select placeholder="Módulo" [(selected)]="selectedItem" fullWidth  [(ngModel)]="estatus" filled status="info" class="form-controlgit">
+                              <nb-option value="0">Administrador</nb-option>
+                              <nb-option value="1">Usuario</nb-option>
+                          </nb-select>
+                          
                         </div>
                       
                     </div>
                  
                     
                         </nb-card-body>
-                            <div class="container" center>
+                            <div class="container">
                             <div class="col-xs-12">
                               <button nbButton
                                 fullWidth
-                                status="primary"
+                                status="success"
                                 size="large"
                                 [class.btn-pulse]="submitted" class="pull-right">
                                 Iniciar sesión
                               </button>
                             </div> 
                             </div>
-                                     <div class="title"><a href="" text-center>Recuperar Contraseña</a></div>
+                                     <div class="title"><a href="" text-center>¿Olvidaste la contraseña? Recuperar Contraseña</a></div>
                         </nb-card>
+                  
              </form>
-        <!--</div>-->
+        
       </div>
     </div>
   </nb-layout-column>

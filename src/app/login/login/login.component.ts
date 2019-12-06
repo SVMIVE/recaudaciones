@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit {
     clave: string;
     clase: string;
     loading = false;
+    selectedItem: string;
+    estatus: string;
 
     // tslint:disable-next-line: one-line
     constructor(private loginServicio: LoginService, private router: Router){ }
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
   login () {
     this.loading = true;
 
-    const usr : Usuario = {
+    const usr: Usuario = {
       nombre : this.nombre,
       clave : this.clave,
       clase : this.clase,
@@ -48,7 +50,7 @@ export class LoginComponent implements OnInit {
 //        console.log(resp.token)
         sessionStorage.setItem('key-iaim', resp.token);
 
-        this.router.navigateByUrl("/home/tasa")
+        this.router.navigateByUrl('/home/tasa');
         this.loading = false;
       },
       (error) => {
