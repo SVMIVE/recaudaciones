@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login/login.component';
 import { NbSelectModule } from '@nebular/theme';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { AppComponent } from './app.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('app/pages/pages.module')
+    loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
   },
 ];
@@ -28,7 +28,7 @@ const config: ExtraOptions = {
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, config),
-    AppComponent,
+    ,
     NbSelectModule,
     MatCheckboxModule,
     MatTableModule,

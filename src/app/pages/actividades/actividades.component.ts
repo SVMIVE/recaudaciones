@@ -20,7 +20,7 @@ interface FSEntry {
 @Component({
   selector: 'ngx-actividades',
   templateUrl: './actividades.component.html',
-  styleUrls: ['./actividades.component.scss']
+  styleUrls: ['./actividades.component.scss'],
 })
 export class ActividadesComponent implements OnInit {
 
@@ -41,10 +41,10 @@ export class ActividadesComponent implements OnInit {
 
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private actividad : ActividadService, private windowService: NbWindowService) {
-    
+
   }
-  ngOnInit(){
-    this.obtenerDatos() 
+  ngOnInit() {
+    this.obtenerDatos();
   }
   updateSort(sortRequest: NbSortRequest): void {
     this.sortColumn = sortRequest.column;
@@ -58,27 +58,27 @@ export class ActividadesComponent implements OnInit {
     return NbSortDirection.NONE;
   }
 
-  obtenerDatos(){
+  obtenerDatos() {
 
 
     this.actividad.listar().subscribe(
       (resp) => {
         resp .forEach(d => {
-          console.log(d)
-          
+          console.log(d);
+
           this.data.push({
-              data: { Codigo: d.codigo, Nombre: d.actividad, Moneda: d.moneda },      
-          });
+              data: { Codigo: d.codigo, Nombre: d.actividad, Moneda: d.moneda },
+                      });
           this.dataSource = this.dataSourceBuilder.create(this.data);
         });
-        //this.router.navigateByUrl("/pages/")
-        //this.loading = false;
+        // this.router.navigateByUrl("/pages/")
+        // this.loading = false;
       },
       (error) => {
-        //this.loading = false;
-        console.error("No se logro conectar...")
-      }
-    )
+        // this.loading = false;
+        console.error('No se logro conectar...');
+      },
+    );
   }
 
 
@@ -99,9 +99,9 @@ export class ActividadesComponent implements OnInit {
     );
   }
 
-  add(){
-    console.log("Hola mundo")
-   
+  add() {
+    console.log('Hola mundo');
+
 
   }
 
