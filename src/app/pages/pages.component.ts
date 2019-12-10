@@ -15,8 +15,7 @@ import { Router } from '@angular/router';
 })
 export class PagesComponent {
 
-  constructor(){
-    
+  constructor() {
   }
   menu = MENU_ITEMS;
 }

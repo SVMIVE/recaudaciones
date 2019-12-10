@@ -1,6 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
@@ -14,12 +13,12 @@ import { MonedaComponent } from './moneda/moneda.component';
 import { PagadoresComponent } from './pagadores/pagadores.component';
 import { ControlComponent } from './control/control.component';
 import { PagosComponent } from './pagos/pagos.component';
-
-
+import {MatTableModule} from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
-  children: [    
+  children: [
     {
       path: 'tasa',
       component: DashboardComponent,
@@ -31,7 +30,7 @@ const routes: Routes = [{
     {
       path: 'cliente',
       component: ClienteComponent,
-    },    
+    },
     {
       path: 'documentos',
       component: DocumentosComponent,
@@ -77,7 +76,10 @@ const routes: Routes = [{
 }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes),
+
+    MatTableModule,
+    MatCheckboxModule],
   exports: [RouterModule],
 })
 export class PagesRoutingModule {

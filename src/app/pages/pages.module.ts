@@ -1,5 +1,16 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbTreeGridModule, NbCardModule, NbInputModule, NbTableModule, NbButtonModule, NbWindowModule, NbIconModule, NbSelectModule, NbDatepickerModule, NbToastrModule } from '@nebular/theme';
+import {
+  NbMenuModule,
+  NbTreeGridModule,
+  NbCardModule,
+  NbInputModule,
+  NbTableModule,
+  NbButtonModule,
+  NbWindowModule,
+  NbIconModule,
+  NbSelectModule,
+  NbDatepickerModule,
+  NbToastrModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -23,7 +34,6 @@ import { SeguridadComponent } from './seguridad/seguridad.component';
 import { PagosComponent } from './pagos/pagos.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -46,7 +56,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     NbToastrModule,
     MatTableModule,
     MatCheckboxModule,
-    
+
+
   ],
   declarations: [
     PagesComponent,

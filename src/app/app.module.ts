@@ -12,12 +12,13 @@ import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {
+  NbSelectModule,
   NbChatModule,
   NbDatepickerModule,
   NbDialogModule,
   NbMenuModule,
   NbSidebarModule,
-  NbToastrModule,  
+  NbToastrModule,
   NbLayoutModule,
   NbInputModule,
   NbButtonModule,
@@ -26,7 +27,6 @@ import {
   NbTreeGridModule,
   NbSpinnerModule,
   NbWindowModule,
-  
 } from '@nebular/theme';
 
 import { NotadebitoComponent } from './pages/notadebito/notadebito.component';
@@ -36,16 +36,15 @@ import { environment } from '../environments/environment';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { MatTableModule } from '@angular/material/table';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
      NotadebitoComponent,
-     LoginComponent    
+     LoginComponent,
     ],
   imports: [
+    NbSelectModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

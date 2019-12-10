@@ -8,7 +8,7 @@ import { User } from '../../@core/data/users';
 @Component({
   selector: 'ngx-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 
 
@@ -22,42 +22,42 @@ export class LoginComponent implements OnInit {
     messages: string[];
     submitted: boolean;
     rememberMe: boolean;
-
-    
-    nombre : string
-    clave : string
+    nombre: string;
+    clave: string;
+    clase: string;
     loading = false;
+    selectedItem: string;
+    estatus: string;
 
-    constructor(private loginServicio: LoginService, private router : Router){
-      
-    }
+    // tslint:disable-next-line: one-line
+    constructor(private loginServicio: LoginService, private router: Router){ }
 
   ngOnInit() {
-    console.error("Control de pasos")
+    console.error('Control de pasos');
   }
 
   login () {
     this.loading = true;
-    //setTimeout(() => this.loading = false, 3000);
-    const usr : Usuario = {
+
+    const usr: Usuario = {
       nombre : this.nombre,
-      clave : this.clave
-    }
+      clave : this.clave,
+      clase : this.clase,
+    };
 
     this.loginServicio.Validar(usr).subscribe(
       (resp) => {
 //        console.log(resp.token)
-        sessionStorage.setItem('key-iaim', resp.token)
+        sessionStorage.setItem('key-iaim', resp.token);
 
-        this.router.navigateByUrl("/home/tasa")
+        this.router.navigateByUrl('/home/tasa');
         this.loading = false;
       },
       (error) => {
         this.loading = false;
-        console.error("No se logro conectar...")
-      }
-    )
-    
+        console.error('No se logro conectar...');
+      },
+    );
   }
 
 }
