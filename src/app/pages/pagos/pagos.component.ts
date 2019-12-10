@@ -1,28 +1,10 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource } from '@nebular/theme';
+import {  NbWindowService } from '@nebular/theme';
 
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
-interface TreeNode<T> {
-  data: T;
-  children?: TreeNode<T>[];
-  expanded?: boolean;
-}
-
-interface FSEntry {
-  Numero: string
-  Tipo?: string
-  Servicio?: string
-  Fecha?: boolean
-  Moneda?: number
-  Iva?: number
-  Monto?: number
-  Total?: number
-}
 
 
 export interface PeriodicElement {
@@ -49,16 +31,7 @@ export class PagosComponent implements OnInit {
   @ViewChild('escClose', { read: TemplateRef  , static: false }) escCloseTemplate: TemplateRef<HTMLElement>;
   @ViewChild('disabledEsc', { read: TemplateRef, static: false }) disabledEscTemplate: TemplateRef<HTMLElement>;
 
-  formControl = new FormControl(new Date());
-  ngModelDate = new Date();
-  customColumn = 'Numero';
-  defaultColumns = [ 'Fecha', 'Tipo', 'Cliente', 'Codigo', 'Estatus', 'Monto' , 'Iva', 'Moneda'];
-  allColumns = [ this.customColumn, ...this.defaultColumns ];
-
-  dataSource: NbTreeGridDataSource<FSEntry>;
-
-  sortColumn: string;
-  sortDirection: NbSortDirection = NbSortDirection.NONE;
+  
 
   cantidad = ""
 
@@ -66,7 +39,7 @@ export class PagosComponent implements OnInit {
   dataSources = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private docu : DocumentoService, private windowService: NbWindowService) {
+  constructor( private docu : DocumentoService, private windowService: NbWindowService) {
     
   }
 
@@ -90,7 +63,7 @@ export class PagosComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.reglon + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.Reglon + 1}`;
   }
 
 
@@ -99,25 +72,7 @@ export class PagosComponent implements OnInit {
   ngOnInit(){
     //this.obtenerDatos() 
   }
-  updateSort(sortRequest: NbSortRequest): void {
-    this.sortColumn = sortRequest.column;
-    this.sortDirection = sortRequest.direction;
-  }
 
-  getSortDirection(column: string): NbSortDirection {
-    if (this.sortColumn === column) {
-      return this.sortDirection;
-    }
-    return NbSortDirection.NONE;
-  }
-
-  private data: TreeNode<FSEntry>[] = [ ];
-
-  getShowOn(index: number) {
-    const minWithForMultipleColumns = 10;
-    const nextColumnStep = 10;
-    return minWithForMultipleColumns + (nextColumnStep * index);
-  }
 
   openWindowWithBackdrop() {
     this.windowService.open(

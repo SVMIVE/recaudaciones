@@ -41,15 +41,15 @@ export class ClienteComponent implements OnInit {
 
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
-
+  index = 0
   codigox = ""
   razonSocialx = ""
   rifx  = ""
   nitx  = ""
   tipox = ""
-  estatusx = ""
+  estatusx = 0
   actividadx = ""
-  declararx  = ""
+  declararx  = 0
   fechaIniciox = ""
   fechaModificionx = ""
   emailx = ""
@@ -58,7 +58,7 @@ export class ClienteComponent implements OnInit {
   direccionx = ""
 
 
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private cliente : ClienteService, private windowService: NbWindowService) {
+  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private toastrService: NbToastrService, private cliente : ClienteService, private windowService: NbWindowService) {
     
   }
   ngOnInit(){
@@ -80,6 +80,7 @@ export class ClienteComponent implements OnInit {
 
     this.cliente.listar().subscribe(
       (resp) => {
+        console.log(resp)
         resp.forEach(d => {
           console.log(d)
           
@@ -114,8 +115,16 @@ export class ClienteComponent implements OnInit {
     );
   }
 
+  showToast(position, status) {
+    this.index += 1;
+    this.toastrService.show(
+      status || 'Success',
+      `Proceso finalizado`,
+      { position, status });
+  }
 
-  add(){
+
+  agregar(){
     var wCli : WCliente = {
       Codigo: this.codigox,
       RazonSocial: this.razonSocialx,
@@ -130,10 +139,19 @@ export class ClienteComponent implements OnInit {
       Email: this.emailx,
       Telefono: this.telefonox,
       CodigoPostal: this.codigoPostalx,
-      Direccion: this.direccionx
+      Direccion: this.direccionx, 
+      Usuario : "ANUGULAR-NGX"
     }
     console.log(wCli)
-    //this.cliente.add(wCli)
+    this.cliente.agregar(wCli).subscribe(
+      (resp) => {         
+        this.dataSource = this.dataSourceBuilder.create(this.data)
+        this.showToast('top-right', 'success')
+      },
+      (err) => {
+        console.log("Personales")
+      }
+    )
 
   }
 

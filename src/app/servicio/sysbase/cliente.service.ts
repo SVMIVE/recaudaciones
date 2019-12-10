@@ -8,15 +8,16 @@ export interface WCliente  {
   Rif  : string
   Nit : string
   Tipo  : string
-  Estatus  : string
+  Estatus  : number
   Actividad : string
-  Declarar : string
+  Declarar : number
   FechaInicio  : string
   FechaModificacion : string
   Email : string
   Telefono  : string
   CodigoPostal  : string
   Direccion : string
+  Usuario : string
 }
 
 @Injectable({
@@ -41,7 +42,7 @@ export class ClienteService {
     return this.httpClient.get<any>(this.url +  "sybase/cliente/lstactividad")
   }
 
-  add(wCliente : WCliente){
+  agregar(wCliente : WCliente){
     return this.httpClient.post<any>(this.url +  "sybase/cliente/agregar", wCliente)
   
   }

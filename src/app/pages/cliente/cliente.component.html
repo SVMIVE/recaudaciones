@@ -141,7 +141,7 @@
                             <label for="exampleInputIngresos" class="label">Fecha de Inicio Contrato</label><br>
                             <input nbInput fullWidth placeholder="Fecha de Inicio Contrato" [(ngModel)]="fechaIniciox" 
                                 [nbDatepicker]="formpicker">
-                                <nb-rangepicker #formpicker></nb-rangepicker>
+                                <nb-datepicker #formpicker ></nb-datepicker>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -149,7 +149,7 @@
                             <label for="exampleInputIngresos" class="label">Fecha de Modificación Contrato</label><br>
                             <input nbInput fullWidth placeholder="Fecha de Modificación Contrato" [(ngModel)]="fechaModificionx" 
                                 [nbDatepicker]="formpickerR">
-                                <nb-rangepicker #formpickerR></nb-rangepicker>
+                                <nb-datepicker #formpickerR></nb-datepicker>
                         </div>
                     </div>
                 </div>
@@ -193,14 +193,14 @@
         
     </div>
         <div  class="row">
-            <div class="col-md-8"></div>
-            <div class="col-md-2">
+            <div class="col-md-6"></div>
+            <div class="col-md-3">
                 <button nbButton fullWidth  (click)="Cancelar()" type="button" class="home-button pull-right" status="danger">
                     Cancelar
                 </button>
             </div>
-            <div class="col-md-2">
-                <button nbButton fullWidth  (click)="Guardar()" type="submit" class="home-button pull-right" status="success">
+            <div class="col-md-3">
+                <button nbButton fullWidth  (click)="agregar()" type="submit" class="home-button pull-right" status="success">
                     Guardar
                 </button>
             </div>
