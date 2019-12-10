@@ -11,10 +11,12 @@
     }
     .logo{
         border-radius: 50%;
-        width: 130px;
-        height: 130px;
+        width: 170px;
+        height: 170px;
         //margin-left: 40%;
-        //margin-right: -40%;
+       // margin-right: -40%;
+        margin-top: -5%;
+    
     } 
     .Space{
         
@@ -53,7 +55,15 @@
         transform: rotate(-90deg);*/
     .sede{
         width: 100%;
-    
+    }
+    $colorear : true !default;
+    .selector{
+        @if $colorear{
+            background-color: red
+        }
+        @else{
+            background-color: green
+        }
     }
     }
 }

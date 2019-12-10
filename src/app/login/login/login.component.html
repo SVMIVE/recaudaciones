@@ -4,42 +4,37 @@
         <img src="assets/images/cintillo.png" class="cintillo" >
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"></div>
+        <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12"></div>
         
                     
                     <nb-card accent="success" [nbSpinner]="loading"
                           nbSpinnerStatus="danger"
                          nbSpinnerSize="large"
                          nbSpinnerMessage="loading">
-                        <nb-card-header>
+                        <nb-card-header >
                           <p style="text-align:center"><img src="assets/images/logo.jpg" class="logo"></p>
-                          <h2 id="title" class="text-info" style="text-align:center">Bienvenido</h2>
-              
-                          <nb-select placeholder="Módulo" [(selected)]="selectedItem" fullWidth  
-                          [(ngModel)]="estatus" filled status="info" class="form-control">
-                              <nb-option value="0">Administrador</nb-option>
-                              <nb-option value="1">Usuario</nb-option>
+                          <h1 id="carousel" class="text-info" style="text-align:center"><marquee direction="right" loop="10">Bienvenido</marquee></h1>
+
+                          <nb-select placeholder="Módulo" shape="round" [(selected)]="selectedItem" fullWidth  
+                          [(ngModel)]="estatus" filled status="info">
+                              <nb-option value="0" badge bagde-danger>Desarrollo</nb-option>
+                              <nb-option value="1">Producción</nb-option>
                           </nb-select>
 
                         </nb-card-header>
+                        <nb-card-body>
 
-            
-                        
-                        
-                        <nb-card-body>
-            
-
-                  
-                       
-                      <div class="col-xs-12" size="large">
+                      <div class="col-xs-12" size="large">
                         <input nbInput
                           class="form-control"
                          [(ngModel)]="nombre"
                          name="nombre"
                          id="input-nombre"
                          placeholder="Usuario">
-                        
-                        <input nbInput
+
+                        <label class="title" text-center><small><a href="" text-center>¿Olvidaste la contraseña? Recuperar Contraseña</a></small></label>
+                        
+                        <input nbInput
                           class="form-control"
                           [(ngModel)]="clave"
                          name="clave"
@@ -51,22 +46,23 @@
                       <div class="col-xs-12">
                           <button nbButton
                             fullWidth
+                            shape="round"
                             status="success"
                             size="large"
                             [class.btn-pulse]="submitted" class="pull-right">
                             Iniciar sesión
                           </button>
 
-                        <div class="title"><br><a href="" text-center>¿Olvidaste la contraseña? Recuperar Contraseña</a></div>
-                        </div> 
+                      </div> 
                     
-                    </nb-card-body>
-                   
-                </nb-card>
+                        </nb-card-body>
+                   <a class="title"><small><br>© Copyright 2019 IAIM- Todos los Derechos Reservados </small></a>
+                    </nb-card>
                   
       </div>
     </div>
   </nb-layout-column>
+  
 </nb-layout>
 <div class="footer">Instituto Aeropuerto Internacional de Maiquetía IAIM - 
 Dirección de Telemática - Div. Gestión de Tecnología Web</div>

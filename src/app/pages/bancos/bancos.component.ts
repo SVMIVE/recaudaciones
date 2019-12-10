@@ -1,5 +1,11 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource, NbToastrService } from '@nebular/theme';
+import {
+  NbSortDirection,
+  NbTreeGridDataSourceBuilder,
+  NbSortRequest,
+  NbWindowService,
+  NbTreeGridDataSource,
+  NbToastrService } from '@nebular/theme';
 
 import { FormControl, FormsModule } from '@angular/forms';
 import { BancoService, WBanco } from '../../servicio/sysbase/banco.service';
@@ -22,7 +28,7 @@ interface FSEntry {
 @Component({
   selector: 'ngx-bancos',
   templateUrl: './bancos.component.html',
-  styleUrls: ['./bancos.component.scss']
+  styleUrls: ['./bancos.component.scss'],
 })
 export class BancosComponent implements OnInit {
 
@@ -40,17 +46,18 @@ export class BancosComponent implements OnInit {
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
-  codigo = ""
-  nombre = ""
-  abreviatura = ""
-  estatus = 0
-  index = 0
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private bancoService : BancoService, 
+  codigo = '';
+  nombre = '';
+  abreviatura = '';
+  estatus = 0;
+  index = 0;
+
+  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private bancoService: BancoService,
     private windowService: NbWindowService, private toastrService: NbToastrService) {
-    
+
   }
-  ngOnInit(){
-    this.obtenerDatos() 
+  ngOnInit() {
+    this.obtenerDatos() ;
   }
 
   showToast(position, status) {
@@ -74,24 +81,24 @@ export class BancosComponent implements OnInit {
     return NbSortDirection.NONE;
   }
 
-  obtenerDatos(){
-  
+  obtenerDatos() {
+
 
     this.bancoService.listar().subscribe(
       (resp) => {
         resp.forEach(d => {
-          var strEstatus = (d.activo==1)?"ACTIVO":"INACTIVO";
+          const strEstatus = (d.activo === 1) ? 'ACTIVO' : 'INACTIVO';
           this.data.push({
-              data: { Codigo: d.id_banco, Nombre: d.des_banco,  Abreviatura: d.ds_corta, Estatus: strEstatus },      
+              data: { Codigo: d.id_banco, Nombre: d.des_banco,  Abreviatura: d.ds_corta, Estatus: strEstatus },
           });
-          
+
           this.dataSource = this.dataSourceBuilder.create(this.data);
         });
       },
       (error) => {
-        console.error("No se logro conectar...")
-      }
-    )
+        console.error('No se logro conectar...');
+      },
+    );
   }
 
 
@@ -112,31 +119,31 @@ export class BancosComponent implements OnInit {
     );
   }
 
-  add(){
+  add() {
     //    console.info(this.codigo);
-    var strEstatus = (this.estatus==1)?"ACTIVO":"INACTIVO";
+    const strEstatus = (this.estatus === 1) ? 'ACTIVO' : 'INACTIVO';
     this.data.push({
-      data: { Codigo: this.codigo, Nombre: this.nombre,  Abreviatura: this.abreviatura, Estatus: strEstatus  },  
+      data: { Codigo: this.codigo, Nombre: this.nombre,  Abreviatura: this.abreviatura, Estatus: strEstatus  },
     });
-    
-    const banco : WBanco = {
+
+    const banco: WBanco = {
       codigo: this.codigo,
       descripcion: this.nombre,
       abreviatura: this.abreviatura,
       estatus : 1,
-      usuario: "ANUGULAR-NGX"
-    }
+      usuario: 'ANUGULAR-NGX',
+    };
 
     this.bancoService.agregar(banco).subscribe(
-      (resp) => {         
-        this.dataSource = this.dataSourceBuilder.create(this.data)
-        this.showToast('top-right', 'success')
+      (resp) => {
+        this.dataSource = this.dataSourceBuilder.create(this.data);
+        this.showToast('top-right', 'success');
       },
       (err) => {
-        console.log("Personales")
-      }
-    )
-    
+        console.log ('Personales');
+      },
+    );
+
 
   }
 
