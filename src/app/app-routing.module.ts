@@ -28,7 +28,6 @@ const config: ExtraOptions = {
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, config),
-    ,
     NbSelectModule,
     MatCheckboxModule,
     MatTableModule,

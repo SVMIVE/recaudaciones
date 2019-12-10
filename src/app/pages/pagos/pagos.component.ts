@@ -1,17 +1,12 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-<<<<<<< HEAD
-import {  NbWindowService } from '@nebular/theme';
 
-import { FormsModule } from '@angular/forms';
-import { DocumentoService } from '../../servicio/sysbase/documento.service';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-=======
+
 import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource } from '@nebular/theme';
 import { FormControl, FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
 
 interface TreeNode<T> {
   data: T;
@@ -29,9 +24,6 @@ interface FSEntry {
   Monto?: number;
   Total?: number;
 }
->>>>>>> e7bb94e98db4004086c1dba7bef41b432ece637b
-
-
 export interface PeriodicElement {
   Reglon: number;
   Numero: string;

@@ -1,85 +1,72 @@
 
 <nb-layout center>
-      <nb-layout-column size="giant">
+      <nb-layout-column>
         <img src="assets/images/cintillo.png" class="cintillo" >
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"></div>
         
-                      <form (ngSubmit)="login()"  aria-labelledby="title">
-                         <nb-card size="giant" accent="success" [nbSpinner]="loading"
-                             nbSpinnerStatus="danger"
-                             nbSpinnerSize="large"
-                             nbSpinnerMessage="loading">
-                            <nb-card-header>
-                            <p style="text-align:center"><img src="assets/images/logo.jpg" class="logo"></p>
-                            <h2 id="title" class="text-info" style="text-align:center">Bienvenido</h2>
-                            </nb-card-header>
-                        <nb-card-body size="giant">
-                
-                
-                <!--
-                <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
-                  <p class="alert-title"><b>Oh snap!</b></p>
-                  <ul class="alert-message-list">
-                    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
-                  </ul>
-                </nb-alert>
-                <nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success" role="alert">
-                  <p class="alert-title"><b>Hooray!</b></p>
-                  <ul class="alert-message-list">
-                    <li *ngFor="let message of messages" class="alert-message">{{ message }}</li>
-                  </ul>
-                </nb-alert>
-                -->
-                    <div class="container">
-                       
-                        <div class="col-xs-12" size="large">
-                          <!--<label class="label" for="input-nombre">Usuario:</label>-->
-                          <input nbInput
-                           class="form-control"
-                           [(ngModel)]="nombre"
-                           name="nombre"
-                           id="input-nombre"
-                           placeholder="Usuario">
-                          
-                          <input nbInput
-                           class="form-control"
-                           [(ngModel)]="clave"
-                           name="clave"
-                           type="password"
-                           id="input-clave"
-                           placeholder="Contraseña">
-                         
-                          <nb-select placeholder="Módulo" [(selected)]="selectedItem" fullWidth  [(ngModel)]="estatus" filled status="info" class="form-control">
+                    
+                    <nb-card accent="success" [nbSpinner]="loading"
+                          nbSpinnerStatus="danger"
+                         nbSpinnerSize="large"
+                         nbSpinnerMessage="loading">
+                        <nb-card-header>
+                          <p style="text-align:center"><img src="assets/images/logo.jpg" class="logo"></p>
+                          <h2 id="title" class="text-info" style="text-align:center">Bienvenido</h2>
+              
+                          <nb-select placeholder="Módulo" [(selected)]="selectedItem" fullWidth  
+                          [(ngModel)]="estatus" filled status="info" class="form-control">
                               <nb-option value="0">Administrador</nb-option>
                               <nb-option value="1">Usuario</nb-option>
                           </nb-select>
-                          
-                        </div>
-                      
-                    </div>
-                 
-                    
-                        </nb-card-body>
-                            <div class="container">
-                            <div class="col-xs-12">
-                              <button nbButton
-                                fullWidth
-                                status="success"
-                                size="large"
-                                [class.btn-pulse]="submitted" class="pull-right">
-                                Iniciar sesión
-                              </button>
-                            </div> 
-                            </div>
-                                     <div class="title"><a href="" text-center>¿Olvidaste la contraseña? Recuperar Contraseña</a></div>
-                        </nb-card>
+
+                        </nb-card-header>
+
+            
+                        
+                        
+                        <nb-card-body>
+            
+
                   
-             </form>
-        
+                       
+                      <div class="col-xs-12" size="large">
+                        <input nbInput
+                          class="form-control"
+                         [(ngModel)]="nombre"
+                         name="nombre"
+                         id="input-nombre"
+                         placeholder="Usuario">
+                        
+                        <input nbInput
+                          class="form-control"
+                          [(ngModel)]="clave"
+                         name="clave"
+                          type="password"
+                         id="input-clave"
+                         placeholder="Contraseña">                         
+                      </div>
+      
+                      <div class="col-xs-12">
+                          <button nbButton
+                            fullWidth
+                            status="success"
+                            size="large"
+                            [class.btn-pulse]="submitted" class="pull-right">
+                            Iniciar sesión
+                          </button>
+
+                        <div class="title"><br><a href="" text-center>¿Olvidaste la contraseña? Recuperar Contraseña</a></div>
+                        </div> 
+                    
+                    </nb-card-body>
+                   
+                </nb-card>
+                  
       </div>
     </div>
   </nb-layout-column>
 </nb-layout>
-<div class="footer">Instituto Aeropuerto Internacional de Maiquetía IAIM - Dirección de Telemática - Div. Gestión de Tecnología Web</div>
+<div class="footer">Instituto Aeropuerto Internacional de Maiquetía IAIM - 
+Dirección de Telemática - Div. Gestión de Tecnología Web</div>
