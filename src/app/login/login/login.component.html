@@ -13,12 +13,12 @@
                          nbSpinnerMessage="loading">
                         <nb-card-header >
                           <p style="text-align:center"><img src="assets/images/logo.jpg" class="logo"></p>
-                          <h1 style="font-family:'Courier New', Courier, monospace; margin-top: -5%;" class="sub-title">Bienvenido</h1>
+                          <h1 style="font-family:'Courier New', Courier, monospace; margin-top: -7%;" class="sub-title">Bienvenido</h1>
 
                           <nb-select placeholder="Módulo" shape="round" [(selected)]="selectedItem" fullWidth  
-                          [(ngModel)]="estatus" filled-status="info">
-                              <nb-option value="0" class="p-2 bg-danger text-white">Desarrollo</nb-option>
-                              <nb-option value="1" class="p-2 bg-success text-white">Producción</nb-option>
+                          [(ngModel)]="estatus" filled status="info">
+                              <nb-option value="0" class="p-2 bg-info text-white">Desarrollo</nb-option>
+                              <nb-option value="1" class="p-2 bg-info text-white">Producción</nb-option>
                           </nb-select>
 
                         </nb-card-header>
@@ -53,7 +53,7 @@
                             size="large"
                             (click)= login()
                             [class.btn-pulse]="submitted"
-                            style="margin-top: -2%;">
+                            style="margin-top: -4%;">
                             Iniciar sesión
                           </button>
 
