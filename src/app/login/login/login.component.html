@@ -13,12 +13,12 @@
                          nbSpinnerMessage="loading">
                         <nb-card-header >
                           <p style="text-align:center"><img src="assets/images/logo.jpg" class="logo"></p>
-                          <h1 id="carousel" class="text-info" style="text-align:center"><marquee direction="right" loop="10">Bienvenido</marquee></h1>
+                          <h1 style="font-family:'Courier New', Courier, monospace; margin-top: -5%;" class="sub-title">Bienvenido</h1>
 
                           <nb-select placeholder="Módulo" shape="round" [(selected)]="selectedItem" fullWidth  
-                          [(ngModel)]="estatus" filled status="info">
-                              <nb-option value="0">Desarrollo</nb-option>
-                              <nb-option value="1">Producción</nb-option>
+                          [(ngModel)]="estatus" filled-status="info">
+                              <nb-option value="0" class="p-2 bg-danger text-white">Desarrollo</nb-option>
+                              <nb-option value="1" class="p-2 bg-success text-white">Producción</nb-option>
                           </nb-select>
 
                         </nb-card-header>
@@ -30,9 +30,10 @@
                          [(ngModel)]="nombre"
                          name="nombre"
                          id="input-nombre"
-                         placeholder="Usuario">
+                         placeholder="Usuario"
+                         style="margin-top: -10%;">
 
-                        <label class="title" text-center><small><a href="" text-center>¿Olvidaste la contraseña? Recuperar Contraseña</a></small></label>
+                        <p class="text-right"><small><a href="">¿Olvidaste la contraseña?</a></small></p>
                         
                         <input nbInput
                           class="form-control"
@@ -40,7 +41,8 @@
                          name="clave"
                           type="password"
                          id="input-clave"
-                         placeholder="Contraseña">                         
+                         placeholder="Contraseña"
+                         style="margin-top: -10%;">                         
                       </div>
       
                       <div class="col-xs-12">
@@ -49,14 +51,16 @@
                             shape="round"
                             status="success"
                             size="large"
-                            [class.btn-pulse]="submitted" class="pull-right">
+                            (click)= login()
+                            [class.btn-pulse]="submitted"
+                            style="margin-top: -2%;">
                             Iniciar sesión
                           </button>
 
                       </div> 
                     
                         </nb-card-body>
-                   <a class="title"><small><br>© Copyright 2019 IAIM- Todos los Derechos Reservados </small></a>
+                   <a style="margin-top: -10%;" class="title"><small><br>© Copyright 2019 IAIM- Todos los Derechos Reservados </small></a>
                     </nb-card>
                   
       </div>
