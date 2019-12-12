@@ -11,7 +11,6 @@ import { User } from '../../@core/data/users';
   styleUrls: ['./login.component.scss'],
 })
 
-
 export class LoginComponent implements OnInit {
 
     protected options: {};
@@ -38,6 +37,7 @@ export class LoginComponent implements OnInit {
 
   login () {
     this.loading = true;
+    // setTimeout(() => this.loading = false, 3000);
 
     const usr: Usuario = {
       nombre : this.nombre,
@@ -60,4 +60,3 @@ export class LoginComponent implements OnInit {
     );
   }
 }
-
