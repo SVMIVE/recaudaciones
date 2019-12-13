@@ -28,4 +28,13 @@ export class ConceptoService {
   listar(): any{
     return this.httpClient.get<any>(this.url +  "sybase/concepto/listar")
   }
+
+  
+  consultar(id : string): any{
+    var Ser = {
+      servicio: id
+    }
+    console.log(Ser)
+    return this.httpClient.post<any>(this.url +  "sybase/concepto/consultar", Ser)
+  }
 }

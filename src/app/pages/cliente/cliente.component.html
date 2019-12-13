@@ -1,11 +1,9 @@
 <nb-card  accent="success" >
     <nb-card-header>Listar Clientes</nb-card-header>
     <nb-card-body>
-
-        <div class="row">
-            
+        <div class="row">            
             <div class="col-xl-11 col-lg-11 col-md-11 ">
-                 <label class="search-label" for="search">Buscar:&nbsp;&nbsp;&nbsp; </label> 
+                 <label class="search-label" for="search">Buscar:&nbsp;&nbsp;&nbsp;</label> 
                 <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input">
             </div>
             <div class="col-xl-1 col-lg-1 col-md-1 ">
@@ -14,11 +12,7 @@
                 </button>
             </div>
         </div>
-       
-        
-
-
-        <br><br>
+        <br>
         <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
 
         <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
@@ -40,7 +34,7 @@
             <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
             {{column}}
             </th>
-            <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column] || '-'}}</td>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">{{ row.data[column] || '-'}}</td>
         </ng-container>
 
         </table>
@@ -57,10 +51,6 @@
 <ng-template #escClose>
     <div class="row">
         <div class="col-md-12">
-            
-                
-          
-
                 <div class="row">
                     <div class="col-md-4">
                     <div class="form-group">
@@ -82,22 +72,22 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputRif" class="label">Rif:</label>
-                        <input type="text" nbInput fullWidth id="txtRif"   [(ngModel)]="rif"  placeholder="Rif">
+                        <input type="text" nbInput fullWidth id="txtRif" [(ngModel)]="rifx" placeholder="Rif">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputNit" class="label">Nit</label>
-                            <input type="text" nbInput fullWidth id="txtNit"   [(ngModel)]="nit"  placeholder="Nit">
+                            <input type="text" nbInput fullWidth id="txtNit" [(ngModel)]="nitx" placeholder="Nit">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputTipoCliente" class="label">Tipo Cliente</label><br>
-                            <nb-select placeholder="Tipo Cliente" [(selected)]="selectedItem" [(ngModel)]="razonSocialx" fullWidth>
-                                <nb-option value="0">Fijo</nb-option>
-                                <nb-option value="1">Temporal</nb-option>
-                                <nb-option value="2">Terminal Auxiliar</nb-option>
+                            <nb-select placeholder="Tipo Cliente" [(selected)]="selectedItem" [(ngModel)]="tipox" fullWidth>
+                                <nb-option value="Fijo">Fijo</nb-option>
+                                <nb-option value="Temporal">Temporal</nb-option>
+                                <nb-option value="Terminal Auxiliar">Terminal Auxiliar</nb-option>
                             </nb-select>
                         </div>
                     </div>
@@ -108,7 +98,7 @@
                      <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputEstatus" class="label">Estatus</label><br>
-                            <nb-select placeholder="Estatus" [(selected)]="selectedItem" [(ngModel)]="estatusx" fullWidth>
+                            <nb-select placeholder="Estatus" [(selected)]="selectedItemS" [(ngModel)]="estatusx" fullWidth>
                                 <nb-option value="0">Activo</nb-option>
                                 <nb-option value="1">Inactivo</nb-option>
                             </nb-select>
@@ -118,9 +108,9 @@
                         <div class="form-group">
                             <div class="form-group">
                             <label for="exampleInputActividad" class="label">Actividad</label><br>
-                            <nb-select placeholder="Actividad" [(selected)]="selectedItem" [(ngModel)]="actividadx" fullWidth>
-                                <nb-option value="0">030</nb-option>
-                                <nb-option value="1">043</nb-option>
+                            <nb-select placeholder="Actividad" [(selected)]="selectedItemA" [(ngModel)]="actividadx" fullWidth>
+                                <nb-option value="030">030</nb-option>
+                                <nb-option value="043">043</nb-option>
                             </nb-select>
                         </div>
                         </div>

@@ -47,7 +47,7 @@ export class ClienteComponent implements OnInit {
   rifx  = ""
   nitx  = ""
   tipox = ""
-  estatusx = 0
+  estatusx = "0"
   actividadx = ""
   declararx  = 0
   fechaIniciox = ""
@@ -80,10 +80,7 @@ export class ClienteComponent implements OnInit {
 
     this.cliente.listar().subscribe(
       (resp) => {
-        console.log(resp)
         resp.forEach(d => {
-          console.log(d)
-          
             this.data.push({
                 data: { Rif: d.cedula_rif, Razonsocial: d.razon_social, Nit: d.nit, Codigo: d.auxiliar_contable },      
             });
@@ -131,7 +128,7 @@ export class ClienteComponent implements OnInit {
       Rif: this.rifx,
       Nit : this.nitx,
       Tipo : this.tipox,
-      Estatus: this.estatusx,
+      Estatus: parseInt(this.estatusx),
       Actividad: this.actividadx,
       Declarar: this.declararx,
       FechaInicio : this.fechaIniciox,
@@ -143,16 +140,16 @@ export class ClienteComponent implements OnInit {
       Usuario : "ANUGULAR-NGX"
     }
     console.log(wCli)
+    
     this.cliente.agregar(wCli).subscribe(
       (resp) => {         
         this.dataSource = this.dataSourceBuilder.create(this.data)
         this.showToast('top-right', 'success')
       },
       (err) => {
-        console.log("Personales")
+        console.error("Error: ", err)
       }
-    )
-
+    ) 
   }
 
   actualizar(){

@@ -3,6 +3,11 @@ import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowSe
 
 import { FormControl, FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { ConceptoService } from '../../servicio/sysbase/concepto.service';
+import { ServicioService } from '../../servicio/sysbase/servicio.service';
+import { ClienteService } from '../../servicio/sysbase/cliente.service';
+
 
 interface TreeNode<T> {
   data: T;
@@ -21,6 +26,17 @@ interface FSEntry {
   Iva?: number
   Moneda: string
 }
+
+
+export interface PeriodicElement {
+  Concepto: string;
+  Cantidad: number;
+  Monto: number;
+  Iva: number;
+}
+
+
+var ELEMENT_DATA: PeriodicElement[] = [];
 
 @Component({
   selector: 'ngx-documentos',
@@ -47,12 +63,45 @@ export class DocumentosComponent implements OnInit {
 
   cantidad = ""
 
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private docu : DocumentoService, private windowService: NbWindowService) {
+  codigo = ""
+  cliente = ""
+  monto = 0.00
+  iva = 0.00
+  tipo = ""
+
+  concepto = []
+  conceptox = ""
+  lstServicio = []
+
+  displayedColumnx: string[] = ['Concepto', 'Cantidad', 'Monto', 'Iva'];
+  
+  dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+
+  
+  flipped = false;
+
+  toggleView() {
+    this.flipped = !this.flipped;
+  }
+
+  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, 
+    private docu : DocumentoService, 
+    private windowService: NbWindowService,
+    private conceptos : ConceptoService,
+    private servicio : ServicioService,
+    private servicioCliente : ClienteService ) {
+    
+      //this.cargarConcepto()
+
+      this.cargarServicio()
+      //this.consultarConcepto("DO")
+
+  }
+  ngOnInit(){    
+    this.obtenerDatos() 
     
   }
-  ngOnInit(){
-    this.obtenerDatos() 
-  }
+
   updateSort(sortRequest: NbSortRequest): void {
     this.sortColumn = sortRequest.column;
     this.sortDirection = sortRequest.direction;
@@ -66,13 +115,9 @@ export class DocumentosComponent implements OnInit {
   }
 
   obtenerDatos(){
-    console.log("Errr")
      this.docu.listar().subscribe(
-      (resp) => {
-        
-        resp.data.forEach(d => {
-          console.log(d)
-          
+      (resp) => {        
+        resp.data.forEach(d => {          
           this.data.push({
               data: { 
                 Numero: d.nu_documento, 
@@ -88,6 +133,8 @@ export class DocumentosComponent implements OnInit {
           });
 
           this.dataSource = this.dataSourceBuilder.create(this.data);
+         
+          
         });
         //this.router.navigateByUrl("/pages/")
         //this.loading = false;
@@ -99,6 +146,56 @@ export class DocumentosComponent implements OnInit {
     )
   }
 
+  cargarServicio() {
+    console.info("Procesando servicios")
+    return this.servicio.listar().subscribe(
+      (resp) => {          
+          this.lstServicio = resp;
+       },
+      (err) => {
+          console.log(err)
+      }
+
+    ) 
+  }
+  cargarConcepto() {
+    return this.conceptos.listar().subscribe(
+      (resp) => { 
+          this.concepto = resp;
+       },
+      (err) => {
+          console.log(err)
+      }
+
+    )
+  }
+
+  consultarConcepto(id){
+    this.conceptox = ""
+    return this.conceptos.consultar(id).subscribe(
+      (resp) => { 
+          
+          this.concepto = resp;       
+       },
+      (err) => {
+          console.log(err)
+      }
+    )
+  }
+
+  consultarCliente(id){
+    return this.servicioCliente.consultar(this.codigo).subscribe(
+      (resp) => { 
+        console.log(resp.length )
+        this.cliente = resp[0].razon_social
+               
+       },
+      (err) => {
+          console.log(err)
+      }
+    )
+  }
+  
 
   private data: TreeNode<FSEntry>[] = [ ];
 
@@ -117,4 +214,21 @@ export class DocumentosComponent implements OnInit {
     );
   }
 
+  agregarData(){    
+    ELEMENT_DATA.push( {
+      Cantidad: parseInt(this.cantidad), 
+      Concepto: this.conceptox, 
+      Monto: this.monto,
+      Iva: this.iva
+    } )
+    this.dataSourcesx.data = ELEMENT_DATA
+  }
+
+  guardar(){
+    this.iva = 0
+    this.monto = 0
+    this.codigo = ""
+    this.cliente = ""
+
+  }
 }

@@ -78,6 +78,8 @@ export class DashboardComponent implements OnDestroy {
     dark: this.commonStatusCardsSet,
   };
 
+
+
   constructor(private themeService: NbThemeService,
               private solarService: SolarData) {
     this.themeService.getJsTheme()

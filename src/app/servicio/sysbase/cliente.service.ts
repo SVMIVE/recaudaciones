@@ -43,7 +43,11 @@ export class ClienteService {
   }
 
   agregar(wCliente : WCliente){
-    return this.httpClient.post<any>(this.url +  "sybase/cliente/agregar", wCliente)
+    return this.httpClient.post<any>(this.url +  "sybase/cliente/insertar", wCliente)
   
+  }
+
+  consultar(id : string) : any {
+    return this.httpClient.post<any>(this.url +  "sybase/cliente/razonsocial", { "auxcontable": id } )
   }
 }
