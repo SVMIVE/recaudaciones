@@ -32,31 +32,28 @@ export class LoginComponent implements OnInit {
     constructor(private loginServicio: LoginService, private router: Router){ }
 
   ngOnInit() {
-    console.error('Control de pasos');
+    
   }
 
-  login () {
+  async login () {
     this.loading = true;
-    // setTimeout(() => this.loading = false, 3000);
-
+    
+    
     const usr: Usuario = {
       nombre : this.nombre,
       clave : this.clave,
       clase : this.clase,
     };
 
-    this.loginServicio.Validar(usr).subscribe(
+    await this.loginServicio.Validar(usr).subscribe(
       (resp) => {
-//        console.log(resp.token)
         sessionStorage.setItem('key-iaim', resp.token);
-
-        this.router.navigateByUrl('/home/tasa');
-        this.loading = false;
+        this.router.navigateByUrl('/home/tasa');        
       },
-      (error) => {
-        this.loading = false;
+      (error) => {       
         console.error('No se logro conectar...');
       },
     );
+    this.loading = false;
   }
 }
