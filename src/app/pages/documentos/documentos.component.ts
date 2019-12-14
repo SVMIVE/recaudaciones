@@ -29,10 +29,9 @@ interface FSEntry {
 
 
 export interface PeriodicElement {
-  Concepto: string;
-  Cantidad: number;
-  Monto: number;
-  Iva: number;
+  Concepto: string
+  Cantidad: number
+  Monto: number
 }
 
 
@@ -73,7 +72,7 @@ export class DocumentosComponent implements OnInit {
   conceptox = ""
   lstServicio = []
 
-  displayedColumnx: string[] = ['Concepto', 'Cantidad', 'Monto', 'Iva'];
+  displayedColumnx: string[] = ['Concepto', 'Cantidad', 'Monto'];
   
   dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -174,8 +173,9 @@ export class DocumentosComponent implements OnInit {
     this.conceptox = ""
     return this.conceptos.consultar(id).subscribe(
       (resp) => { 
-          
-          this.concepto = resp;       
+        
+        this.concepto = resp
+        
        },
       (err) => {
           console.log(err)
@@ -183,12 +183,22 @@ export class DocumentosComponent implements OnInit {
     )
   }
 
+  consultarCantidad(id){
+    
+    this.concepto.forEach(e => {
+      if(this.conceptox == e.cd_concepto){        
+        this.monto = parseFloat(e.mn_monto_bf) * parseInt(this.cantidad);
+      }
+    });
+    
+    
+  }
+
   consultarCliente(id){
     return this.servicioCliente.consultar(this.codigo).subscribe(
       (resp) => { 
         console.log(resp.length )
-        this.cliente = resp[0].razon_social
-               
+        this.cliente = resp[0].razon_social               
        },
       (err) => {
           console.log(err)
@@ -215,11 +225,17 @@ export class DocumentosComponent implements OnInit {
   }
 
   agregarData(){    
+    var concepto = ""
+    this.concepto.forEach(e => {
+      if(this.conceptox == e.cd_concepto){        
+        concepto = e.nb_concepto
+      }
+    });
+
     ELEMENT_DATA.push( {
       Cantidad: parseInt(this.cantidad), 
-      Concepto: this.conceptox, 
-      Monto: this.monto,
-      Iva: this.iva
+      Concepto: concepto, 
+      Monto: this.monto
     } )
     this.dataSourcesx.data = ELEMENT_DATA
   }

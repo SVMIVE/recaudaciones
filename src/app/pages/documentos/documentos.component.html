@@ -81,7 +81,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input placeholder="Codigo" nbInput fullWidth [(ngModel)]="codigo"  (blur)="consultarCliente($event)">
+                                        <input placeholder="Codigo" nbInput fullWidth [(ngModel)]="codigo" 
+                                         (blur)="consultarCliente($event)">
                                     </div>
                                 </div>
                                 <div class="col-md-8">
@@ -129,7 +130,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <input placeholder="Cantidad" nbInput fullWidth   [(ngModel)]="cantidad" >
+                                        <input placeholder="Cantidad" nbInput fullWidth   [(ngModel)]="cantidad" (blur)="consultarCantidad($event)">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -137,7 +138,7 @@
                                         <input placeholder="Monto" nbInput fullWidth  [(ngModel)]="monto" >
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3" style="display:none">
                                     <div class="form-group">
                                         <input placeholder="% IVA" nbInput fullWidth  [(ngModel)]="iva">
                                     </div>
@@ -214,6 +215,204 @@
       </nb-card-back>
     </nb-flip-card>
   </div>
+</div>
+
+
+<div id="divFactura">
+        <body>
+            <header class="clearfix">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="header_field_1">FACTURA</td>
+                            <td class="header_field_2" id="fnumero">1810175631</td>
+                            <td class="header_field_2" id="ffecha">26/11/2018</td>
+                            <td class="header_field_3" id="fcontrol">0541383</td>
+                        </tr>
+                        <tr>
+                            <td id="serie" colspan="4" id="fserie">SERIE: A</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </header>
+            <main>
+                <div id="details" class="clearfix">
+                    <div id="client">
+                        <div class="client">
+                            <label style="padding-right: 30px;">CÒDIGO:</label> <i id="fcodigocliente">10352</i>
+                        </div>
+                        <div class="client">
+                            <label style="padding-right: 30px;">CLIENTE:</label><i id="fcliente"> CONSORCIO VENEZOLANO DE INDUSTRIAS AERONAUTICAS 
+                            Y SERVICIOS AERES, S.A. (CONVIASA) CONCESION</i>
+                        </div>
+                        <br>
+                        <div class="client">
+                            <label style="padding-right: 60px;">RIF:</label> G-20007774-3
+                        </div>
+                        <div class="client">
+                            <label style="padding-right: 10px;">DIRECCIÒN:</label> AV.INTERCOMUNAL AEROPUERTO INTERNACIONAL DE MAIQUETIA EDF. SECTOR 6.3
+                        </div>
+                        <div class="right_content">
+                            <label>CONDICIÒN DE PAGO:</label> DE CONTADO
+                        </div>
+                        <div class="right_content">
+                            <label>TIPO SERVICIO:</label> DOSAS CONTADO
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>COD.CUENTA</th>
+                            <th class="num">CONCEPTO</th>
+                            <th class="num">MONTO ($)</th>
+                            <th class="num">BS X $</th>
+                            <th class="num">IVA</th>
+                            <th class="num">MONTO (BS)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>3.03.02.01.05</td>
+                            <td class="descripcion">ATERRIZAJE INTERNACIONAL DE PASAJEROS</td>
+                            <td class="num">2.334,66</td>
+                            <td class="num">63,03</td>
+                            <td class="num">16,00</td>
+                            <td class="num">147.153,62</td>
+                        </tr>
+                        <tr>
+                            <td>3.03.02.01.16</td>
+                            <td class="descripcion">PUENTES MOVILES INTERNACIONALES</td>
+                            <td class="num">600,00</td>
+                            <td class="num">63,03</td>
+                            <td class="num">16,00</td>
+                            <td class="num">37.818,00</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="10" colspan="2" class="top_left">
+                                <Label>OBSEVACIONES:</Label>
+                            </td>
+                            <td class="descripcion">
+                                <Label>SUB-TOTAL $:</Label>
+                            </td>
+                            <td class="num">
+                                <Label>11.286,74</Label>
+                            </td>
+                            <td class="descripcion">
+                                <Label>SUB-TOTAL:</Label>
+                            </td>
+                            <td class="num">
+                                <Label>711.403,22</Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="descripcion">
+                                <Label>BASE IMPONIBLE:</Label>
+                            </td>
+                            <td class="num">696.687,61</td>
+                            <td class="descripcion">
+                                <Label style="padding-right: 10px;">IVA BS:</Label>16%:</td>
+                            <td class="num">
+                                <Label>111.470,02</Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="descripcion">
+                                <Label>EXENTO:</Label>
+                            </td>
+                            <td class="num">0.00</td>
+                            <td colspan="2" class="num"></td>
+                        </tr>
+                        <tr>
+                            <td class="descripcion">
+                                <Label>NS:</Label>
+                            </td>
+                            <td class="num">14.715,61</td>
+                            <td colspan="2" class="num"></td>
+                        </tr>
+                        <tr style="border-bottom: 3px solid black;">
+                            <td colspan="2"></td>
+                            <td class="descripcion">
+                                <Label>TOTAL (BS):</Label>
+                            </td>
+                            <td class="num">
+                                <Label>822.873,24</Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="descripcion">
+                                <Label>SUB-TOTAL $:</Label>
+                            </td>
+                            <td class="num">
+                                <Label>11.286,74</Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="descripcion">
+                                <Label>BASE IMPONIBLE $:</Label>
+                            </td>
+                            <td class="num">11.053,27</td>
+                            <td class="descripcion">
+                                <Label style="padding-right: 20px;">IVA $:</Label>16%:</td>
+                            <td class="num">
+                                <Label></Label>1.768,52</td>
+                        </tr>
+                        <tr>
+                            <td class="descripcion">
+                                <Label>EXENTO:</Label>
+                            </td>
+                            <td class="num">0,00</td>
+                            <td colspan="2" class=""></td>
+                        </tr>
+                        <tr>
+                            <td class="descripcion">
+                                <Label>NS:</Label>
+                            </td>
+                            <td class="num">233,47</td>
+                            <td colspan="2" class=""></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="descripcion">
+                                <Label>TOTAL ($):</Label>
+                            </td>
+                            <td class="num">
+                                <Label>13.055,26</Label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </main>
+
+        </body>
+        <footer>
+            <div class="margin_bottom_5">
+                CONDICIÒN DE PAGO : CONTADO
+            </div>
+
+            <div class="margin_bottom_5">
+                <Label>
+                    TASA DE CAMBIO DE FECHA 17/10/2018 POR BS. 63,03 SEGUN DICOM
+                </Label>
+            </div>
+
+            <div class="margin_bottom_5" id='right'>
+                23/02/2019
+                <br> 02:45:18 P.M.
+            </div>
+            <div id='left_50'>
+                DSC:
+            </div>
+            <div id='right_50'>
+                IMPRESO POR: ESALAZAR
+            </div>
+        </footer>
+
 </div>
 
 
