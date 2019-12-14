@@ -225,12 +225,12 @@
                     <tbody>
                         <tr>
                             <td class="header_field_1">FACTURA</td>
-                            <td class="header_field_2" id="fnumero">1810175631</td>
-                            <td class="header_field_2" id="ffecha">26/11/2018</td>
-                            <td class="header_field_3" id="fcontrol">0541383</td>
+                            <td class="header_field_2"><b id="fnumero">1810175631</b> </td>
+                            <td class="header_field_2" ><b id="ffecha">26/11/2018</b> </td>
+                            <td class="header_field_3" ><b id="fcontrol">0541383</b> </td>
                         </tr>
                         <tr>
-                            <td id="serie" colspan="4" id="fserie">SERIE: A</td>
+                            <td id="serie" colspan="4" >SERIE: <i id="fserie">A</i></td>
                         </tr>
                     </tbody>
                 </table>
@@ -247,16 +247,16 @@
                         </div>
                         <br>
                         <div class="client">
-                            <label style="padding-right: 60px;">RIF:</label> G-20007774-3
+                            <label style="padding-right: 60px;">RIF:</label> <i id="frif"> G-20007774-3</i>
                         </div>
                         <div class="client">
-                            <label style="padding-right: 10px;">DIRECCIÒN:</label> AV.INTERCOMUNAL AEROPUERTO INTERNACIONAL DE MAIQUETIA EDF. SECTOR 6.3
+                            <label style="padding-right: 10px;">DIRECCIÒN:</label> <i id="fdireccion"> AV.INTERCOMUNAL AEROPUERTO INTERNACIONAL DE MAIQUETIA EDF. SECTOR 6.3</i>
                         </div>
                         <div class="right_content">
-                            <label>CONDICIÒN DE PAGO:</label> DE CONTADO
+                            <label>CONDICIÒN DE PAGO:</label> <i id="fcondicionpago">DE CONTADO</i> 
                         </div>
                         <div class="right_content">
-                            <label>TIPO SERVICIO:</label> DOSAS CONTADO
+                            <label>TIPO SERVICIO:</label> <i id="ftiposervicio">DOSAS CONTADO </i> 
                         </div>
                         <div>
                         </div>
@@ -284,53 +284,53 @@
                             <td class="num">147.153,62</td>
                         </tr>
                         <tr>
-                            <td>3.03.02.01.16</td>
-                            <td class="descripcion">PUENTES MOVILES INTERNACIONALES</td>
-                            <td class="num">600,00</td>
-                            <td class="num">63,03</td>
-                            <td class="num">16,00</td>
-                            <td class="num">37.818,00</td>
-                        </tr>
-                        <tr>
                             <td rowspan="10" colspan="2" class="top_left">
                                 <Label>OBSEVACIONES:</Label>
+                                <i id="fobservaciones"> </i>
                             </td>
                             <td class="descripcion">
                                 <Label>SUB-TOTAL $:</Label>
                             </td>
                             <td class="num">
-                                <Label>11.286,74</Label>
+                                <b id="fsubtotaldivisas">11.286,74</b>
                             </td>
                             <td class="descripcion">
                                 <Label>SUB-TOTAL:</Label>
                             </td>
                             <td class="num">
-                                <Label>711.403,22</Label>
+                                <b id="fsubtotalbolivares">711.403,22</b>
                             </td>
                         </tr>
                         <tr>
                             <td class="descripcion">
                                 <Label>BASE IMPONIBLE:</Label>
                             </td>
-                            <td class="num">696.687,61</td>
-                            <td class="descripcion">
-                                <Label style="padding-right: 10px;">IVA BS:</Label>16%:</td>
                             <td class="num">
-                                <Label>111.470,02</Label>
+                                <i id="fbaseimponiblebolivares">696.687,61</i>
+                            </td>
+                            <td class="descripcion">
+                                <Label style="padding-right: 10px;">IVA BS:</Label>
+                                <i id="fivaprorcentaje">16%</i></td>
+                            <td class="num">
+                                <b id="fivabolivares">111.470,02</b>
                             </td>
                         </tr>
                         <tr>
                             <td class="descripcion">
                                 <Label>EXENTO:</Label>
                             </td>
-                            <td class="num">0.00</td>
+                            <td class="num">
+                                <i id="fexentobolivares"> 0.00</i>
+                            </td>
                             <td colspan="2" class="num"></td>
                         </tr>
                         <tr>
                             <td class="descripcion">
                                 <Label>NS:</Label>
                             </td>
-                            <td class="num">14.715,61</td>
+                            <td class="num">
+                                <i id="fnsbolivares">14.715,61</i>
+                            </td>
                             <td colspan="2" class="num"></td>
                         </tr>
                         <tr style="border-bottom: 3px solid black;">
@@ -339,7 +339,7 @@
                                 <Label>TOTAL (BS):</Label>
                             </td>
                             <td class="num">
-                                <Label>822.873,24</Label>
+                                <b id="ftotalbolivares">822.873,24</b>
                             </td>
                         </tr>
                         <tr>
@@ -348,31 +348,37 @@
                                 <Label>SUB-TOTAL $:</Label>
                             </td>
                             <td class="num">
-                                <Label>11.286,74</Label>
+                                <b id="fsubtotaldivisas">11.286,74</b>
                             </td>
                         </tr>
                         <tr>
                             <td class="descripcion">
                                 <Label>BASE IMPONIBLE $:</Label>
                             </td>
-                            <td class="num">11.053,27</td>
+                            <td class="num">
+                                <i id="fbaseimponibledivisas"> 11.053,27</i>
+                            </td>
                             <td class="descripcion">
                                 <Label style="padding-right: 20px;">IVA $:</Label>16%:</td>
                             <td class="num">
-                                <Label></Label>1.768,52</td>
+                                <b id="fivadivisas">1.768,52</b></td>
                         </tr>
                         <tr>
                             <td class="descripcion">
                                 <Label>EXENTO:</Label>
                             </td>
-                            <td class="num">0,00</td>
+                            <td class="num">
+                                <i id="fexentodivisas"> 0,00</i>
+                            </td>
                             <td colspan="2" class=""></td>
                         </tr>
                         <tr>
                             <td class="descripcion">
                                 <Label>NS:</Label>
                             </td>
-                            <td class="num">233,47</td>
+                            <td class="num">
+                                <i id="fnsdivisas">233,47</i>
+                            </td>
                             <td colspan="2" class=""></td>
                         </tr>
                         <tr>
@@ -381,7 +387,7 @@
                                 <Label>TOTAL ($):</Label>
                             </td>
                             <td class="num">
-                                <Label>13.055,26</Label>
+                                <b id="ftotaldivisas">13.055,26</b>
                             </td>
                         </tr>
                     </tbody>
@@ -397,19 +403,24 @@
 
             <div class="margin_bottom_5">
                 <Label>
-                    TASA DE CAMBIO DE FECHA 17/10/2018 POR BS. 63,03 SEGUN DICOM
+                    TASA DE CAMBIO DE FECHA <b id="ffechatasa">17/10/2018</b> POR <b id="ftasavalor">63,03</b>  SEGUN <b id="ftipotasa">DICOM</b>
                 </Label>
             </div>
 
             <div class="margin_bottom_5" id='right'>
-                23/02/2019
-                <br> 02:45:18 P.M.
+                <b id="ffechaimpresion"> 
+                        23/02/2019
+                        <br> 
+                        02:45:18 P.M.
+                </b>
             </div>
             <div id='left_50'>
                 DSC:
+                <b id="fdsc"></b>
             </div>
             <div id='right_50'>
-                IMPRESO POR: ESALAZAR
+                IMPRESO POR: 
+                <b id="fimpresopor">ESALAZAR</b>
             </div>
         </footer>
 
