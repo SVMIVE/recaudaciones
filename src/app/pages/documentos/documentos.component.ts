@@ -72,12 +72,14 @@ export class DocumentosComponent implements OnInit {
   conceptox = ""
   lstServicio = []
 
-  displayedColumnx: string[] = ['Concepto', 'Cantidad', 'Monto'];
+
+  displayedColumnx: string[] = ['Concepto', 'Cantidad', 'Monto']
   
-  dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
 
   
-  flipped = false;
+  flipped = false
+  esVisible = false
 
   toggleView() {
     this.flipped = !this.flipped;
@@ -245,6 +247,7 @@ export class DocumentosComponent implements OnInit {
     this.monto = 0
     this.codigo = ""
     this.cliente = ""
+    this.esVisible = true
 
   }
 }

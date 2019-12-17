@@ -138,6 +138,11 @@
                                         <input placeholder="Monto" nbInput fullWidth  [(ngModel)]="monto" >
                                     </div>
                                 </div>
+                                 <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input placeholder="Total" nbInput fullWidth  [(ngModel)]="total" >
+                                    </div>
+                                </div>
                                 <div class="col-md-3" style="display:none">
                                     <div class="form-group">
                                         <input placeholder="% IVA" nbInput fullWidth  [(ngModel)]="iva">
@@ -197,11 +202,23 @@
                                     </button>
                                 </div>
                                 
-                                <div class="col-md-6"></div>
+                                <div class="col-md-5"></div>
                                 
-                                <div class="col-md-3">
-                                    <button nbButton fullWidth  (click)="guardar()" type="submit" class="home-button pull-right" status="success">
+                                <div class="col-md-2">
+                                    <button nbButton fullWidth  (click)="guardar()" 
+                                         [style.visibility]="esVisible ? 'hidden' : 'visible'"
+                                        type="submit" class="home-button pull-right" status="success">
                                         Guardar
+                                    </button>
+                                </div>
+                                <div class="col-md-2">
+                                     <button nbButton fullWidth  
+                                        styleSheetFile="http://192.168.41.27:4200/assets/reporte/factura.css"
+                                        printSectionId="print-divFactura"
+                                        ngxPrint
+                                        [style.visibility]="esVisible ? 'visible' : 'hidden'"
+                                      class="home-button pull-right" status="info">
+                                        Imprimir
                                     </button>
                                 </div>
                             </div>
@@ -218,16 +235,16 @@
 </div>
 
 
-<div id="divFactura">
+<div id="print-divFactura" style="display:none">
         <body>
             <header class="clearfix">
                 <table>
                     <tbody>
                         <tr>
                             <td class="header_field_1">FACTURA</td>
-                            <td class="header_field_2"><b id="fnumero">1810175631</b> </td>
-                            <td class="header_field_2" ><b id="ffecha">26/11/2018</b> </td>
-                            <td class="header_field_3" ><b id="fcontrol">0541383</b> </td>
+                            <td class="header_field_2"><b id="fnumero"></b> </td>
+                            <td class="header_field_2" ><b id="ffecha"></b> </td>
+                            <td class="header_field_3" ><b id="fcontrol"></b> </td>
                         </tr>
                         <tr>
                             <td id="serie" colspan="4" >SERIE: <i id="fserie">A</i></td>

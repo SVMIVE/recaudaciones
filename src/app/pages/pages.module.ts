@@ -32,8 +32,9 @@ import { PagadoresComponent } from './pagadores/pagadores.component';
 import { ControlComponent } from './control/control.component';
 import { SeguridadComponent } from './seguridad/seguridad.component';
 import { PagosComponent } from './pagos/pagos.component';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {NgxPrintModule} from 'ngx-print';
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -56,7 +57,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     NbToastrModule,
     MatTableModule,
     MatCheckboxModule,
-
+    NgxPrintModule,
 
   ],
   declarations: [
