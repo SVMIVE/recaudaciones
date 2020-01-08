@@ -20,6 +20,32 @@ export interface WCliente  {
   Usuario : string
 }
 
+//Control de mapping
+export interface WAdminUsuario {
+  tbl: string,
+  cedula_rif : string,
+  nit : string,
+  razon_social : string,
+  auxiliar_contable : string,
+  actividad_empresa : string, //Actividad
+  presidente?: string,
+  porc_ing_bruto?: number, //Declara
+  origen : string,
+  dec_ing_bruto?: number,
+  dec_ajusta?: number,
+  activo : number, //Estatus
+  cd_usuario?: string,
+  fecha_registro: string, //Fecha y Hora
+  Fech_modi_contrato?: string, //Fecha y Hora
+  Fech_ini_contrato?: string, //Fecha y Hora
+  oficina: string,
+  tipo_cliente?: string,
+  dir_estado: string,
+  telefono_1: string,
+  telefono_2?: string,
+  email?: string,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -42,8 +68,28 @@ export class ClienteService {
     return this.httpClient.get<any>(this.url +  "sybase/cliente/lstactividad")
   }
 
-  agregar(wCliente : WCliente){
-    return this.httpClient.post<any>(this.url +  "sybase/cliente/insertar", wCliente)
+  agregar(wC : WCliente){
+    var wAdmin : WAdminUsuario  = {
+      tbl: 'dbo.admin_personas_juridicas',
+      auxiliar_contable : wC.Codigo,
+      cedula_rif : wC.Rif,
+      nit : wC.Nit,
+      razon_social : wC.RazonSocial,
+      actividad_empresa : wC.Actividad, //Actividad
+      presidente : 'PRESIDENTE',
+      porc_ing_bruto: wC.Declarar, //Declara
+      origen : 'SEDE',
+      activo : wC.Estatus, //Estatus
+      cd_usuario: 'LOGIN',
+      fecha_registro: wC.FechaInicio, //Fecha y Hora
+      oficina: '2',
+      tipo_cliente: wC.Tipo,
+      dir_estado: wC.Direccion,
+      telefono_1: wC.Telefono,
+      
+    }
+
+    return this.httpClient.post<any>(this.url +  "sybase/cliente/insertar", wAdmin)
   
   }
 

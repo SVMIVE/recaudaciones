@@ -15,6 +15,7 @@ import { ControlComponent } from './control/control.component';
 import { PagosComponent } from './pagos/pagos.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReporteComponent } from './reporte/reporte.component';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -22,6 +23,10 @@ const routes: Routes = [{
     {
       path: 'tasa',
       component: DashboardComponent,
+    },
+    {
+      path: 'reporte',
+      component: ReporteComponent,
     },
     {
       path: 'pagos',

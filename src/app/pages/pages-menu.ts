@@ -15,6 +15,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'credit-card',
     link: '/home/pagos',
   }, {
+    title: 'Reporte',
+    icon: 'credit-card',
+    link: '/home/reporte',
+  }, {
     title: 'Configuración',
     icon: 'settings-2-outline',
     children: [

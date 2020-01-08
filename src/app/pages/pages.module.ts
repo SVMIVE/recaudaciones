@@ -35,6 +35,7 @@ import { PagosComponent } from './pagos/pagos.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {NgxPrintModule} from 'ngx-print';
+import { ReporteComponent } from './reporte/reporte.component';
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -73,6 +74,7 @@ import {NgxPrintModule} from 'ngx-print';
     ControlComponent,
     SeguridadComponent,
     PagosComponent,
+    ReporteComponent,
   ],
 })
 export class PagesModule {
