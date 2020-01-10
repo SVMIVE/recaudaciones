@@ -29,9 +29,9 @@ export interface WAdminUsuario {
   auxiliar_contable : string,
   actividad_empresa : string, //Actividad
   presidente?: string,
-  porc_ing_bruto?: number, //Declara
+  porc_ing_bruto: number, //Declara
   origen : string,
-  dec_ing_bruto?: number,
+  dec_ing_bruto: number,
   dec_ajusta?: number,
   activo : number, //Estatus
   cd_usuario?: string,
@@ -78,18 +78,21 @@ export class ClienteService {
       actividad_empresa : wC.Actividad, //Actividad
       presidente : 'PRESIDENTE',
       porc_ing_bruto: wC.Declarar, //Declara
+      dec_ing_bruto: 0,
       origen : 'SEDE',
       activo : wC.Estatus, //Estatus
       cd_usuario: 'LOGIN',
-      fecha_registro: wC.FechaInicio, //Fecha y Hora
+      fecha_registro:'GETDATE()', //Fecha y Hora
       oficina: '2',
       tipo_cliente: wC.Tipo,
       dir_estado: wC.Direccion,
-      telefono_1: wC.Telefono,
-      
+      telefono_1: wC.Telefono,      
     }
 
-    return this.httpClient.post<any>(this.url +  "sybase/cliente/insertar", wAdmin)
+    console.log(wAdmin)
+    console.error( JSON.stringify(wAdmin) )
+
+    return this.httpClient.post<any>(this.url +  "sybase/admincontrol/insertvarios", wAdmin)
   
   }
 
