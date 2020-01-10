@@ -12,4 +12,10 @@ export class StepperComponent implements OnInit {
   ngOnInit() {
   }
 
+  linearMode = true;
+
+  toggleLinearMode() {
+    this.linearMode = !this.linearMode;
+  }
+
 }
