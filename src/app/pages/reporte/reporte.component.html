@@ -1,1 +1,43 @@
-<p>reporte works!</p>
+<!-- <nb-tabset-width></nb-tabset-width> -->
+
+    <nb-card>
+    <nb-card-body>
+  
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="DOSAS">
+          <nb-stepper orientation="horizontal" disableStepNavigation>
+            <nb-step [label]="labelOne">
+              <ng-template #labelOne>Seleccion</ng-template>
+<div>
+  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>DOSAS</button>
+  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>CLIENTES</button>
+  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>RESUMEN DE DOCUMENTOS</button>
+  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>ESTADOS DE CUENTA ACTUAL</button>
+  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>HASTA</button>
+  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>HISTÓRICO</button>
+
+</div>
+              <br>
+
+              <button class="next-button" nbButton nbStepperNext>next</button>
+            </nb-step>
+            <nb-step [label]="labelTwo">
+              <ng-template #labelTwo>Llenado</ng-template>
+              <button class="prev-button" nbButton nbStepperPrevious>prev</button>
+              <button class="next-button" nbButton nbStepperNext>next</button>
+            </nb-step>
+            <nb-step label="Impresion">
+              <button class="prev-button" nbButton nbStepperPrevious>prev</button>
+            </nb-step>
+          </nb-stepper>
+        </nb-tab>
+        <nb-tab tabTitle="TERMINAL AUXILIAR">
+        </nb-tab>
+        <nb-tab tabTitle="RECAUDACIÓN">
+          </nb-tab>
+          <nb-tab tabTitle="HABILITADURIA">
+          </nb-tab>
+      </nb-tabset>
+  
+    </nb-card-body>
+  </nb-card>

@@ -10,7 +10,9 @@ import {
   NbIconModule,
   NbSelectModule,
   NbDatepickerModule,
-  NbToastrModule } from '@nebular/theme';
+  NbToastrModule,
+  NbStepperModule,
+  NbTabsetModule,} from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -36,6 +38,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {NgxPrintModule} from 'ngx-print';
 import { ReporteComponent } from './reporte/reporte.component';
+import { TabsetWidthComponent } from './reporte/tabs/tabs.component';
+import { StepperComponent } from './reporte/stepper/stepper.component';
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -59,7 +63,8 @@ import { ReporteComponent } from './reporte/reporte.component';
     MatTableModule,
     MatCheckboxModule,
     NgxPrintModule,
-
+    NbTabsetModule,
+    NbStepperModule,
   ],
   declarations: [
     PagesComponent,
@@ -75,6 +80,8 @@ import { ReporteComponent } from './reporte/reporte.component';
     SeguridadComponent,
     PagosComponent,
     ReporteComponent,
+    TabsetWidthComponent,
+    StepperComponent,
   ],
 })
 export class PagesModule {
