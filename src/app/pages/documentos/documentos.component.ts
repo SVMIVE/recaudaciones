@@ -271,8 +271,32 @@ export class DocumentosComponent implements OnInit {
     this.codigo = ""
     this.cliente = ""
     this.esVisible = true
+    var obj = {
+      "call_back": "AutoIncremento",
+      "nu_documento":"1912160099",
+      "fe_documento":"2019-11-26 08:14:49",
+      "tp_documento":"FAC",
+      "cd_servicio":"DC",
+      "oficina":"2",
+      "cd_cliente": this.codigo,
+      "st_documento":"0",
+      "cd_usuario":"NRECAUDA",
+      "pc_iva":16.00,
+      "mn_documento_bf":200000.00,
+      "baseimponible":10000.00,
+      "mn_iva_bf":16000.00,
+      "exentos":10000.00,
+      "tbl" : "dbo.admin_documentos",
+      "moneda":"B",
+      "cod_terminal":"SEDE",
+      "one-to-many": LSTDetalles,
+    }
+    console.log( JSON.stringify (obj) )
+
     ELEMENT_DATA = []
-    
+    LSTDetalles = []
+
+
 
 
   }
