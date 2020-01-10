@@ -92,7 +92,7 @@ export class ClienteService {
     console.log(wAdmin)
     console.error( JSON.stringify(wAdmin) )
 
-    return this.httpClient.post<any>(this.url +  "sybase/admincontrol/insertvarios", wAdmin)
+    return this.httpClient.post<any>(this.url +  "sybase/admincontrol/insertinto", wAdmin)
   
   }
 

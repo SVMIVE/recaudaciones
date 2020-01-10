@@ -35,7 +35,10 @@ export interface PeriodicElement {
 }
 
 
+
+
 var ELEMENT_DATA: PeriodicElement[] = [];
+var LSTDetalles = []
 
 @Component({
   selector: 'ngx-documentos',
@@ -61,7 +64,7 @@ export class DocumentosComponent implements OnInit {
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
   cantidad = ""
-
+  index = 0
   codigo = ""
   cliente = ""
   monto = 0.00
@@ -71,6 +74,8 @@ export class DocumentosComponent implements OnInit {
   concepto = []
   conceptox = ""
   lstServicio = []
+
+
 
 
   displayedColumnx: string[] = ['Concepto', 'Cantidad', 'Monto']
@@ -238,8 +243,26 @@ export class DocumentosComponent implements OnInit {
       Cantidad: parseInt(this.cantidad), 
       Concepto: concepto, 
       Monto: this.monto
+      
     } )
+
     this.dataSourcesx.data = ELEMENT_DATA
+    this.index++
+    LSTDetalles.push( {      
+        "tbl" : "dbo.admin_detdocumentos",
+        "nu_documento":"1912160099",
+        "nu_renglon": this.index,
+        "cd_concepto": this.conceptox,
+        "ds_concepto": concepto,
+        "nu_cantidad": parseInt(this.cantidad),
+        "mn_monto_bf": this.monto,
+        "exentos":100000.00,
+        "pc_iva": this.iva,
+        "moneda": 'B',
+        "tp_cambio":"BS",
+        "cd_cuenta":"303020121"        
+    } )
+
   }
 
   guardar(){
@@ -248,6 +271,9 @@ export class DocumentosComponent implements OnInit {
     this.codigo = ""
     this.cliente = ""
     this.esVisible = true
+    ELEMENT_DATA = []
+    
+
 
   }
 }
