@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource } from '@nebular/theme';
+import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource, NbToastrService } from '@nebular/theme';
 
 import { FormControl, FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
@@ -64,13 +64,14 @@ export class DocumentosComponent implements OnInit {
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
   cantidad = ""
+  monto = 0.00
+  total = 0.00
   index = 0
   codigo = ""
   cliente = ""
-  monto = 0.00
   iva = 0.00
   tipo = ""
-
+  pos = 0
   concepto = []
   conceptox = ""
   lstServicio = []
@@ -94,6 +95,7 @@ export class DocumentosComponent implements OnInit {
     private docu : DocumentoService, 
     private windowService: NbWindowService,
     private conceptos : ConceptoService,
+    private toastrService: NbToastrService,
     private servicio : ServicioService,
     private servicioCliente : ClienteService ) {
     
@@ -201,6 +203,11 @@ export class DocumentosComponent implements OnInit {
     
   }
 
+  calcularCantidad(e){
+    this.total =  parseInt(this.cantidad) * this.monto;
+  }
+
+
   consultarCliente(id){
     return this.servicioCliente.consultar(this.codigo).subscribe(
       (resp) => { 
@@ -263,6 +270,8 @@ export class DocumentosComponent implements OnInit {
         "cd_cuenta":"303020121"        
     } )
 
+    
+
   }
 
   guardar(){
@@ -291,13 +300,31 @@ export class DocumentosComponent implements OnInit {
       "cod_terminal":"SEDE",
       "one-to-many": LSTDetalles,
     }
-    console.log( JSON.stringify (obj) )
+    console.log( JSON.stringify  (obj) )
 
+    this.docu.agregar(obj).subscribe(
+      (resp) => {         
+        this.dataSource = this.dataSourceBuilder.create(this.data)
+        console.info("Exito: ", resp)
+        this.showToast('top-right', 'success')
+      },
+      (err) => {
+        console.error("Error: ", err)
+        this.showToast('top-right', 'warning')
+      }
+    ) 
     ELEMENT_DATA = []
     LSTDetalles = []
 
 
 
 
+  }
+
+  showToast(position, status) {
+    this.toastrService.show(
+      status || 'Success',
+      `Proceso finalizado`,
+      { position, status });
   }
 }

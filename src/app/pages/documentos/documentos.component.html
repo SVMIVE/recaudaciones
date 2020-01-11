@@ -113,7 +113,7 @@
                                         (selectedChange)="consultarConcepto($event)" 
                                         [(ngModel)]="servicio" 
                                         fullWidth>
-                                            <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{serv.nb_servicio}} </nb-option>
+                                            <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{ serv.cd_servicio + ' - ' + serv.nb_servicio}} </nb-option>
                                         </nb-select>
                                         
                                     </div>
@@ -124,7 +124,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <nb-select placeholder="Concepto" [(ngModel)]="conceptox"  fullWidth  >
-                                            <nb-option  *ngFor = "let cpt of concepto"  value="{{cpt.cd_concepto}}"> {{cpt.nb_concepto}} </nb-option>
+                                            <nb-option  *ngFor = "let cpt of concepto"  value="{{cpt.cd_concepto}}"> {{cpt.cd_concepto  + ' - ' +  cpt.nb_concepto}} </nb-option>
                                         </nb-select>
                                     </div>
                                 </div>
@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <input   type="number" placeholder="Monto" nbInput fullWidth  [(ngModel)]="monto" >
+                                        <input   type="number" placeholder="Monto" nbInput fullWidth  [(ngModel)]="monto" (blur)="calcularCantidad($event)">
                                     </div>
                                 </div>
                                  <div class="col-md-3">
@@ -206,7 +206,7 @@
                                 
                                 <div class="col-md-2">
                                     <button nbButton fullWidth  (click)="guardar()" 
-                                         [style.visibility]="esVisible ? 'hidden' : 'visible'"
+                                         
                                         type="submit" class="home-button pull-right" status="success">
                                         Guardar
                                     </button>

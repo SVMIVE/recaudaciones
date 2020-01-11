@@ -82,7 +82,7 @@ export class ClienteService {
       origen : 'SEDE',
       activo : wC.Estatus, //Estatus
       cd_usuario: 'LOGIN',
-      fecha_registro:'GETDATE()', //Fecha y Hora
+      fecha_registro:'GETDATE()#F', //Fecha y Hora
       oficina: '2',
       tipo_cliente: wC.Tipo,
       dir_estado: wC.Direccion,
