@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource } from '@nebular/theme';
+import {  NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource, NbToastrService } from '@nebular/theme';
 
 import { FormControl, FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
@@ -16,6 +16,7 @@ interface TreeNode<T> {
 }
 
 interface FSEntry {
+  Opciones?: string
   Numero: string
   Fecha?: string
   Tipo?: string
@@ -54,8 +55,8 @@ export class DocumentosComponent implements OnInit {
 
   formControl = new FormControl(new Date());
   ngModelDate = new Date();
-  customColumn = 'Numero';
-  defaultColumns = [ 'Fecha', 'Tipo', 'Cliente', 'Codigo', 'Estatus', 'Monto' , 'Iva', 'Moneda'];
+  customColumn = 'Opciones';
+  defaultColumns = [ 'Numero', 'Fecha', 'Tipo', 'Cliente', 'Codigo', 'Estatus', 'Monto' , 'Iva', 'Moneda'];
   allColumns = [ this.customColumn, ...this.defaultColumns ];
 
   dataSource: NbTreeGridDataSource<FSEntry>;
@@ -64,16 +65,21 @@ export class DocumentosComponent implements OnInit {
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
   cantidad = ""
+  monto = 0.00
+  total = 0.00
   index = 0
   codigo = ""
   cliente = ""
-  monto = 0.00
   iva = 0.00
   tipo = ""
-
+  pos = 0
   concepto = []
   conceptox = ""
   lstServicio = []
+  baseImponible = 0.00
+  excento = 0.00
+  cuenta = ''
+  montoTotal = 0.00
 
 
 
@@ -94,6 +100,7 @@ export class DocumentosComponent implements OnInit {
     private docu : DocumentoService, 
     private windowService: NbWindowService,
     private conceptos : ConceptoService,
+    private toastrService: NbToastrService,
     private servicio : ServicioService,
     private servicioCliente : ClienteService ) {
     
@@ -123,7 +130,13 @@ export class DocumentosComponent implements OnInit {
   obtenerDatos(){
      this.docu.listar().subscribe(
       (resp) => {        
-        resp.data.forEach(d => {          
+        resp.data.forEach(d => {      
+          var opciones = '-'
+          if (d.st_documento == "0") {
+            opciones = `OK`
+          } 
+          
+          
           this.data.push({
               data: { 
                 Numero: d.nu_documento, 
@@ -134,7 +147,8 @@ export class DocumentosComponent implements OnInit {
                 Estatus: d.st_documento, 
                 Monto: d.mn_documento_bf,
                 Iva : d.mn_iva_bf,
-                Moneda: d.moneda  
+                Moneda: d.moneda,
+                //Opciones: opciones
             },      
           });
 
@@ -194,12 +208,25 @@ export class DocumentosComponent implements OnInit {
     
     this.concepto.forEach(e => {
       if(this.conceptox == e.cd_concepto){        
-        this.monto = parseFloat(e.mn_monto_bf) * parseInt(this.cantidad);
+        console.log(e);
+        if ( e.in_iva == "0"){
+          this.excento += this.monto
+        }else{
+          this.baseImponible += this.monto
+        }
+        
+        this.monto = parseFloat(e.mn_monto_bf) * parseInt(this.cantidad)
+        this.cuenta = e.cd_cuenta
       }
     });
     
     
   }
+
+  calcularCantidad(e){
+    this.total =  parseInt(this.cantidad) * this.monto;
+  }
+
 
   consultarCliente(id){
     return this.servicioCliente.consultar(this.codigo).subscribe(
@@ -242,28 +269,29 @@ export class DocumentosComponent implements OnInit {
     ELEMENT_DATA.push( {
       Cantidad: parseInt(this.cantidad), 
       Concepto: concepto, 
-      Monto: this.monto
-      
+      Monto: this.total
     } )
 
+
+    this.montoTotal += this.total
     this.dataSourcesx.data = ELEMENT_DATA
     this.index++
     LSTDetalles.push( {      
         "tbl" : "dbo.admin_detdocumentos",
-        "nu_documento":"1912160099",
+        "nu_documento":"",
         "nu_renglon": this.index,
         "cd_concepto": this.conceptox,
         "ds_concepto": concepto,
         "nu_cantidad": parseInt(this.cantidad),
-        "mn_monto_bf": this.monto,
-        "exentos":100000.00,
+        "mn_monto_bf": this.total,
+        "exentos":0.00,
         "pc_iva": this.iva,
         "moneda": 'B',
         "tp_cambio":"BS",
-        "cd_cuenta":"303020121"        
+        "cd_cuenta": this.cuenta        
     } )
-
   }
+
 
   guardar(){
     this.iva = 0
@@ -271,9 +299,56 @@ export class DocumentosComponent implements OnInit {
     this.codigo = ""
     this.cliente = ""
     this.esVisible = true
-    ELEMENT_DATA = []
-    
+    var d = new Date()
+    var fe =  d.toISOString().substring(0,10)
+    var obj = {
+      "call_back": "AutoIncrementoC",
+      "nu_documento": "",
+      "fe_documento": fe + " " + d.toLocaleTimeString(),
+      "tp_documento":"FAC",
+      "cd_servicio": this.conceptox,
+      "oficina": "2",
+      "cd_cliente": this.codigo,
+      "st_documento":"O",
+      "cd_usuario": "NRECAUDA",
+      "pc_iva": 16.00,
+      "mn_documento_bf": this.excento + this.baseImponible,
+      "baseimponible": this.baseImponible,
+      "exentos": this.excento,
+      "tbl" : "dbo.admin_documentos",
+      "moneda": "B",
+      "cod_terminal": "SEDE",
+      "onetomany": LSTDetalles,
+    }
+    console.log( JSON.stringify  (obj) )
+
+    this.docu.agregar(obj).subscribe(
+      (resp) => {         
+        this.dataSource = this.dataSourceBuilder.create(this.data)
+        console.info("Exito: ", resp)
+        this.showToast('top-right', 'success')
+      },
+      (err) => {
+        console.error("Error: ", err)
+        this.showToast('top-right', 'warning')
+      }
+    ) 
+    //ELEMENT_DATA = []
+    //LSTDetalles = []
 
 
+
+
+  }
+
+  showToast(position, status) {
+    this.toastrService.show(
+      status || 'Success',
+      `Proceso finalizado`,
+      { position, status });
+  }
+
+  facturar(e){
+    console.log(e);
   }
 }

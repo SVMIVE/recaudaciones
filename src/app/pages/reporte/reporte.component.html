@@ -1,43 +1,236 @@
 <!-- <nb-tabset-width></nb-tabset-width> -->
 
-    <nb-card>
+<nb-card>
     <nb-card-body>
-  
-      <nb-tabset fullWidth>
-        <nb-tab tabTitle="DOSAS">
-          <nb-stepper orientation="horizontal" disableStepNavigation>
-            <nb-step [label]="labelOne">
-              <ng-template #labelOne>Seleccion</ng-template>
-<div>
-  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>DOSAS</button>
-  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>CLIENTES</button>
-  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>RESUMEN DE DOCUMENTOS</button>
-  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>ESTADOS DE CUENTA ACTUAL</button>
-  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>HASTA</button>
-  <button nbButton status="success" class="category"><nb-icon icon="bulb-outline"></nb-icon>HISTÓRICO</button>
 
-</div>
-              <br>
+        <nb-tabset fullWidth>
+            <nb-tab tabTitle="DOSAS">
+                <ngx-stepper></ngx-stepper>
+<!--
+                <nb-stepper orientation="horizontal" disableStepNavigation>
+                    <nb-step [label]="labelOne">
+                        <ng-template #labelOne>Categorias</ng-template>
 
-              <button class="next-button" nbButton nbStepperNext>next</button>
-            </nb-step>
-            <nb-step [label]="labelTwo">
-              <ng-template #labelTwo>Llenado</ng-template>
-              <button class="prev-button" nbButton nbStepperPrevious>prev</button>
-              <button class="next-button" nbButton nbStepperNext>next</button>
-            </nb-step>
-            <nb-step label="Impresion">
-              <button class="prev-button" nbButton nbStepperPrevious>prev</button>
-            </nb-step>
-          </nb-stepper>
-        </nb-tab>
-        <nb-tab tabTitle="TERMINAL AUXILIAR">
-        </nb-tab>
-        <nb-tab tabTitle="RECAUDACIÓN">
-          </nb-tab>
-          <nb-tab tabTitle="HABILITADURIA">
-          </nb-tab>
-      </nb-tabset>
-  
+                        <div class="content" id="categorias_dosa">
+                        <div class="row">
+                                <button nbButton status="primary"  class="category"><nb-icon id="dos_dosa" icon="bulb-outline"></nb-icon>DOSAS</button>
+                                <button nbButton status="primary"  class="category"><nb-icon id="dos_cliente" icon="bulb-outline"></nb-icon>CLIENTES</button>
+                                <button nbButton status="primary"  class="category"><nb-icon id="dos_resumen_documento" icon="bulb-outline"></nb-icon>RESUMEN DE DOCUMENTOS</button>
+                        </div>
+                            <div class="break"></div>
+                        <div class="row">
+                                <button nbButton status="primary" class="category"><nb-icon id="dos_estado_cuenta" icon="bulb-outline"></nb-icon>ESTADOS DE CUENTA ACTUAL</button>
+                                <button nbButton status="primary" class="category"><nb-icon id="dos_hasta" icon="bulb-outline"></nb-icon>HASTA</button>
+                                <button nbButton status="primary" class="category"><nb-icon id="dos_historico" icon="bulb-outline"></nb-icon>HISTÓRICO</button>
+                        </div>
+                        </div>
+                        <div class="content" id="categorias_terminal_auxiliar">
+                            <button nbButton status="primary" class="category"><nb-icon id="tea_cliente" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="tea_facturas_anuladas" icon="bulb-outline"></nb-icon>	FACTURAS ANULADAS	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="tea_relacion_ingresos_diarios" icon="bulb-outline"></nb-icon>RELACIÓN Y/O INGRESOS DIARIOS TERMINAL AUXILIAR 	</button>
+                            <div class="break"></div>
+                            <button nbButton status="primary" class="category"><nb-icon id="tea_resumen_documentos" icon="bulb-outline"></nb-icon>	RESUMEN DE DOCUMENTOS	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="tea_estado_cuenta" icon="bulb-outline"></nb-icon>	ESTADOS DE CUENTA ACTUAL	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="tea_totales_servicios" icon="bulb-outline"></nb-icon>	TOTALES DE SERVICIOS	</button>
+                        </div>
+
+                        <div class="content" id="categorias_recaudacion">
+                            <button nbButton status="primary" class="category"><nb-icon id="rec_documentos_abiertos" icon="bulb-outline"></nb-icon>	DOCUMENTOS ABIERTOS	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="rec_libro_ventas" icon="bulb-outline"></nb-icon>	LIBRO DE VENTAS	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="rec_retenciones" icon="bulb-outline"></nb-icon>	RETENCIONES	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="rec_relacion_ingresos" icon="bulb-outline"></nb-icon>	RELACIÓN Y/O INGRESOS	</button>
+                            <div class="break"></div>
+                            <button nbButton status="primary" class="category"><nb-icon id="rec_clientes" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="rec_listados" icon="bulb-outline"></nb-icon>	LISTADOS	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="rec_estado_cuenta" icon="bulb-outline"></nb-icon>	ESTADO DE CUENTA	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="rec_resumen" icon="bulb-outline"></nb-icon>	RESUMEN	</button>
+                            <div class="break"></div>
+                            <button nbButton status="primary" class="category"><nb-icon id="rec_relacion_dia" icon="bulb-outline"></nb-icon>	RELACIONES DEL DIA	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="rec_recibos" icon="bulb-outline"></nb-icon>	RECIBOS	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="rec_nota_credito" icon="bulb-outline"></nb-icon>	NOTAS DE CRÉDITO	</button>
+                        </div>
+
+                        <div class="content" id="categorias_habilitaduria">
+                            <button nbButton status="primary" class="category"><nb-icon id="hab_cliente" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="hab_facturas_anuladas" icon="bulb-outline"></nb-icon>	FACTURAS ANULADAS	</button>
+                            <div class="break"></div>
+                            <button nbButton status="primary" class="category"><nb-icon id="hab_relacion_ingresos_diarios" icon="bulb-outline"></nb-icon>	RELACIÓN Y/O INGRESOS DIARIOS	</button>
+                            <button nbButton status="primary" class="category"><nb-icon id="hab_resumen_documentos" icon="bulb-outline"></nb-icon>	RESUMEN DE DOCUMENTOS	</button>
+                        </div>
+                    
+                        <div class="footer">
+                            <button class="next-button" nbButton nbStepperNext>Siguiente</button>
+                        </div>
+
+                    </nb-step>
+                    <nb-step [label]="labelTwo">
+                        <ng-template #labelTwo>Reportes</ng-template>
+                        <div class="content">
+
+                            <div class="col-md-4">
+                                <nb-select placeholder="Seleccion Reporte" id="select_reporte" fullWidth>
+
+                                    <nb-option-group title="DOSAS">
+                                        <nb-option value="11"> RELACIÓN Y/O INGRESOS DIARIOS DOSAS </nb-option>
+                                        <nb-option value="12"> TOTAL GENERAL DOSAS </nb-option>
+                                        <nb-option value="13"> DOSAS ANULADAS </nb-option>
+                                    </nb-option-group>
+
+                                    <nb-option-group title="CLIENTES">
+                                        <nb-option value="21"> CLIENTES FIJOS </nb-option>
+                                        <nb-option value="22"> CLIENTES GENÉRICOS </nb-option>
+                                        <nb-option value="23"> CLIENTES </nb-option>
+                                    </nb-option-group>
+
+                                    <nb-option-group title="RESUMEN DE DOCUMENTOS">
+                                        <nb-option value="31"> RESUMEN DE DOCUMENTOS POR CLIENTE FIJO </nb-option>
+                                        <nb-option value="32"> RESUMEN DE DOCUMENTOS POR CLIENTE CARGUEROS </nb-option>
+                                        <nb-option value="33"> RESUMEN GENERAL DOSA DE CONTADO CLASIFICADO POR CONCEPTO </nb-option>
+                                    </nb-option-group>
+
+                                    <nb-option-group title="ESTADOS DE CUENTA ACTUAL">
+                                        <nb-option value="41"> CLIENTES CARGUEROS </nb-option>
+                                        <nb-option value="42"> CLIENTES FIJOS </nb-option>
+                                    </nb-option-group>
+
+                                    <nb-option-group title="HASTA">
+                                        <nb-option value="51"> CLIENTES CARGUEROS </nb-option>
+                                        <nb-option value="52"> CLIENTES FIJOS </nb-option>
+                                    </nb-option-group>
+
+                                    <nb-option-group title="HISTÓRICO">
+                                        <nb-option value="61"> CLIENTES CARGUEROS </nb-option>
+                                        <nb-option value="62"> CLIENTES FIJOS </nb-option>
+                                    </nb-option-group>
+
+                                </nb-select>
+                            </div>
+
+                        </div>
+
+                        <div class="content">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                    <nb-select placeholder="Cliente" id="select_cliente" fullWidth>
+                                        <nb-option value="0">0</nb-option>
+                                        <nb-option value="1">0</nb-option>
+                                        <nb-option value="2">0</nb-option>
+                                    </nb-select>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="content">
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                    <nb-select placeholder="Tipo de Documento" id="select_tdocumento" fullWidth>
+                                        <nb-option value="0">0</nb-option>
+                                        <nb-option value="1">0</nb-option>
+                                        <nb-option value="2">0</nb-option>
+                                    </nb-select>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="content">
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                    <nb-select placeholder="Servicios" id="select_servicio" fullWidth>
+                                        <nb-option value="0">0</nb-option>
+                                        <nb-option value="1">0</nb-option>
+                                        <nb-option value="2">0</nb-option>
+                                    </nb-select>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="content">
+                            <div class="col-md-4">
+                                <div class="form-group">
+
+                                    <nb-select placeholder="Tipo de Serie" id="select_tserie" fullWidth>
+                                        <nb-option value="0">0</nb-option>
+                                        <nb-option value="1">0</nb-option>
+                                        <nb-option value="2">0</nb-option>
+                                    </nb-select>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="content">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label># SENIAT:</label>
+                                    <input class="" placeholder="Desde" id="input_seniat_desde" nbInput fullWidth>
+                                    <input class="" placeholder="Hasta" id="input_seniat_hasta"nbInput fullWidth>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="content">
+                            <div class="col-md-4">
+                                <div>
+                                    <div class="form-group">
+                                        <input nbInput fullWidth placeholder="Rango de Fechas" id="date_rfecha" [nbDatepicker]="formpicker">
+                                        <nb-rangepicker #formpicker></nb-rangepicker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="footer">
+
+                            <button class="prev-button" nbButton nbStepperPrevious>Anterior</button>
+                            <button class="next-button" nbButton nbStepperNext>Siguiente</button>
+                        </div>
+
+
+                    </nb-step>
+                    <nb-step label="Impresion">
+                        <div class="content">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button nbButton status="success" id="print_doc"><nb-icon icon="printer-outline"></nb-icon>IMPRIMIR</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="footer">
+                            <button class="prev-button" nbButton nbStepperPrevious>Anterior</button>
+                        </div>
+
+                    </nb-step>
+                </nb-stepper>
+            -->
+            </nb-tab>
+            <nb-tab tabTitle="TERMINAL AUXILIAR">
+                <ngx-stepper></ngx-stepper>
+            </nb-tab>
+            <nb-tab tabTitle="RECAUDACIÓN">
+                <ngx-stepper></ngx-stepper>
+            </nb-tab>
+            <nb-tab tabTitle="HABILITADURIA">
+                <ngx-stepper></ngx-stepper>
+            </nb-tab>
+        </nb-tabset>
+
     </nb-card-body>
-  </nb-card>
+</nb-card>

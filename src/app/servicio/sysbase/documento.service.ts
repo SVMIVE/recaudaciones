@@ -21,7 +21,7 @@ export interface WDocumento {
   exentos: number,
   moneda: string,
   cod_terminal: string,
-  onetomany: [],
+  onetomany ?: [],
 }
 
 @Injectable({

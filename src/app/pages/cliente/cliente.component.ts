@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource, NbToastrService } from '@nebular/theme';
-
 import { FormControl, FormsModule } from '@angular/forms';
 import { ClienteService, WCliente } from '../../servicio/sysbase/cliente.service';
 
@@ -16,7 +15,10 @@ interface FSEntry {
   Nit: string;
   Codigo: string;
   Acciones?: boolean;
-  //items?: number;
+  selectedItem: string;
+  selectedItemS: string;
+  selectedItemA: string;
+  // items?: number;
 }
 
 
@@ -27,6 +29,7 @@ interface FSEntry {
 })
 export class ClienteComponent implements OnInit {
 
+  emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   @ViewChild('escClose', { read: TemplateRef  , static: false }) escCloseTemplate: TemplateRef<HTMLElement>;
   @ViewChild('disabledEsc', { read: TemplateRef, static: false }) disabledEscTemplate: TemplateRef<HTMLElement>;
@@ -37,32 +40,35 @@ export class ClienteComponent implements OnInit {
   defaultColumns = [ 'Razonsocial', 'Nit', 'Codigo', 'Acciones' ];
   allColumns = [ this.customColumn, ...this.defaultColumns ];
 
-  dataSource: NbTreeGridDataSource<FSEntry>;
 
+  dataSource: NbTreeGridDataSource<FSEntry>;
+  selectedItem: string;
+  selectedItemS: string;
+  selectedItemA: string;
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
-  index = 0
-  codigox = ""
-  razonSocialx = ""
-  rifx  = ""
-  nitx  = ""
-  tipox = ""
-  estatusx = "0"
-  actividadx = ""
-  declararx  = 0
-  fechaIniciox = ""
-  fechaModificionx = ""
-  emailx = ""
-  telefonox = ""
-  codigoPostalx = ""
-  direccionx = ""
+  index = 0;
+  codigox = '';
+  razonSocialx = '';
+  rifx  = '';
+  nitx  = '';
+  tipox = '';
+  estatusx = 0;
+  actividadx = '';
+  declararx  = 0;
+  fechaIniciox = '';
+  fechaModificionx = '';
+  emailx = '';
+  telefonox = '';
+  codigoPostalx = '';
+  direccionx = '';
 
 
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private toastrService: NbToastrService, private cliente : ClienteService, private windowService: NbWindowService) {
-    
+constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private toastrService: NbToastrService, private cliente : ClienteService, private windowService: NbWindowService) {
+
   }
   ngOnInit(){
-    this.obtenerDatos() 
+    this.obtenerDatos();
   }
   updateSort(sortRequest: NbSortRequest): void {
     this.sortColumn = sortRequest.column;
@@ -82,14 +88,14 @@ export class ClienteComponent implements OnInit {
       (resp) => {
         resp.forEach(d => {
             this.data.push({
-                data: { Rif: d.cedula_rif, Razonsocial: d.razon_social, Nit: d.nit, Codigo: d.auxiliar_contable },      
+                data: { Rif: d.cedula_rif, Razonsocial: d.razon_social, Nit: d.nit, Codigo: d.auxiliar_contable },
             });
-          
+
           this.dataSource = this.dataSourceBuilder.create(this.data);
         });
       },
       (error) => {
-        console.error("No se logro conectar...")
+        console.error('No se logro conectar...');
       }
     )
   }
@@ -122,7 +128,7 @@ export class ClienteComponent implements OnInit {
 
 
   agregar(){
-    var wCli : WCliente = {
+    const wCli: WCliente = {
       Codigo: this.codigox,
       RazonSocial: this.razonSocialx,
       Rif: this.rifx,
@@ -136,20 +142,19 @@ export class ClienteComponent implements OnInit {
       Email: this.emailx,
       Telefono: this.telefonox,
       CodigoPostal: this.codigoPostalx,
-      Direccion: this.direccionx, 
-      Usuario : "ANUGULAR-NGX"
+      Direccion: this.direccionx,
+      Usuario : "ANUGULAR-NGX",
     }
-    console.log(wCli)
-    
+    console.log(wCli);
     this.cliente.agregar(wCli).subscribe(
-      (resp) => {         
+      (resp) => {
         this.dataSource = this.dataSourceBuilder.create(this.data)
-        this.showToast('top-right', 'success')
+        this.showToast('top-right', 'success');
       },
       (err) => {
-        console.error("Error: ", err)
-      }
-    ) 
+        console.error('Error: ', err);
+      },
+    );
   }
 
   actualizar(){

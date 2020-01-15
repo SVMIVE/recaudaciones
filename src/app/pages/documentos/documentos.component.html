@@ -40,29 +40,35 @@
                 
 
                     <br><br>
-                    <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
+                    
+       
 
-                    <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
-                    <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+                     <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
 
-                    <ng-container [nbTreeGridColumnDef]="customColumn">
-                        <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
-                        {{customColumn}}
-                        </th>
-                        <td nbTreeGridCell *nbTreeGridCellDef="let row">
-                        <!-- <nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></nb-fs-icon>-->    
-                        {{row.data[customColumn]}}
-                        </td>
-                    </ng-container>
+                        <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+                        <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
 
-                    <ng-container *ngFor="let column of defaultColumns; let index = index"
-                                    [nbTreeGridColumnDef]="column"
-                                    [showOn]="getShowOn(index)">
-                        <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
-                        {{column}}
-                        </th>
-                        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column] || '-'}}</td>
-                    </ng-container>
+                        <ng-container [nbTreeGridColumnDef]="customColumn">
+                            <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
+                            {{customColumn}}
+                            </th>
+                            <td nbTreeGridCell *nbTreeGridCellDef="let row">                                
+                                {{ row.data[customColumn] == '0'?row.data[customColumn]:'' }}
+                                <button nbButton fullWidth  (click)="facturar( this.row )"
+                                          size="tiny" hero status="primary">
+                                        Facturar
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <ng-container *ngFor="let column of defaultColumns; let index = index"
+                                        [nbTreeGridColumnDef]="column"
+                                        [showOn]="getShowOn(index)">
+                            <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
+                            {{column}}
+                            </th>
+                            <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column] || '-'}}</td>
+                        </ng-container>
 
                     </table>
 
@@ -113,7 +119,7 @@
                                         (selectedChange)="consultarConcepto($event)" 
                                         [(ngModel)]="servicio" 
                                         fullWidth>
-                                            <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{serv.nb_servicio}} </nb-option>
+                                            <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{ serv.cd_servicio + ' - ' + serv.nb_servicio}} </nb-option>
                                         </nb-select>
                                         
                                     </div>
@@ -124,7 +130,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <nb-select placeholder="Concepto" [(ngModel)]="conceptox"  fullWidth  >
-                                            <nb-option  *ngFor = "let cpt of concepto"  value="{{cpt.cd_concepto}}"> {{cpt.nb_concepto}} </nb-option>
+                                            <nb-option  *ngFor = "let cpt of concepto"  value="{{cpt.cd_concepto}}"> {{cpt.cd_concepto  + ' - ' +  cpt.nb_concepto}} </nb-option>
                                         </nb-select>
                                     </div>
                                 </div>
@@ -135,7 +141,12 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <input   type="number" placeholder="Monto" nbInput fullWidth  [(ngModel)]="monto" >
+                                        <input  type="text" placeholder="Cuenta" nbInput fullWidth  [(ngModel)]="cuenta" disabled >
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input   type="number" placeholder="Monto" nbInput fullWidth  [(ngModel)]="monto" (blur)="calcularCantidad($event)">
                                     </div>
                                 </div>
                                  <div class="col-md-3">
@@ -160,7 +171,7 @@
 
 
                             <div class="row">
-                                <div class="container">
+
                                     <br>
 
                                     <table mat-table [dataSource]="dataSourcesx" class="mat-elevation-z8" width="100%">
@@ -189,10 +200,12 @@
                                             <td mat-cell *matCellDef="let element"> {{element.Iva}} </td>
                                         </ng-container>
 
+                                        
+
                                         <tr mat-header-row *matHeaderRowDef="displayedColumnx"></tr>
                                         <tr mat-row *matRowDef="let row; columns: displayedColumnx;"></tr>
                                     </table>
-                                </div>
+                                
                             </div> <!-- Control de vida -->
                             <br>
                             <div  class="row">
@@ -206,8 +219,9 @@
                                 
                                 <div class="col-md-2">
                                     <button nbButton fullWidth  (click)="guardar()" 
-                                         [style.visibility]="esVisible ? 'hidden' : 'visible'"
-                                        type="submit" class="home-button pull-right" status="success">
+                                        [style.visibility]="esVisible ? 'hidden' : 'visible'"
+                                        type="submit" 
+                                        class="home-button pull-right" status="success">
                                         Guardar
                                     </button>
                                 </div>
@@ -217,8 +231,8 @@
                                         printSectionId="print-divFactura"
                                         ngxPrint
                                         [style.visibility]="esVisible ? 'visible' : 'hidden'"
-                                      class="home-button pull-right" status="info">
-                                        Imprimir
+                                        class="home-button pull-right" status="info">
+                                        Previsualizar
                                     </button>
                                 </div>
                             </div>
@@ -233,6 +247,15 @@
     </nb-flip-card>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
 
 
 <div id="print-divFactura" style="display:none">
