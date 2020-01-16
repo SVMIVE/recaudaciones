@@ -45,6 +45,7 @@ export class ClienteComponent implements OnInit {
   selectedItem: string;
   selectedItemS: string;
   selectedItemA: string;
+  selectedItemB: string;
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
   index = 0;

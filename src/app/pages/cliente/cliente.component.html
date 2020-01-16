@@ -84,10 +84,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputTipoCliente" class="label">Tipo Cliente</label><br>
-                            <nb-select placeholder="Tipo Cliente" [(selected)]="selectedItem" [(ngModel)]="tipox" fullWidth required status="info" shape="round">
-                                <nb-option value="Fijo">Fijo</nb-option>
-                                <nb-option value="Temporal">Temporal</nb-option>
-                                <nb-option value="Terminal Auxiliar">Terminal Auxiliar</nb-option>
+                            <nb-select placeholder="Tipo Cliente" [(selected)]="selectedItem" [(ngModel)]="tipox" fullWidth required status="danger" shape="round">
+                                <nb-option value="Fijo" class="p-2 bg-danger text-white">Fijo</nb-option>
+                                <nb-option value="Temporal" class="p-2 bg-danger text-white">Temporal</nb-option>
+                                <nb-option value="Terminal Auxiliar" class="p-2 bg-danger text-white">Terminal Auxiliar</nb-option>
                             </nb-select>
                         </div>
                     </div>
@@ -99,8 +99,8 @@
                         <div class="form-group">
                             <label for="exampleInputEstatus" class="label">Estatus</label><br>
                             <nb-select placeholder="Estatus" [(selected)]="selectedItemS" [(ngModel)]="estatusx" fullWidth required status="info" shape="round">
-                                <nb-option value="0">Activo</nb-option>
-                                <nb-option value="1">Inactivo</nb-option>
+                                <nb-option value="0" class="p-2 bg-info text-white">Activo</nb-option>
+                                <nb-option value="1" class="p-2 bg-info text-white">Inactivo</nb-option>
                             </nb-select>
                         </div>
                     </div>
@@ -109,8 +109,8 @@
                             <div class="form-group">
                             <label for="exampleInputActividad" class="label">Actividad</label><br>
                             <nb-select placeholder="Actividad" [(selected)]="selectedItemA" [(ngModel)]="actividadx" fullWidth required status="info" shape="round">
-                                <nb-option value="030">030</nb-option>
-                                <nb-option value="043">043</nb-option>
+                                <nb-option value="030" class="p-2 bg-info text-white">030</nb-option>
+                                <nb-option value="043" class="p-2 bg-info text-white">043</nb-option>
                             </nb-select>
                         </div>
                         </div>
@@ -119,9 +119,9 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="exampleInputIngresos" class="label">Declara Ingresos Brutos</label>
-                                <nb-select placeholder="declarar" [(selected)]="selectedItemA" [(ngModel)]="declararx" fullWidth required status="info" shape="round">
-                                        <nb-option value="0">Si</nb-option>
-                                        <nb-option value="1">No</nb-option>
+                                <nb-select placeholder="declarar" [(selected)]="selectedItemB" [(ngModel)]="declararx" fullWidth required status="info" shape="round">
+                                        <nb-option value="0" class="p-2 bg-info text-white">Si</nb-option>
+                                        <nb-option value="1" class="p-2 bg-info text-white">No</nb-option>
                                 </nb-select>
                             </div>
                         </div>
