@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     selectedItem: string;
     estatus: string;
-    index = 0
+    index = 0;
 
     // tslint:disable-next-line: one-line
     constructor(private loginServicio: LoginService, private router: Router, private toastrService: NbToastrService){ }
@@ -59,15 +59,14 @@ export class LoginComponent implements OnInit {
       (resp) => {
         sessionStorage.setItem('key-iaim', resp.token);
         this.router.navigateByUrl('/home/tasa');
-        
+
       },
       (error) => {
-        this.showToast('top-right', 'warning', 'Usuario o clave errada');
-        this.nombre = ""
-        this.clave = ""
+        this.showToast('top-right', 'danger', 'Usuario o clave errada');
+        this.nombre = '',
+        this.clave = '',
         this.loading = false;
       },
     );
-    
   }
 }

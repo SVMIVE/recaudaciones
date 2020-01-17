@@ -3,47 +3,47 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface WCliente  {
-  Codigo : string
-  RazonSocial : string
-  Rif  : string
-  Nit : string
-  Tipo  : string
-  Estatus  : number
-  Actividad : string
-  Declarar : number
-  FechaInicio  : string
-  FechaModificacion : string
-  Email : string
-  Telefono  : string
-  CodigoPostal  : string
-  Direccion : string
-  Usuario : string
+  Codigo: string;
+  RazonSocial: string;
+  Rif: string;
+  Nit: string;
+  Tipo: string;
+  Estatus: number;
+  Actividad: string;
+  Declarar: number;
+  FechaInicio: string;
+  FechaModificacion: string;
+  Email: string;
+  Telefono: string;
+  CodigoPostal: string;
+  Direccion: string;
+  Usuario: string;
 }
 
-//Control de mapping
+// Control de mapping
 export interface WAdminUsuario {
-  tbl: string,
-  cedula_rif : string,
-  nit : string,
-  razon_social : string,
-  auxiliar_contable : string,
-  actividad_empresa : string, //Actividad
-  presidente?: string,
-  porc_ing_bruto: number, //Declara
-  origen : string,
-  dec_ing_bruto: number,
-  dec_ajusta?: number,
-  activo : number, //Estatus
-  cd_usuario?: string,
-  fecha_registro: string, //Fecha y Hora
-  Fech_modi_contrato?: string, //Fecha y Hora
-  Fech_ini_contrato?: string, //Fecha y Hora
-  oficina: string,
-  tipo_cliente?: string,
-  dir_estado: string,
-  telefono_1: string,
-  telefono_2?: string,
-  email?: string,
+  tbl: string;
+  cedula_rif: string;
+  nit: string;
+  razon_social: string;
+  auxiliar_contable: string;
+  actividad_empresa: string; // Actividad
+  presidente?: string;
+  porc_ing_bruto: number; // Declara
+  origen: string;
+  dec_ing_bruto: number;
+  dec_ajusta?: number;
+  activo: number; // Estatus
+  cd_usuario?: string;
+  fecha_registro: string; // Fecha y Hora
+  Fech_modi_contrato?: string; // Fecha y Hora
+  Fech_ini_contrato?: string; // Fecha y Hora
+  oficina: string;
+  tipo_cliente?: string;
+  dir_estado: string;
+  telefono_1: string;
+  telefono_2?: string;
+  email?: string;
 }
 
 @Injectable({

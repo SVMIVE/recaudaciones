@@ -16,16 +16,16 @@ interface TreeNode<T> {
 }
 
 interface FSEntry {
-  Opciones?: string
-  Numero: string
-  Fecha?: string
-  Tipo?: string
-  Cliente?: boolean
-  Codigo?: number
-  Estatus?: number
-  Monto?: number
-  Iva?: number
-  Moneda: string
+  Opciones?: string;
+  Numero: string;
+  Fecha?: string;
+  Tipo?: string;
+  Cliente?: boolean;
+  Codigo?: number;
+  Estatus?: number;
+  Monto?: number;
+  Iva?: number;
+  Moneda: string;
 }
 
 
@@ -34,9 +34,6 @@ export interface PeriodicElement {
   Cantidad: number
   Monto: number
 }
-
-
-
 
 var ELEMENT_DATA: PeriodicElement[] = [];
 var LSTDetalles = []
@@ -85,13 +82,15 @@ export class DocumentosComponent implements OnInit {
 
 
   displayedColumnx: string[] = ['Concepto', 'Cantidad', 'Monto']
-  
+
   dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
+
 
   lblcodigo = "" //Codigo de facturar actual seleccionado
   lblresultado = ""
   flipped = false
   esVisible = false
+
 
   toggleView() {
     this.flipped = !this.flipped;
