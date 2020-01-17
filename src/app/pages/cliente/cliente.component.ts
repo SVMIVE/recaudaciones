@@ -15,9 +15,7 @@ interface FSEntry {
   Nit: string;
   Codigo: string;
   Acciones?: boolean;
-  selectedItem: string;
-  selectedItemS: string;
-  selectedItemA: string;
+
   // items?: number;
 }
 
@@ -25,7 +23,7 @@ interface FSEntry {
 @Component({
   selector: 'ngx-cliente',
   templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.scss']
+  styleUrls: ['./cliente.component.scss'],
 })
 export class ClienteComponent implements OnInit {
 

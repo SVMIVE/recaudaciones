@@ -55,13 +55,13 @@
                     <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputCodigo" class="label">Codigo:</label>
-                        <input type="text" nbInput fullWidth id="txtCodigo" [(ngModel)]="codigox" placeholder="Codigo" name="codigox" minlength="5" maxlength="10" required status="info">
+                        <input type="text" nbInput fullWidth id="txtCodigo" [(ngModel)]="codigox" placeholder="Codigo" name="codigox" minlength="5" maxlength="10" status="info">
                     </div>
                     </div>
                     <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputRazonSocial" class="label">Razón Social</label>
-                        <input type="text" nbInput fullWidth id="txtRazonSocial"  [(ngModel)]="razonSocialx" placeholder="Razón Social" maxlength="200" required status="info">
+                        <input type="text" nbInput fullWidth id="txtRazonSocial"  [(ngModel)]="razonSocialx" placeholder="Razón Social" maxlength="200" status="info">
                     </div>
                     </div>
                     <div class="col-md-4">
@@ -72,19 +72,19 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputRif" class="label">Rif:</label>
-                        <input type="text" nbInput fullWidth id="txtRif" [(ngModel)]="rifx" placeholder="Rif" minlength="8" maxlength="25" required status="info">
+                        <input type="text" nbInput fullWidth id="txtRif" [(ngModel)]="rifx" placeholder="Rif" minlength="8" maxlength="25" status="info">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputNit" class="label">Nit</label>
-                            <input type="text" nbInput fullWidth id="txtNit" [(ngModel)]="nitx" placeholder="Nit" required status="info">
+                            <input type="text" nbInput fullWidth id="txtNit" [(ngModel)]="nitx" placeholder="Nit" status="info">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputTipoCliente" class="label">Tipo Cliente</label><br>
-                            <nb-select placeholder="Tipo Cliente" [(selected)]="selectedItem" [(ngModel)]="tipox" fullWidth required status="danger" shape="round">
+                            <nb-select placeholder="Tipo Cliente" [(selected)]="selectedItem" [(ngModel)]="tipox" fullWidth status="danger" shape="round">
                                 <nb-option value="Fijo" class="p-2 bg-danger text-white">Fijo</nb-option>
                                 <nb-option value="Temporal" class="p-2 bg-danger text-white">Temporal</nb-option>
                                 <nb-option value="Terminal Auxiliar" class="p-2 bg-danger text-white">Terminal Auxiliar</nb-option>
@@ -98,7 +98,7 @@
                      <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputEstatus" class="label">Estatus</label><br>
-                            <nb-select placeholder="Estatus" [(selected)]="selectedItemS" [(ngModel)]="estatusx" fullWidth required status="info" shape="round">
+                            <nb-select placeholder="Estatus" [(selected)]="selectedItemS" [(ngModel)]="estatusx" fullWidth  status="info" shape="round">
                                 <nb-option value="0" class="p-2 bg-info text-white">Activo</nb-option>
                                 <nb-option value="1" class="p-2 bg-info text-white">Inactivo</nb-option>
                             </nb-select>
@@ -108,7 +108,7 @@
                         <div class="form-group">
                             <div class="form-group">
                             <label for="exampleInputActividad" class="label">Actividad</label><br>
-                            <nb-select placeholder="Actividad" [(selected)]="selectedItemA" [(ngModel)]="actividadx" fullWidth required status="info" shape="round">
+                            <nb-select placeholder="Actividad" [(selected)]="selectedItemA" [(ngModel)]="actividadx" fullWidth  status="info" shape="round">
                                 <nb-option value="030" class="p-2 bg-info text-white">030</nb-option>
                                 <nb-option value="043" class="p-2 bg-info text-white">043</nb-option>
                             </nb-select>
@@ -119,7 +119,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="exampleInputIngresos" class="label">Declara Ingresos Brutos</label>
-                                <nb-select placeholder="declarar" [(selected)]="selectedItemB" [(ngModel)]="declararx" fullWidth required status="info" shape="round">
+                                <nb-select placeholder="declarar" [(selected)]="selectedItemB" [(ngModel)]="declararx" fullWidth status="info" shape="round">
                                         <nb-option value="0" class="p-2 bg-info text-white">Si</nb-option>
                                         <nb-option value="1" class="p-2 bg-info text-white">No</nb-option>
                                 </nb-select>
@@ -133,7 +133,7 @@
                         <div class="form-group">
                             <label for="exampleInputIngresos" class="label">Fecha de Inicio Contrato</label><br>
                             <input nbInput fullWidth placeholder="Fecha de Inicio Contrato" [(ngModel)]="fechaIniciox" 
-                                [nbDatepicker]="formpicker" required status="info">
+                                [nbDatepicker]="formpicker" status="info">
                                 <nb-datepicker #formpicker ></nb-datepicker>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                         <div class="form-group">
                             <label for="exampleInputIngresos" class="label">Fecha de Modificación Contrato</label><br>
                             <input nbInput fullWidth placeholder="Fecha de Modificación Contrato" [(ngModel)]="fechaModificionx" 
-                                [nbDatepicker]="formpickerR" required status="info">
+                                [nbDatepicker]="formpickerR" status="info">
                                 <nb-datepicker #formpickerR></nb-datepicker>
                         </div>
                     </div>
@@ -151,20 +151,20 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputEmail" class="label">Email</label>
-                            <input type="email" nbInput fullWidth id="txtEmail" [(ngModel)]="emailx" placeholder="Email" ng-pattern="emailPattern" name="emailx" required status="info"> 
+                            <input type="email" nbInput fullWidth id="txtEmail" [(ngModel)]="emailx" placeholder="Email" ng-pattern="emailPattern" name="emailx" status="info"> 
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
 
                             <label for="exampleInputTelefono" class="label">Teléfono</label>
-                            <input type="text" nbInput fullWidth id="txtTeléfono" [(ngModel)]="telefonox" placeholder="Teléfono" name="telefonox" required status="info">
+                            <input type="text" nbInput fullWidth id="txtTeléfono" [(ngModel)]="telefonox" placeholder="Teléfono" name="telefonox" status="info">
                         </div>
                     </div>                    
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputCodigoPostal" class="label">Código Postal</label>
-                            <input type="text" nbInput fullWidth id="txtCodigoPostal" [(ngModel)]="codigoPostalx" placeholder="Código Postal" required status="info">
+                            <input type="text" nbInput fullWidth id="txtCodigoPostal" [(ngModel)]="codigoPostalx" placeholder="Código Postal" status="info">
                         </div>
                     </div>
                 </div>
