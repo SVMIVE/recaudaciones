@@ -80,7 +80,7 @@ export class DocumentosComponent implements OnInit {
   excento = 0.00
   cuenta = ''
   montoTotal = 0.00
-
+  seniat = ''
 
 
 
@@ -88,7 +88,8 @@ export class DocumentosComponent implements OnInit {
   
   dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
 
-  
+  lblcodigo = "" //Codigo de facturar actual seleccionado
+  lblresultado = ""
   flipped = false
   esVisible = false
 
@@ -115,6 +116,7 @@ export class DocumentosComponent implements OnInit {
     
   }
 
+  
   updateSort(sortRequest: NbSortRequest): void {
     this.sortColumn = sortRequest.column;
     this.sortDirection = sortRequest.direction;
@@ -251,12 +253,27 @@ export class DocumentosComponent implements OnInit {
 
 
 
-  openWindowWithBackdrop() {
+  openWindowDocumento() {
     this.windowService.open(
       this.escCloseTemplate,
-      { title: 'Crear documentos', hasBackdrop: true },
+      { title: 'Documentos creado', hasBackdrop: true },
     );
   }
+
+  openWindowFacturar( e ) {
+    console.log(e.data);
+    this.lblcodigo = e.data.Numero
+    
+    this.windowService.open(
+      this.escCloseTemplate,
+      { title: 'Número de Factura', hasBackdrop: true },
+    );
+  }
+  facturar(e){
+    this.seniat = "A000000568"
+    this.lblresultado = "Control Seniat: "
+  }
+
 
   agregarData(){    
     var concepto = ""
@@ -348,7 +365,5 @@ export class DocumentosComponent implements OnInit {
       { position, status });
   }
 
-  facturar(e){
-    console.log(e);
-  }
+
 }
