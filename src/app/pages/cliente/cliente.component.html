@@ -78,7 +78,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputNit" class="label">Nit</label>
-                            <input type="text" nbInput fullWidth id="txtNit" [(ngModel)]="nitx" placeholder="Nit" number required status="info">
+                            <input type="text" nbInput fullWidth id="txtNit" [(ngModel)]="nitx" placeholder="Nit" required status="info">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -158,13 +158,13 @@
                         <div class="form-group">
 
                             <label for="exampleInputTelefono" class="label">Teléfono</label>
-                            <input type="text" nbInput fullWidth id="txtTeléfono" [(ngModel)]="telefonox" placeholder="Teléfono" name="telefonox" number required status="info">
+                            <input type="text" nbInput fullWidth id="txtTeléfono" [(ngModel)]="telefonox" placeholder="Teléfono" name="telefonox" required status="info">
                         </div>
                     </div>                    
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputCodigoPostal" class="label">Código Postal</label>
-                            <input type="text" nbInput fullWidth id="txtCodigoPostal" [(ngModel)]="codigoPostalx" placeholder="Código Postal" number required status="info">
+                            <input type="text" nbInput fullWidth id="txtCodigoPostal" [(ngModel)]="codigoPostalx" placeholder="Código Postal" required status="info">
                         </div>
                     </div>
                 </div>
@@ -188,7 +188,7 @@
         <div  class="row">
             <div class="col-md-12"></div>
             <div class="col-md-6">
-                <button nbButton fullWidth  (click)= 'Cancelar()' type="button" class="home-button pull-center" status="danger" shape="round">
+                <button nbButton fullWidth  (click)="Cancelar()" type="button" class="home-button pull-center" status="danger" shape="round">
                     Cancelar
                 </button>
             </div>
