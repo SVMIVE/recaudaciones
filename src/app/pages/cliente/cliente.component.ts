@@ -63,7 +63,9 @@ export class ClienteComponent implements OnInit {
   direccionx = '';
 
 
-constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, private toastrService: NbToastrService, private cliente : ClienteService, private windowService: NbWindowService) {
+constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, 
+  private toastrService: NbToastrService, 
+  private cliente : ClienteService, private windowService: NbWindowService) {
 
   }
   ngOnInit(){
@@ -133,7 +135,7 @@ constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, pri
       Rif: this.rifx,
       Nit : this.nitx,
       Tipo : this.tipox,
-      Estatus: parseInt(this.estatusx),
+      Estatus: this.estatusx,
       Actividad: this.actividadx,
       Declarar: this.declararx,
       FechaInicio : this.fechaIniciox,
