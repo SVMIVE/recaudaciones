@@ -16,23 +16,24 @@ interface TreeNode<T> {
 }
 
 interface FSEntry {
-  Opciones?: string;
-  Numero: string;
-  Fecha?: string;
-  Tipo?: string;
-  Cliente?: boolean;
-  Codigo?: number;
-  Estatus?: number;
-  Monto?: number;
-  Iva?: number;
-  Moneda: string;
+  Opciones? : string
+  Numero    : string
+  Fecha?    : string
+  Tipo?     : string
+  Cliente?  : boolean
+  Codigo?   : number
+  Estatus?  : number
+  Monto?    : number
+  Iva?      : number
+  Moneda    : string
 }
 
 
 export interface PeriodicElement {
-  Concepto: string
-  Cantidad: number
-  Monto: number
+  Cuenta    : string
+  Concepto  : string
+  Cantidad  : number
+  Monto     : number
 }
 
 var ELEMENT_DATA: PeriodicElement[] = [];
@@ -81,7 +82,7 @@ export class DocumentosComponent implements OnInit {
 
 
 
-  displayedColumnx: string[] = ['Concepto', 'Cantidad', 'Monto']
+  displayedColumnx: string[] = ['Cuenta', 'Concepto', 'Cantidad', 'Monto']
 
   dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
 
@@ -105,7 +106,10 @@ export class DocumentosComponent implements OnInit {
     private servicioCliente : ClienteService ) {
     
       //this.cargarConcepto()
+      ELEMENT_DATA = []
+      LSTDetalles = []
 
+      this.dataSourcesx.data = ELEMENT_DATA
       this.cargarServicio()
       //this.consultarConcepto("DO")
 
@@ -210,13 +214,13 @@ export class DocumentosComponent implements OnInit {
     this.concepto.forEach(e => {
       if(this.conceptox == e.cd_concepto){        
         console.log(e);
+        var monto = parseFloat(e.mn_monto_bf) * parseInt(this.cantidad)
         if ( e.in_iva == "0"){
           this.excento += this.monto
         }else{
           this.baseImponible += this.monto
         }
-        
-        this.monto = parseFloat(e.mn_monto_bf) * parseInt(this.cantidad)
+        this.monto = parseFloat(  monto.toFixed(2) )
         this.cuenta = e.cd_cuenta
       }
     });
@@ -225,7 +229,8 @@ export class DocumentosComponent implements OnInit {
   }
 
   calcularCantidad(e){
-    this.total =  parseInt(this.cantidad) * this.monto;
+    var monto = parseInt(this.cantidad) * this.monto
+    this.total =  parseFloat(  monto.toFixed(2) )
   }
 
 
@@ -276,6 +281,7 @@ export class DocumentosComponent implements OnInit {
 
   agregarData(){    
     var concepto = ""
+    var cuenta = ""
     this.concepto.forEach(e => {
       if(this.conceptox == e.cd_concepto){        
         concepto = e.nb_concepto
@@ -283,6 +289,7 @@ export class DocumentosComponent implements OnInit {
     });
 
     ELEMENT_DATA.push( {
+      Cuenta : this.cuenta,
       Cantidad: parseInt(this.cantidad), 
       Concepto: concepto, 
       Monto: this.total
@@ -306,6 +313,8 @@ export class DocumentosComponent implements OnInit {
         "tp_cambio":"BS",
         "cd_cuenta": this.cuenta        
     } )
+    
+    
   }
 
 
@@ -336,7 +345,7 @@ export class DocumentosComponent implements OnInit {
       "cod_terminal": "SEDE",
       "onetomany": LSTDetalles,
     }
-    console.log( JSON.stringify  (obj) )
+    //console.log( JSON.stringify  (obj) )
 
     this.docu.agregar(obj).subscribe(
       (resp) => {         

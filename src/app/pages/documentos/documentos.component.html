@@ -186,6 +186,14 @@
                                                 <br>
 
                                                 <table mat-table [dataSource]="dataSourcesx" class="mat-elevation-z8" width="100%">
+                                                    
+
+
+                                                      <!-- Position Cuenta -->
+                                                    <ng-container matColumnDef="Cuenta">
+                                                        <th mat-header-cell *matHeaderCellDef>Cuenta</th>
+                                                        <td mat-cell *matCellDef="let element">{{element.Cuenta}}</td>
+                                                    </ng-container>
 
                                                     <!-- Position Column -->
                                                     <ng-container matColumnDef="Concepto">
