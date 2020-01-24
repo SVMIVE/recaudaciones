@@ -1,3 +1,63 @@
+
+@font-face {
+    font-family: 'times new roman';
+    src: url('times-webfont.woff2') format('woff2'),
+         url('times-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'times new roman bold';
+    src: url('timesbd-webfont.woff2') format('woff2'),
+         url('timesbd-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+p{
+margin-bottom: 0;
+padding-bottom: 0;
+}
+
+.pinline{
+display: inline;   
+}
+
+#print-divFactura{
+ margin-top: 69px  
+}
+
+.label_left{
+   width: auto;
+    margin-bottom: auto;
+    float: left;
+}
+
+#fcodigocliente{
+padding-left: 10%;
+}
+
+#fcliente{
+padding-left: 10%;
+}
+
+#frif{
+padding-left: 10%;
+}
+
+#fdireccion{
+padding-left: 10%;
+}
+
+#fcondicionpago{
+padding-left: 150px;
+}
+
+#ftiposervicio{
+padding-left: 150px;
+}
+
 .right_content {
     padding-left: 50%;
     padding-bottom: 5px;
@@ -27,9 +87,12 @@ body {
     margin: 0 auto;
     color: #000000;
     background: #FFFFFF;
-    font-family: sans-serif;
-    font-size: 11px;
-    font-family: sans-serif;
+    font-size: 12px;
+    font-family: 'times new roman';
+}
+
+b{
+    font-family: 'times new roman bold';
 }
 
 footer {
@@ -41,7 +104,7 @@ footer {
 }
 
 .header_field_1 {
-    width: 28%;
+    width: 31%;
     font-size: 14px;
     font-weight: bold;
     text-align: right;
@@ -55,7 +118,7 @@ footer {
 }
 
 .header_field_3 {
-    font-size: 9px;
+    font-size: 20px;
     font-weight: bold;
     text-align: right;
 }
@@ -76,10 +139,17 @@ footer {
 
 .num {
     text-align: right;
+    width: 50px;
+}
+
+.codigo {
+    text-align: left;
+    width: 50px;
 }
 
 .descripcion {
     text-align: left;
+    width: 300px;
 }
 
 .client {
@@ -95,17 +165,17 @@ table {
 }
 
 table td {
-    text-align: center;
     border: 0px solid black;
     padding-bottom: 10px;
 }
 
 table th {
-    padding: 5px 20px;
+    padding: 5px 0px;
     color: rgb(0, 0, 0);
     white-space: nowrap;
     font-weight: bold;
     border-bottom: 0px solid #C1CED9;
+
 }
 
 #left_50 {

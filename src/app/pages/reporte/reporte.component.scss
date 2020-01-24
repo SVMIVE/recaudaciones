@@ -2,10 +2,22 @@
     height: 750px;
 }
 
-.category {
+.report_buttom {
     margin-left: 10px;
     width: 300px;
-    white-space: normal
+    white-space: normal;
+  }
+  .category{
+    margin-top: 25%;
+    margin-bottom: 25%;
+  }
+
+  .iniciador {
+    margin-left: 10px;
+    width: 300px;
+    white-space: normal;
+    margin-top: 25%;
+    margin-bottom: 25%;    
   }
    .content {
     display: flex;
@@ -15,6 +27,12 @@
     margin-bottom: 2rem;   
     //height: 80%;
    }
+
+   .dobleimput{
+    display: inline-flex;
+    float: left;
+   }
+   
 
    .break {
     flex-basis: 100%;
@@ -30,3 +48,4 @@
    button {
     margin-right: 20px;
    }
+   

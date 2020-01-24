@@ -1,220 +1,732 @@
 <nb-tabset fullWidth>
-    <nb-tab tabTitle="DOSAS" (click)="loadDosasCategory()">
-        <nb-flip-card [showToggleButton]="false" [flipped]="flipped">
-            <nb-card-front>
-              <nb-card>
-                      <nb-card-body>
+    <nb-tab tabTitle="DOSAS">
 
-                        <div *ngIf="loadDosas">
+        <nb-flip-card [showToggleButton]="false" [flipped]="flipped">
+
+            <nb-card-front>
+                <nb-card>
+
+
+                    <div class="content" *ngIf="Dosasbuttom">
+                        <button nbButton status="primary" class="iniciador" (click)="loadDosasCategory()"><nb-icon icon="file-text-outline"></nb-icon>INICIAR</button>
+                    </div>
+                    <div *ngIf="loadDosas">
+                        <nb-card-body>
 
                             <div class="content" id="categorias_dosa">
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="dos_dosa" icon="bulb-outline"></nb-icon>DOSAS</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="dos_cliente" icon="bulb-outline"></nb-icon>CLIENTES</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="dos_resumen_documento" icon="bulb-outline"></nb-icon>RESUMEN DE DOCUMENTOS</button>
-                                <div class="break"></div>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="dos_estado_cuenta" icon="bulb-outline"></nb-icon>ESTADOS DE CUENTA ACTUAL</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="dos_hasta" icon="bulb-outline"></nb-icon>HASTA</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="dos_historico" icon="bulb-outline"></nb-icon>HISTÓRICO</button>
-                            
-                            </div>
-                        </div>
-
-                        <div *ngIf="loadterminal">
-
-                            <div class="content" id="categorias_terminal_auxiliar">
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="tea_cliente" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="tea_facturas_anuladas" icon="bulb-outline"></nb-icon>	FACTURAS ANULADAS	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="tea_relacion_ingresos_diarios" icon="bulb-outline"></nb-icon>RELACIÓN Y/O INGRESOS DIARIOS TERMINAL AUXILIAR 	</button>
-                                <div class="break"></div>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="tea_resumen_documentos" icon="bulb-outline"></nb-icon>	RESUMEN DE DOCUMENTOS	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="tea_estado_cuenta" icon="bulb-outline"></nb-icon>	ESTADOS DE CUENTA ACTUAL	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="tea_totales_servicios" icon="bulb-outline"></nb-icon>	TOTALES DE SERVICIOS	</button>
+                                <div class="category">
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_dosa" icon="bulb-outline"></nb-icon>DOSAS</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_cliente" icon="bulb-outline"></nb-icon>CLIENTES</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_resumen_documento" icon="bulb-outline"></nb-icon>RESUMEN DE DOCUMENTOS</button>
+                                    <div class="break"></div>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_estado_cuenta" icon="bulb-outline"></nb-icon>ESTADOS DE CUENTA ACTUAL</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_hasta" icon="bulb-outline"></nb-icon>HASTA</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_historico" icon="bulb-outline"></nb-icon>HISTÓRICO</button>
+                                </div>
                             </div>
 
-                            <div class="content" id="categorias_recaudacion">
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="rec_documentos_abiertos" icon="bulb-outline"></nb-icon>	DOCUMENTOS ABIERTOS	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="rec_libro_ventas" icon="bulb-outline"></nb-icon>	LIBRO DE VENTAS	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="rec_retenciones" icon="bulb-outline"></nb-icon>	RETENCIONES	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="rec_relacion_ingresos" icon="bulb-outline"></nb-icon>	RELACIÓN Y/O INGRESOS	</button>
-                                <div class="break"></div>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="rec_clientes" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="rec_listados" icon="bulb-outline"></nb-icon>	LISTADOS	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="rec_estado_cuenta" icon="bulb-outline"></nb-icon>	ESTADO DE CUENTA	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="rec_resumen" icon="bulb-outline"></nb-icon>	RESUMEN	</button>
-                                <div class="break"></div>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="rec_relacion_dia" icon="bulb-outline"></nb-icon>	RELACIONES DEL DIA	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="rec_recibos" icon="bulb-outline"></nb-icon>	RECIBOS	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="rec_nota_credito" icon="bulb-outline"></nb-icon>	NOTAS DE CRÉDITO	</button>
-                            </div>
-                            
-                            <div class="content" id="categorias_habilitaduria">
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="hab_cliente" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="hab_facturas_anuladas" icon="bulb-outline"></nb-icon>	FACTURAS ANULADAS	</button>
-                                <div class="break"></div>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="hab_relacion_ingresos_diarios" icon="bulb-outline"></nb-icon>	RELACIÓN Y/O INGRESOS DIARIOS	</button>
-                                <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon id="hab_resumen_documentos" icon="bulb-outline"></nb-icon>	RESUMEN DE DOCUMENTOS	</button>
-                            </div>
-                        </div>
-       
+                        </nb-card-body>
+                        <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
 
-
-
-    
-
-                      </nb-card-body>
-                <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
-              </nb-card>
+                    </div>
+                </nb-card>
             </nb-card-front>
             <nb-card-back>
-              <nb-card>
-                      <nb-card-body>
-                        <div class="content">
-                            <div class="col-md-4">
-                                <nb-select placeholder="Seleccion Reporte" id="select_reporte" fullWidth (selectedChange)="test($event);">
-    
-                                    <nb-option-group title="DOSAS">
-                                        <nb-option value="11"> RELACIÓN Y/O INGRESOS DIARIOS DOSAS </nb-option>
-                                        <nb-option value="12"> TOTAL GENERAL DOSAS </nb-option>
-                                        <nb-option value="13"> DOSAS ANULADAS </nb-option>
-                                    </nb-option-group>
-    
-                                    <nb-option-group title="CLIENTES">
-                                        <nb-option value="21"> CLIENTES FIJOS </nb-option>
-                                        <nb-option value="22"> CLIENTES GENÉRICOS </nb-option>
-                                        <nb-option value="23"> CLIENTES </nb-option>
-                                    </nb-option-group>
-    
-                                    <nb-option-group title="RESUMEN DE DOCUMENTOS">
-                                        <nb-option value="31"> RESUMEN DE DOCUMENTOS POR CLIENTE FIJO </nb-option>
-                                        <nb-option value="32"> RESUMEN DE DOCUMENTOS POR CLIENTE CARGUEROS </nb-option>
-                                        <nb-option value="33"> RESUMEN GENERAL DOSA DE CONTADO CLASIFICADO POR CONCEPTO </nb-option>
-                                    </nb-option-group>
-    
-                                    <nb-option-group title="ESTADOS DE CUENTA ACTUAL">
-                                        <nb-option value="41"> CLIENTES CARGUEROS </nb-option>
-                                        <nb-option value="42"> CLIENTES FIJOS </nb-option>
-                                    </nb-option-group>
-    
-                                    <nb-option-group title="HASTA">
-                                        <nb-option value="51"> CLIENTES CARGUEROS </nb-option>
-                                        <nb-option value="52"> CLIENTES FIJOS </nb-option>
-                                    </nb-option-group>
-    
-                                    <nb-option-group title="HISTÓRICO">
-                                        <nb-option value="61"> CLIENTES CARGUEROS </nb-option>
-                                        <nb-option value="62"> CLIENTES FIJOS </nb-option>
-                                    </nb-option-group>
-    
-                                </nb-select>
-                            </div>
-    
-                        </div>
-    
-                        <div class="content" *ngIf="loadterminal">
-    
-                            <div class="col-md-4">
-                                <div class="form-group">
-    
-                                    <nb-select placeholder="Cliente" id="select_cliente" fullWidth>
-                                        <nb-option value="0">0</nb-option>
-                                        <nb-option value="1">0</nb-option>
-                                        <nb-option value="2">0</nb-option>
+                <nb-card>
+                    <div *ngIf="loadDosas">
+                        <nb-card-body>
+                            <div class="content">
+                                <div class="col-md-4">
+                                    <nb-select placeholder="Seleccion Reporte" fullWidth [(ngModel)]="reporte" (selectedChange)="test($event);">
+
+                                        <nb-option-group title="DOSAS">
+                                            <nb-option value="11"> RELACIÓN Y/O INGRESOS DIARIOS DOSAS </nb-option>
+                                            <nb-option value="12"> TOTAL GENERAL DOSAS </nb-option>
+                                            <nb-option value="13"> DOSAS ANULADAS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="CLIENTES">
+                                            <nb-option value="21"> CLIENTES FIJOS </nb-option>
+                                            <nb-option value="22"> CLIENTES GENÉRICOS </nb-option>
+                                            <nb-option value="23"> CLIENTES </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="RESUMEN DE DOCUMENTOS">
+                                            <nb-option value="31"> RESUMEN DE DOCUMENTOS POR CLIENTE FIJO </nb-option>
+                                            <nb-option value="32"> RESUMEN DE DOCUMENTOS POR CLIENTE CARGUEROS </nb-option>
+                                            <nb-option value="33"> RESUMEN GENERAL DOSA DE CONTADO CLASIFICADO POR CONCEPTO </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="ESTADOS DE CUENTA ACTUAL">
+                                            <nb-option value="41"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="42"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="HASTA">
+                                            <nb-option value="51"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="52"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="HISTÓRICO">
+                                            <nb-option value="61"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="62"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
                                     </nb-select>
-    
                                 </div>
+
                             </div>
-    
-                        </div>
-    
-                        <div class="content" *ngIf="loadterminal">
-                            <div class="col-md-4">
-                                <div class="form-group">
-    
-                                    <nb-select placeholder="Tipo de Documento" id="select_tdocumento" fullWidth>
-                                        <nb-option value="0">0</nb-option>
-                                        <nb-option value="1">0</nb-option>
-                                        <nb-option value="2">0</nb-option>
-                                    </nb-select>
-    
-                                </div>
-                            </div>
-                        </div>
-    
-    
-                        <div class="content" *ngIf="loadterminal">
-                            <div class="col-md-4">
-                                <div class="form-group">
-    
-                                    <nb-select placeholder="Servicios" id="select_servicio" fullWidth>
-                                        <nb-option value="0">0</nb-option>
-                                        <nb-option value="1">0</nb-option>
-                                        <nb-option value="2">0</nb-option>
-                                    </nb-select>
-    
-                                </div>
-                            </div>
-                        </div>
-    
-    
-                        <div class="content" *ngIf="loadterminal">
-                            <div class="col-md-4">
-                                <div class="form-group">
-    
-                                    <nb-select placeholder="Tipo de Serie" id="select_tserie" fullWidth>
-                                        <nb-option value="0">0</nb-option>
-                                        <nb-option value="1">0</nb-option>
-                                        <nb-option value="2">0</nb-option>
-                                    </nb-select>
-    
-                                </div>
-                            </div>
-                        </div>
-    
-    
-                        <div class="content" *ngIf="loadterminal">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label># SENIAT:</label>
-                                    <input class="" placeholder="Desde" id="input_seniat_desde" nbInput fullWidth>
-                                    <input class="" placeholder="Hasta" id="input_seniat_hasta"nbInput fullWidth>
-                                </div>
-                            </div>
-                        </div>
-    
-    
-                        <div class="content" *ngIf="loadterminal">
-                            <div class="col-md-4">
-                                <div>
+
+                            <div class="content" *ngIf="loadcliente">
+
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <input nbInput fullWidth placeholder="Rango de Fechas" id="date_rfecha" [nbDatepicker]="formpicker">
-                                        <nb-rangepicker #formpicker></nb-rangepicker>
+
+                                        <nb-select placeholder="Cliente" id="select_cliente" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="content" *ngIf="loaddocumento">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="content" >
-   
-                            <button nbButton status="primary" class="category" (click)="toggleView()"><nb-icon icon="arrow-ios-back-outline"></nb-icon>REGRESAR</button>
-                            <button nbButton status="success" class="category" id="print_doc"><nb-icon icon="printer-outline"></nb-icon>IMPRIMIR</button>
 
-                        </div>
-      
-                 </nb-card-body>
-                 <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
-              </nb-card>
+                            <div class="content" *ngIf="loadservicio">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Servicio"
+                                        (selectedChange)="consultarConcepto($event)" 
+                                        [(ngModel)]="servicio" 
+                                        fullWidth>
+                                            <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{ serv.cd_servicio + ' - ' + serv.nb_servicio}} </nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadserie">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Tipo de Serie" id="select_tserie" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadseniat">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label># SENIAT:</label>
+                                        <br>
+                                        <input class="dobleimput"  placeholder="Desde" id="input_seniat_desde" nbInput >
+                                        <input class="dobleimput"  placeholder="Hasta" id="input_seniat_hasta" nbInput >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadrango">
+                                <div class="col-md-4">
+                                    <div>
+                                        <div class="form-group">
+                                            <label>Rango de Fechas:</label>
+                                            <br>
+                                            <input nbInput placeholder="Desde" id="fecha_desde" [nbDatepicker]="desde">
+                                            <nb-datepicker #desde></nb-datepicker>
+                                            <input nbInput placeholder="Hasta" id="fecha_hasta" [nbDatepicker]="hasta">
+                                            <nb-datepicker #hasta></nb-datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content">
+
+                                <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon icon="arrow-ios-back-outline"></nb-icon>REGRESAR</button>
+                                <button nbButton status="success" class="report_buttom" id="print_doc"><nb-icon icon="printer-outline"></nb-icon>IMPRIMIR</button>
+
+                            </div>
+
+                        </nb-card-body>
+                    </div>
+                    <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
+                </nb-card>
             </nb-card-back>
-          </nb-flip-card>
+        </nb-flip-card>
+
     </nb-tab>
+
     <nb-tab tabTitle="TERMINAL AUXILIAR">
 
+        <nb-flip-card [showToggleButton]="false" [flipped]="flipped">
+
+            <nb-card-front>
+                <nb-card>
+
+                    <div class="content" *ngIf="Terminalbuttom">
+                        <button nbButton status="primary" class="iniciador" (click)="loadTerminalCategory()"><nb-icon icon="file-text-outline"></nb-icon>INICIAR</button>
+                    </div>
+                    <div *ngIf="loadterminal">
+                        <nb-card-body>
+
+                            <div class="content" id="categorias_terminal_auxiliar">
+                                <div class="category">
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_cliente" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_facturas_anuladas" icon="bulb-outline"></nb-icon>	FACTURAS ANULADAS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_relacion_ingresos_diarios" icon="bulb-outline"></nb-icon>RELACIÓN Y/O INGRESOS DIARIOS TERMINAL AUXILIAR 	</button>
+                                    <div class="break"></div>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_resumen_documentos" icon="bulb-outline"></nb-icon>	RESUMEN DE DOCUMENTOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_estado_cuenta" icon="bulb-outline"></nb-icon>	ESTADOS DE CUENTA ACTUAL	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_totales_servicios" icon="bulb-outline"></nb-icon>	TOTALES DE SERVICIOS	</button>
+                                </div>
+                            </div>
+
+                        </nb-card-body>
+                        <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
+
+                    </div>
+                </nb-card>
+            </nb-card-front>
+            <nb-card-back>
+                <nb-card>
+                    <div *ngIf="loadterminal">
+                        <nb-card-body>
+                            <div class="content">
+                                <div class="col-md-4">
+                                    <nb-select placeholder="Seleccion Reporte" name="select_reporte" id="select_reporte" fullWidth (selectedChange)="test($event);">
+
+                                        <nb-option-group title="DOSAS">
+                                            <nb-option value="11"> RELACIÓN Y/O INGRESOS DIARIOS DOSAS </nb-option>
+                                            <nb-option value="12"> TOTAL GENERAL DOSAS </nb-option>
+                                            <nb-option value="13"> DOSAS ANULADAS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="CLIENTES">
+                                            <nb-option value="21"> CLIENTES FIJOS </nb-option>
+                                            <nb-option value="22"> CLIENTES GENÉRICOS </nb-option>
+                                            <nb-option value="23"> CLIENTES </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="RESUMEN DE DOCUMENTOS">
+                                            <nb-option value="31"> RESUMEN DE DOCUMENTOS POR CLIENTE FIJO </nb-option>
+                                            <nb-option value="32"> RESUMEN DE DOCUMENTOS POR CLIENTE CARGUEROS </nb-option>
+                                            <nb-option value="33"> RESUMEN GENERAL DOSA DE CONTADO CLASIFICADO POR CONCEPTO </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="ESTADOS DE CUENTA ACTUAL">
+                                            <nb-option value="41"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="42"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="HASTA">
+                                            <nb-option value="51"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="52"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="HISTÓRICO">
+                                            <nb-option value="61"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="62"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
+                                    </nb-select>
+                                </div>
+
+                            </div>
+
+                            <div class="content" *ngIf="loadcliente">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Cliente" id="select_cliente" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="content" *ngIf="loaddocumento">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadservicio">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Servicios" id="select_servicio" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadserie">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Tipo de Serie" id="select_tserie" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadseniat">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label># SENIAT:</label>
+                                        <br>
+                                        <input class="dobleimput" placeholder="Desde" id="input_seniat_desde" nbInput >
+                                        <input class="dobleimput" placeholder="Hasta" id="input_seniat_hasta" nbInput >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadrango">
+                                <div class="col-md-4">
+                                    <div>
+                                        <div class="form-group">
+                                            <label>Rango de Fechas:</label>
+                                            <br>
+                                            <input nbInput placeholder="Desde" id="fecha_desde" [nbDatepicker]="desde">
+                                            <nb-datepicker #desde></nb-datepicker>
+                                            <input nbInput placeholder="Hasta" id="fecha_hasta" [nbDatepicker]="hasta">
+                                            <nb-datepicker #hasta></nb-datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content">
+
+                                <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon icon="arrow-ios-back-outline"></nb-icon>REGRESAR</button>
+                                <button nbButton status="success" class="report_buttom" id="print_doc"><nb-icon icon="printer-outline"></nb-icon>IMPRIMIR</button>
+
+                            </div>
+
+                        </nb-card-body>
+                    </div>
+                    <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
+                </nb-card>
+            </nb-card-back>
+        </nb-flip-card>
 
     </nb-tab>
+
     <nb-tab tabTitle="RECAUDACIÓN">
 
-      </nb-tab>
-      <nb-tab tabTitle="HABILITADURIA">
+        <nb-flip-card [showToggleButton]="false" [flipped]="flipped">
 
-      </nb-tab>
-  </nb-tabset>
+            <nb-card-front>
+                <nb-card>
 
+
+                    <div class="content" *ngIf="Recaudacionbuttom">
+                        <button nbButton status="primary" class="iniciador" (click)="loadRecaudaccionCategory()"><nb-icon icon="file-text-outline"></nb-icon>INICIAR</button>
+                    </div>
+                    <div *ngIf="loadrecaudacion">
+                        <nb-card-body>
+
+                            <div class="content" id="categorias_recaudacion">
+                                <div class="category">
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_documentos_abiertos" icon="bulb-outline"></nb-icon>	DOCUMENTOS ABIERTOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_libro_ventas" icon="bulb-outline"></nb-icon>	LIBRO DE VENTAS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_retenciones" icon="bulb-outline"></nb-icon>	RETENCIONES	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_relacion_ingresos" icon="bulb-outline"></nb-icon>	RELACIÓN Y/O INGRESOS	</button>
+                                    <div class="break"></div>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_clientes" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_listados" icon="bulb-outline"></nb-icon>	LISTADOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_estado_cuenta" icon="bulb-outline"></nb-icon>	ESTADO DE CUENTA	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_resumen" icon="bulb-outline"></nb-icon>	RESUMEN	</button>
+                                    <div class="break"></div>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_relacion_dia" icon="bulb-outline"></nb-icon>	RELACIONES DEL DIA	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_recibos" icon="bulb-outline"></nb-icon>	RECIBOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_nota_credito" icon="bulb-outline"></nb-icon>	NOTAS DE CRÉDITO	</button>
+                                </div>
+                            </div>
+
+                        </nb-card-body>
+                        <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
+
+                    </div>
+                </nb-card>
+            </nb-card-front>
+            <nb-card-back>
+                <nb-card>
+                    <div *ngIf="loadrecaudacion">
+                        <nb-card-body>
+                            <div class="content">
+                                <div class="col-md-4">
+                                    <nb-select placeholder="Seleccion Reporte" name="select_reporte" id="select_reporte" fullWidth (selectedChange)="test($event);">
+
+                                        <nb-option-group title="DOSAS">
+                                            <nb-option value="11"> RELACIÓN Y/O INGRESOS DIARIOS DOSAS </nb-option>
+                                            <nb-option value="12"> TOTAL GENERAL DOSAS </nb-option>
+                                            <nb-option value="13"> DOSAS ANULADAS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="CLIENTES">
+                                            <nb-option value="21"> CLIENTES FIJOS </nb-option>
+                                            <nb-option value="22"> CLIENTES GENÉRICOS </nb-option>
+                                            <nb-option value="23"> CLIENTES </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="RESUMEN DE DOCUMENTOS">
+                                            <nb-option value="31"> RESUMEN DE DOCUMENTOS POR CLIENTE FIJO </nb-option>
+                                            <nb-option value="32"> RESUMEN DE DOCUMENTOS POR CLIENTE CARGUEROS </nb-option>
+                                            <nb-option value="33"> RESUMEN GENERAL DOSA DE CONTADO CLASIFICADO POR CONCEPTO </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="ESTADOS DE CUENTA ACTUAL">
+                                            <nb-option value="41"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="42"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="HASTA">
+                                            <nb-option value="51"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="52"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="HISTÓRICO">
+                                            <nb-option value="61"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="62"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
+                                    </nb-select>
+                                </div>
+
+                            </div>
+
+                            <div class="content" *ngIf="loadcliente">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Cliente" id="select_cliente" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="content" *ngIf="loaddocumento">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadservicio">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Servicios" id="select_servicio" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadserie">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Tipo de Serie" id="select_tserie" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadseniat">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label># SENIAT:</label>
+                                        <br>
+                                        <input class="dobleimput" placeholder="Desde" id="input_seniat_desde" nbInput >
+                                        <input class="dobleimput" placeholder="Hasta" id="input_seniat_hasta" nbInput >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadrango">
+                                <div class="col-md-4">
+                                    <div>
+                                        <div class="form-group">
+                                            <label>Rango de Fechas:</label>
+                                            <br>
+                                            <input nbInput placeholder="Desde" id="fecha_desde" [nbDatepicker]="desde">
+                                            <nb-datepicker #desde></nb-datepicker>
+                                            <input nbInput placeholder="Hasta" id="fecha_hasta" [nbDatepicker]="hasta">
+                                            <nb-datepicker #hasta></nb-datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content">
+
+                                <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon icon="arrow-ios-back-outline"></nb-icon>REGRESAR</button>
+                                <button nbButton status="success" class="report_buttom" id="print_doc"><nb-icon icon="printer-outline"></nb-icon>IMPRIMIR</button>
+
+                            </div>
+
+                        </nb-card-body>
+                    </div>
+                    <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
+                </nb-card>
+            </nb-card-back>
+        </nb-flip-card>
+
+    </nb-tab>
+
+    <nb-tab tabTitle="HABILITADURIA">
+
+        <nb-flip-card [showToggleButton]="false" [flipped]="flipped">
+
+            <nb-card-front>
+                <nb-card>
+
+                    <div class="content" *ngIf="Habilitaduriabuttom">
+                        <button nbButton status="primary" class="iniciador" (click)="loadHabilitaduriaCategory()"><nb-icon icon="file-text-outline"></nb-icon>INICIAR</button>
+                    </div>
+                    <div *ngIf="loadhabilitaduria">
+                        <nb-card-body>
+
+                            <div class="content" id="categorias_habilitaduria">
+                                <div class="category">
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="hab_cliente" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="hab_facturas_anuladas" icon="bulb-outline"></nb-icon>	FACTURAS ANULADAS	</button>
+                                    <div class="break"></div>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="hab_relacion_ingresos_diarios" icon="bulb-outline"></nb-icon>	RELACIÓN Y/O INGRESOS DIARIOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="hab_resumen_documentos" icon="bulb-outline"></nb-icon>	RESUMEN DE DOCUMENTOS	</button>
+                                </div>
+                            </div>
+
+                        </nb-card-body>
+                        <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
+
+                    </div>
+                </nb-card>
+            </nb-card-front>
+            <nb-card-back>
+                <nb-card>
+                    <div *ngIf="loadhabilitaduria">
+                        <nb-card-body>
+                            <div class="content">
+                                <div class="col-md-4">
+                                    <nb-select placeholder="Seleccion Reporte" name="select_reporte" id="select_reporte" fullWidth (selectedChange)="test($event);">
+
+                                        <nb-option-group title="DOSAS">
+                                            <nb-option value="11"> RELACIÓN Y/O INGRESOS DIARIOS DOSAS </nb-option>
+                                            <nb-option value="12"> TOTAL GENERAL DOSAS </nb-option>
+                                            <nb-option value="13"> DOSAS ANULADAS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="CLIENTES">
+                                            <nb-option value="21"> CLIENTES FIJOS </nb-option>
+                                            <nb-option value="22"> CLIENTES GENÉRICOS </nb-option>
+                                            <nb-option value="23"> CLIENTES </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="RESUMEN DE DOCUMENTOS">
+                                            <nb-option value="31"> RESUMEN DE DOCUMENTOS POR CLIENTE FIJO </nb-option>
+                                            <nb-option value="32"> RESUMEN DE DOCUMENTOS POR CLIENTE CARGUEROS </nb-option>
+                                            <nb-option value="33"> RESUMEN GENERAL DOSA DE CONTADO CLASIFICADO POR CONCEPTO </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="ESTADOS DE CUENTA ACTUAL">
+                                            <nb-option value="41"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="42"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="HASTA">
+                                            <nb-option value="51"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="52"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
+                                        <nb-option-group title="HISTÓRICO">
+                                            <nb-option value="61"> CLIENTES CARGUEROS </nb-option>
+                                            <nb-option value="62"> CLIENTES FIJOS </nb-option>
+                                        </nb-option-group>
+
+                                    </nb-select>
+                                </div>
+
+                            </div>
+
+                            <div class="content" *ngIf="loadcliente">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Cliente" id="select_cliente" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="content" *ngIf="loaddocumento">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadservicio">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Servicios" id="select_servicio" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadserie">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+
+                                        <nb-select placeholder="Tipo de Serie" id="select_tserie" fullWidth>
+                                            <nb-option value="0">0</nb-option>
+                                            <nb-option value="1">0</nb-option>
+                                            <nb-option value="2">0</nb-option>
+                                        </nb-select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadseniat">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label># SENIAT:</label>
+                                        <br>
+                                        <input class="dobleimput" placeholder="Desde" id="input_seniat_desde" nbInput >
+                                        <input class="dobleimput" placeholder="Hasta" id="input_seniat_hasta" nbInput >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="content" *ngIf="loadrango">
+                                <div class="col-md-4">
+                                    <div>
+                                        <div class="form-group">
+                                            <label>Rango de Fechas:</label>
+                                            <br>
+                                            <input nbInput placeholder="Desde" id="fecha_desde" [nbDatepicker]="desde">
+                                            <nb-datepicker #desde></nb-datepicker>
+                                            <input nbInput placeholder="Hasta" id="fecha_hasta" [nbDatepicker]="hasta">
+                                            <nb-datepicker #hasta></nb-datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content">
+
+                                <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon icon="arrow-ios-back-outline"></nb-icon>REGRESAR</button>
+                                <button nbButton status="success" class="report_buttom" id="print_doc"><nb-icon icon="printer-outline"></nb-icon>IMPRIMIR</button>
+
+                            </div>
+
+                        </nb-card-body>
+                    </div>
+                    <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
+                </nb-card>
+            </nb-card-back>
+        </nb-flip-card>
+
+    </nb-tab>
+</nb-tabset>
