@@ -7,6 +7,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ConceptoService } from '../../servicio/sysbase/concepto.service';
 import { ServicioService } from '../../servicio/sysbase/servicio.service';
 import { ClienteService } from '../../servicio/sysbase/cliente.service';
+import { TasaService } from '../../servicio/tasa/tasa.service';
+
 
 
 interface TreeNode<T> {
@@ -14,6 +16,7 @@ interface TreeNode<T> {
   children?: TreeNode<T>[];
   expanded?: boolean;
 }
+
 
 interface FSEntry {
   Opciones? : string
@@ -34,6 +37,7 @@ export interface PeriodicElement {
   Concepto  : string
   Cantidad  : number
   Monto     : number
+  Iva       : number
 }
 
 var ELEMENT_DATA: PeriodicElement[] = [];
@@ -79,10 +83,16 @@ export class DocumentosComponent implements OnInit {
   cuenta = ''
   montoTotal = 0.00
   seniat = ''
+  ivaf=0.00
+  rif=''
+  direccion=''
+  DicomUS = 0.00
+  DicomEU = 0.00
+  Petro = 0.00
+  ngFactura = true
 
 
-
-  displayedColumnx: string[] = ['Cuenta', 'Concepto', 'Cantidad', 'Monto']
+  displayedColumnx: string[] = ['Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
 
   dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
 
@@ -92,6 +102,16 @@ export class DocumentosComponent implements OnInit {
   flipped = false
   esVisible = false
 
+  fnumero = ""
+  ffecha = "" 
+  fcontrol = ""
+  fserie = ""
+  fcodigocliente = ""
+  fcliente = ""
+  frif = ""
+  fdireccion = ""
+  fcondicionpago = ""
+  ftiposervicio = ""
 
   toggleView() {
     this.flipped = !this.flipped;
@@ -103,7 +123,8 @@ export class DocumentosComponent implements OnInit {
     private conceptos : ConceptoService,
     private toastrService: NbToastrService,
     private servicio : ServicioService,
-    private servicioCliente : ClienteService ) {
+    private servicioCliente : ClienteService ,
+    private tasaService : TasaService) {
     
       //this.cargarConcepto()
       ELEMENT_DATA = []
@@ -111,12 +132,25 @@ export class DocumentosComponent implements OnInit {
 
       this.dataSourcesx.data = ELEMENT_DATA
       this.cargarServicio()
+      this.ngFactura = true
+
       //this.consultarConcepto("DO")
 
   }
   ngOnInit(){    
     this.obtenerDatos() 
-    
+    this.tasaService.listar().subscribe(     
+      (resp) => { 
+        console.log(resp)
+        this.DicomUS = resp[0].ta_dollar
+        this.DicomEU = resp[0].mn_euro
+        this.Petro = resp[0].mn_petro
+
+       },
+      (error) =>{
+        console.log("Error del sistema")
+      }
+    )
   }
 
   
@@ -197,9 +231,14 @@ export class DocumentosComponent implements OnInit {
 
   consultarConcepto(id){
     this.conceptox = ""
+    this.cantidad = ""
+    this.ivaf = 0
+    this.cuenta = ""
+    this.monto = 0
+    this.total = 0
     return this.conceptos.consultar(id).subscribe(
       (resp) => { 
-        
+        console.log(resp )
         this.concepto = resp
         
        },
@@ -215,6 +254,7 @@ export class DocumentosComponent implements OnInit {
       if(this.conceptox == e.cd_concepto){        
         console.log(e);
         var monto = parseFloat(e.mn_monto_bf) * parseInt(this.cantidad)
+        this.ivaf = e.pc_iva
         if ( e.in_iva == "0"){
           this.excento += this.monto
         }else{
@@ -222,6 +262,8 @@ export class DocumentosComponent implements OnInit {
         }
         this.monto = parseFloat(  monto.toFixed(2) )
         this.cuenta = e.cd_cuenta
+
+        this.calcularCantidad(id)
       }
     });
     
@@ -230,15 +272,17 @@ export class DocumentosComponent implements OnInit {
 
   calcularCantidad(e){
     var monto = parseInt(this.cantidad) * this.monto
-    this.total =  parseFloat(  monto.toFixed(2) )
+    this.total =  parseFloat(  monto.toFixed(2) ) * this.Petro
   }
 
 
   consultarCliente(id){
     return this.servicioCliente.consultar(this.codigo).subscribe(
       (resp) => { 
-        console.log(resp.length )
-        this.cliente = resp[0].razon_social               
+        console.log(resp )
+        this.cliente = resp[0].razon_social
+        this.rif = resp[0].cedula_rif 
+        this.direccion = resp[0].dir_estado              
        },
       (err) => {
           console.log(err)
@@ -292,9 +336,9 @@ export class DocumentosComponent implements OnInit {
       Cuenta : this.cuenta,
       Cantidad: parseInt(this.cantidad), 
       Concepto: concepto, 
-      Monto: this.total
+      Monto: this.total,
+      Iva:this.ivaf
     } )
-
 
     this.montoTotal += this.total
     this.dataSourcesx.data = ELEMENT_DATA
@@ -313,7 +357,16 @@ export class DocumentosComponent implements OnInit {
         "tp_cambio":"BS",
         "cd_cuenta": this.cuenta        
     } )
-    
+    console.log(this.DicomUS)
+    console.log(this.DicomEU)
+
+    this.conceptox = ""
+    this.cantidad = ""
+    this.ivaf = 0
+    this.cuenta = ""
+    this.monto = 0
+    this.total = 0
+    this.ngFactura = false
     
   }
 
@@ -323,6 +376,11 @@ export class DocumentosComponent implements OnInit {
     this.monto = 0
     this.codigo = ""
     this.cliente = ""
+    this.tipo = ""
+    this.cantidad = ""
+    this.cuenta = ""
+    this.monto = 0
+    this.total = 0
     this.esVisible = true
     var d = new Date()
     var fe =  d.toISOString().substring(0,10)
@@ -350,6 +408,18 @@ export class DocumentosComponent implements OnInit {
     this.docu.agregar(obj).subscribe(
       (resp) => {         
         this.dataSource = this.dataSourceBuilder.create(this.data)
+
+        this.fnumero = ""
+        this.ffecha = "" 
+        this.fcontrol = ""
+        this.fserie = ""
+        this.fcodigocliente = this.codigo
+        this.fcliente = this.cliente
+        this.frif = this.rif
+        this.fdireccion = this.direccion
+        this.fcondicionpago = ""
+        this.ftiposervicio = ""
+        
         console.info("Exito: ", resp)
         this.showToast('top-right', 'success')
       },
@@ -364,6 +434,10 @@ export class DocumentosComponent implements OnInit {
 
 
 
+  }
+  
+  imprimirFactura () : any {
+    
   }
 
   showToast(position, status) {

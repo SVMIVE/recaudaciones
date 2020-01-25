@@ -98,24 +98,45 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input placeholder="Codigo" nbInput fullWidth [(ngModel)]="codigo" 
-                                                    (blur)="consultarCliente($event)">
+                                                    <input placeholder="Codigo" 
+                                                        nbInput fullWidth 
+                                                        [(ngModel)]="codigo" 
+                                                        (blur)="consultarCliente($event)"
+                                                        [disabled] = "!ngFactura"
+                                                    >
+
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <input placeholder="Cliente" nbInput fullWidth  [(ngModel)]="cliente" >
+                                                    <input placeholder="Cliente" nbInput fullWidth  
+                                                    [(ngModel)]="cliente"                                                     
+                                                    [disabled] = "!ngFactura">
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                        <div class="row" style="display: none;">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <input nbInput fullWidth [(ngModel)]="rif" >
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input nbInput fullWidth  [(ngModel)]="direccion" >
                                                 </div>
                                             </div>
                                         
                                         </div>
 
-
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     
-                                                    <nb-select placeholder="Tipo de Documento"  [(ngModel)]="tipo" fullWidth>
+                                                    <nb-select placeholder="Tipo de Documento"  [(ngModel)]="tipo" 
+                                                    [disabled] = "!ngFactura" fullWidth>
                                                         <nb-option value="0">Factura</nb-option>
                                                         <nb-option value="1">Nota de Crédito</nb-option>
                                                         <nb-option value="2">Nota de Debito</nb-option>
@@ -129,6 +150,7 @@
                                                     <nb-select placeholder="Servicio"
                                                     (selectedChange)="consultarConcepto($event)" 
                                                     [(ngModel)]="servicio" 
+                                                    [disabled] = "!ngFactura"
                                                     fullWidth>
                                                         <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{ serv.cd_servicio + ' - ' + serv.nb_servicio}} </nb-option>
                                                     </nb-select>
@@ -145,9 +167,14 @@
                                                     </nb-select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
                                                     <input type="number" placeholder="Cantidad" nbInput fullWidth   [(ngModel)]="cantidad" (blur)="consultarCantidad($event)">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <input type="number" placeholder="Iva" nbInput fullWidth   [(ngModel)]="ivaf" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -162,7 +189,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <input type="number"  placeholder="Total" nbInput fullWidth  [(ngModel)]="total" >
+                                                    <input type="number"  placeholder="Total" nbInput fullWidth  [(ngModel)]="total" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-3" style="display:none">
@@ -180,10 +207,10 @@
 
                                         </div><!-- fin de la fila -->
 
-
+                                        <div class="row"><br></div>
                                         <div class="row">
 
-                                                <br>
+                                                
 
                                                 <table mat-table [dataSource]="dataSourcesx" class="mat-elevation-z8" width="100%">
                                                     
@@ -336,13 +363,13 @@
                 <tbody>
                     <tr>
                         <td class="header_field_1">FACTURA</td>
-                        <td class="header_field_2"><b id="fnumero"></b>E00066305 </td>
-                        <td class="header_field_2" ><b id="ffecha"></b> 14/04/2020</td>
-                        <td class="header_field_3" ><b id="fcontrol"></b>00-00583658 </td>
+                        <td class="header_field_2"><b id="fnumero"></b>{{fnumero}} </td>
+                        <td class="header_field_2" ><b id="ffecha"></b> {{ffecha}}</td>
+                        <td class="header_field_3" ><b id="fcontrol"></b>{{fcontrol}}  </td>
                     </tr>
                     <tr>
                         <td id="serie" colspan="4" >
-                            <label >SERIE:</label> <p class="pinline" id="fserie">A</p>
+                            <label >SERIE:</label> <p class="pinline" id="fserie">{{fserie}}</p>
                         </td>
                     </tr>
                 </tbody>
@@ -352,23 +379,22 @@
             <div id="details" class="clearfix">
                 <div id="client">
                     <div class="client">
-                        <label class="label_left">CÒDIGO:</label> <p id="fcodigocliente">10352</p>
+                        <label class="label_left">CÒDIGO:</label> <p id="fcodigocliente">{{fcodigocliente}}</p>
                     </div>
                     <div class="client">
-                        <label class="label_left" >CLIENTE:</label><p id="fcliente"> CONSORCIO VENEZOLANO DE INDUSTRIAS AERONAUTICAS 
-                        Y SERVICIOS AERES, S.A. (CONVIASA) CONCESION</p>
+                        <label class="label_left" >CLIENTE:</label><p id="fcliente"> {{fcliente}}</p>
                     </div>
                     <div class="client">
-                        <label class="label_left">RIF:</label> <p id="frif"> G-20007774-3</p>
+                        <label class="label_left">RIF:</label> <p id="frif"> {{frif}}</p>
                     </div>
                     <div class="client">
-                        <label class="label_left">DIRECCIÒN:</label> <p id="fdireccion"> AV.INTERCOMUNAL AEROPUERTO INTERNACIONAL DE MAIQUETIA EDF. SECTOR 6.3</p>
+                        <label class="label_left">DIRECCIÒN:</label> <p id="fdireccion"> {{fdireccion}}</p>
                     </div>
                     <div class="right_content">
-                        <label class="label_left">CONDICIÒN DE PAGO:</label> <p id="fcondicionpago">DE CONTADO</p> 
+                        <label class="label_left">CONDICIÒN DE PAGO:</label> <p id="fcondicionpago">{{fcondicionpago}}</p> 
                     </div>
                     <div class="right_content">
-                        <label class="label_left">TIPO SERVICIO:</label> <p id="ftiposervicio">DOSAS CONTADO </p> 
+                        <label class="label_left">TIPO SERVICIO:</label> <p id="ftiposervicio">{{ftiposervicio}}</p> 
                     </div>
                     <div>
                     </div>
@@ -751,10 +777,5 @@
         </footer>
 
 </div>
+
 -->
-
-
-
-
-
-
