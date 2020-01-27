@@ -89,7 +89,7 @@ export class DocumentosComponent implements OnInit {
   DicomUS = 0.00
   DicomEU = 0.00
   Petro = 0.00
-  ngFactura = true
+  ngFactura = false
 
 
   displayedColumnx: string[] = ['Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
@@ -132,7 +132,7 @@ export class DocumentosComponent implements OnInit {
 
       this.dataSourcesx.data = ELEMENT_DATA
       this.cargarServicio()
-      this.ngFactura = true
+      this.ngFactura = false
 
       //this.consultarConcepto("DO")
 
@@ -277,6 +277,7 @@ export class DocumentosComponent implements OnInit {
 
 
   consultarCliente(id){
+
     return this.servicioCliente.consultar(this.codigo).subscribe(
       (resp) => { 
         console.log(resp )
@@ -366,7 +367,7 @@ export class DocumentosComponent implements OnInit {
     this.cuenta = ""
     this.monto = 0
     this.total = 0
-    this.ngFactura = false
+    this.ngFactura = true
 
     this.previsualizarFactura()
     

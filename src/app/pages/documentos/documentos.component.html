@@ -102,7 +102,7 @@
                                                         nbInput fullWidth 
                                                         [(ngModel)]="codigo" 
                                                         (blur)="consultarCliente($event)"
-                                                        [disabled] = "!ngFactura"
+                                                        [disabled] = "ngFactura"
                                                     >
 
                                                 </div>
@@ -111,7 +111,7 @@
                                                 <div class="form-group">
                                                     <input placeholder="Cliente" nbInput fullWidth  
                                                     [(ngModel)]="cliente"                                                     
-                                                    [disabled] = "!ngFactura">
+                                                    [disabled] = "ngFactura">
                                                 </div>
                                             </div>
                                         
