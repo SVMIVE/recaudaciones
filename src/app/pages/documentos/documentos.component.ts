@@ -33,9 +33,9 @@ interface FSEntry {
 
 
 export interface PeriodicElement {
-  Cuenta    : string
-  Concepto  : string
-  Cantidad  : number
+  Cuenta?    : string
+  Concepto?  : string
+  Cantidad?  : number
   Monto     : number
   Iva       : number
 }
@@ -102,9 +102,9 @@ export class DocumentosComponent implements OnInit {
   flipped = false
   esVisible = false
 
-  fnumero = ""
-  ffecha = "" 
-  fcontrol = ""
+  fnumero = "0000000"
+  ffecha = "0000000" 
+  fcontrol = "000000"
   fserie = ""
   fcodigocliente = ""
   fcliente = ""
@@ -367,6 +367,8 @@ export class DocumentosComponent implements OnInit {
     this.monto = 0
     this.total = 0
     this.ngFactura = false
+
+    this.previsualizarFactura()
     
   }
 
@@ -408,19 +410,11 @@ export class DocumentosComponent implements OnInit {
     this.docu.agregar(obj).subscribe(
       (resp) => {         
         this.dataSource = this.dataSourceBuilder.create(this.data)
-
-        this.fnumero = ""
-        this.ffecha = "" 
-        this.fcontrol = ""
-        this.fserie = ""
-        this.fcodigocliente = this.codigo
-        this.fcliente = this.cliente
-        this.frif = this.rif
-        this.fdireccion = this.direccion
-        this.fcondicionpago = ""
-        this.ftiposervicio = ""
         
         console.info("Exito: ", resp)
+        
+        
+        
         this.showToast('top-right', 'success')
       },
       (err) => {
@@ -434,6 +428,20 @@ export class DocumentosComponent implements OnInit {
 
 
 
+  }
+  previsualizarFactura(){
+
+    // ELEMENT_DATA.forEach(element => {
+    //   console.log(element)
+    // });                   
+    // document.getElementById("ContenidoTbl").append(`<table><tr>
+    //   <td class="codigo">3.03.02.01.05</td>
+    //   <td class="descripcion">ATERRIZAJE INTERNACIONAL DE PASAJEROS</td>
+    //   <td class="num">2.334,66</td>
+    //   <td class="num">63,03</td>
+    //   <td class="num">16,00</td>
+    //   <td class="num">147.153,62</td>
+    // </tr></table>`);
   }
   
   imprimirFactura () : any {
