@@ -1,7 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource, NbToastrService } from '@nebular/theme';
+import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource, NbToastrService, NbDateService, NbDatepickerComponent} from '@nebular/theme';
 import { FormControl, FormsModule } from '@angular/forms';
 import { ClienteService, WCliente } from '../../servicio/sysbase/cliente.service';
+
 
 interface TreeNode<T> {
   data: T;
@@ -83,7 +84,7 @@ constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
     return NbSortDirection.NONE;
   }
 
-  obtenerDatos(){
+  obtenerDatos() {
 
     this.cliente.listar().subscribe(
       (resp) => {
@@ -128,7 +129,7 @@ constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
   }
 
 
-  agregar(){
+  agregar() {
     const wCli: WCliente = {
       Codigo: this.codigox,
       RazonSocial: this.razonSocialx,
@@ -145,11 +146,11 @@ constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
       CodigoPostal: this.codigoPostalx,
       Direccion: this.direccionx,
       Usuario : "ANUGULAR-NGX",
-    }
+    };
     console.log(wCli);
     this.cliente.agregar(wCli).subscribe(
       (resp) => {
-        this.dataSource = this.dataSourceBuilder.create(this.data)
+        this.dataSource = this.dataSourceBuilder.create(this.data);
         this.showToast('top-right', 'success');
       },
       (err) => {
@@ -158,10 +159,8 @@ constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
     );
   }
 
-  actualizar(){
-
+  Cancelar() {
+    return this.escCloseTemplate;
   }
 
-
- 
 }

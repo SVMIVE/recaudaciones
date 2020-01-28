@@ -37,11 +37,13 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { PasswordValidationDirective } from './validations/password-validation.directive';
 @NgModule({
   declarations: [
     AppComponent,
      NotadebitoComponent,
      LoginComponent,
+     PasswordValidationDirective,
     ],
   imports: [
     NbSelectModule,

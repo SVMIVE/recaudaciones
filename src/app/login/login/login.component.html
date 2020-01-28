@@ -35,13 +35,13 @@
                         <p class="text-right"><small><a href="">¿Olvidaste la contraseña?</a></small></p>
                         
                         <input nbInput
-                          class="form-control"
-                          [(ngModel)]="clave"
+                         class="form-control"
+                         [(ngModel)]="clave"
                          name="clave"
-                          type="password"
+                         type="password"
                          id="input-clave"
                          placeholder="Contraseña"
-                         style="margin-top: -10%;">                         
+                         style="margin-top: -10%;" ng-keyup="$event.keyCode == 13 && login() : null">                         
                       </div>
       
                       <div class="col-xs-12">
