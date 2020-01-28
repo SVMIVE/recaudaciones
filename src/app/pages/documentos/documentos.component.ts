@@ -432,22 +432,35 @@ export class DocumentosComponent implements OnInit {
   }
   previsualizarFactura(){
 
-    // ELEMENT_DATA.forEach(element => {
-    //   console.log(element)
-    // });                   
-    // document.getElementById("ContenidoTbl").append(`<table><tr>
-    //   <td class="codigo">3.03.02.01.05</td>
-    //   <td class="descripcion">ATERRIZAJE INTERNACIONAL DE PASAJEROS</td>
-    //   <td class="num">2.334,66</td>
-    //   <td class="num">63,03</td>
-    //   <td class="num">16,00</td>
-    //   <td class="num">147.153,62</td>
-    // </tr></table>`);
+    ELEMENT_DATA.forEach(element => {
+      console.log(element)
+    });                   
+    document.getElementById("ContenidoTbl").append(`<table><tr>
+      <td class="codigo">3.03.02.01.05</td>
+      <td class="descripcion">ATERRIZAJE INTERNACIONAL DE PASAJEROS</td>
+      <td class="num">2.334,66</td>
+      <td class="num">63,03</td>
+      <td class="num">16,00</td>
+      <td class="num">147.153,62</td>
+    </tr></table>`);
   }
   
   imprimirFactura () : any {
     
   }
+
+  Previsualizar(){
+    this.previsualizarFactura()
+    var estiloCSSDocumentos = ``
+    var html = document.getElementById("divFactura").innerHTML;
+    console.log(html)
+    var ventana = window.open("", "_blank");
+    ventana.document.write(html)
+    ventana.document.head.innerHTML = estiloCSSDocumentos;
+    ventana.print()
+    ventana.close()
+  }
+
 
   showToast(position, status) {
     this.toastrService.show(

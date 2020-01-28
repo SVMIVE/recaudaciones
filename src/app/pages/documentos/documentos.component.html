@@ -271,7 +271,13 @@
                                                     styleSheetFile="http://192.168.41.31:4200/assets/reporte/factura.css"
                                                     printSectionId="print-divFactura"
                                                     ngxPrint
-                                                   
+                                                    class="home-button pull-right" status="info"
+                                                    style="display: none">
+                                                    Previsualizar
+                                                </button>
+                                                <button nbButton fullWidth  
+                                                    styleSheetFile="http://192.168.41.31:4200/assets/reporte/factura.css"                                                   
+                                                    (click) = "Previsualizar()"
                                                     class="home-button pull-right" status="info">
                                                     Previsualizar
                                                 </button>
@@ -358,8 +364,8 @@
         </div>
     </div>
 </ng-template>
-
-<div id="print-divFactura" style="display:none">
+<!-- print-divFactura -->
+<div id="divFactura" style="display:none">
     <body>
         <header class="clearfix">
             <table>
@@ -382,7 +388,7 @@
             <div id="details" class="clearfix">
                 <div id="client">
                     <div class="client">
-                        <label class="label_left">CÒDIGO:</label> <p >{{codigo}}</p>
+                        <label class="label_left">CÒDIGO:</label> <p >lkasdjflñasdkj{{codigo}}</p>
                     </div>
                     <div class="client">
                         <label class="label_left" >CLIENTE:</label><p> {{cliente}}</p>
@@ -415,7 +421,7 @@
                         <th class="num" style="text-align-last: right">MONTO (BS)</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="ContenidoTbl">
 
                             <!-- <tr *ngFor="lista of ELEMENT_DATA | async">
                                 <td>{{ lista.Cuenta }}</td>
