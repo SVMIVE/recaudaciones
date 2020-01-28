@@ -55,6 +55,8 @@ export class LoginComponent implements OnInit {
       clase : this.clase,
     };
 
+
+
     await this.loginServicio.Validar(usr).subscribe(
       (resp) => {
         sessionStorage.setItem('key-iaim', resp.token);
