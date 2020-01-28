@@ -89,8 +89,7 @@ export class DocumentosComponent implements OnInit {
   DicomUS = 0.00
   DicomEU = 0.00
   Petro = 0.00
-  ngFactura = true
-  ngFacturax = false 
+  ngFactura = false
 
 
   displayedColumnx: string[] = ['Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
@@ -133,8 +132,7 @@ export class DocumentosComponent implements OnInit {
 
       this.dataSourcesx.data = ELEMENT_DATA
       this.cargarServicio()
-      this.ngFactura = true
-      this.ngFacturax = false 
+      this.ngFactura = false
 
       //this.consultarConcepto("DO")
 
@@ -279,7 +277,7 @@ export class DocumentosComponent implements OnInit {
 
 
   consultarCliente(id){
-    if(this.codigo=="")return false
+
     return this.servicioCliente.consultar(this.codigo).subscribe(
       (resp) => { 
         console.log(resp )
@@ -369,9 +367,7 @@ export class DocumentosComponent implements OnInit {
     this.cuenta = ""
     this.monto = 0
     this.total = 0
-    
-    this.ngFactura = false
-    this.ngFacturax = true 
+    this.ngFactura = true
 
     this.previsualizarFactura()
     
@@ -435,36 +431,25 @@ export class DocumentosComponent implements OnInit {
 
   }
   previsualizarFactura(){
+    var html = ``;
 
-    ELEMENT_DATA.forEach(element => {
-      console.log(element)
+    ELEMENT_DATA.forEach(e => {
+      html += `<tr>
+      <td class="codigo">${e.Cuenta}</td>
+      <td class="descripcion">${e.Concepto}</td>
+      <td class="num">0.00</td>
+      <td class="num">0.00</td>
+      <td class="num">${e.Iva}</td>
+      <td class="num">${e.Monto}</td>
+    </tr>`
+
     });                   
-    document.getElementById("ContenidoTbl").append(`<table><tr>
-      <td class="codigo">3.03.02.01.05</td>
-      <td class="descripcion">ATERRIZAJE INTERNACIONAL DE PASAJEROS</td>
-      <td class="num">2.334,66</td>
-      <td class="num">63,03</td>
-      <td class="num">16,00</td>
-      <td class="num">147.153,62</td>
-    </tr></table>`);
+    document.getElementById("ContenidoTbl").innerHTML = html;
   }
   
   imprimirFactura () : any {
     
   }
-
-  Previsualizar(){
-    this.previsualizarFactura()
-    var estiloCSSDocumentos = ``
-    var html = document.getElementById("divFactura").innerHTML;
-    console.log(html)
-    var ventana = window.open("", "_blank");
-    ventana.document.write(html)
-    ventana.document.head.innerHTML = estiloCSSDocumentos;
-    ventana.print()
-    ventana.close()
-  }
-
 
   showToast(position, status) {
     this.toastrService.show(

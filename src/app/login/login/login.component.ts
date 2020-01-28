@@ -71,4 +71,9 @@ export class LoginComponent implements OnInit {
       },
     );
   }
+  PresionarEnter(e){
+    if (e.keyCode == 13){
+      this.login()
+    } 
+  }
 }

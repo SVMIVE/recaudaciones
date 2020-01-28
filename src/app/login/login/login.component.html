@@ -41,7 +41,7 @@
                          type="password"
                          id="input-clave"
                          placeholder="Contraseña"
-                         style="margin-top: -10%;" ng-keyup="$event.keyCode == 13 && login() : null">                         
+                         style="margin-top: -10%;" (keyup)="PresionarEnter($event)">                         
                       </div>
       
                       <div class="col-xs-12">
@@ -50,10 +50,10 @@
                             shape="round"
                             status="success"
                             size="large"
-                            (click)= login()
+                            (click)= "login()"
                             [class.btn-pulse]="submitted"
                             style="margin-top: -4%;">
-                            Iniciar sesión
+            
                           </button>
 
                       </div> 

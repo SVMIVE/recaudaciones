@@ -102,7 +102,7 @@
                                                         nbInput fullWidth 
                                                         [(ngModel)]="codigo" 
                                                         (blur)="consultarCliente($event)"
-                                                        [disabled] = "ngFacturax"
+                                                        [disabled] = "ngFactura"
                                                     >
 
                                                 </div>
@@ -111,7 +111,7 @@
                                                 <div class="form-group">
                                                     <input placeholder="Cliente" nbInput fullWidth  
                                                     [(ngModel)]="cliente"                                                     
-                                                    [disabled] = "ngFacturax">
+                                                    [disabled] = "ngFactura">
                                                 </div>
                                             </div>
                                         
@@ -136,7 +136,7 @@
                                                 <div class="form-group">
                                                     
                                                     <nb-select placeholder="Tipo de Documento"  [(ngModel)]="tipo" 
-                                                    [disabled] = "ngFacturax" fullWidth>
+                                                    [disabled] = "ngFactura" fullWidth>
                                                         <nb-option value="0">Factura</nb-option>
                                                         <nb-option value="1">Nota de Crédito</nb-option>
                                                         <nb-option value="2">Nota de Debito</nb-option>
@@ -150,7 +150,7 @@
                                                     <nb-select placeholder="Servicio"
                                                     (selectedChange)="consultarConcepto($event)" 
                                                     [(ngModel)]="servicio" 
-                                                    [disabled] = "ngFacturax"
+                                                    [disabled] = "ngFactura"
                                                     fullWidth>
                                                         <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{ serv.cd_servicio + ' - ' + serv.nb_servicio}} </nb-option>
                                                     </nb-select>
@@ -271,13 +271,7 @@
                                                     styleSheetFile="http://192.168.41.31:4200/assets/reporte/factura.css"
                                                     printSectionId="print-divFactura"
                                                     ngxPrint
-                                                    class="home-button pull-right" status="info"
-                                                    style="display: none">
-                                                    Previsualizar
-                                                </button>
-                                                <button nbButton fullWidth  
-                                                    styleSheetFile="http://192.168.41.31:4200/assets/reporte/factura.css"                                                   
-                                                    (click) = "Previsualizar()"
+                                                   
                                                     class="home-button pull-right" status="info">
                                                     Previsualizar
                                                 </button>
@@ -364,8 +358,8 @@
         </div>
     </div>
 </ng-template>
-<!-- print-divFactura -->
-<div id="divFactura" style="display:none">
+
+<div id="print-divFactura" style="display:none">
     <body>
         <header class="clearfix">
             <table>
@@ -388,7 +382,7 @@
             <div id="details" class="clearfix">
                 <div id="client">
                     <div class="client">
-                        <label class="label_left">CÒDIGO:</label> <p >lkasdjflñasdkj{{codigo}}</p>
+                        <label class="label_left">CÒDIGO:</label> <p >{{codigo}}</p>
                     </div>
                     <div class="client">
                         <label class="label_left" >CLIENTE:</label><p> {{cliente}}</p>
@@ -423,13 +417,6 @@
                 </thead>
                 <tbody id="ContenidoTbl">
 
-                            <!-- <tr *ngFor="lista of ELEMENT_DATA | async">
-                                <td>{{ lista.Cuenta }}</td>
-                                <td>{{ lista.Concepto }}</td>
-                                <td>{{ lista.Monto }}</td>
-                                <td>{{ lista.Iva }}</td>
-                                <td>{{ i }}</td>
-                            </tr> -->
        
                 </tbody>
                 <tfoot>
