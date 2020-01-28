@@ -102,7 +102,7 @@
                                                         nbInput fullWidth 
                                                         [(ngModel)]="codigo" 
                                                         (blur)="consultarCliente($event)"
-                                                        [disabled] = "ngFactura"
+                                                        [disabled] = "ngFacturax"
                                                     >
 
                                                 </div>
@@ -111,7 +111,7 @@
                                                 <div class="form-group">
                                                     <input placeholder="Cliente" nbInput fullWidth  
                                                     [(ngModel)]="cliente"                                                     
-                                                    [disabled] = "ngFactura">
+                                                    [disabled] = "ngFacturax">
                                                 </div>
                                             </div>
                                         
@@ -136,7 +136,7 @@
                                                 <div class="form-group">
                                                     
                                                     <nb-select placeholder="Tipo de Documento"  [(ngModel)]="tipo" 
-                                                    [disabled] = "!ngFactura" fullWidth>
+                                                    [disabled] = "ngFacturax" fullWidth>
                                                         <nb-option value="0">Factura</nb-option>
                                                         <nb-option value="1">Nota de Crédito</nb-option>
                                                         <nb-option value="2">Nota de Debito</nb-option>
@@ -150,7 +150,7 @@
                                                     <nb-select placeholder="Servicio"
                                                     (selectedChange)="consultarConcepto($event)" 
                                                     [(ngModel)]="servicio" 
-                                                    [disabled] = "!ngFactura"
+                                                    [disabled] = "ngFacturax"
                                                     fullWidth>
                                                         <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{ serv.cd_servicio + ' - ' + serv.nb_servicio}} </nb-option>
                                                     </nb-select>
