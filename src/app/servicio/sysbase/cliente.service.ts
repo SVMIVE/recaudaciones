@@ -99,4 +99,9 @@ export class ClienteService {
   consultar(id : string) : any {
     return this.httpClient.post<any>(this.url +  "sybase/cliente/razonsocial", { "auxcontable": id } )
   }
+
+  lstPagos(id : string) : any{
+    return this.httpClient.post<any>(this.url +  "sybase/cliente/pagos", { "cliente": id })
+  }
+
 }
