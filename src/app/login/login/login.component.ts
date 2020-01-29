@@ -71,9 +71,15 @@ export class LoginComponent implements OnInit {
       },
     );
   }
-  PresionarEnter(e){
-    if (e.keyCode == 13){
-      this.login()
-    } 
+  PresionarEnter(e) {
+    if (e.keyCode === 13) {
+      this.login();
+    }
   }
+  salir () {
+    this.loading = true;
+    sessionStorage.removeItem('key-iaim');
+    this.router.navigateByUrl('');
+  }
+
 }

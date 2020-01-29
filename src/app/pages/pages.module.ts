@@ -12,7 +12,7 @@ import {
   NbDatepickerModule,
   NbToastrModule,
   NbStepperModule,
-  NbTabsetModule,} from '@nebular/theme';
+  NbTabsetModule} from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
