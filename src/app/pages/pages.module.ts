@@ -12,7 +12,8 @@ import {
   NbDatepickerModule,
   NbToastrModule,
   NbStepperModule,
-  NbTabsetModule} from '@nebular/theme';
+  NbTabsetModule,
+  NbSpinnerModule} from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -40,6 +41,7 @@ import {NgxPrintModule} from 'ngx-print';
 import { ReporteComponent } from './reporte/reporte.component';
 import { TabsetWidthComponent } from './reporte/tabs/tabs.component';
 import { StepperComponent } from './reporte/stepper/stepper.component';
+import { SalirComponent } from './salir/salir.component';
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -65,6 +67,7 @@ import { StepperComponent } from './reporte/stepper/stepper.component';
     NgxPrintModule,
     NbTabsetModule,
     NbStepperModule,
+    NbSpinnerModule,
   ],
   declarations: [
     PagesComponent,
@@ -82,6 +85,7 @@ import { StepperComponent } from './reporte/stepper/stepper.component';
     ReporteComponent,
     TabsetWidthComponent,
     StepperComponent,
+    SalirComponent,
   ],
 })
 export class PagesModule {

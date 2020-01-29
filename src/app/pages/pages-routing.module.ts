@@ -16,6 +16,7 @@ import { PagosComponent } from './pagos/pagos.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReporteComponent } from './reporte/reporte.component';
+import { SalirComponent } from './salir/salir.component';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -67,6 +68,10 @@ const routes: Routes = [{
     {
       path: 'control',
       component: ControlComponent,
+    },
+    {
+      path: 'salir',
+      component: SalirComponent,
     },
     {
       path: '',

@@ -23,43 +23,40 @@
                         </nb-card-header>
                         <nb-card-body>
 
-                      <div class="col-md-12" size="large">
-                        <input nbInput
-                          class="form-control"
-                         [(ngModel)]="nombre"
-                         name="nombre"
-                         id="input-nombre"
-                         placeholder="Usuario"
-                         style="margin-top: -10%;">
+                     
+                          <input nbInput
+                           fullWidth
+                           class="form-control"
+                           [(ngModel)]="nombre"
+                           name="nombre"
+                           id="input-nombre"
+                           placeholder="Usuario"
+                           style="margin-top: -5%;">
 
-                        <p class="text-right"><small><a href="">¿Olvidaste la contraseña?</a></small></p>
-                        
-                        <input nbInput
-                         class="form-control"
-                         [(ngModel)]="clave"
-                         name="clave"
-                         type="password"
-                         id="input-clave"
-                         placeholder="Contraseña"
-                         style="margin-top: -10%;" (keyup)="PresionarEnter($event)">                         
-                      </div>
-      
-                      <div class="col-md-12">
+                          <p class="text-right"><small><a href="">¿Olvidaste la contraseña?</a></small></p>
+                          
+                          <input nbInput
+                           fullWidth
+                           class="form-control"
+                           [(ngModel)]="clave"
+                           name="clave"
+                           type="password"
+                           id="input-clave"
+                           placeholder="Contraseña"
+                           style="margin-top: -10%;" (keyup)="PresionarEnter($event)">                         
+                        
                           <button nbButton
-                            fullWidth
-                            shape="round"
-                            status="success"
-                            size="large"
-                            (click)= "login()"
-                            [class.btn-pulse]="submitted"
-                            style="margin-top: -4%;">
-                              Iniciar Sesión
-                          </button>
-                      </div> 
+                           fullWidth
+                           shape="round"
+                           status="success"
+                           size="large"
+                           (click)= "login()"
+                           style="margin-top: 3%;">Iniciar Sesión</button>
+                      
                     
                         </nb-card-body>
-                   <a style="margin-top: -10%;" class="title"><small><br>© Copyright 2019 IAIM- Todos los Derechos Reservados </small></a>
-                    </nb-card>
+                    <a style="margin-top: -10%;" class="title"><small><br>© Copyright 2019 IAIM- Todos los Derechos Reservados </small></a>
+                </nb-card>
             </div>  
       </div>
     </div>

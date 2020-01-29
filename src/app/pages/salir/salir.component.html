@@ -1,10 +1,15 @@
-<nb-card  accent="success"  >
+<nb-card  accent="success" [nbSpinner]="loading"
+             nbSpinnerStatus="danger"
+             nbSpinnerSize="large">
     <div class="container" center>
-            <div class="col-md-12; text-center">
-                <h1 style="font-family:'Courier New', Courier, monospace; margin-top: 5%" class="title">¿Desea cerrar sesión?</h1>
+        <div class="col-md-12; text-center">
+            <div class="row">
+                <h1 style="font-family:'Courier New', Courier, monospace; margin-top: 5%" class="col-md-12">¿Desea cerrar sesión?</h1>
                 <div class="col-md-12">
-                    <button nbButton shape="round" status="success" size="large" (click)= "salir()" style="margin-top: 5%;"></button>
+                    <button nbButton shape="round" status="success" size="large" (click)= "login()" style="margin-top: 5%; margin: 10px;">No</button>
+                    <button nbButton shape="round" status="success" size="large" (click)= "salir()" style="margin-top: 5%; margin: 10px;">Sí</button>
                 </div>
             </div>
+        </div>
     </div>
 </nb-card>

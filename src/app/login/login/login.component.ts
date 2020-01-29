@@ -76,10 +76,4 @@ export class LoginComponent implements OnInit {
       this.login();
     }
   }
-  salir () {
-    this.loading = true;
-    sessionStorage.removeItem('key-iaim');
-    this.router.navigateByUrl('');
-  }
-
 }
