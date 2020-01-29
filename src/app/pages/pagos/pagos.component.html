@@ -100,8 +100,39 @@
 
 <ng-template #escClose>
     <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input placeholder="Codigo" 
+                    nbInput fullWidth 
+                    [(ngModel)]="codigo" 
+                    (blur)="consultarCliente($event)"
+                    [disabled] = "ngFactura"
+                >
 
-        
-    </div>        
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <input placeholder="Cliente" nbInput fullWidth  
+                [(ngModel)]="cliente"                                                     
+                [disabled] = "ngFactura">
+            </div>
+        </div>
+    
+    </div>
+    <div class="row" >
+        <div class="col-md-4">
+            <div class="form-group">
+                <input nbInput fullWidth [(ngModel)]="rif" >
+                
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <input nbInput fullWidth  [(ngModel)]="direccion" >
+            </div>
+        </div>
+    
+    </div>     
 </ng-template>
 

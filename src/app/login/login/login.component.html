@@ -1,13 +1,13 @@
 
 <nb-layout center>
-      <nb-layout-column>
-        <img src="assets/images/cintillo.png" class="cintillo" >
+  <nb-layout-column>
+    <img src="assets/images/cintillo.png" class="cintillo" >
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12"></div>
-        
-                    
-                    <nb-card accent="success" [nbSpinner]="loading"
+            <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12">
+                   
+                <nb-card accent="success" [nbSpinner]="loading"
                          nbSpinnerStatus="danger"
                          nbSpinnerSize="large">
                         <nb-card-header >
@@ -53,15 +53,14 @@
                             (click)= "login()"
                             [class.btn-pulse]="submitted"
                             style="margin-top: -4%;">
-            
+                              Iniciar Sesión
                           </button>
-
                       </div> 
                     
                         </nb-card-body>
                    <a style="margin-top: -10%;" class="title"><small><br>© Copyright 2019 IAIM- Todos los Derechos Reservados </small></a>
                     </nb-card>
-                  
+            </div>  
       </div>
     </div>
   </nb-layout-column>
