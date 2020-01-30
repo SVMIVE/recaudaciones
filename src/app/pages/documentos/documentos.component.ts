@@ -27,6 +27,7 @@ interface FSEntry {
   Codigo?   : number
   Estatus?  : number
   Monto?    : number
+  Montous?  : number
   Iva?      : number
   Moneda    : string
 }
@@ -36,8 +37,9 @@ export interface PeriodicElement {
   Cuenta?    : string
   Concepto?  : string
   Cantidad?  : number
-  Monto     : number
-  Iva       : number
+  Monto      : number
+  Montous    : number
+  Iva        : number
 }
 
 var ELEMENT_DATA: PeriodicElement[] = [];
@@ -69,6 +71,8 @@ export class DocumentosComponent implements OnInit {
   cantidad = ""
   monto = 0.00
   total = 0.00
+  montous = 0.00
+  totalus= 0.00
   index = 0
   codigo = ""
   cliente = ""
@@ -185,6 +189,7 @@ export class DocumentosComponent implements OnInit {
                 Codigo: d.cd_cliente, 
                 Estatus: d.st_documento, 
                 Monto: d.mn_documento_bf,
+                Montous: d.mn_documento_us,
                 Iva : d.mn_iva_bf,
                 Moneda: d.moneda,
                 //Opciones: opciones
@@ -235,6 +240,7 @@ export class DocumentosComponent implements OnInit {
     this.ivaf = 0
     this.cuenta = ""
     this.monto = 0
+    this.montous = 0
     this.total = 0
     return this.conceptos.consultar(id).subscribe(
       (resp) => { 
@@ -270,9 +276,38 @@ export class DocumentosComponent implements OnInit {
     
   }
 
-  calcularCantidad(e){
+ calcularCantidad(e){
     var monto = parseInt(this.cantidad) * this.monto
-    this.total =  parseFloat(  monto.toFixed(2) ) * this.Petro
+    var total =  parseFloat(  monto.toFixed(2) ) * this.Petro
+    this.total = parseFloat(total.toFixed(2) )
+  }
+
+  consultarCantidadUS(id){
+    
+    this.concepto.forEach(e => {
+      if(this.conceptox == e.cd_concepto){        
+        console.log(e);
+        var montous = parseFloat(e.mn_monto_us) * parseInt(this.cantidad)
+        this.ivaf = e.pc_iva
+        if ( e.in_iva == "0"){
+          this.excento += this.montous
+        }else{
+          this.baseImponible += this.montous
+        }
+        this.montous = parseFloat(  montous.toFixed(2) )
+        this.cuenta = e.cd_cuenta
+
+        this.calcularCantidadUS(id)
+      }
+    });
+    
+    
+  }
+
+  calcularCantidadUS(e){
+    var montous = parseInt(this.cantidad) * this.montous
+    var totalus =  parseFloat(  montous.toFixed(2) ) * this.DicomUS
+    this.totalus = parseFloat(totalus.toFixed(2) )
   }
 
 
@@ -283,7 +318,13 @@ export class DocumentosComponent implements OnInit {
         console.log(resp )
         this.cliente = resp[0].razon_social
         this.rif = resp[0].cedula_rif 
-        this.direccion = resp[0].dir_estado              
+        this.direccion = resp[0].dir_estado  
+
+        this.fe_documento = resp[0].fe_documento
+        this.tp_documento = resp[0].tp_documento 
+        this.mn_documento_us = resp[0].mn_documento_us  
+
+                   
        },
       (err) => {
           console.log(err)
@@ -339,6 +380,7 @@ export class DocumentosComponent implements OnInit {
       Concepto: concepto, 
       Monto: this.total,
       Iva:this.ivaf
+     
     } )
 
     this.montoTotal += this.total
@@ -352,6 +394,9 @@ export class DocumentosComponent implements OnInit {
         "ds_concepto": concepto,
         "nu_cantidad": parseInt(this.cantidad),
         "mn_monto_bf": this.total,
+        "mn_monto_us": this.totalus,
+        
+        
         "exentos":0.00,
         "pc_iva": this.iva,
         "moneda": 'B',
@@ -367,6 +412,8 @@ export class DocumentosComponent implements OnInit {
     this.cuenta = ""
     this.monto = 0
     this.total = 0
+    this.montous = 0
+    this.totalus = 0
     this.ngFactura = true
 
     this.previsualizarFactura()
@@ -390,7 +437,7 @@ export class DocumentosComponent implements OnInit {
     var obj = {
       "call_back": "AutoIncrementoC",
       "nu_documento": "",
-      "fe_documento": fe + " " + d.toLocaleTimeString(),
+      "fe_documento": fe + " " + d.toLocaleTimeString('en-US', { hour12: false }),
       "tp_documento":"FAC",
       "cd_servicio": this.conceptox,
       "oficina": "2",
@@ -406,7 +453,7 @@ export class DocumentosComponent implements OnInit {
       "cod_terminal": "SEDE",
       "onetomany": LSTDetalles,
     }
-    //console.log( JSON.stringify  (obj) )
+    console.log( JSON.stringify  (obj) )
 
     this.docu.agregar(obj).subscribe(
       (resp) => {         
@@ -419,16 +466,13 @@ export class DocumentosComponent implements OnInit {
         this.showToast('top-right', 'success')
       },
       (err) => {
+       
         console.error("Error: ", err)
         this.showToast('top-right', 'warning')
       }
     ) 
     //ELEMENT_DATA = []
     //LSTDetalles = []
-
-
-
-
   }
   previsualizarFactura(){
     var html = ``;
@@ -437,8 +481,8 @@ export class DocumentosComponent implements OnInit {
       html += `<tr>
       <td class="codigo">${e.Cuenta}</td>
       <td class="descripcion">${e.Concepto}</td>
-      <td class="num">0.00</td>
-      <td class="num">0.00</td>
+      <td class="num">${e.Iva}</td>
+      <td class="num">${e.Iva}</td>
       <td class="num">${e.Iva}</td>
       <td class="num">${e.Monto}</td>
     </tr>`

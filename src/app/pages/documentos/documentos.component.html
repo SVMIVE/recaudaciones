@@ -3,7 +3,7 @@
   <div class="col-md-12 col-xxxl-12 col-xl-12">
 
     <nb-card>
-        <nb-card-body>  
+        <nb-card-body >  
 
         <nb-tabset fullWidth>
             <nb-tab tabTitle="Documentos">
@@ -197,7 +197,27 @@
                                                     <input  type="number" placeholder="% IVA" nbInput fullWidth  [(ngModel)]="iva">
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+                                            
+
+                                        </div><!-- fin de la fila -->
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input   type="number" placeholder="Monto us" nbInput fullWidth  [(ngModel)]="montous" (blur)="calcularCantidadUS($event)">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="number"  placeholder="Total US" nbInput fullWidth  [(ngModel)]="totalus" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" style="display:none">
+                                                <div class="form-group">
+                                                    <input  type="number" placeholder="% IVA" nbInput fullWidth  [(ngModel)]="iva">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <button nbButton 
                                                     (click)="agregarData()" 
@@ -214,7 +234,7 @@
 
                                                 
 
-                                                <table mat-table [dataSource]="dataSourcesx" class="mat-elevation-z8" width="100%">
+                                                <table mat-table [dataSource]="dataSourcesx" class="mat-elevation-z8" width="100%" height="100%">
                                                     
 
 
@@ -423,19 +443,19 @@
                         <tr>
                                 <td rowspan="10" colspan="2" class="top_left">
                                     <Label>OBSEVACIONES:</Label>
-                                    <p id="fobservaciones"> </p>
+                                    <p id="fobservaciones">ccccc </p>
                                 </td>
                                 <td class="num">
                                     <Label>SUB-TOTAL $:</Label>
                                 </td>
                                 <td class="num">
-                                    <b id="fsubtotaldivisas">11.286,74</b>
+                                    <b id="fsubtotaldivisas">{{rif}}</b>
                                 </td>
                                 <td class="num">
                                     <Label>SUB-TOTAL:</Label>
                                 </td>
                                 <td class="num">
-                                    <b id="fsubtotalbolivares">711.403,22</b>
+                                    <b id="fsubtotalbolivares"> {{rif}}</b>
                                 </td>
                             </tr>
                             <tr>
@@ -544,7 +564,7 @@
 
         <div class="margin_bottom_5">
             <Label>
-                TASA DE CAMBIO DE FECHA <b id="ffechatasa">17/10/2018</b> POR <b id="ftasavalor">63,03</b>  SEGUN <b id="ftipotasa">DICOM</b>
+                TASA DE CAMBIO DE FECHA <b id="ffechatasa">17/10/2018</b> POR <b id="ftasavalor">{{DicomUS}}</b>  SEGUN <b id="ftipotasa">DICOM</b>
             </Label>
         </div>
 
