@@ -386,13 +386,13 @@
                 <tbody>
                     <tr>
                         <td class="header_field_1">FACTURA</td>
-                        <td class="header_field_2"><b id="fnumero"></b>{{fnumero}} </td>
-                        <td class="header_field_2" ><b id="ffecha"></b> {{ffecha}}</td>
-                        <td class="header_field_3" ><b id="fcontrol"></b>{{fcontrol}}  </td>
+                        <td class="header_field_2"><b id="fnumero"></b>E00066305 </td>
+                        <td class="header_field_2" ><b id="ffecha"></b> 14/04/2020</td>
+                        <td class="header_field_3" ><b id="fcontrol"></b>00-00583658 </td>
                     </tr>
                     <tr>
                         <td id="serie" colspan="4" >
-                            <label >SERIE:</label> <p class="pinline" id="fserie">{{fserie}}</p>
+                          <b> <label class="normal">SERIE:</label> <p class="pinline" id="fserie">A</p></b>  
                         </td>
                     </tr>
                 </tbody>
@@ -402,22 +402,23 @@
             <div id="details" class="clearfix">
                 <div id="client">
                     <div class="client">
-                        <label class="label_left">CÒDIGO:</label> <p >{{codigo}}</p>
+                        <label class="label_left">CÒDIGO:</label> <p id="fcodigocliente">10352</p>
                     </div>
                     <div class="client">
-                        <label class="label_left" >CLIENTE:</label><p> {{cliente}}</p>
+                        <label class="label_left" >CLIENTE:</label><p id="fcliente"> CONSORCIO VENEZOLANO DE INDUSTRIAS AERONAUTICAS 
+                        Y SERVICIOS AERES, S.A. (CONVIASA) CONCESION</p>
                     </div>
                     <div class="client">
-                        <label class="label_left">RIF:</label> <p > {{rif}}</p>
+                        <label class="label_left">RIF:</label> <p id="frif"> G-20007774-3</p>
                     </div>
                     <div class="client">
-                        <label class="label_left">DIRECCIÒN:</label> <p > {{direccion}}</p>
+                        <label class="label_left">DIRECCIÒN:</label> <p id="fdireccion"> AV.INTERCOMUNAL AEROPUERTO INTERNACIONAL DE MAIQUETIA EDF. SECTOR 6.3</p>
                     </div>
                     <div class="right_content">
-                        <label class="label_left">CONDICIÒN DE PAGO:</label> <p >{{fcondicionpago}}</p> 
+                        <label class="label_left">CONDICIÒN DE PAGO:</label> <p id="fcondicionpago">DE CONTADO</p> 
                     </div>
                     <div class="right_content">
-                        <label class="label_left">TIPO SERVICIO:</label> <p >{{ftiposervicio}}</p> 
+                        <label class="label_left">TIPO SERVICIO:</label> <p id="ftiposervicio">DOSAS CONTADO </p> 
                     </div>
                     <div>
                     </div>
@@ -429,129 +430,155 @@
                     <tr>
                         <th class="codigo" style="text-align-last: left">COD.CUENTA</th>
                         <th class="descripcion" style="text-align-last: left">CONCEPTO</th>
-                        <th class="num" style="text-align-last: right">MONTO ($)</th>
-                        <th class="num" style="text-align-last: right">BS X $</th>
-                        <th class="num" style="text-align-last: right">IVA</th>
-                        <th class="num" style="text-align-last: right">MONTO (BS)</th>
+                        <th class="numero" style="text-align-last: right">MONTO ($)</th>
+                        <th class="numero" style="text-align-last: right">BS X $</th>
+                        <th class="numero" style="text-align-last: right">IVA</th>
+                        <th class="numero" style="text-align-last: right">MONTO (BS)</th>
                     </tr>
                 </thead>
-                <tbody id="ContenidoTbl">
-
-       
+                <tbody>
+                    <tr>
+                        <td class="codigo">3.03.02.01.05</td>
+                        <td class="descripcion">ATERRIZAJE INTERNACIONAL DE PASAJEROS</td>
+                        <td class="numero">2.334,66</td>
+                        <td class="numero">63,03</td>
+                        <td class="numero">16,00</td>
+                        <td class="numero">147.153,62</td>
+                    </tr>
                 </tbody>
-                <tfoot>
-                        <tr>
-                                <td rowspan="10" colspan="2" class="top_left">
-                                    <Label>OBSEVACIONES:</Label>
-                                    <p id="fobservaciones">ccccc </p>
-                                </td>
-                                <td class="num">
-                                    <Label>SUB-TOTAL $:</Label>
-                                </td>
-                                <td class="num">
-                                    <b id="fsubtotaldivisas">{{rif}}</b>
-                                </td>
-                                <td class="num">
-                                    <Label>SUB-TOTAL:</Label>
-                                </td>
-                                <td class="num">
-                                    <b id="fsubtotalbolivares"> {{rif}}</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="num" >
-                                    <Label>BASE IMPONIBLE:</Label>
-                                </td>
-                                <td class="num">
-                                    <p id="fbaseimponiblebolivares">696.687,61</p>
-                                </td>
-                                <td class="num">
-                                    <Label>IVA BS:</Label>
-                                    <p class="pinline" id="fivabolivares">16%</p></td>
-                                <td class="num">
-                                    <b id="fivabolivares">111.470,02</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="num">
-                                    <Label>EXENTO:</Label>
-                                </td>
-                                <td class="num">
-                                    <p id="fexentobolivares"> 0.00</p>
-                                </td>
-                                <td colspan="2" class="num"></td>
-                            </tr>
-                            <tr>
-                                <td class="num">
-                                    <Label>NS:</Label>
-                                </td>
-                                <td class="num">
-                                    <p id="fnsbolivares">14.715,61</p>
-                                </td>
-                                <td colspan="2" class="num"></td>
-                            </tr>
-                            <tr style="border-bottom: 3px solid black;">
-                                <td colspan="2"></td>
-                                <td class="num">
-                                    <Label>TOTAL (BS):</Label>
-                                </td>
-                                <td class="num">
-                                    <b id="ftotalbolivares">822.873,24</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"></td>
-                                <td class="num">
-                                    <Label>SUB-TOTAL $:</Label>
-                                </td>
-                                <td class="num">
-                                    <b id="fsubtotaldivisas">11.286,74</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="num">
-                                    <Label>BASE IMPONIBLE $:</Label>
-                                </td>
-                                <td class="num">
-                                    <p id="fbaseimponibledivisas"> 11.053,27</p>
-                                </td>
-                                <td class="num">
-                                    <Label >IVA $:</Label>
-                                    <p class="pinline" id="fivadivisas">
-                                    16%
-                                    </p>
-                                </td>
-                                <td class="num">
-                                    <b id="fivadivisas">1.768,52</b></td>
-                            </tr>
-                            <tr>
-                                <td class="num">
-                                    <Label>EXENTO:</Label>
-                                </td>
-                                <td class="num">
-                                    <p id="fexentodivisas"> 0,00</p>
-                                </td>
-                                <td colspan="2" class=""></td>
-                            </tr>
-                            <tr>
-                                <td class="num">
-                                    <Label>NS:</Label>
-                                </td>
-                                <td class="num">
-                                    <p id="fnsdivisas">233,47</p>
-                                </td>
-                                <td colspan="2" class=""></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"></td>
-                                <td class="num">
-                                    <Label>TOTAL ($):</Label>
-                                </td>
-                                <td class="num">
-                                    <b id="ftotaldivisas">13.055,26</b>
-                                </td>
-                            </tr>
-                </tfoot>
+            </table>
+            <table>
+                <tbody>
+                    <tr>
+                        <td rowspan="10" colspan="2" class="top_left">
+                            <Label class="label_left">OBSEVACIONES:</Label>
+                            <Label id="fobservaciones"> </Label>
+                        </td>
+                        <td class="cell1">
+                            <Label class="label_right">SUB-TOTAL $:</Label>
+                        </td>
+                        <td class="num">
+                            <b>
+                                <Label id="fsubtotaldivisas">11.286,74</Label>
+                            </b>
+                        </td>
+                        <td class="cell2">
+                            <Label class="label_right">SUB-TOTAL:</Label>
+                        </td>
+                        <td class="num">
+                           <b>
+                            <Label id="fsubtotalbolivares">711.403,22</Label>
+                           </b> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cell1" >
+                            <Label class="label_right">BASE IMPONIBLE:</Label>
+                        </td>
+                        <td class="num">
+                            <label id="fbaseimponiblebolivares">696.687,61</label>
+                        </td>
+                        <td class="cell2">
+                            <Label class="label_right">IVA BS:
+                                <Label class="pinline" id="fivabolivares">16%</Label>
+                            </Label>
+                            
+                        </td>
+                        <td class="num">
+                           <b>
+                            <Label id="fivabolivares">111.470,02</Label>
+                           </b> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cell1">
+                            <Label class="label_right">EXENTO:</Label>
+                        </td>
+                        <td class="num">
+                            <Label id="fexentobolivares"> 0.00</Label>
+                        </td>
+                        <td colspan="2" class="num"></td>
+                    </tr>
+                    <tr>
+                        <td class="cell1">
+                            <Label class="label_right">NS:</Label>
+                        </td>
+                        <td class="num">
+                            <Label id="fnsbolivares">14.715,61</Label>
+                        </td>
+                        <td colspan="2" class="num"></td>
+                    </tr>
+                    <tr style="border-bottom: 3px solid black;">
+                        <td colspan="2"></td>
+                        <td class="cell2">
+                            <Label class="label_right">TOTAL (BS):</Label>
+                        </td>
+                        <td class="num">
+                           <b>
+                            <Label id="ftotalbolivares">822.873,24</Label>
+                           </b> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td class="cell2">
+                            <Label class="label_right">SUB-TOTAL $:</Label>
+                        </td>
+                        <td class="num">
+                            <b>
+                                <Label id="fsubtotaldivisas">11.286,74</Label>
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cell1">
+                            <Label class="label_right">BASE IMPONIBLE $:</Label>
+                        </td>
+                        <td class="num">
+                            <Label id="fbaseimponibledivisas"> 11.053,27</Label>
+                        </td>
+                        <td class="cell2">
+                            <Label class="label_right">IVA $:
+                                <Label class="pinline" id="fivadivisas">16%</Label>
+                            </Label>
+                            
+                        </td>
+                        <td class="num">
+                            <b>
+                                <Label id="fivadivisas">1.768,52</Label>
+                            </b>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td class="cell1">
+                            <Label class="label_right">EXENTO:</Label>
+                        </td>
+                        <td class="num">
+                            <Label id="fexentodivisas"> 0,00</Label>
+                        </td>
+                        <td colspan="2" class=""></td>
+                    </tr>
+                    <tr>
+                        <td class="cell1">
+                            <Label class="label_right">NS:</Label>
+                        </td>
+                        <td class="num">
+                            <Label id="fnsdivisas">233,47</Label>
+                        </td>
+                        <td colspan="2" class=""></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td class="cell2">
+                            <Label class="label_right">TOTAL ($):</Label>
+                        </td>
+                        <td class="num">
+                           <b>
+                            <Label id="ftotaldivisas">13.055,26</Label>
+                           </b> 
+                        </td>
+                    </tr>
+                </tbody>
             </table>
 
         </main>
@@ -564,7 +591,7 @@
 
         <div class="margin_bottom_5">
             <Label>
-                TASA DE CAMBIO DE FECHA <b id="ffechatasa">17/10/2018</b> POR <b id="ftasavalor">{{DicomUS}}</b>  SEGUN <b id="ftipotasa">DICOM</b>
+                TASA DE CAMBIO DE FECHA <b id="ffechatasa">17/10/2018</b> POR <b id="ftasavalor">63,03</b>  SEGUN <b id="ftipotasa">DICOM</b>
             </Label>
         </div>
 
@@ -585,4 +612,4 @@
         </div>
     </footer>
 
-</div>   
+</div>  
