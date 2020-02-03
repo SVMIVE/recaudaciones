@@ -101,7 +101,15 @@ export class ClienteService {
   }
 
   lstPagos(id : string) : any{
-    return this.httpClient.post<any>(this.url +  "sybase/cliente/pagos", { "cliente": id })
+    var pagos = {
+       "cliente": id,
+       "serie" : "C",
+       "usuario": "PASTEL"
+    }
+    return this.httpClient.post<any>(this.url +  "sybase/cliente/pagos", pagos)
   }
 
+  consultarNombre(cadena: string) : any{
+    return this.httpClient.post<any>(this.url +  "sybase/cliente/consultar", { "crit" : cadena })
+  }
 }
