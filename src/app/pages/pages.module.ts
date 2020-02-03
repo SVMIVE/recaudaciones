@@ -13,7 +13,8 @@ import {
   NbToastrModule,
   NbStepperModule,
   NbTabsetModule,
-  NbSpinnerModule} from '@nebular/theme';
+  NbSpinnerModule,
+  NbSearchModule} from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -68,6 +69,7 @@ import { SalirComponent } from './salir/salir.component';
     NbTabsetModule,
     NbStepperModule,
     NbSpinnerModule,
+    NbSearchModule,
   ],
   declarations: [
     PagesComponent,

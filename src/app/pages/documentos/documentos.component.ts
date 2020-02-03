@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import {  NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource, NbToastrService } from '@nebular/theme';
+import {  NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, 
+  NbWindowService, NbTreeGridDataSource, NbToastrService, NbSearchService } from '@nebular/theme';
 
 import { FormControl, FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
@@ -8,6 +9,8 @@ import { ConceptoService } from '../../servicio/sysbase/concepto.service';
 import { ServicioService } from '../../servicio/sysbase/servicio.service';
 import { ClienteService } from '../../servicio/sysbase/cliente.service';
 import { TasaService } from '../../servicio/tasa/tasa.service';
+import { Subscription } from 'rxjs';
+import { WindowRef } from '@agm/core/utils/browser-globals';
 
 
 
@@ -40,9 +43,18 @@ export interface PeriodicElement {
   Monto      : number
   Montous    : number
   Iva        : number
+  Exento?    : number
+}
+
+export interface PeriodicCliente {
+  Codigo?    : string
+  Nombre?  : string
+  Rif?  : string
+
 }
 
 var ELEMENT_DATA: PeriodicElement[] = [];
+var ELEMENT_CLIENTE: PeriodicCliente[] = [];
 var LSTDetalles = []
 
 @Component({
@@ -53,9 +65,11 @@ var LSTDetalles = []
 export class DocumentosComponent implements OnInit {
 
   
-
   @ViewChild('escClose', { read: TemplateRef  , static: false }) escCloseTemplate: TemplateRef<HTMLElement>;
   @ViewChild('disabledEsc', { read: TemplateRef, static: false }) disabledEscTemplate: TemplateRef<HTMLElement>;
+  @ViewChild('frmMensaje', { read: TemplateRef  , static: false }) frmMensajeTemplate: TemplateRef<HTMLElement>;
+  @ViewChild('frmCliente', { read: TemplateRef  , static: false }) frmClienteTemplate: TemplateRef<HTMLElement>;
+  @ViewChild('frmProcesar', { read: TemplateRef  , static: false }) frmProcesarTemplate: TemplateRef<HTMLElement>;
 
   formControl = new FormControl(new Date());
   ngModelDate = new Date();
@@ -79,11 +93,12 @@ export class DocumentosComponent implements OnInit {
   iva = 0.00
   tipo = ""
   pos = 0
+  exentox = 0
   concepto = []
   conceptox = ""
   lstServicio = []
   baseImponible = 0.00
-  excento = 0.00
+  exento = 0.00
   cuenta = ''
   montoTotal = 0.00
   seniat = ''
@@ -94,16 +109,21 @@ export class DocumentosComponent implements OnInit {
   DicomEU = 0.00
   Petro = 0.00
   ngFactura = false
+  serviciox = ''
+  baseimponiblex = 0
 
 
   displayedColumnx: string[] = ['Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
+  displayedColumnCliente: string[] = ['Codigo', 'Nombre', 'Rif']
 
   dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
+  dataCliente = new MatTableDataSource<PeriodicCliente>(ELEMENT_CLIENTE)
 
 
   lblcodigo = "" //Codigo de facturar actual seleccionado
   lblresultado = ""
   flipped = false
+  lblNumeroDocumento = ''
   esVisible = false
 
   fnumero = "0000000"
@@ -116,11 +136,18 @@ export class DocumentosComponent implements OnInit {
   fdireccion = ""
   fcondicionpago = ""
   ftiposervicio = ""
+  montototalx = 0
+
+  subscription: Subscription;
 
   toggleView() {
     this.flipped = !this.flipped;
   }
+  windowRef: any
+  windowClient: any
+  windowProcesar: any
 
+  
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, 
     private docu : DocumentoService, 
     private windowService: NbWindowService,
@@ -128,15 +155,18 @@ export class DocumentosComponent implements OnInit {
     private toastrService: NbToastrService,
     private servicio : ServicioService,
     private servicioCliente : ClienteService ,
-    private tasaService : TasaService) {
+    private tasaService : TasaService,
+    private nbSearch : NbSearchService) {
     
       //this.cargarConcepto()
       ELEMENT_DATA = []
       LSTDetalles = []
 
-      this.dataSourcesx.data = ELEMENT_DATA
+      this.dataSourcesx.data = []
+      this.dataCliente.data = []
       this.cargarServicio()
       this.ngFactura = false
+      this.lblNumeroDocumento = ''
 
       //this.consultarConcepto("DO")
 
@@ -155,6 +185,33 @@ export class DocumentosComponent implements OnInit {
         console.log("Error del sistema")
       }
     )
+    //this.nbSearch.submitSearch("Valores", "control")
+    this.subscription = this.nbSearch.onSearchSubmit().subscribe(
+      (data: { term: string, tag: string }) => {
+        
+        ELEMENT_CLIENTE = []
+        this.dataCliente.data = []
+
+        return this.servicioCliente.consultarNombre(data.term).subscribe(
+          (resp) => {
+            console.log(resp)
+            this.windowClient = this.windowService.open(this.frmClienteTemplate, { title: 'Listado de cliente', hasBackdrop: true, closeOnEsc: true },)
+            resp.forEach(e => {
+              ELEMENT_CLIENTE.push({
+                Codigo: e.auxiliar_contable,
+                Nombre: e.razon_social,
+                Rif: e.cedula_rif
+              })
+              
+            });
+            this.dataCliente.data = ELEMENT_CLIENTE
+          }, (err) => {
+            console.error(err)
+          }
+          )
+        }
+    );
+    console.error("Iniciando")
   }
 
   
@@ -259,52 +316,76 @@ export class DocumentosComponent implements OnInit {
     this.concepto.forEach(e => {
       if(this.conceptox == e.cd_concepto){        
         console.log(e);
-        var monto = parseFloat(e.mn_monto_bf) * parseInt(this.cantidad)
+        var monto = parseFloat(e.mn_monto_bf) * parseInt(this.cantidad) 
         this.ivaf = e.pc_iva
-        if ( e.in_iva == "0"){
-          this.excento += this.monto
+
+        if ( e.in_iva == "0" ){
+          //this.exento += this.monto
+          this.exentox = monto
         }else{
-          this.baseImponible += this.monto
+          //this.baseImponible += this.monto
+          this.baseimponiblex = parseFloat(  monto.toFixed(2) ) * this.Petro
         }
-        this.monto = parseFloat(  monto.toFixed(2) )
+        var valor = monto * this.Petro
+
+        this.monto = parseFloat( monto.toFixed(2) )
+        this.total = parseFloat( valor.toFixed(2) )
+
         this.cuenta = e.cd_cuenta
 
-        this.calcularCantidad(id)
       }
+      
+      console.error('Base Imponible: ', this.baseimponiblex)
+
     });
     
+    //this.consultarCantidadUS()  
+      
+  }
+
+  /**
+   * 
+   * @param e 
+   */
+  asignarCliente( e ){
+    this.codigo = e.Codigo
+    this.consultarCliente(this.codigo)
+    this.windowClient.close()   
     
   }
 
- calcularCantidad(e){
-    var monto = parseInt(this.cantidad) * this.monto
-    var total =  parseFloat(  monto.toFixed(2) ) * this.Petro
-    this.total = parseFloat(total.toFixed(2) )
+
+
+  calcularCantidad() : number{
+    // var monto = parseInt(this.cantidad) * this.monto
+    var total =  parseFloat(   this.monto.toFixed(2) ) * this.Petro
+    //this.total = parseFloat(total.toFixed(2) )
+    return parseFloat(total.toFixed(2) )
   }
 
-  consultarCantidadUS(id){
+  consultarCantidadUS(){
     
     this.concepto.forEach(e => {
       if(this.conceptox == e.cd_concepto){        
-        console.log(e);
-        var montous = parseFloat(e.mn_monto_us) * parseInt(this.cantidad)
+        
+        var montous = parseFloat(e.mn_monto_s) * parseInt(this.cantidad)
         this.ivaf = e.pc_iva
         if ( e.in_iva == "0"){
-          this.excento += this.montous
+          this.exento += this.montous
         }else{
           this.baseImponible += this.montous
         }
         this.montous = parseFloat(  montous.toFixed(2) )
         this.cuenta = e.cd_cuenta
 
-        this.calcularCantidadUS(id)
+        
       }
     });
     
     
   }
 
-  calcularCantidadUS(e){
+  calcularCantidadUS(){
     var montous = parseInt(this.cantidad) * this.montous
     var totalus =  parseFloat(  montous.toFixed(2) ) * this.DicomUS
     this.totalus = parseFloat(totalus.toFixed(2) )
@@ -320,9 +401,9 @@ export class DocumentosComponent implements OnInit {
         this.rif = resp[0].cedula_rif 
         this.direccion = resp[0].dir_estado  
 
-        this.fe_documento = resp[0].fe_documento
-        this.tp_documento = resp[0].tp_documento 
-        this.mn_documento_us = resp[0].mn_documento_us  
+        // this.fe_documento = resp[0].fe_documento
+        // this.tp_documento = resp[0].tp_documento 
+        // this.mn_documento_us = resp[0].mn_documento_us  
 
                    
        },
@@ -341,6 +422,54 @@ export class DocumentosComponent implements OnInit {
     return minWithForMultipleColumns + (nextColumnStep * index);
   }
 
+  cancelarData(){
+    this.windowRef = this.windowService.open(
+      this.frmMensajeTemplate,
+      { title: 'Cancelar proceso', hasBackdrop: true, closeOnEsc: true },
+    );
+    
+  }
+
+  limpiarCampos(){
+    this.flipped = !this.flipped;
+    this.iva = 0
+    this.monto = 0
+    this.codigo = ""
+    this.cliente = ""
+    this.tipo = ""
+    this.cantidad = ""
+    this.cuenta = ""
+    this.monto = 0
+    this.total = 0
+    this.baseImponible = 0
+    this.index = 0
+    this.esVisible = true
+    this.conceptox = ""
+    this.cantidad = ""
+    this.ivaf = 0
+    this.cuenta = ""
+    this.monto = 0
+    this.total = 0
+    this.montous = 0
+    this.serviciox = ''
+    this.totalus = 0
+    this.ngFactura = false
+    ELEMENT_DATA = []
+    LSTDetalles = []
+
+    this.dataSourcesx.data = []
+    this.dataCliente.data = []
+  }
+
+  siCancelar(e){
+    this.limpiarCampos()
+    this.windowRef.close()
+    
+
+  }
+  noCancelar(e){
+    this.windowRef.close()
+  }
 
 
   openWindowDocumento() {
@@ -351,7 +480,6 @@ export class DocumentosComponent implements OnInit {
   }
 
   openWindowFacturar( e ) {
-    console.log(e.data);
     this.lblcodigo = e.data.Numero
     
     this.windowService.open(
@@ -379,8 +507,9 @@ export class DocumentosComponent implements OnInit {
       Cantidad: parseInt(this.cantidad), 
       Concepto: concepto, 
       Monto: this.total,
-      Iva:this.ivaf
-     
+      Iva:this.ivaf, 
+      Montous: 0,
+      Exento :0,
     } )
 
     this.montoTotal += this.total
@@ -394,23 +523,27 @@ export class DocumentosComponent implements OnInit {
         "ds_concepto": concepto,
         "nu_cantidad": parseInt(this.cantidad),
         "mn_monto_bf": this.total,
-        "mn_monto_us": this.totalus,
-        
-        
-        "exentos":0.00,
+        "mn_monto_s": this.totalus,       
+        "exentos": this.exentox,
         "pc_iva": this.iva,
         "moneda": 'B',
         "tp_cambio":"BS",
         "cd_cuenta": this.cuenta        
     } )
-    console.log(this.DicomUS)
-    console.log(this.DicomEU)
+
+    this.baseImponible += this.baseimponiblex
+    this.exento += this.exentox
+    this.montototalx = this.exento + this.baseImponible
+    // console.error('BI: ', this.baseImponible )
+    // console.error('Exe: ', this.exento )
 
     this.conceptox = ""
     this.cantidad = ""
     this.ivaf = 0
     this.cuenta = ""
     this.monto = 0
+    this.exentox = 0
+    this.baseimponiblex = 0
     this.total = 0
     this.montous = 0
     this.totalus = 0
@@ -422,6 +555,53 @@ export class DocumentosComponent implements OnInit {
 
 
   guardar(){
+
+    if(this.cliente == "")return false
+    var d = new Date()
+    var fe =  d.toISOString().substring(0,10)
+    var obj = {
+      "call_back": "AutoIncrementoC",
+      "tp_serie": "C",
+      "nu_documento": "",
+      "fe_documento": fe + " " + d.toLocaleTimeString('en-US', { hour12: false }),
+      "tp_documento":"FAC",
+      "cd_servicio": this.serviciox,
+      "oficina": "2",
+      "cd_cliente": this.codigo,
+      "st_documento":"O",
+      "cd_usuario": "NRECAUDA",
+      "pc_iva": 16.00,
+      "mn_documento_bf": this.exento + this.baseImponible,
+      "baseimponible": this.baseImponible,
+      "exentos": this.exento,
+      "tbl" : "dbo.admin_documentos",
+      "moneda": "B",
+      "cod_terminal": "SEDE",
+      "onetomany": LSTDetalles,
+    }
+    console.log( JSON.stringify  (obj) )
+    
+    this.docu.agregar(obj).subscribe(
+      (data) => {    
+        this.showToast('top-right', 'success')
+        console.info( data)  
+        this.lblNumeroDocumento = data.resp
+        this.windowProcesar = this.windowService.open(
+          this.frmProcesarTemplate,
+          { title: 'Documento Generado', hasBackdrop: true, closeOnEsc: true },
+          );
+          
+          this.limpiarCampos()    
+      },
+      (err) => {       
+        //console.error("Error: ", err) 
+        this.showToast('top-right', 'warning')
+      }
+    ) 
+
+
+    // ELEMENT_DATA = []
+    // LSTDetalles = []
     this.iva = 0
     this.monto = 0
     this.codigo = ""
@@ -432,47 +612,12 @@ export class DocumentosComponent implements OnInit {
     this.monto = 0
     this.total = 0
     this.esVisible = true
-    var d = new Date()
-    var fe =  d.toISOString().substring(0,10)
-    var obj = {
-      "call_back": "AutoIncrementoC",
-      "nu_documento": "",
-      "fe_documento": fe + " " + d.toLocaleTimeString('en-US', { hour12: false }),
-      "tp_documento":"FAC",
-      "cd_servicio": this.conceptox,
-      "oficina": "2",
-      "cd_cliente": this.codigo,
-      "st_documento":"O",
-      "cd_usuario": "NRECAUDA",
-      "pc_iva": 16.00,
-      "mn_documento_bf": this.excento + this.baseImponible,
-      "baseimponible": this.baseImponible,
-      "exentos": this.excento,
-      "tbl" : "dbo.admin_documentos",
-      "moneda": "B",
-      "cod_terminal": "SEDE",
-      "onetomany": LSTDetalles,
-    }
-    console.log( JSON.stringify  (obj) )
 
-    this.docu.agregar(obj).subscribe(
-      (resp) => {         
-        this.dataSource = this.dataSourceBuilder.create(this.data)
-        
-        console.info("Exito: ", resp)
-        
-        
-        
-        this.showToast('top-right', 'success')
-      },
-      (err) => {
-       
-        console.error("Error: ", err)
-        this.showToast('top-right', 'warning')
-      }
-    ) 
-    //ELEMENT_DATA = []
-    //LSTDetalles = []
+  }
+
+  aceptarDocumento(){
+    this.windowProcesar.close()
+
   }
   previsualizarFactura(){
     var html = ``;

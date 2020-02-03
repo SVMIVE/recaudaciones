@@ -8,6 +8,7 @@ import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowSe
 import { FormControl, FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
 import { ClienteService } from '../../servicio/sysbase/cliente.service';
+import { BancoService } from '../../servicio/sysbase/banco.service';
 
 interface TreeNode<T> {
   data: T;
@@ -26,10 +27,17 @@ interface FSEntry {
   Total?: number;
 }
 export interface PeriodicElement {
-  Reglon: number;
-  Control: string;
-  Seniat: string;
-  Banco: string;
+  Reglon ?: number
+  Control ?: string
+  Seniat ?: string
+  Servicio ?: string
+  Tipo ?: string
+  Moneda ?: string
+  Fecha ?: string
+  Monto ?: number
+
+
+
 }
 
 // const ELEMENT_DATA: PeriodicElement[] = [
@@ -58,10 +66,23 @@ export class PagosComponent implements OnInit {
   direccion = ''
 
   cantidad = '';
+  
+  forma = ''
+  banco = ''
+  fechadep = ''
+  montofact = 0.00
+  montofactd = 0.00
+
+
+  lstBancos = []
+
+  Maestro = {}
+  DetalleFact = []
+  DetalleDoc = []
 
 
 
-  displayedColumns: string[] = ['select', 'Reglon', 'Control', 'Seniat', 'Banco'];
+  displayedColumns: string[] = ['select', 'Reglon', 'Control', 'Seniat', 'Servicio', 'Tipo', 'Moneda', 'Fecha', 'Monto'];
   dataSources = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
@@ -69,9 +90,10 @@ export class PagosComponent implements OnInit {
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
     private docu: DocumentoService, 
     private windowService: NbWindowService,
-    private servicioCliente : ClienteService) {
-
-      this.dataSources.data = ELEMENT_DATA
+    private servicioCliente : ClienteService,
+    private bancoServicio: BancoService) {
+      ELEMENT_DATA = []
+      this.dataSources.data = []
     
   }
 
@@ -103,19 +125,80 @@ export class PagosComponent implements OnInit {
 
   ngOnInit() {
   // this.obtenerDatos()
-  }
 
-
-  openWindowWithBackdrop() {
-    this.windowService.open(
-      this.escCloseTemplate,
-      { title: 'Buscar Cliente', hasBackdrop: true },
+    this.bancoServicio.listar().subscribe(
+      (resp) => {
+        //console.log(resp)
+        this.lstBancos = resp
+        
+      },
+      (error) => {
+        console.error('No se logro conectar...');
+      },
     );
   }
 
+
+
   Procesar() {
-    this.dataSources.data.forEach(row => 'console.log(row)');
-    'console.log(this.selection)';
+    
+    
+    //console.log ( this.selection.selected )
+
+    var items = this.selection.selected 
+    var monto = 0
+    var montodol = 0
+
+    items.forEach(e => {
+
+      /**
+         * INSERT INTO dbo.admin_pagosdoc
+
+(nu_pago,nu_documento,nu_renglon,mn_pago_bf,mn_pago_dol,moneda)
+
+VALUES('299083','00322774',1,1443638.40,0.00,'B')
+         */
+        this.DetalleDoc.push(
+
+          )
+
+          
+      /**
+      INSERT INTO 
+
+      (,,,,,nu_docpago,mn_pago_bf,mn_pago_dol,moneda)
+      
+      VALUES('299083',1,'009','000',2020-01-02 00:00:00.0,'2020100007095',1443638.40,0.00,'B')      
+      
+      */
+     this.montofact = monto
+     this.montofactd = montodol
+     this.DetalleFact.push(
+        {                
+          "tbl" : "dbo.admin_detpagos",
+          "nu_pago":"",
+          "nu_renglon": e.Reglon,
+          "tp_pago": this.forma,
+          "id_banco": this.banco,
+          "fe_tppago": "2020-01-02 00:00:00.0",
+          "nu_docpago": "",
+          "mn_pago_bf": this.montofact,
+          "mn_pago_dol": this.montofactd,
+          "moneda": e.Moneda,
+        }
+        
+      )
+        
+      monto += e.Monto
+    });
+    
+    
+
+    this.windowService.open(
+      this.escCloseTemplate,
+      { title: "Forma de Pago", hasBackdrop: true} ,
+    )
+    
   }
 
 
@@ -136,17 +219,30 @@ export class PagosComponent implements OnInit {
   }
 
   lstPagos(){
+    ELEMENT_DATA = []
+    this.dataSources.data = []
     return this.servicioCliente.lstPagos(this.codigo).subscribe(
       (resp) => { 
         console.log(resp )
         var i = 0
         resp.data.forEach(e => {
+          var monto = e.moneda == "B"? e.mn_documento_bf:e.mn_documento_dol
+          // if(e.moneda == "B"){
+          //   monto = e.mn_documento_bf
+          // }else {
+          //   monto = e.mn_documento_dol
+          // }
+
           i++
           ELEMENT_DATA.push( {
             Reglon: i,
             Control: e.nu_documento,
             Seniat: e.nu_seniat,
-            Banco: "string"
+            Servicio: e.nb_servicio,
+            Tipo: e.tp_documento,
+            Moneda: e.moneda,
+            Fecha: e.fe_documento.substr(0,10),
+            Monto: monto  
           } )
         });
        
@@ -158,5 +254,36 @@ export class PagosComponent implements OnInit {
           console.log(err)
       }
     )
+  }
+
+  guardar(){
+
+    /**
+     *  INSERT INTO dbo.admin_pagos (nu_pago,fe_pago,cd_cliente,
+     * cd_usuario,st_pago,ds_observaciones,
+     * st_reversa,mn_pago_bf,oficina,mn_pago_dol,moneda,fe_pago_servidor,nu_sobrante,mn_sobrante)
+
+        VALUES('299401','2020-01-10 10:55:04.38','10773','AMARRERO',1,NULL,0,3620800.00,'2',0.00,'B','2020-01-10 10:55:04.38',NULL,0.00)
+     */
+    var Pago = {     
+      "call_back": "AutoIncrementoPagos", 
+      "tbl" : "dbo.admin_pagos",
+      "nu_pago": "",
+      "fe_pago": "",
+      "cd_cliente": this.codigo,
+      "cd_usuario": "TUPA",
+      "st_pago": "1",
+      "ds_observaciones": "",
+      "st_reversa": 0,
+      "mn_pago_bf": "",
+      "oficina": "",
+      "mn_pago_dol": "",
+      "moneda": "",
+      "fe_pago_servidor": "",
+      "nu_sobrante": "",
+      "mn_sobrante": "",
+      "onetomany": this.DetalleFact,
+      "manytomany": this.DetalleDoc,
+    }
   }
 }

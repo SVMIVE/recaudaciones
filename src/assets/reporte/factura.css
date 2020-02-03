@@ -32,7 +32,15 @@ display: inline;
    width: auto;
     margin-bottom: auto;
     float: left;
+    font-weight: bold;
 }
+
+.label_right{
+    width: auto;
+     margin-bottom: auto;
+     float: right;
+     font-weight: bold;
+ }
 
 #fcodigocliente{
 padding-left: 10%;
@@ -78,7 +86,7 @@ header {
 
 label {
     width: 50px;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 body {
@@ -124,7 +132,7 @@ footer {
 }
 
 #serie {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     text-align: center;
     padding-top: 0%;
@@ -139,7 +147,17 @@ footer {
 
 .num {
     text-align: right;
-    width: 50px;
+    width: 60px;
+}
+
+.cell1 {
+    text-align: right;
+    width: 130px;
+}
+
+.cell2 {
+    text-align: right;
+    width: 100px;
 }
 
 .codigo {
@@ -152,9 +170,14 @@ footer {
     width: 300px;
 }
 
+.numero {
+    text-align: right;
+    width: 50px;
+}
+
 .client {
     text-align: left;
-    padding-bottom: 3px;
+    padding-bottom: 0px;
 }
 
 table {
@@ -166,7 +189,7 @@ table {
 
 table td {
     border: 0px solid black;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
 }
 
 table th {

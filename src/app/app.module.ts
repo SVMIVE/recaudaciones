@@ -44,6 +44,7 @@ import { PasswordValidationDirective } from './validations/password-validation.d
      NotadebitoComponent,
      LoginComponent,
      PasswordValidationDirective,
+     
     ],
   imports: [
     NbSelectModule,
