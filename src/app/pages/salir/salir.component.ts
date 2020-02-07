@@ -14,7 +14,7 @@ loading = false;
 
   ngOnInit() {
   }
-add() {}
+add () {}
 salir () {
   this.loading = true;
   sessionStorage.removeItem('key-iaim');

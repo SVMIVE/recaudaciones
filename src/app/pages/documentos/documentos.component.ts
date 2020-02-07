@@ -645,6 +645,9 @@ export class DocumentosComponent implements OnInit {
       `Proceso finalizado`,
       { position, status });
   }
+  onSubmit(f) {
+    console.log(f.value);
+}
 
 
 }
