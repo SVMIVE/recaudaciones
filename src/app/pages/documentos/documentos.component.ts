@@ -650,6 +650,7 @@ export class DocumentosComponent implements OnInit {
 }
  vacio() {
 
+
  }
 
 
