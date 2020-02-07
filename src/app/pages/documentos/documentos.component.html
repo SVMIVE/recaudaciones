@@ -16,7 +16,7 @@
                                     <div class="row">                                
                                             <div class="col-md-5">
                                                 <div class="form-group">                            
-                                                    <nb-select placeholder="Tipo de Documento" [(selected)]="selectedItem" fullWidth  [(ngModel)]="codigo" >
+                                                    <nb-select [(selected)]="selectedItem" fullWidth  [(ngModel)]="codigo" >
                                                         <nb-option value="0">Factura</nb-option>
                                                         <nb-option value="1">Nota de Crédito</nb-option>
                                                         <nb-option value="2">Nota de Debito</nb-option>
@@ -116,7 +116,7 @@
                                             </div>
                                             <div class="col-md-1">
                                                     <div class="form-group">                                                        
-                                                        <nb-search type="rotate-layout" placeholder="Buscar Cliente" ></nb-search>
+                                                        <nb-search type="rotate-layout" placeholder="Buscar Cliente"></nb-search>
                                                     </div>
                                                 </div>
                                         </div>
@@ -141,7 +141,7 @@
                                                     
                                                     <nb-select placeholder="Tipo de Documento"  [(ngModel)]="tipo" 
                                                     [disabled] = "ngFactura" fullWidth>
-                                                        <nb-option value="0">Factura</nb-option>
+                                                        <nb-option selected="selected" value="0">Factura</nb-option>
                                                         <nb-option value="1">Nota de Crédito</nb-option>
                                                         <nb-option value="2">Nota de Debito</nb-option>
                                                     </nb-select>
