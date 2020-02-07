@@ -50,7 +50,6 @@ export interface PeriodicCliente {
   Codigo?    : string
   Nombre?  : string
   Rif?  : string
-
 }
 
 var ELEMENT_DATA: PeriodicElement[] = [];
@@ -111,7 +110,6 @@ export class DocumentosComponent implements OnInit {
   ngFactura = false
   serviciox = ''
   baseimponiblex = 0
-
 
   displayedColumnx: string[] = ['Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
   displayedColumnCliente: string[] = ['Codigo', 'Nombre', 'Rif']
@@ -646,6 +644,9 @@ export class DocumentosComponent implements OnInit {
       `Proceso finalizado`,
       { position, status });
   }
+  onSubmit(f) {
+    console.log(f.value);
+}
 
 
 }
