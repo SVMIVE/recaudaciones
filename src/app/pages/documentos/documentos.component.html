@@ -91,7 +91,6 @@
                     <nb-card>
                         <nb-card-header>Documentos</nb-card-header>
                             <nb-card-body>
-                        <form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
                             <div class="row">
                                 <div class="col-md-12">     
                                         <div class="row">
@@ -102,7 +101,7 @@
                                                         [(ngModel)]="codigo" 
                                                         (blur)="consultarCliente($event)"
                                                         [disabled] = "ngFactura"
-                                                    required>
+                                                    >
 
                                                 </div>
                                             </div>
@@ -110,7 +109,7 @@
                                                 <div class="form-group">
                                                     <input placeholder="Cliente" nbInput fullWidth  
                                                     [(ngModel)]="cliente"                                                     
-                                                    [disabled] = "ngFactura" disabled required>
+                                                    [disabled] = "ngFactura" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-1">
@@ -137,8 +136,9 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
+                                                    
                                                     <nb-select  placeholder="Tipo de Documento"  [(ngModel)]="tipo" 
-                                                    [disabled] = "ngFactura" fullWidth required>
+                                                    [disabled] = "ngFactura" fullWidth>
                                                         <nb-option value="0">Factura</nb-option>
                                                         <nb-option value="1">Nota de Crédito</nb-option>
                                                         <nb-option value="2">Nota de Debito</nb-option>
@@ -153,7 +153,7 @@
                                                     (selectedChange)="consultarConcepto($event)" 
                                                     [(ngModel)]="serviciox" 
                                                     [disabled] = "ngFactura"
-                                                    fullWidth required>
+                                                    fullWidth>
                                                         <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{ serv.cd_servicio + ' - ' + serv.nb_servicio}} </nb-option>
                                                     </nb-select>
                                                     
@@ -164,46 +164,46 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <nb-select placeholder="Concepto" [(ngModel)]="conceptox"  fullWidth required>
+                                                    <nb-select placeholder="Concepto" [(ngModel)]="conceptox"  fullWidth>
                                                         <nb-option  *ngFor = "let cpt of concepto"  value="{{cpt.cd_concepto}}"> {{cpt.cd_concepto  + ' - ' +  cpt.nb_concepto}} </nb-option>
                                                     </nb-select>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="number" placeholder="Cantidad" nbInput fullWidth   [(ngModel)]="cantidad" (blur)="consultarCantidad($event)" required>
+                                                    <input type="number" placeholder="Cantidad" nbInput fullWidth   [(ngModel)]="cantidad" (blur)="consultarCantidad($event)">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="number" placeholder="Iva" nbInput fullWidth   [(ngModel)]="ivaf" disabled required>
+                                                    <input type="number" placeholder="Iva" nbInput fullWidth   [(ngModel)]="ivaf" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input  type="text" placeholder="Cuenta" nbInput fullWidth  [(ngModel)]="cuenta" disabled required>
+                                                    <input  type="text" placeholder="Cuenta" nbInput fullWidth  [(ngModel)]="cuenta" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input   type="number" placeholder="Monto" nbInput fullWidth  [(ngModel)]="monto" (blur)="calcularCantidad($event)" required>
+                                                    <input   type="number" placeholder="Monto" nbInput fullWidth  [(ngModel)]="monto" (blur)="calcularCantidad($event)">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="number"  placeholder="Total" nbInput fullWidth  [(ngModel)]="total" disabled required>
+                                                    <input type="number"  placeholder="Total" nbInput fullWidth  [(ngModel)]="total" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-2" style="display:none">
                                                 <div class="form-group">
-                                                    <input  type="number" placeholder="% IVA" nbInput fullWidth  [(ngModel)]="iva" required>
+                                                    <input  type="number" placeholder="% IVA" nbInput fullWidth  [(ngModel)]="iva">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <button nbButton 
                                                     (click)="agregarData()" 
-                                                    shape="semi-round" size="medium" hero status="primary" type="submit" [disabled]="f.invalid">
+                                                    shape="semi-round" size="medium" hero status="primary" type="submit">
                                                         Agregar
                                                     </button>
                                                 </div>
@@ -347,7 +347,6 @@
                                     
                                 </div>
                             </div>
-                        </form>
                     </nb-card-body>
                     <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
                     </nb-card>
