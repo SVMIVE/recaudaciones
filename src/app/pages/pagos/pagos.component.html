@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card accent="success">
     <nb-card-header>Pagos</nb-card-header>
     <nb-card-body>
         <div class="row">
@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <input placeholder="Cliente" nbInput fullWidth  
                     [(ngModel)]="cliente"                                                     
-                    [disabled] = "ngFactura">
+                    [disabled] = "ngFactura" disabled>
                 </div>
             </div>
         
@@ -25,13 +25,13 @@
         <div class="row" >
             <div class="col-md-4">
                 <div class="form-group">
-                    <input nbInput fullWidth [(ngModel)]="rif" >
+                    <input nbInput fullWidth [(ngModel)]="rif" disabled>
                     
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="form-group">
-                    <input nbInput fullWidth  [(ngModel)]="direccion" >
+                    <input nbInput fullWidth  [(ngModel)]="direccion" disabled>
                 </div>
             </div>
         

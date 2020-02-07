@@ -110,6 +110,7 @@ export class DocumentosComponent implements OnInit {
   ngFactura = false
   serviciox = ''
   baseimponiblex = 0
+  selectedItem= '';
 
   displayedColumnx: string[] = ['Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
   displayedColumnCliente: string[] = ['Codigo', 'Nombre', 'Rif']
