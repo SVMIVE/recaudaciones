@@ -165,6 +165,7 @@ export class DocumentosComponent implements OnInit {
       this.cargarServicio()
       this.ngFactura = false
       this.lblNumeroDocumento = ''
+      this.tipo="0"
 
       //this.consultarConcepto("DO")
 
