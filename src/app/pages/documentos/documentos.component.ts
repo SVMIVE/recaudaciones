@@ -37,6 +37,7 @@ interface FSEntry {
 
 
 export interface PeriodicElement {
+  Codigo?    : string
   Cuenta?    : string
   Concepto?  : string
   Cantidad?  : number
@@ -111,8 +112,9 @@ export class DocumentosComponent implements OnInit {
   serviciox = ''
   baseimponiblex = 0
   selectedItem= '';
+  
 
-  displayedColumnx: string[] = ['button','Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
+  displayedColumnx: string[] = ['button','Codigo', 'Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
   displayedColumnCliente: string[] = ['Codigo', 'Nombre', 'Rif']
 
   dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
@@ -489,7 +491,20 @@ export class DocumentosComponent implements OnInit {
   }
 
 
-  agregarData(){    
+  agregarData(  position, status ){    
+    if ( this.validarConceptosAgregados() ) {
+      this.toastrService.show(
+        status || 'danger',
+        `El concepto ha sido agregado, si quiere agregar más cantidad elimine el anterior`,
+        {  position, status });
+        return false
+    }
+
+    if( this.cantidad <= 0 ) { 
+      this.cantidad = 0
+      return false
+    }
+    if(this.cliente == "")return false
     var concepto = ""
     var cuenta = ""
     this.concepto.forEach(e => {
@@ -499,6 +514,7 @@ export class DocumentosComponent implements OnInit {
     });
 
     ELEMENT_DATA.push( {
+      Codigo : this.conceptox,
       Cuenta : this.cuenta,
       Cantidad: this.cantidad, 
       Concepto: concepto, 
@@ -532,9 +548,6 @@ export class DocumentosComponent implements OnInit {
     this.montoivax +=  this.ivat
     this.montobaseimponiblex = this.baseImponible
     this.montototalx = this.exento + this.baseImponible + this.montoivax
-    // console.error('BI: ', this.baseImponible )
-    // console.error('Exe: ', this.exento )
-
     this.conceptox = ""
     this.cantidad = 0
     this.ivaf = 0
@@ -553,7 +566,7 @@ export class DocumentosComponent implements OnInit {
 
 
   guardar(){
-    if( this.cantidad < 0 ) { 
+    if( this.cantidad <= 0 ) { 
       this.cantidad = 0
       return false
     }
@@ -580,12 +593,9 @@ export class DocumentosComponent implements OnInit {
       "cod_terminal": "SEDE",
       "onetomany": LSTDetalles,
     }
-    //console.log( JSON.stringify  (obj) )
-    
     this.docu.agregar(obj).subscribe(
       (data) => {    
         this.showToast('top-right', 'success')
-        console.info( data)  
         this.lblNumeroDocumento = data.resp
         this.windowProcesar = this.windowService.open(
           this.frmProcesarTemplate,
@@ -594,15 +604,11 @@ export class DocumentosComponent implements OnInit {
           
           this.limpiarCampos()    
       },
-      (err) => {       
-        //console.error("Error: ", err) 
+      (err) => { 
         this.showToast('top-right', 'warning')
       }
     ) 
 
-
-    // ELEMENT_DATA = []
-    // LSTDetalles = []
     this.iva = 0
     this.monto = 0
     this.codigo = ""
@@ -616,10 +622,22 @@ export class DocumentosComponent implements OnInit {
 
   }
 
+
+  validarConceptosAgregados(): boolean{
+    var valor = false
+    ELEMENT_DATA.forEach(e => {
+      if(this.conceptox == e.Codigo) valor = true    
+    });
+    return valor
+  }
+
+
   aceptarDocumento(){
     this.windowProcesar.close()
 
   }
+  
+  
   previsualizarFactura(){
     var html = ``;
 
@@ -636,6 +654,7 @@ export class DocumentosComponent implements OnInit {
     });                   
     document.getElementById("ContenidoTbl").innerHTML = html;
   }
+  
   
   imprimirFactura () : any {
     
