@@ -98,7 +98,8 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input placeholder="Codigo" 
+                                                    <label>Código</label>
+                                                    <input placeholder="Código" 
                                                         nbInput fullWidth 
                                                         [(ngModel)]="codigo" 
                                                         (blur)="consultarCliente($event)"
@@ -109,6 +110,7 @@
                                             </div>
                                             <div class="col-md-7">
                                                 <div class="form-group">
+                                                    <label>Datos del Cliente</label>
                                                     <input placeholder="Cliente" nbInput fullWidth  
                                                     [(ngModel)]="cliente"                                                     
                                                     [disabled] = "ngFactura">
@@ -138,7 +140,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    
+                                                    <label>Tipo de Documento</label>
                                                     <nb-select placeholder="Tipo de Documento"  [(ngModel)]="tipo" 
                                                     [disabled] = "ngFactura" fullWidth>
                                                         <nb-option selected="selected" value="0">Factura</nb-option>
@@ -150,7 +152,7 @@
                                         
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    
+                                                    <label>Servicio</label>
                                                     <nb-select placeholder="Servicio"
                                                     (selectedChange)="consultarConcepto($event)" 
                                                     [(ngModel)]="serviciox" 
@@ -166,6 +168,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
+                                                        <label>Servicio</label>
                                                     <nb-select placeholder="Concepto" [(ngModel)]="conceptox"  fullWidth  >
                                                         <nb-option  *ngFor = "let cpt of concepto"  value="{{cpt.cd_concepto}}"> {{cpt.cd_concepto  + ' - ' +  cpt.nb_concepto}} </nb-option>
                                                     </nb-select>
@@ -173,27 +176,37 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="number" placeholder="Cantidad" nbInput fullWidth   [(ngModel)]="cantidad" (blur)="consultarCantidad($event)">
+                                                    <label>Cantidad</label>
+                                                    <input type="number" placeholder="Cantidad" 
+                                                    nbInput fullWidth   [(ngModel)]="cantidad" (blur)="consultarCantidad($event)">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="number" placeholder="Iva" nbInput fullWidth   [(ngModel)]="ivaf" disabled>
+                                                    <label>Iva</label>
+                                                    <input type="number" placeholder="Iva" 
+                                                    nbInput fullWidth   [(ngModel)]="ivaf" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input  type="text" placeholder="Cuenta" nbInput fullWidth  [(ngModel)]="cuenta" disabled >
+                                                    <label>Cuenta</label>
+                                                    <input  type="text" placeholder="Cuenta" 
+                                                    nbInput fullWidth  [(ngModel)]="cuenta" disabled >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input   type="number" placeholder="Monto" nbInput fullWidth  [(ngModel)]="monto" (blur)="calcularCantidad($event)">
+                                                    <label>Monto</label>
+                                                    <input   type="number" placeholder="Monto" 
+                                                    nbInput fullWidth  [(ngModel)]="monto" (blur)="calcularCantidad($event)">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="number"  placeholder="Total" nbInput fullWidth  [(ngModel)]="total" disabled>
+                                                    <label>Total</label>
+                                                    <input type="number"  placeholder="Total" 
+                                                    nbInput fullWidth  [(ngModel)]="total" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-2" style="display:none">
@@ -202,7 +215,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <div class="form-group">
+                                                <div class="form-group" >
+                                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                                     <button nbButton 
                                                     (click)="agregarData()" 
                                                     shape="semi-round" size="medium" hero status="primary">
@@ -212,8 +226,9 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
+                                                    <label>&nbsp;</label>
                                                     <button nbButton 
-                                                    (click)="cancelarData(  )" 
+                                                    (click)="cancelarData()" 
                                                     shape="semi-round" size="medium" hero status="danger">
                                                         Cancelar
                                                     </button>
@@ -223,13 +238,13 @@
 
                                         </div><!-- fin de la fila -->
 
-                                        <div class="row" style="display:none">
-                                            <div class="col-md-3">
+                                        <div class="row" >
+                                            <div class="col-md-3" style="display:none">
                                                 <div class="form-group">
                                                     <input   type="number"  nbInput fullWidth  [(ngModel)]="exentox" >
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" style="display:none">
                                                 <div class="form-group">
                                                     <input   type="number"  nbInput fullWidth  [(ngModel)]="baseimponiblex" >
                                                 </div>
@@ -244,9 +259,9 @@
                                                     <input type="number"  placeholder="Total US" nbInput fullWidth  [(ngModel)]="totalus" disabled>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3" style="display:none">
+                                            <div class="col-md-3" >
                                                 <div class="form-group">
-                                                    <input  type="number" placeholder="% IVA" nbInput fullWidth  [(ngModel)]="iva">
+                                                    <input  type="number" placeholder="% IVA" nbInput fullWidth  [(ngModel)]="ivat">
                                                 </div>
                                             </div>
                                             
@@ -301,15 +316,26 @@
                                         </div> <!-- Control de vida -->
                                         <br>
                                         <div  class="row">
-                                                <div class="col-md-3"></div>
-                                                <div class="col-md-5"></div>
+                                                <div class="col-md-6"></div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label style="font-size: 20pt; font-weight: bold">Monto total</label>
+                                                            <label >Base </label>
+                                                            <input  type="number" placeholder="Base" nbInput 
+                                                            [disabled] = "true"
+                                                            fullWidth  [(ngModel)]="montobaseimponiblex">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
+                                                            <label >Iva </label>
+                                                            <input  type="number" placeholder="Iva" nbInput 
+                                                            [disabled] = "true"
+                                                            fullWidth  [(ngModel)]="montoivax">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label >Total</label>
                                                         <input  type="number" placeholder="Total" nbInput 
                                                         [disabled] = "true"
                                                         fullWidth  [(ngModel)]="montototalx">
@@ -338,8 +364,8 @@
                                                 </button>
                                             </div>
                                             <div class="col-md-2">
-                                                    <button nbButton fullWidth  (click)="guardar()" 
-                                                        
+                                                    
+                                                    <button nbButton fullWidth  (click)="guardar()"                                                         
                                                         type="submit" 
                                                         class="home-button pull-right" status="success">
                                                         Guardar

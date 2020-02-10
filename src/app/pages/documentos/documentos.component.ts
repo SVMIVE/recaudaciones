@@ -81,7 +81,7 @@ export class DocumentosComponent implements OnInit {
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
-  cantidad = ""
+  cantidad = 0
   monto = 0.00
   total = 0.00
   montous = 0.00
@@ -135,6 +135,9 @@ export class DocumentosComponent implements OnInit {
   fcondicionpago = ""
   ftiposervicio = ""
   montototalx = 0
+  ivat = 0
+  montobaseimponiblex = 0
+  montoivax = 0
 
   subscription: Subscription;
 
@@ -165,7 +168,7 @@ export class DocumentosComponent implements OnInit {
       this.cargarServicio()
       this.ngFactura = false
       this.lblNumeroDocumento = ''
-
+      this.ivat = 0
       //this.consultarConcepto("DO")
 
   }
@@ -291,7 +294,7 @@ export class DocumentosComponent implements OnInit {
 
   consultarConcepto(id){
     this.conceptox = ""
-    this.cantidad = ""
+    this.cantidad = 0
     this.ivaf = 0
     this.cuenta = ""
     this.monto = 0
@@ -310,11 +313,17 @@ export class DocumentosComponent implements OnInit {
   }
 
   consultarCantidad(id){
-    
+
+    if ( this.cantidad < 0) {
+      
+      this.cantidad = 0
+      return false
+      
+    }  
     this.concepto.forEach(e => {
       if(this.conceptox == e.cd_concepto){        
         console.log(e);
-        var monto = parseFloat(e.mn_monto_bf) * parseInt(this.cantidad) 
+        var monto = parseFloat(e.mn_monto_bf) * this.cantidad
         this.ivaf = e.pc_iva
 
         if ( e.in_iva == "0" ){
@@ -328,7 +337,7 @@ export class DocumentosComponent implements OnInit {
 
         this.monto = parseFloat( monto.toFixed(2) )
         this.total = parseFloat( valor.toFixed(2) )
-
+        this.ivat = ( valor * this.ivaf ) / 100
         this.cuenta = e.cd_cuenta
 
       }
@@ -366,7 +375,7 @@ export class DocumentosComponent implements OnInit {
     this.concepto.forEach(e => {
       if(this.conceptox == e.cd_concepto){        
         
-        var montous = parseFloat(e.mn_monto_s) * parseInt(this.cantidad)
+        var montous = parseFloat(e.mn_monto_s) * this.cantidad
         this.ivaf = e.pc_iva
         if ( e.in_iva == "0"){
           this.exento += this.montous
@@ -384,7 +393,7 @@ export class DocumentosComponent implements OnInit {
   }
 
   calcularCantidadUS(){
-    var montous = parseInt(this.cantidad) * this.montous
+    var montous = this.cantidad * this.montous
     var totalus =  parseFloat(  montous.toFixed(2) ) * this.DicomUS
     this.totalus = parseFloat(totalus.toFixed(2) )
   }
@@ -435,7 +444,7 @@ export class DocumentosComponent implements OnInit {
     this.codigo = ""
     this.cliente = ""
     this.tipo = ""
-    this.cantidad = ""
+    this.cantidad = 0
     this.cuenta = ""
     this.monto = 0
     this.total = 0
@@ -443,7 +452,6 @@ export class DocumentosComponent implements OnInit {
     this.index = 0
     this.esVisible = true
     this.conceptox = ""
-    this.cantidad = ""
     this.ivaf = 0
     this.cuenta = ""
     this.monto = 0
@@ -502,7 +510,7 @@ export class DocumentosComponent implements OnInit {
 
     ELEMENT_DATA.push( {
       Cuenta : this.cuenta,
-      Cantidad: parseInt(this.cantidad), 
+      Cantidad: this.cantidad, 
       Concepto: concepto, 
       Monto: this.total,
       Iva:this.ivaf, 
@@ -519,7 +527,7 @@ export class DocumentosComponent implements OnInit {
         "nu_renglon": this.index,
         "cd_concepto": this.conceptox,
         "ds_concepto": concepto,
-        "nu_cantidad": parseInt(this.cantidad),
+        "nu_cantidad": this.cantidad,
         "mn_monto_bf": this.total,
         "mn_monto_s": this.totalus,       
         "exentos": this.exentox,
@@ -531,12 +539,14 @@ export class DocumentosComponent implements OnInit {
 
     this.baseImponible += this.baseimponiblex
     this.exento += this.exentox
-    this.montototalx = this.exento + this.baseImponible
+    this.montoivax +=  this.ivat
+    this.montobaseimponiblex = this.baseImponible
+    this.montototalx = this.exento + this.baseImponible + this.montoivax
     // console.error('BI: ', this.baseImponible )
     // console.error('Exe: ', this.exento )
 
     this.conceptox = ""
-    this.cantidad = ""
+    this.cantidad = 0
     this.ivaf = 0
     this.cuenta = ""
     this.monto = 0
@@ -553,7 +563,10 @@ export class DocumentosComponent implements OnInit {
 
 
   guardar(){
-
+    if( this.cantidad < 0 ) { 
+      this.cantidad = 0
+      return false
+    }
     if(this.cliente == "")return false
     var d = new Date()
     var fe =  d.toISOString().substring(0,10)
@@ -577,7 +590,7 @@ export class DocumentosComponent implements OnInit {
       "cod_terminal": "SEDE",
       "onetomany": LSTDetalles,
     }
-    console.log( JSON.stringify  (obj) )
+    //console.log( JSON.stringify  (obj) )
     
     this.docu.agregar(obj).subscribe(
       (data) => {    
@@ -605,7 +618,7 @@ export class DocumentosComponent implements OnInit {
     this.codigo = ""
     this.cliente = ""
     this.tipo = ""
-    this.cantidad = ""
+    this.cantidad = 0
     this.cuenta = ""
     this.monto = 0
     this.total = 0
