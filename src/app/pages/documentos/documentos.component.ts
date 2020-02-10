@@ -110,8 +110,9 @@ export class DocumentosComponent implements OnInit {
   ngFactura = false
   serviciox = ''
   baseimponiblex = 0
+  selectedItem= '';
 
-  displayedColumnx: string[] = ['Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
+  displayedColumnx: string[] = ['button','Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
   displayedColumnCliente: string[] = ['Codigo', 'Nombre', 'Rif']
 
   dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
@@ -169,6 +170,7 @@ export class DocumentosComponent implements OnInit {
       this.ngFactura = false
       this.lblNumeroDocumento = ''
       this.ivat = 0
+      this.tipo = "0"
       //this.consultarConcepto("DO")
 
   }
@@ -357,24 +359,19 @@ export class DocumentosComponent implements OnInit {
   asignarCliente( e ){
     this.codigo = e.Codigo
     this.consultarCliente(this.codigo)
-    this.windowClient.close()   
-    
+    this.windowClient.close()
   }
 
 
 
   calcularCantidad() : number{
-    // var monto = parseInt(this.cantidad) * this.monto
     var total =  parseFloat(   this.monto.toFixed(2) ) * this.Petro
-    //this.total = parseFloat(total.toFixed(2) )
-    return parseFloat(total.toFixed(2) )
+    return parseFloat( total.toFixed(2) )
   }
 
-  consultarCantidadUS(){
-    
+  consultarCantidadUS(){    
     this.concepto.forEach(e => {
-      if(this.conceptox == e.cd_concepto){        
-        
+      if(this.conceptox == e.cd_concepto){         
         var montous = parseFloat(e.mn_monto_s) * this.cantidad
         this.ivaf = e.pc_iva
         if ( e.in_iva == "0"){
@@ -406,13 +403,7 @@ export class DocumentosComponent implements OnInit {
         console.log(resp )
         this.cliente = resp[0].razon_social
         this.rif = resp[0].cedula_rif 
-        this.direccion = resp[0].dir_estado  
-
-        // this.fe_documento = resp[0].fe_documento
-        // this.tp_documento = resp[0].tp_documento 
-        // this.mn_documento_us = resp[0].mn_documento_us  
-
-                   
+        this.direccion = resp[0].dir_estado                     
        },
       (err) => {
           console.log(err)
@@ -470,9 +461,8 @@ export class DocumentosComponent implements OnInit {
   siCancelar(e){
     this.limpiarCampos()
     this.windowRef.close()
-    
-
   }
+
   noCancelar(e){
     this.windowRef.close()
   }
@@ -656,6 +646,19 @@ export class DocumentosComponent implements OnInit {
       status || 'Success',
       `Proceso finalizado`,
       { position, status });
+  }
+  onSubmit(f) {
+    console.log(f.value);
+  }
+  vacio() {
+
+
+  }
+
+  BtnEliminar(e, x, w){
+    console.info(e)
+    console.log(x)
+    console.error(w)
   }
 
 

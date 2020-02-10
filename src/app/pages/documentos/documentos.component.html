@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-md-12 col-xxxl-12 col-xl-12">
 
-    <nb-card>
+    <nb-card accent="success">
         <nb-card-body >  
 
         <nb-tabset fullWidth>
@@ -143,7 +143,7 @@
                                                     <label>Tipo de Documento</label>
                                                     <nb-select placeholder="Tipo de Documento"  [(ngModel)]="tipo" 
                                                     [disabled] = "ngFactura" fullWidth>
-                                                        <nb-option selected="selected" value="0">Factura</nb-option>
+                                                        <nb-option value="0">Factura</nb-option>
                                                         <nb-option value="1">Nota de Crédito</nb-option>
                                                         <nb-option value="2">Nota de Debito</nb-option>
                                                     </nb-select>
@@ -276,7 +276,19 @@
                                                 <table mat-table [dataSource]="dataSourcesx" class="mat-elevation-z8" width="100%" height="100%">
                                                     
 
-
+                                                    <!-- Checkbox Column -->
+                                                    <ng-container matColumnDef="button">
+                                                        <th mat-header-cell *matHeaderCellDef>#Acc
+                                                           
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let row">
+                                                            <button nbButton (click)="BtnEliminar( this.row, $event, this )"
+                                                                    size="tiny" ghost status="danger">
+                                                                <nb-icon icon="trash" ></nb-icon>
+                                                                
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
                                                       <!-- Position Cuenta -->
                                                     <ng-container matColumnDef="Cuenta">
                                                         <th mat-header-cell *matHeaderCellDef>Cuenta</th>
@@ -589,15 +601,8 @@
                         <th class="numero" style="text-align-last: right">MONTO (BS)</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="codigo">3.03.02.01.05</td>
-                        <td class="descripcion">ATERRIZAJE INTERNACIONAL DE PASAJEROS</td>
-                        <td class="numero">2.334,66</td>
-                        <td class="numero">63,03</td>
-                        <td class="numero">16,00</td>
-                        <td class="numero">147.153,62</td>
-                    </tr>
+                <tbody id="ContenidoTbl">
+                   
                 </tbody>
             </table>
             <table>

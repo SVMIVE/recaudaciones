@@ -9,6 +9,7 @@ import { FormControl, FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
 import { ClienteService } from '../../servicio/sysbase/cliente.service';
 import { BancoService } from '../../servicio/sysbase/banco.service';
+import { PagadoresComponent } from '../pagadores/pagadores.component';
 
 interface TreeNode<T> {
   data: T;
@@ -35,9 +36,6 @@ export interface PeriodicElement {
   Moneda ?: string
   Fecha ?: string
   Monto ?: number
-
-
-
 }
 
 // const ELEMENT_DATA: PeriodicElement[] = [
@@ -64,15 +62,15 @@ export class PagosComponent implements OnInit {
   cliente = ""
   rif = ''
   direccion = ''
-
+  selectedItem = ''
   cantidad = '';
-  
+  selectedItemx = ''
   forma = ''
   banco = ''
   fechadep = ''
   montofact = 0.00
   montofactd = 0.00
-
+  ngFactura = false;
 
   lstBancos = []
 
@@ -94,7 +92,7 @@ export class PagosComponent implements OnInit {
     private bancoServicio: BancoService) {
       ELEMENT_DATA = []
       this.dataSources.data = []
-    
+
   }
 
 
@@ -129,8 +127,8 @@ export class PagosComponent implements OnInit {
     this.bancoServicio.listar().subscribe(
       (resp) => {
         //console.log(resp)
-        this.lstBancos = resp
-        
+        this.lstBancos = resp;
+
       },
       (error) => {
         console.error('No se logro conectar...');
@@ -141,8 +139,7 @@ export class PagosComponent implements OnInit {
 
 
   Procesar() {
-    
-    
+
     //console.log ( this.selection.selected )
 
     var items = this.selection.selected 
@@ -285,5 +282,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       "onetomany": this.DetalleFact,
       "manytomany": this.DetalleDoc,
     }
+
   }
+  Pagar() {}
 }

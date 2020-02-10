@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card accent="success">
     <nb-card-header>Pagos</nb-card-header>
     <nb-card-body>
         <div class="row">
@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <input placeholder="Cliente" nbInput fullWidth  
                     [(ngModel)]="cliente"                                                     
-                    [disabled] = "ngFactura">
+                    [disabled] = "ngFactura" disabled>
                 </div>
             </div>
         
@@ -25,13 +25,13 @@
         <div class="row" >
             <div class="col-md-4">
                 <div class="form-group">
-                    <input nbInput fullWidth [(ngModel)]="rif" >
+                    <input nbInput fullWidth [(ngModel)]="rif" disabled>
                     
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="form-group">
-                    <input nbInput fullWidth  [(ngModel)]="direccion" >
+                    <input nbInput fullWidth  [(ngModel)]="direccion" disabled>
                 </div>
             </div>
         
@@ -61,18 +61,18 @@
             <!-- Checkbox Column -->
             <ng-container matColumnDef="select">
                 <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="$event ? masterToggle() : null"
-                                [checked]="selection.hasValue() && isAllSelected()"
-                                [indeterminate]="selection.hasValue() && !isAllSelected()"
-                                [aria-label]="checkboxLabel()">
-                </mat-checkbox>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                    [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
                 </th>
                 <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()"
-                                (change)="$event ? selection.toggle(row) : null"
-                                [checked]="selection.isSelected(row)"
-                                [aria-label]="checkboxLabel(row)">
-                </mat-checkbox>
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(row) : null"
+                                    [checked]="selection.isSelected(row)"
+                                    [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
                 </td>
             </ng-container>
 
