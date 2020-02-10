@@ -15,13 +15,13 @@
 
                             <div class="content" id="categorias_dosa">
                                 <div class="category">
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_dosa" icon="bulb-outline"></nb-icon>DOSAS</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_cliente" icon="bulb-outline"></nb-icon>CLIENTES</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_resumen_documento" icon="bulb-outline"></nb-icon>RESUMEN DE DOCUMENTOS</button>
+                                    <button nbButton status="primary" class="report_buttom" id="dos_dosa" (click)="get_report_list($event);"><nb-icon  icon="bulb-outline"></nb-icon>DOSAS</button>
+                                    <button nbButton status="primary" class="report_buttom" id="dos_cliente" (click)="get_report_list($event);"><nb-icon  icon="bulb-outline"></nb-icon>CLIENTES</button>
+                                    <button nbButton status="primary" class="report_buttom" id="dos_resumen_documento" (click)="get_report_list($event)"><nb-icon  icon="bulb-outline"></nb-icon>RESUMEN DE DOCUMENTOS</button>
                                     <div class="break"></div>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_estado_cuenta" icon="bulb-outline"></nb-icon>ESTADOS DE CUENTA ACTUAL</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_hasta" icon="bulb-outline"></nb-icon>HASTA</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="dos_historico" icon="bulb-outline"></nb-icon>HISTÓRICO</button>
+                                    <button nbButton status="primary" class="report_buttom" id="dos_estado_cuenta" (click)="get_report_list($event);"><nb-icon  icon="bulb-outline"></nb-icon>ESTADOS DE CUENTA ACTUAL</button>
+                                    <button nbButton status="primary" class="report_buttom" id="dos_hasta" (click)="get_report_list($event)"><nb-icon  icon="bulb-outline"></nb-icon>HASTA</button>
+                                    <button nbButton status="primary" class="report_buttom" id="dos_historico" (click)="get_report_list($event)"><nb-icon  icon="bulb-outline"></nb-icon>HISTÓRICO</button>
                                 </div>
                             </div>
 
@@ -37,41 +37,8 @@
                         <nb-card-body>
                             <div class="content">
                                 <div class="col-md-4">
-                                    <nb-select placeholder="Seleccion Reporte" fullWidth [(ngModel)]="reporte" (selectedChange)="test($event);">
-
-                                        <nb-option-group title="DOSAS">
-                                            <nb-option value="11"> RELACIÓN Y/O INGRESOS DIARIOS DOSAS </nb-option>
-                                            <nb-option value="12"> TOTAL GENERAL DOSAS </nb-option>
-                                            <nb-option value="13"> DOSAS ANULADAS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="CLIENTES">
-                                            <nb-option value="21"> CLIENTES FIJOS </nb-option>
-                                            <nb-option value="22"> CLIENTES GENÉRICOS </nb-option>
-                                            <nb-option value="23"> CLIENTES </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="RESUMEN DE DOCUMENTOS">
-                                            <nb-option value="31"> RESUMEN DE DOCUMENTOS POR CLIENTE FIJO </nb-option>
-                                            <nb-option value="32"> RESUMEN DE DOCUMENTOS POR CLIENTE CARGUEROS </nb-option>
-                                            <nb-option value="33"> RESUMEN GENERAL DOSA DE CONTADO CLASIFICADO POR CONCEPTO </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="ESTADOS DE CUENTA ACTUAL">
-                                            <nb-option value="41"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="42"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="HASTA">
-                                            <nb-option value="51"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="52"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="HISTÓRICO">
-                                            <nb-option value="61"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="62"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
+                                    <nb-select placeholder="Seleccion Reporte" fullWidth [(ngModel)]="reportex" (selectedChange)="getcampos($event);">
+                                        <nb-option *ngFor = "let REPORTES of REPORTES"  value="{{REPORTES.value}}"> {{ REPORTES.description}} </nb-option>
                                     </nb-select>
                                 </div>
 
@@ -82,10 +49,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
 
-                                        <nb-select placeholder="Cliente" id="select_cliente" fullWidth>
-                                            <nb-option value="0">0</nb-option>
-                                            <nb-option value="1">0</nb-option>
-                                            <nb-option value="2">0</nb-option>
+                                        <nb-select placeholder="Cliente" [(ngModel)]="clientex" id="select_cliente" fullWidth>
+                                            <nb-option *ngFor = "let client of lstCliente"  value="{{client.razon_social}}"> {{ client.razon_social}} </nb-option>
                                         </nb-select>
 
                                     </div>
@@ -97,10 +62,10 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
 
-                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" fullWidth>
-                                            <nb-option value="0">0</nb-option>
-                                            <nb-option value="1">0</nb-option>
-                                            <nb-option value="2">0</nb-option>
+                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" [(ngModel)]="tipodoc" fullWidth>
+                                            <nb-option value="0">Factura</nb-option>
+                                            <nb-option value="1">Nota de Crédito</nb-option>
+                                            <nb-option value="2">Nota de Debito</nb-option>
                                         </nb-select>
 
                                     </div>
@@ -155,11 +120,11 @@
                                 <div class="col-md-4">
                                     <div>
                                         <div class="form-group">
-                                            <label>Rango de Fechas:</label>
+                                            <label>Fechas:</label>
                                             <br>
-                                            <input nbInput placeholder="Desde" id="fecha_desde" [nbDatepicker]="desde">
+                                            <input nbInput placeholder="Desde" id="fecha_desde" *ngIf="loaddesde" [nbDatepicker]="desde">
                                             <nb-datepicker #desde></nb-datepicker>
-                                            <input nbInput placeholder="Hasta" id="fecha_hasta" [nbDatepicker]="hasta">
+                                            <input nbInput placeholder="Hasta" id="fecha_hasta" *ngIf="loadhasta" [nbDatepicker]="hasta">
                                             <nb-datepicker #hasta></nb-datepicker>
                                         </div>
                                     </div>
@@ -197,18 +162,18 @@
 
                             <div class="content" id="categorias_terminal_auxiliar">
                                 <div class="category">
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_cliente" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_facturas_anuladas" icon="bulb-outline"></nb-icon>	FACTURAS ANULADAS	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_relacion_ingresos_diarios" icon="bulb-outline"></nb-icon>RELACIÓN Y/O INGRESOS DIARIOS TERMINAL AUXILIAR 	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="tea_cliente" ><nb-icon  icon="bulb-outline"></nb-icon>	CLIENTES	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="tea_facturas_anuladas" ><nb-icon  icon="bulb-outline"></nb-icon>	FACTURAS ANULADAS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="tea_relacion_ingresos_diarios" ><nb-icon  icon="bulb-outline"></nb-icon>RELACIÓN Y/O INGRESOS DIARIOS TERMINAL AUXILIAR 	</button>
                                     <div class="break"></div>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_resumen_documentos" icon="bulb-outline"></nb-icon>	RESUMEN DE DOCUMENTOS	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_estado_cuenta" icon="bulb-outline"></nb-icon>	ESTADOS DE CUENTA ACTUAL	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="tea_totales_servicios" icon="bulb-outline"></nb-icon>	TOTALES DE SERVICIOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="tea_resumen_documentos" ><nb-icon  icon="bulb-outline"></nb-icon>	RESUMEN DE DOCUMENTOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="tea_estado_cuenta" ><nb-icon  icon="bulb-outline"></nb-icon>	ESTADOS DE CUENTA ACTUAL	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="tea_totales_servicios" ><nb-icon  icon="bulb-outline"></nb-icon>	TOTALES DE SERVICIOS	</button>
                                 </div>
                             </div>
 
                         </nb-card-body>
-                        <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon> -->
+                        <!-- <nb-icon icon="chevron-right-outline" pack="eva" class="flip-icon" (click)="toggleView()"></nb-icon>  ><nb-icon -->
 
                     </div>
                 </nb-card>
@@ -219,41 +184,8 @@
                         <nb-card-body>
                             <div class="content">
                                 <div class="col-md-4">
-                                    <nb-select placeholder="Seleccion Reporte" name="select_reporte" id="select_reporte" fullWidth (selectedChange)="test($event);">
-
-                                        <nb-option-group title="DOSAS">
-                                            <nb-option value="11"> RELACIÓN Y/O INGRESOS DIARIOS DOSAS </nb-option>
-                                            <nb-option value="12"> TOTAL GENERAL DOSAS </nb-option>
-                                            <nb-option value="13"> DOSAS ANULADAS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="CLIENTES">
-                                            <nb-option value="21"> CLIENTES FIJOS </nb-option>
-                                            <nb-option value="22"> CLIENTES GENÉRICOS </nb-option>
-                                            <nb-option value="23"> CLIENTES </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="RESUMEN DE DOCUMENTOS">
-                                            <nb-option value="31"> RESUMEN DE DOCUMENTOS POR CLIENTE FIJO </nb-option>
-                                            <nb-option value="32"> RESUMEN DE DOCUMENTOS POR CLIENTE CARGUEROS </nb-option>
-                                            <nb-option value="33"> RESUMEN GENERAL DOSA DE CONTADO CLASIFICADO POR CONCEPTO </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="ESTADOS DE CUENTA ACTUAL">
-                                            <nb-option value="41"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="42"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="HASTA">
-                                            <nb-option value="51"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="52"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="HISTÓRICO">
-                                            <nb-option value="61"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="62"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
+                                    <nb-select placeholder="Seleccion Reporte" fullWidth [(ngModel)]="reportex" (selectedChange)="getcampos($event);">
+                                        <nb-option *ngFor = "let REPORTES of REPORTES"  value="{{REPORTES.value}}"> {{ REPORTES.description}} </nb-option>
                                     </nb-select>
                                 </div>
 
@@ -264,10 +196,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
 
-                                        <nb-select placeholder="Cliente" id="select_cliente" fullWidth>
-                                            <nb-option value="0">0</nb-option>
-                                            <nb-option value="1">0</nb-option>
-                                            <nb-option value="2">0</nb-option>
+                                        <nb-select placeholder="Cliente" [(ngModel)]="clientex" id="select_cliente" fullWidth>
+                                            <nb-option *ngFor = "let client of lstCliente"  value="{{client.razon_social}}"> {{ client.razon_social}} </nb-option>
                                         </nb-select>
 
                                     </div>
@@ -279,10 +209,10 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
 
-                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" fullWidth>
-                                            <nb-option value="0">0</nb-option>
-                                            <nb-option value="1">0</nb-option>
-                                            <nb-option value="2">0</nb-option>
+                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" [(ngModel)]="tipodoc" fullWidth>
+                                            <nb-option value="0">Factura</nb-option>
+                                            <nb-option value="1">Nota de Crédito</nb-option>
+                                            <nb-option value="2">Nota de Debito</nb-option>
                                         </nb-select>
 
                                     </div>
@@ -294,10 +224,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
 
-                                        <nb-select placeholder="Servicios" id="select_servicio" fullWidth>
-                                            <nb-option value="0">0</nb-option>
-                                            <nb-option value="1">0</nb-option>
-                                            <nb-option value="2">0</nb-option>
+                                        <nb-select placeholder="Servicio"
+                                        (selectedChange)="consultarConcepto($event)" 
+                                        [(ngModel)]="servicio" 
+                                        fullWidth>
+                                            <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{ serv.cd_servicio + ' - ' + serv.nb_servicio}} </nb-option>
                                         </nb-select>
 
                                     </div>
@@ -336,11 +267,11 @@
                                 <div class="col-md-4">
                                     <div>
                                         <div class="form-group">
-                                            <label>Rango de Fechas:</label>
+                                            <label>Fechas:</label>
                                             <br>
-                                            <input nbInput placeholder="Desde" id="fecha_desde" [nbDatepicker]="desde">
+                                            <input nbInput placeholder="Desde" id="fecha_desde" *ngIf="loaddesde" [nbDatepicker]="desde">
                                             <nb-datepicker #desde></nb-datepicker>
-                                            <input nbInput placeholder="Hasta" id="fecha_hasta" [nbDatepicker]="hasta">
+                                            <input nbInput placeholder="Hasta" id="fecha_hasta" *ngIf="loadhasta" [nbDatepicker]="hasta">
                                             <nb-datepicker #hasta></nb-datepicker>
                                         </div>
                                     </div>
@@ -379,19 +310,19 @@
 
                             <div class="content" id="categorias_recaudacion">
                                 <div class="category">
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_documentos_abiertos" icon="bulb-outline"></nb-icon>	DOCUMENTOS ABIERTOS	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_libro_ventas" icon="bulb-outline"></nb-icon>	LIBRO DE VENTAS	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_retenciones" icon="bulb-outline"></nb-icon>	RETENCIONES	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_relacion_ingresos" icon="bulb-outline"></nb-icon>	RELACIÓN Y/O INGRESOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="rec_documentos_abiertos" ><nb-icon  icon="bulb-outline"></nb-icon>	DOCUMENTOS ABIERTOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="rec_libro_ventas" ><nb-icon  icon="bulb-outline"></nb-icon>	LIBRO DE VENTAS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="rec_retenciones" ><nb-icon  icon="bulb-outline"></nb-icon>	RETENCIONES	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="rec_relacion_ingresos" ><nb-icon  icon="bulb-outline"></nb-icon>	RELACIÓN Y/O INGRESOS	</button>
                                     <div class="break"></div>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_clientes" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_listados" icon="bulb-outline"></nb-icon>	LISTADOS	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_estado_cuenta" icon="bulb-outline"></nb-icon>	ESTADO DE CUENTA	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_resumen" icon="bulb-outline"></nb-icon>	RESUMEN	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="rec_clientes" ><nb-icon  icon="bulb-outline"></nb-icon>	CLIENTES	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="rec_listados" ><nb-icon  icon="bulb-outline"></nb-icon>	LISTADOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="rec_estado_cuenta" ><nb-icon  icon="bulb-outline"></nb-icon>	ESTADO DE CUENTA	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="rec_resumen" ><nb-icon  icon="bulb-outline"></nb-icon>	RESUMEN	</button>
                                     <div class="break"></div>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_relacion_dia" icon="bulb-outline"></nb-icon>	RELACIONES DEL DIA	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_recibos" icon="bulb-outline"></nb-icon>	RECIBOS	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="rec_nota_credito" icon="bulb-outline"></nb-icon>	NOTAS DE CRÉDITO	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="rec_relacion_dia" ><nb-icon  icon="bulb-outline"></nb-icon>	RELACIONES DEL DIA	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="rec_recibos" ><nb-icon  icon="bulb-outline"></nb-icon>	RECIBOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="rec_nota_credito" ><nb-icon  icon="bulb-outline"></nb-icon>	NOTAS DE CRÉDITO	</button>
                                 </div>
                             </div>
 
@@ -407,41 +338,8 @@
                         <nb-card-body>
                             <div class="content">
                                 <div class="col-md-4">
-                                    <nb-select placeholder="Seleccion Reporte" name="select_reporte" id="select_reporte" fullWidth (selectedChange)="test($event);">
-
-                                        <nb-option-group title="DOSAS">
-                                            <nb-option value="11"> RELACIÓN Y/O INGRESOS DIARIOS DOSAS </nb-option>
-                                            <nb-option value="12"> TOTAL GENERAL DOSAS </nb-option>
-                                            <nb-option value="13"> DOSAS ANULADAS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="CLIENTES">
-                                            <nb-option value="21"> CLIENTES FIJOS </nb-option>
-                                            <nb-option value="22"> CLIENTES GENÉRICOS </nb-option>
-                                            <nb-option value="23"> CLIENTES </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="RESUMEN DE DOCUMENTOS">
-                                            <nb-option value="31"> RESUMEN DE DOCUMENTOS POR CLIENTE FIJO </nb-option>
-                                            <nb-option value="32"> RESUMEN DE DOCUMENTOS POR CLIENTE CARGUEROS </nb-option>
-                                            <nb-option value="33"> RESUMEN GENERAL DOSA DE CONTADO CLASIFICADO POR CONCEPTO </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="ESTADOS DE CUENTA ACTUAL">
-                                            <nb-option value="41"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="42"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="HASTA">
-                                            <nb-option value="51"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="52"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="HISTÓRICO">
-                                            <nb-option value="61"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="62"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
+                                    <nb-select placeholder="Seleccion Reporte" fullWidth [(ngModel)]="reportex" (selectedChange)="getcampos($event);">
+                                        <nb-option *ngFor = "let REPORTES of REPORTES"  value="{{REPORTES.value}}"> {{ REPORTES.description}} </nb-option>
                                     </nb-select>
                                 </div>
 
@@ -452,10 +350,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
 
-                                        <nb-select placeholder="Cliente" id="select_cliente" fullWidth>
-                                            <nb-option value="0">0</nb-option>
-                                            <nb-option value="1">0</nb-option>
-                                            <nb-option value="2">0</nb-option>
+                                        <nb-select placeholder="Cliente" [(ngModel)]="clientex" id="select_cliente" fullWidth>
+                                            <nb-option *ngFor = "let client of lstCliente"  value="{{client.razon_social}}"> {{ client.razon_social}} </nb-option>
                                         </nb-select>
 
                                     </div>
@@ -467,10 +363,10 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
 
-                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" fullWidth>
-                                            <nb-option value="0">0</nb-option>
-                                            <nb-option value="1">0</nb-option>
-                                            <nb-option value="2">0</nb-option>
+                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" [(ngModel)]="tipodoc" fullWidth>
+                                            <nb-option value="0">Factura</nb-option>
+                                            <nb-option value="1">Nota de Crédito</nb-option>
+                                            <nb-option value="2">Nota de Debito</nb-option>
                                         </nb-select>
 
                                     </div>
@@ -482,10 +378,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
 
-                                        <nb-select placeholder="Servicios" id="select_servicio" fullWidth>
-                                            <nb-option value="0">0</nb-option>
-                                            <nb-option value="1">0</nb-option>
-                                            <nb-option value="2">0</nb-option>
+                                        <nb-select placeholder="Servicio"
+                                        (selectedChange)="consultarConcepto($event)" 
+                                        [(ngModel)]="servicio" 
+                                        fullWidth>
+                                            <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{ serv.cd_servicio + ' - ' + serv.nb_servicio}} </nb-option>
                                         </nb-select>
 
                                     </div>
@@ -524,11 +421,11 @@
                                 <div class="col-md-4">
                                     <div>
                                         <div class="form-group">
-                                            <label>Rango de Fechas:</label>
+                                            <label>Fechas:</label>
                                             <br>
-                                            <input nbInput placeholder="Desde" id="fecha_desde" [nbDatepicker]="desde">
+                                            <input nbInput placeholder="Desde" id="fecha_desde" *ngIf="loaddesde" [nbDatepicker]="desde">
                                             <nb-datepicker #desde></nb-datepicker>
-                                            <input nbInput placeholder="Hasta" id="fecha_hasta" [nbDatepicker]="hasta">
+                                            <input nbInput placeholder="Hasta" id="fecha_hasta" *ngIf="loadhasta" [nbDatepicker]="hasta">
                                             <nb-datepicker #hasta></nb-datepicker>
                                         </div>
                                     </div>
@@ -566,11 +463,11 @@
 
                             <div class="content" id="categorias_habilitaduria">
                                 <div class="category">
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="hab_cliente" icon="bulb-outline"></nb-icon>	CLIENTES	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="hab_facturas_anuladas" icon="bulb-outline"></nb-icon>	FACTURAS ANULADAS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="hab_cliente" ><nb-icon  icon="bulb-outline"></nb-icon>	CLIENTES	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="hab_facturas_anuladas" ><nb-icon  icon="bulb-outline"></nb-icon>	FACTURAS ANULADAS	</button>
                                     <div class="break"></div>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="hab_relacion_ingresos_diarios" icon="bulb-outline"></nb-icon>	RELACIÓN Y/O INGRESOS DIARIOS	</button>
-                                    <button nbButton status="primary" class="report_buttom" (click)="toggleView()"><nb-icon id="hab_resumen_documentos" icon="bulb-outline"></nb-icon>	RESUMEN DE DOCUMENTOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="hab_relacion_ingresos_diarios" ><nb-icon  icon="bulb-outline"></nb-icon>	RELACIÓN Y/O INGRESOS DIARIOS	</button>
+                                    <button nbButton status="primary" class="report_buttom" (click)="get_report_list($event)" id="hab_resumen_documentos" ><nb-icon  icon="bulb-outline"></nb-icon>	RESUMEN DE DOCUMENTOS	</button>
                                 </div>
                             </div>
 
@@ -586,41 +483,8 @@
                         <nb-card-body>
                             <div class="content">
                                 <div class="col-md-4">
-                                    <nb-select placeholder="Seleccion Reporte" name="select_reporte" id="select_reporte" fullWidth (selectedChange)="test($event);">
-
-                                        <nb-option-group title="DOSAS">
-                                            <nb-option value="11"> RELACIÓN Y/O INGRESOS DIARIOS DOSAS </nb-option>
-                                            <nb-option value="12"> TOTAL GENERAL DOSAS </nb-option>
-                                            <nb-option value="13"> DOSAS ANULADAS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="CLIENTES">
-                                            <nb-option value="21"> CLIENTES FIJOS </nb-option>
-                                            <nb-option value="22"> CLIENTES GENÉRICOS </nb-option>
-                                            <nb-option value="23"> CLIENTES </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="RESUMEN DE DOCUMENTOS">
-                                            <nb-option value="31"> RESUMEN DE DOCUMENTOS POR CLIENTE FIJO </nb-option>
-                                            <nb-option value="32"> RESUMEN DE DOCUMENTOS POR CLIENTE CARGUEROS </nb-option>
-                                            <nb-option value="33"> RESUMEN GENERAL DOSA DE CONTADO CLASIFICADO POR CONCEPTO </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="ESTADOS DE CUENTA ACTUAL">
-                                            <nb-option value="41"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="42"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="HASTA">
-                                            <nb-option value="51"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="52"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
-                                        <nb-option-group title="HISTÓRICO">
-                                            <nb-option value="61"> CLIENTES CARGUEROS </nb-option>
-                                            <nb-option value="62"> CLIENTES FIJOS </nb-option>
-                                        </nb-option-group>
-
+                                    <nb-select placeholder="Seleccion Reporte" fullWidth [(ngModel)]="reportex" (selectedChange)="getcampos($event);">
+                                        <nb-option *ngFor = "let REPORTES of REPORTES"  value="{{REPORTES.value}}"> {{ REPORTES.description}} </nb-option>
                                     </nb-select>
                                 </div>
 
@@ -631,10 +495,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
 
-                                        <nb-select placeholder="Cliente" id="select_cliente" fullWidth>
-                                            <nb-option value="0">0</nb-option>
-                                            <nb-option value="1">0</nb-option>
-                                            <nb-option value="2">0</nb-option>
+                                        <nb-select placeholder="Cliente" [(ngModel)]="clientex" id="select_cliente" fullWidth>
+                                            <nb-option *ngFor = "let client of lstCliente"  value="{{client.razon_social}}"> {{ client.razon_social}} </nb-option>
                                         </nb-select>
 
                                     </div>
@@ -646,10 +508,10 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
 
-                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" fullWidth>
-                                            <nb-option value="0">0</nb-option>
-                                            <nb-option value="1">0</nb-option>
-                                            <nb-option value="2">0</nb-option>
+                                        <nb-select placeholder="Tipo de Documento" id="select_tdocumento" [(ngModel)]="tipodoc" fullWidth>
+                                            <nb-option value="0">Factura</nb-option>
+                                            <nb-option value="1">Nota de Crédito</nb-option>
+                                            <nb-option value="2">Nota de Debito</nb-option>
                                         </nb-select>
 
                                     </div>
@@ -661,10 +523,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
 
-                                        <nb-select placeholder="Servicios" id="select_servicio" fullWidth>
-                                            <nb-option value="0">0</nb-option>
-                                            <nb-option value="1">0</nb-option>
-                                            <nb-option value="2">0</nb-option>
+                                        <nb-select placeholder="Servicio"
+                                        (selectedChange)="consultarConcepto($event)" 
+                                        [(ngModel)]="servicio" 
+                                        fullWidth>
+                                            <nb-option *ngFor = "let serv of lstServicio"  value="{{serv.cd_servicio}}"> {{ serv.cd_servicio + ' - ' + serv.nb_servicio}} </nb-option>
                                         </nb-select>
 
                                     </div>
@@ -703,11 +566,11 @@
                                 <div class="col-md-4">
                                     <div>
                                         <div class="form-group">
-                                            <label>Rango de Fechas:</label>
+                                            <label>Fechas:</label>
                                             <br>
-                                            <input nbInput placeholder="Desde" id="fecha_desde" [nbDatepicker]="desde">
+                                            <input nbInput placeholder="Desde" id="fecha_desde" *ngIf="loaddesde" [nbDatepicker]="desde">
                                             <nb-datepicker #desde></nb-datepicker>
-                                            <input nbInput placeholder="Hasta" id="fecha_hasta" [nbDatepicker]="hasta">
+                                            <input nbInput placeholder="Hasta" id="fecha_hasta" *ngIf="loadhasta" [nbDatepicker]="hasta">
                                             <nb-datepicker #hasta></nb-datepicker>
                                         </div>
                                     </div>
