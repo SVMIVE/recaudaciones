@@ -42,9 +42,11 @@ export interface PeriodicElement {
   Concepto?  : string
   Cantidad?  : number
   Monto      : number
-  Montous    : number
+  Montous?   : number
   Iva        : number
-  Exento?    : number
+  MontoIva   : number
+  Exento     : number
+  Total      : number
 }
 
 export interface PeriodicCliente {
@@ -114,7 +116,7 @@ export class DocumentosComponent implements OnInit {
   selectedItem= '';
   
 
-  displayedColumnx: string[] = ['button','Codigo', 'Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
+  displayedColumnx: string[] = ['button','Codigo', 'Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva', 'Exento', 'MontoIva', 'Total']
   displayedColumnCliente: string[] = ['Codigo', 'Nombre', 'Rif']
 
   dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
@@ -174,6 +176,10 @@ export class DocumentosComponent implements OnInit {
       this.ivat = 0
       this.tipo = "0"
       //this.consultarConcepto("DO")
+
+      this.montoivax =  0
+      this.montobaseimponiblex = 0
+      this.montototalx = 0
 
   }
   ngOnInit(){    
@@ -327,7 +333,7 @@ export class DocumentosComponent implements OnInit {
     this.concepto.forEach(e => {
       if(this.conceptox == e.cd_concepto){        
         console.log(e);
-        var monto = parseFloat(e.mn_monto_bf) * this.cantidad
+        var monto = Math.round(e.mn_monto_bf) * this.cantidad
         this.ivaf = e.pc_iva
 
         if ( e.in_iva == "0" ){
@@ -335,13 +341,13 @@ export class DocumentosComponent implements OnInit {
           this.exentox = monto
         }else{
           //this.baseImponible += this.monto
-          this.baseimponiblex = parseFloat(  monto.toFixed(2) ) * this.Petro
+          this.baseimponiblex = Math.round(  monto * this.Petro)
         }
         var valor = monto * this.Petro
 
-        this.monto = parseFloat( monto.toFixed(2) )
-        this.total = parseFloat( valor.toFixed(2) )
-        this.ivat = ( valor * this.ivaf ) / 100
+        this.monto = Math.round( monto )
+        this.total = Math.round( valor )
+        this.ivat = Math.round(( valor * this.ivaf ) / 100)
         this.cuenta = e.cd_cuenta
 
       }
@@ -513,6 +519,13 @@ export class DocumentosComponent implements OnInit {
       }
     });
 
+
+    this.baseImponible += this.baseimponiblex
+    this.exento += this.exentox
+    this.montoivax +=  this.ivat
+    this.montobaseimponiblex = this.baseImponible
+    this.montototalx = this.exento + this.baseImponible + this.montoivax
+
     ELEMENT_DATA.push( {
       Codigo : this.conceptox,
       Cuenta : this.cuenta,
@@ -520,8 +533,9 @@ export class DocumentosComponent implements OnInit {
       Concepto: concepto, 
       Monto: this.total,
       Iva:this.ivaf, 
-      Montous: 0,
-      Exento :0,
+      MontoIva: this.ivat,
+      Exento : this.exentox,
+      Total:  0,
     } )
 
     this.montoTotal += this.total
@@ -543,11 +557,7 @@ export class DocumentosComponent implements OnInit {
         "cd_cuenta": this.cuenta        
     } )
 
-    this.baseImponible += this.baseimponiblex
-    this.exento += this.exentox
-    this.montoivax +=  this.ivat
-    this.montobaseimponiblex = this.baseImponible
-    this.montototalx = this.exento + this.baseImponible + this.montoivax
+    
     this.conceptox = ""
     this.cantidad = 0
     this.ivaf = 0
@@ -625,8 +635,9 @@ export class DocumentosComponent implements OnInit {
 
   validarConceptosAgregados(): boolean{
     var valor = false
+    
     ELEMENT_DATA.forEach(e => {
-      if(this.conceptox == e.Codigo) valor = true    
+      if(this.conceptox == e.Codigo) valor = true   
     });
     return valor
   }
@@ -674,10 +685,37 @@ export class DocumentosComponent implements OnInit {
 
   }
 
-  BtnEliminar(e, x, w){
-    console.info(e)
-    console.log(x)
-    console.error(w)
+  BtnEliminar(element){
+    var i = 0
+    var eliminar = 0
+    var monto = 0
+    var iva = 0 
+    var exento = 0
+
+    ELEMENT_DATA.forEach(e => {
+      if(e.Codigo == element.Codigo){ 
+        eliminar = i 
+      }
+      i++
+    });
+    
+    ELEMENT_DATA.splice(eliminar, 1) //Elimino
+
+    ELEMENT_DATA.forEach(x => {
+      monto += x.Monto
+      iva += x.MontoIva
+      exento += x.Exento
+    });
+
+    this.montobaseimponiblex = monto
+    this.montoivax =  iva
+    this.montototalx = exento + monto + iva
+
+    this.baseImponible = monto
+    this.exentox  = exento
+    this.ivat = iva
+
+    this.dataSourcesx.data = ELEMENT_DATA
   }
 
 
