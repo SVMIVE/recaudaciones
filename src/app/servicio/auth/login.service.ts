@@ -10,12 +10,9 @@ export interface Usuario  {
   clase: string;
 }
 
-
 @Injectable({
   providedIn: 'root',
 })
-
-
 
 export class LoginService {
   url = environment.url;
@@ -24,5 +21,18 @@ export class LoginService {
 
   Validar(usuario: Usuario): any {
    return this.httpdClient.post<any>(this.url + 'wusuario/login', usuario);
+  }
+
+  obtenerUsuario(){
+    if (localStorage.getItem('key.iaim') != undefined ){
+
+      var e = localStorage.getItem("key.iaim");
+      var s = e.split(".");
+      var json = JSON.parse(atob(s[1]));
+      var Usr = json.Usuario;
+      console.log(Usr)
+
+      return Usr
+    }
   }
 }

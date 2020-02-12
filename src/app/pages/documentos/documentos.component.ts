@@ -11,6 +11,7 @@ import { ClienteService } from '../../servicio/sysbase/cliente.service';
 import { TasaService } from '../../servicio/tasa/tasa.service';
 import { Subscription } from 'rxjs';
 import { WindowRef } from '@agm/core/utils/browser-globals';
+import { LoginService } from '../../servicio/auth/login.service';
 
 
 
@@ -93,7 +94,7 @@ export class DocumentosComponent implements OnInit {
   codigo = ""
   cliente = ""
   iva = 0.00
-  tipo = ""
+  tipo = "FAC"
   pos = 0
   exentox = 0
   concepto = []
@@ -114,7 +115,7 @@ export class DocumentosComponent implements OnInit {
   serviciox = ''
   baseimponiblex = 0
   selectedItem= '';
-  
+  pcIva = 0 //Iva global del servicio
 
   displayedColumnx: string[] = ['button','Codigo', 'Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva', 'Exento', 'MontoIva', 'Total']
   displayedColumnCliente: string[] = ['Codigo', 'Nombre', 'Rif']
@@ -162,6 +163,7 @@ export class DocumentosComponent implements OnInit {
     private servicio : ServicioService,
     private servicioCliente : ClienteService ,
     private tasaService : TasaService,
+    private usrService : LoginService,
     private nbSearch : NbSearchService) {
     
       //this.cargarConcepto()
@@ -174,12 +176,13 @@ export class DocumentosComponent implements OnInit {
       this.ngFactura = false
       this.lblNumeroDocumento = ''
       this.ivat = 0
-      this.tipo = "0"
+      this.tipo = "FAC"
       //this.consultarConcepto("DO")
 
       this.montoivax =  0
       this.montobaseimponiblex = 0
       this.montototalx = 0
+      //console.info()
 
   }
   ngOnInit(){    
@@ -332,7 +335,7 @@ export class DocumentosComponent implements OnInit {
     }  
     this.concepto.forEach(e => {
       if(this.conceptox == e.cd_concepto){        
-        console.log(e);
+        //console.log(e);
         var monto = Math.round(e.mn_monto_bf) * this.cantidad
         this.ivaf = e.pc_iva
 
@@ -442,7 +445,7 @@ export class DocumentosComponent implements OnInit {
     this.monto = 0
     this.codigo = ""
     this.cliente = ""
-    this.tipo = ""
+    this.tipo = "FAC"
     this.cantidad = 0
     this.cuenta = ""
     this.monto = 0
@@ -494,6 +497,8 @@ export class DocumentosComponent implements OnInit {
   facturar(e){
     this.seniat = "A000000568"
     this.lblresultado = "Control Seniat: "
+    
+
   }
 
 
@@ -532,12 +537,13 @@ export class DocumentosComponent implements OnInit {
       Cantidad: this.cantidad, 
       Concepto: concepto, 
       Monto: this.total,
-      Iva:this.ivaf, 
+      Iva: this.ivaf, 
       MontoIva: this.ivat,
       Exento : this.exentox,
       Total:  0,
     } )
 
+    if( this.ivaf > 0 ) this.pcIva = this.ivaf
     this.montoTotal += this.total
     this.dataSourcesx.data = ELEMENT_DATA
     this.index++
@@ -576,6 +582,7 @@ export class DocumentosComponent implements OnInit {
 
 
   guardar(){
+    var usr = this.usrService.obtenerUsuario()
     if( this.cantidad <= 0 ) { 
       this.cantidad = 0
       return false
@@ -584,17 +591,17 @@ export class DocumentosComponent implements OnInit {
     var d = new Date()
     var fe =  d.toISOString().substring(0,10)
     var obj = {
-      "call_back": "AutoIncrementoC",
-      "tp_serie": "C",
+      "call_back": "AutoIncremento" + usr.serie,
+      "tp_serie": usr.serie,
       "nu_documento": "",
       "fe_documento": fe + " " + d.toLocaleTimeString('en-US', { hour12: false }),
-      "tp_documento":"FAC",
+      "tp_documento": this.tipo,
       "cd_servicio": this.serviciox,
       "oficina": "2",
       "cd_cliente": this.codigo,
       "st_documento":"O",
-      "cd_usuario": "NRECAUDA",
-      "pc_iva": 16.00,
+      "cd_usuario": usr.usuario,
+      "pc_iva": this.pcIva,
       "mn_documento_bf": this.exento + this.baseImponible,
       "baseimponible": this.baseImponible,
       "exentos": this.exento,
@@ -623,7 +630,7 @@ export class DocumentosComponent implements OnInit {
     this.monto = 0
     this.codigo = ""
     this.cliente = ""
-    this.tipo = ""
+    this.tipo = "FAC"
     this.cantidad = 0
     this.cuenta = ""
     this.monto = 0

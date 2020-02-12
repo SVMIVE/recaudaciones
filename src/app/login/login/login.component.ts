@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
 
     await this.loginServicio.Validar(usr).subscribe(
       (resp) => {
-        sessionStorage.setItem('key-iaim', resp.token);
+        localStorage.setItem('key.iaim', resp.token);
         this.router.navigateByUrl('/home/tasa');
 
       },
