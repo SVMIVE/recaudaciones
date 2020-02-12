@@ -117,10 +117,11 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-1">
-                                                    <div class="form-group">                                                        
-                                                        <nb-search type="rotate-layout" placeholder="Buscar Cliente"></nb-search>
+                                                    <div class="form-group"> 
+                                                        <br>                                                    
+                                                        <nb-search type="rotate-layout"></nb-search>
                                                     </div>
-                                                </div>
+                                            </div>
                                         </div>
                                         <div class="row" style="display: none">
                                             <div class="col-md-4">
@@ -216,9 +217,9 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group" >
-                                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                    <br>
                                                     <button nbButton 
-                                                    (click)="agregarData('top-right', 'success')" 
+                                                    (click)="agregarData()" 
                                                     shape="semi-round" size="medium" hero status="primary">
                                                         Agregar
                                                     </button>
@@ -226,7 +227,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <label>&nbsp;</label>
+                                                   <br>
                                                     <button nbButton 
                                                     (click)="cancelarData()" 
                                                     shape="semi-round" size="medium" hero status="danger">
@@ -259,7 +260,7 @@
                                                     <input type="number"  placeholder="Total US" nbInput fullWidth  [(ngModel)]="totalus" disabled>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3" >
+                                            <div class="col-md-3" style="display: none">
                                                 <div class="form-group">
                                                     <input  type="number" placeholder="% IVA" nbInput fullWidth  [(ngModel)]="ivat">
                                                 </div>
