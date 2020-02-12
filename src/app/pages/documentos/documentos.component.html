@@ -117,11 +117,11 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-1">
-                                                    <div class="form-group"> 
-                                                        <br>                                                    
-                                                        <nb-search type="rotate-layout"></nb-search>
+                                                    <div class="form-group">      
+                                                        <br>                                                  
+                                                        <nb-search type="rotate-layout" placeholder="Buscar Cliente"></nb-search>
                                                     </div>
-                                            </div>
+                                                </div>
                                         </div>
                                         <div class="row" style="display: none">
                                             <div class="col-md-4">
@@ -144,9 +144,9 @@
                                                     <label>Tipo de Documento</label>
                                                     <nb-select placeholder="Tipo de Documento"  [(ngModel)]="tipo" 
                                                     [disabled] = "ngFactura" fullWidth>
-                                                        <nb-option value="FAC">Factura</nb-option>
-                                                        <nb-option value="NCR">Nota de Crédito</nb-option>
-                                                        <nb-option value="NDB">Nota de Debito</nb-option>
+                                                        <nb-option value="0">Factura</nb-option>
+                                                        <nb-option value="1">Nota de Crédito</nb-option>
+                                                        <nb-option value="2">Nota de Debito</nb-option>
                                                     </nb-select>
                                                 </div>
                                             </div>
@@ -219,7 +219,7 @@
                                                 <div class="form-group" >
                                                     <br>
                                                     <button nbButton 
-                                                    (click)="agregarData()" 
+                                                    (click)="agregarData('top-right', 'success')" 
                                                     shape="semi-round" size="medium" hero status="primary">
                                                         Agregar
                                                     </button>
@@ -227,7 +227,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                   <br>
+                                                    <br>
                                                     <button nbButton 
                                                     (click)="cancelarData()" 
                                                     shape="semi-round" size="medium" hero status="danger">
@@ -260,7 +260,7 @@
                                                     <input type="number"  placeholder="Total US" nbInput fullWidth  [(ngModel)]="totalus" disabled>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3" style="display: none">
+                                            <div class="col-md-3" style="display:none">
                                                 <div class="form-group">
                                                     <input  type="number" placeholder="% IVA" nbInput fullWidth  [(ngModel)]="ivat">
                                                 </div>
