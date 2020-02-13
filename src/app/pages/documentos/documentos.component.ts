@@ -210,7 +210,7 @@ export class DocumentosComponent implements OnInit {
           )
         }
     );
-    console.error("Iniciando")
+    //console.error("Iniciando")
   }
 
   
