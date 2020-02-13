@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-md-12 col-xxxl-12 col-xl-12">
 
-    <nb-card>
+    <nb-card accent="success">
         <nb-card-body >  
 
         <nb-tabset fullWidth>
@@ -98,7 +98,8 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input placeholder="Codigo" 
+                                                    <label>Código</label>
+                                                    <input placeholder="Código" 
                                                         nbInput fullWidth 
                                                         [(ngModel)]="codigo" 
                                                         (blur)="consultarCliente($event)"
@@ -109,13 +110,15 @@
                                             </div>
                                             <div class="col-md-7">
                                                 <div class="form-group">
+                                                    <label>Datos del Cliente</label>
                                                     <input placeholder="Cliente" nbInput fullWidth  
                                                     [(ngModel)]="cliente"                                                     
                                                     [disabled] = "ngFactura">
                                                 </div>
                                             </div>
                                             <div class="col-md-1">
-                                                    <div class="form-group">                                                        
+                                                    <div class="form-group">      
+                                                        <br>                                                  
                                                         <nb-search type="rotate-layout" placeholder="Buscar Cliente"></nb-search>
                                                     </div>
                                                 </div>
@@ -138,7 +141,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    
+                                                    <label>Tipo de Documento</label>
                                                     <nb-select placeholder="Tipo de Documento"  [(ngModel)]="tipo" 
                                                     [disabled] = "ngFactura" fullWidth>
                                                         <nb-option value="0">Factura</nb-option>
@@ -150,7 +153,7 @@
                                         
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    
+                                                    <label>Servicio</label>
                                                     <nb-select placeholder="Servicio"
                                                     (selectedChange)="consultarConcepto($event)" 
                                                     [(ngModel)]="serviciox" 
@@ -166,6 +169,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="form-group">
+                                                        <label>Servicio</label>
                                                     <nb-select placeholder="Concepto" [(ngModel)]="conceptox"  fullWidth  >
                                                         <nb-option  *ngFor = "let cpt of concepto"  value="{{cpt.cd_concepto}}"> {{cpt.cd_concepto  + ' - ' +  cpt.nb_concepto}} </nb-option>
                                                     </nb-select>
@@ -173,27 +177,37 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="number" placeholder="Cantidad" nbInput fullWidth   [(ngModel)]="cantidad" (blur)="consultarCantidad($event)">
+                                                    <label>Cantidad</label>
+                                                    <input type="number" placeholder="Cantidad" 
+                                                    nbInput fullWidth   [(ngModel)]="cantidad" (blur)="consultarCantidad($event)">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="number" placeholder="Iva" nbInput fullWidth   [(ngModel)]="ivaf" disabled>
+                                                    <label>Iva</label>
+                                                    <input type="number" placeholder="Iva" 
+                                                    nbInput fullWidth   [(ngModel)]="ivaf" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input  type="text" placeholder="Cuenta" nbInput fullWidth  [(ngModel)]="cuenta" disabled >
+                                                    <label>Cuenta</label>
+                                                    <input  type="text" placeholder="Cuenta" 
+                                                    nbInput fullWidth  [(ngModel)]="cuenta" disabled >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input   type="number" placeholder="Monto" nbInput fullWidth  [(ngModel)]="monto" (blur)="calcularCantidad($event)">
+                                                    <label>Monto</label>
+                                                    <input   type="number" placeholder="Monto" 
+                                                    nbInput fullWidth  [(ngModel)]="monto" (blur)="calcularCantidad($event)">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="number"  placeholder="Total" nbInput fullWidth  [(ngModel)]="total" disabled>
+                                                    <label>Total</label>
+                                                    <input type="number"  placeholder="Total" 
+                                                    nbInput fullWidth  [(ngModel)]="total" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-md-2" style="display:none">
@@ -202,9 +216,10 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <div class="form-group">
+                                                <div class="form-group" >
+                                                    <br>
                                                     <button nbButton 
-                                                    (click)="agregarData()" 
+                                                    (click)="agregarData('top-right','success')" 
                                                     shape="semi-round" size="medium" hero status="primary">
                                                         Agregar
                                                     </button>
@@ -212,8 +227,9 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
+                                                    <br>
                                                     <button nbButton 
-                                                    (click)="cancelarData(  )" 
+                                                    (click)="cancelarData()" 
                                                     shape="semi-round" size="medium" hero status="danger">
                                                         Cancelar
                                                     </button>
@@ -223,13 +239,13 @@
 
                                         </div><!-- fin de la fila -->
 
-                                        <div class="row" style="display:none">
-                                            <div class="col-md-3">
+                                        <div class="row" >
+                                            <div class="col-md-3" style="display:none">
                                                 <div class="form-group">
                                                     <input   type="number"  nbInput fullWidth  [(ngModel)]="exentox" >
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" style="display:none">
                                                 <div class="form-group">
                                                     <input   type="number"  nbInput fullWidth  [(ngModel)]="baseimponiblex" >
                                                 </div>
@@ -246,7 +262,7 @@
                                             </div>
                                             <div class="col-md-3" style="display:none">
                                                 <div class="form-group">
-                                                    <input  type="number" placeholder="% IVA" nbInput fullWidth  [(ngModel)]="iva">
+                                                    <input  type="number" placeholder="% IVA" nbInput fullWidth  [(ngModel)]="ivat">
                                                 </div>
                                             </div>
                                             
@@ -261,7 +277,24 @@
                                                 <table mat-table [dataSource]="dataSourcesx" class="mat-elevation-z8" width="100%" height="100%">
                                                     
 
-
+                                                    <!-- Checkbox Column -->
+                                                    <ng-container matColumnDef="button">
+                                                        <th mat-header-cell *matHeaderCellDef>#Acc
+                                                           
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let row">
+                                                            <button nbButton (click)="BtnEliminar( this.row )"
+                                                                    size="tiny" ghost status="danger">
+                                                                <nb-icon icon="trash" ></nb-icon>
+                                                                
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                      <!-- Position Codigo -->
+                                                    <ng-container matColumnDef="Codigo">
+                                                        <th mat-header-cell *matHeaderCellDef  style="display: none">Codigo</th>
+                                                        <td mat-cell *matCellDef="let element" style="display: none">{{element.Codigo}}</td>
+                                                    </ng-container>
                                                       <!-- Position Cuenta -->
                                                     <ng-container matColumnDef="Cuenta">
                                                         <th mat-header-cell *matHeaderCellDef>Cuenta</th>
@@ -292,6 +325,21 @@
                                                         <td mat-cell *matCellDef="let element"> {{element.Iva}} </td>
                                                     </ng-container>
 
+                                                    <ng-container matColumnDef="Exento">
+                                                        <th mat-header-cell *matHeaderCellDef  style="display: none"> Exento </th>
+                                                        <td mat-cell *matCellDef="let element"  style="display: none"> {{element.Exento}} </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="MontoIva">
+                                                        <th mat-header-cell *matHeaderCellDef  style="display: none"> MontoIva </th>
+                                                        <td mat-cell *matCellDef="let element"  style="display: none"> {{element.MontoIva}} </td>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="Total">
+                                                        <th mat-header-cell *matHeaderCellDef  style="display: none"> Total </th>
+                                                        <td mat-cell *matCellDef="let element"  style="display: none"> {{element.Total}} </td>
+                                                    </ng-container>
+
                                                     
 
                                                     <tr mat-header-row *matHeaderRowDef="displayedColumnx"></tr>
@@ -301,15 +349,26 @@
                                         </div> <!-- Control de vida -->
                                         <br>
                                         <div  class="row">
-                                                <div class="col-md-3"></div>
-                                                <div class="col-md-5"></div>
+                                                <div class="col-md-6"></div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label style="font-size: 20pt; font-weight: bold">Monto total</label>
+                                                            <label >Base </label>
+                                                            <input  type="number" placeholder="Base" nbInput 
+                                                            [disabled] = "true"
+                                                            fullWidth  [(ngModel)]="montobaseimponiblex">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
+                                                            <label >Iva </label>
+                                                            <input  type="number" placeholder="Iva" nbInput 
+                                                            [disabled] = "true"
+                                                            fullWidth  [(ngModel)]="montoivax">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label >Total</label>
                                                         <input  type="number" placeholder="Total" nbInput 
                                                         [disabled] = "true"
                                                         fullWidth  [(ngModel)]="montototalx">
@@ -338,8 +397,8 @@
                                                 </button>
                                             </div>
                                             <div class="col-md-2">
-                                                    <button nbButton fullWidth  (click)="guardar()" 
-                                                        
+                                                    
+                                                    <button nbButton fullWidth  (click)="guardar()"                                                         
                                                         type="submit" 
                                                         class="home-button pull-right" status="success">
                                                         Guardar
@@ -563,15 +622,8 @@
                         <th class="numero" style="text-align-last: right">MONTO (BS)</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="codigo">3.03.02.01.05</td>
-                        <td class="descripcion">ATERRIZAJE INTERNACIONAL DE PASAJEROS</td>
-                        <td class="numero">2.334,66</td>
-                        <td class="numero">63,03</td>
-                        <td class="numero">16,00</td>
-                        <td class="numero">147.153,62</td>
-                    </tr>
+                <tbody id="ContenidoTbl">
+                   
                 </tbody>
             </table>
             <table>

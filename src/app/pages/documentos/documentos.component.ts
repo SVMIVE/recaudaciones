@@ -11,6 +11,7 @@ import { ClienteService } from '../../servicio/sysbase/cliente.service';
 import { TasaService } from '../../servicio/tasa/tasa.service';
 import { Subscription } from 'rxjs';
 import { WindowRef } from '@agm/core/utils/browser-globals';
+import { LoginService } from '../../servicio/auth/login.service';
 
 
 
@@ -37,13 +38,16 @@ interface FSEntry {
 
 
 export interface PeriodicElement {
+  Codigo?    : string
   Cuenta?    : string
   Concepto?  : string
   Cantidad?  : number
   Monto      : number
-  Montous    : number
+  Montous?   : number
   Iva        : number
-  Exento?    : number
+  MontoIva   : number
+  Exento     : number
+  Total      : number
 }
 
 export interface PeriodicCliente {
@@ -81,7 +85,7 @@ export class DocumentosComponent implements OnInit {
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
-  cantidad = ""
+  cantidad = 0
   monto = 0.00
   total = 0.00
   montous = 0.00
@@ -90,7 +94,7 @@ export class DocumentosComponent implements OnInit {
   codigo = ""
   cliente = ""
   iva = 0.00
-  tipo = ""
+  tipo = "FAC"
   pos = 0
   exentox = 0
   concepto = []
@@ -110,8 +114,10 @@ export class DocumentosComponent implements OnInit {
   ngFactura = false
   serviciox = ''
   baseimponiblex = 0
+  selectedItem= '';
+  pcIva = 0 //Iva global del servicio
 
-  displayedColumnx: string[] = ['Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva']
+  displayedColumnx: string[] = ['button','Codigo', 'Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva', 'Exento', 'MontoIva', 'Total']
   displayedColumnCliente: string[] = ['Codigo', 'Nombre', 'Rif']
 
   dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
@@ -135,6 +141,9 @@ export class DocumentosComponent implements OnInit {
   fcondicionpago = ""
   ftiposervicio = ""
   montototalx = 0
+  ivat = 0
+  montobaseimponiblex = 0
+  montoivax = 0
 
   subscription: Subscription;
 
@@ -154,6 +163,7 @@ export class DocumentosComponent implements OnInit {
     private servicio : ServicioService,
     private servicioCliente : ClienteService ,
     private tasaService : TasaService,
+    private usrService : LoginService,
     private nbSearch : NbSearchService) {
     
       //this.cargarConcepto()
@@ -165,9 +175,14 @@ export class DocumentosComponent implements OnInit {
       this.cargarServicio()
       this.ngFactura = false
       this.lblNumeroDocumento = ''
-      this.tipo="0"
-
+      this.ivat = 0
+      this.tipo = "FAC"
       //this.consultarConcepto("DO")
+
+      this.montoivax =  0
+      this.montobaseimponiblex = 0
+      this.montototalx = 0
+      //console.info()
 
   }
   ngOnInit(){    
@@ -292,7 +307,7 @@ export class DocumentosComponent implements OnInit {
 
   consultarConcepto(id){
     this.conceptox = ""
-    this.cantidad = ""
+    this.cantidad = 0
     this.ivaf = 0
     this.cuenta = ""
     this.monto = 0
@@ -311,11 +326,17 @@ export class DocumentosComponent implements OnInit {
   }
 
   consultarCantidad(id){
-    
+
+    if ( this.cantidad < 0) {
+      
+      this.cantidad = 0
+      return false
+      
+    }  
     this.concepto.forEach(e => {
       if(this.conceptox == e.cd_concepto){        
-        console.log(e);
-        var monto = parseFloat(e.mn_monto_bf) * parseInt(this.cantidad) 
+        //console.log(e);
+        var monto = Math.round(e.mn_monto_bf) * this.cantidad
         this.ivaf = e.pc_iva
 
         if ( e.in_iva == "0" ){
@@ -323,13 +344,13 @@ export class DocumentosComponent implements OnInit {
           this.exentox = monto
         }else{
           //this.baseImponible += this.monto
-          this.baseimponiblex = parseFloat(  monto.toFixed(2) ) * this.Petro
+          this.baseimponiblex = Math.round(  monto * this.Petro)
         }
         var valor = monto * this.Petro
 
-        this.monto = parseFloat( monto.toFixed(2) )
-        this.total = parseFloat( valor.toFixed(2) )
-
+        this.monto = Math.round( monto )
+        this.total = Math.round( valor )
+        this.ivat = Math.round(( valor * this.ivaf ) / 100)
         this.cuenta = e.cd_cuenta
 
       }
@@ -349,25 +370,20 @@ export class DocumentosComponent implements OnInit {
   asignarCliente( e ){
     this.codigo = e.Codigo
     this.consultarCliente(this.codigo)
-    this.windowClient.close()   
-    
+    this.windowClient.close()
   }
 
 
 
   calcularCantidad() : number{
-    // var monto = parseInt(this.cantidad) * this.monto
     var total =  parseFloat(   this.monto.toFixed(2) ) * this.Petro
-    //this.total = parseFloat(total.toFixed(2) )
-    return parseFloat(total.toFixed(2) )
+    return parseFloat( total.toFixed(2) )
   }
 
-  consultarCantidadUS(){
-    
+  consultarCantidadUS(){    
     this.concepto.forEach(e => {
-      if(this.conceptox == e.cd_concepto){        
-        
-        var montous = parseFloat(e.mn_monto_s) * parseInt(this.cantidad)
+      if(this.conceptox == e.cd_concepto){         
+        var montous = parseFloat(e.mn_monto_s) * this.cantidad
         this.ivaf = e.pc_iva
         if ( e.in_iva == "0"){
           this.exento += this.montous
@@ -385,7 +401,7 @@ export class DocumentosComponent implements OnInit {
   }
 
   calcularCantidadUS(){
-    var montous = parseInt(this.cantidad) * this.montous
+    var montous = this.cantidad * this.montous
     var totalus =  parseFloat(  montous.toFixed(2) ) * this.DicomUS
     this.totalus = parseFloat(totalus.toFixed(2) )
   }
@@ -398,13 +414,7 @@ export class DocumentosComponent implements OnInit {
         console.log(resp )
         this.cliente = resp[0].razon_social
         this.rif = resp[0].cedula_rif 
-        this.direccion = resp[0].dir_estado  
-
-        // this.fe_documento = resp[0].fe_documento
-        // this.tp_documento = resp[0].tp_documento 
-        // this.mn_documento_us = resp[0].mn_documento_us  
-
-                   
+        this.direccion = resp[0].dir_estado                     
        },
       (err) => {
           console.log(err)
@@ -435,8 +445,8 @@ export class DocumentosComponent implements OnInit {
     this.monto = 0
     this.codigo = ""
     this.cliente = ""
-    this.tipo = ""
-    this.cantidad = ""
+    this.tipo = "FAC"
+    this.cantidad = 0
     this.cuenta = ""
     this.monto = 0
     this.total = 0
@@ -444,7 +454,6 @@ export class DocumentosComponent implements OnInit {
     this.index = 0
     this.esVisible = true
     this.conceptox = ""
-    this.cantidad = ""
     this.ivaf = 0
     this.cuenta = ""
     this.monto = 0
@@ -463,9 +472,8 @@ export class DocumentosComponent implements OnInit {
   siCancelar(e){
     this.limpiarCampos()
     this.windowRef.close()
-    
-
   }
+
   noCancelar(e){
     this.windowRef.close()
   }
@@ -489,10 +497,25 @@ export class DocumentosComponent implements OnInit {
   facturar(e){
     this.seniat = "A000000568"
     this.lblresultado = "Control Seniat: "
+    
+
   }
 
 
-  agregarData(){    
+  agregarData(  position, status ){    
+    if ( this.validarConceptosAgregados() ) {
+      this.toastrService.show(
+        status || 'danger',
+        `El concepto ha sido agregado, si quiere agregar más cantidad elimine el anterior`,
+        {  position, status });
+        return false
+    }
+
+    if( this.cantidad <= 0 ) { 
+      this.cantidad = 0
+      return false
+    }
+    if(this.cliente == "")return false
     var concepto = ""
     var cuenta = ""
     this.concepto.forEach(e => {
@@ -501,16 +524,26 @@ export class DocumentosComponent implements OnInit {
       }
     });
 
+
+    this.baseImponible += this.baseimponiblex
+    this.exento += this.exentox
+    this.montoivax +=  this.ivat
+    this.montobaseimponiblex = this.baseImponible
+    this.montototalx = this.exento + this.baseImponible + this.montoivax
+
     ELEMENT_DATA.push( {
+      Codigo : this.conceptox,
       Cuenta : this.cuenta,
-      Cantidad: parseInt(this.cantidad), 
+      Cantidad: this.cantidad, 
       Concepto: concepto, 
       Monto: this.total,
-      Iva:this.ivaf, 
-      Montous: 0,
-      Exento :0,
+      Iva: this.ivaf, 
+      MontoIva: this.ivat,
+      Exento : this.exentox,
+      Total:  0,
     } )
 
+    if( this.ivaf > 0 ) this.pcIva = this.ivaf
     this.montoTotal += this.total
     this.dataSourcesx.data = ELEMENT_DATA
     this.index++
@@ -520,7 +553,7 @@ export class DocumentosComponent implements OnInit {
         "nu_renglon": this.index,
         "cd_concepto": this.conceptox,
         "ds_concepto": concepto,
-        "nu_cantidad": parseInt(this.cantidad),
+        "nu_cantidad": this.cantidad,
         "mn_monto_bf": this.total,
         "mn_monto_s": this.totalus,       
         "exentos": this.exentox,
@@ -530,14 +563,9 @@ export class DocumentosComponent implements OnInit {
         "cd_cuenta": this.cuenta        
     } )
 
-    this.baseImponible += this.baseimponiblex
-    this.exento += this.exentox
-    this.montototalx = this.exento + this.baseImponible
-    // console.error('BI: ', this.baseImponible )
-    // console.error('Exe: ', this.exento )
-
+    
     this.conceptox = ""
-    this.cantidad = ""
+    this.cantidad = 0
     this.ivaf = 0
     this.cuenta = ""
     this.monto = 0
@@ -554,22 +582,26 @@ export class DocumentosComponent implements OnInit {
 
 
   guardar(){
-
+    var usr = this.usrService.obtenerUsuario()
+    if( this.cantidad <= 0 ) { 
+      this.cantidad = 0
+      return false
+    }
     if(this.cliente == "")return false
     var d = new Date()
     var fe =  d.toISOString().substring(0,10)
     var obj = {
-      "call_back": "AutoIncrementoC",
-      "tp_serie": "C",
+      "call_back": "AutoIncremento" + usr.serie,
+      "tp_serie": usr.serie,
       "nu_documento": "",
       "fe_documento": fe + " " + d.toLocaleTimeString('en-US', { hour12: false }),
-      "tp_documento":"FAC",
+      "tp_documento": this.tipo,
       "cd_servicio": this.serviciox,
       "oficina": "2",
       "cd_cliente": this.codigo,
       "st_documento":"O",
-      "cd_usuario": "NRECAUDA",
-      "pc_iva": 16.00,
+      "cd_usuario": usr.usuario,
+      "pc_iva": this.pcIva,
       "mn_documento_bf": this.exento + this.baseImponible,
       "baseimponible": this.baseImponible,
       "exentos": this.exento,
@@ -578,12 +610,9 @@ export class DocumentosComponent implements OnInit {
       "cod_terminal": "SEDE",
       "onetomany": LSTDetalles,
     }
-    console.log( JSON.stringify  (obj) )
-    
     this.docu.agregar(obj).subscribe(
       (data) => {    
         this.showToast('top-right', 'success')
-        console.info( data)  
         this.lblNumeroDocumento = data.resp
         this.windowProcesar = this.windowService.open(
           this.frmProcesarTemplate,
@@ -592,21 +621,17 @@ export class DocumentosComponent implements OnInit {
           
           this.limpiarCampos()    
       },
-      (err) => {       
-        //console.error("Error: ", err) 
+      (err) => { 
         this.showToast('top-right', 'warning')
       }
     ) 
 
-
-    // ELEMENT_DATA = []
-    // LSTDetalles = []
     this.iva = 0
     this.monto = 0
     this.codigo = ""
     this.cliente = ""
-    this.tipo = ""
-    this.cantidad = ""
+    this.tipo = "FAC"
+    this.cantidad = 0
     this.cuenta = ""
     this.monto = 0
     this.total = 0
@@ -614,10 +639,23 @@ export class DocumentosComponent implements OnInit {
 
   }
 
+
+  validarConceptosAgregados(): boolean{
+    var valor = false
+    
+    ELEMENT_DATA.forEach(e => {
+      if(this.conceptox == e.Codigo) valor = true   
+    });
+    return valor
+  }
+
+
   aceptarDocumento(){
     this.windowProcesar.close()
 
   }
+  
+  
   previsualizarFactura(){
     var html = ``;
 
@@ -635,6 +673,7 @@ export class DocumentosComponent implements OnInit {
     document.getElementById("ContenidoTbl").innerHTML = html;
   }
   
+  
   imprimirFactura () : any {
     
   }
@@ -647,11 +686,44 @@ export class DocumentosComponent implements OnInit {
   }
   onSubmit(f) {
     console.log(f.value);
-}
- vacio() {
+  }
+  vacio() {
 
 
- }
+  }
+
+  BtnEliminar(element){
+    var i = 0
+    var eliminar = 0
+    var monto = 0
+    var iva = 0 
+    var exento = 0
+
+    ELEMENT_DATA.forEach(e => {
+      if(e.Codigo == element.Codigo){ 
+        eliminar = i 
+      }
+      i++
+    });
+    
+    ELEMENT_DATA.splice(eliminar, 1) //Elimino
+
+    ELEMENT_DATA.forEach(x => {
+      monto += x.Monto
+      iva += x.MontoIva
+      exento += x.Exento
+    });
+
+    this.montobaseimponiblex = monto
+    this.montoivax =  iva
+    this.montototalx = exento + monto + iva
+
+    this.baseImponible = monto
+    this.exentox  = exento
+    this.ivat = iva
+
+    this.dataSourcesx.data = ELEMENT_DATA
+  }
 
 
 }
