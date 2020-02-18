@@ -18,7 +18,7 @@ add () {}
 salir () {
   this.loading = true;
   sessionStorage.removeItem('key-iaim');
-  this.router.navigateByUrl('');
+  this.router.navigate(['']);
 }
 
 }
