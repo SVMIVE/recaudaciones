@@ -14,6 +14,7 @@ import { NbToastrService } from '@nebular/theme';
 
 export class LoginComponent implements OnInit {
 
+    money = 9876543.21;
     protected options: {};
     redirectDelay: number;
     showMessages: any;
