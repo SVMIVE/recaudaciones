@@ -176,110 +176,110 @@ import { ClienteService } from '../../servicio/sysbase/cliente.service';
       break;
       case "rec_documentos_abiertos":
         this.REPORTES = [
-          {"id":	43	,"value":"	43	","description":"	DOCUMENTOS ABIERTOS	"},                     
+          {"id":	43	,"value":"na","description":"	DOCUMENTOS ABIERTOS	"},                     
         ];
       break;
       case "rec_libro_ventas":
         this.REPORTES = [
-          {"id":	45	,"value":"	45	","description":"	LIBRO DE VENTAS	"},                   
+          {"id":	45	,"value":"fd-fh","description":"	LIBRO DE VENTAS	"},                   
         ];
       break;
       case "rec_retenciones":
         this.REPORTES = [
-          {"id":	47	,"value":"	47	","description":"	RETENCIONES	"},                  
+          {"id":	47	,"value":"fd-fh","description":"	RETENCIONES	"},                  
         ];
       break;
       case "rec_relacion_ingresos":
         this.REPORTES = [
-          {"id":	49	,"value":"	49	","description":"	RELACIÓN Y/O INGRESOS GENERALES	"},
-          {"id":	50	,"value":"	50	","description":"	RELACIÓN Y/O INGRESOS DIARIOS DE RECAUDACIÓN 	"},
-          {"id":	51	,"value":"	51	","description":"	RELACIÓN GENERAL DE DOCUMENTOS	"},
-          {"id":	52	,"value":"	52	","description":"	RELACIÓN GENERAL DE DOCUMENTOS POR CLIENTE	"},
-          {"id":	53	,"value":"	53	","description":"	RELACIÓN GENERAL DE DOCUMENTOS POR SERVICIOS	"},
-          {"id":	54	,"value":"	54	","description":"	RELACIÓN GENERAL DE DOCUMENTOS POR SERVICIOS Y TIPO DE DOCUMENTO	"},
-          {"id":	55	,"value":"	55	","description":"	RELACIÓN DE DOCUMENTOS ANULADOS	"},
-          {"id":	56	,"value":"	56	","description":"	RELACIÓN DE DOCUMENTOS ANULADOS SERIE C	"},
-          {"id":	57	,"value":"	57	","description":"	RELACIÓN DE DOCUMENTOS POR CLIENTE	"},
-          {"id":	58	,"value":"	58	","description":"	RELACIÓN DE DOSAS FACTURADAS POR CLIENTE	"},                           
+          {"id":	49	,"value":"fd","description":"	RELACIÓN Y/O INGRESOS GENERALES	"},
+          {"id":	50	,"value":"fd-fh","description":"	RELACIÓN Y/O INGRESOS DIARIOS DE RECAUDACIÓN 	"},
+          {"id":	51	,"value":"fd-fh","description":"	RELACIÓN GENERAL DE DOCUMENTOS	"},
+          {"id":	52	,"value":"fd-fh-cl","description":"	RELACIÓN GENERAL DE DOCUMENTOS POR CLIENTE	"},
+          {"id":	53	,"value":"fd-fh-","description":"	RELACIÓN GENERAL DE DOCUMENTOS POR SERVICIOS	"},
+          {"id":	54	,"value":"td-sv-fd-fh","description":"	RELACIÓN GENERAL DE DOCUMENTOS POR SERVICIOS Y TIPO DE DOCUMENTO	"},
+          {"id":	55	,"value":"fd-fh","description":"	RELACIÓN DE DOCUMENTOS ANULADOS	"},
+          {"id":	56	,"value":"fd-fh","description":"	RELACIÓN DE DOCUMENTOS ANULADOS SERIE C	"},
+          {"id":	57	,"value":"fd-fh-cl","description":"	RELACIÓN DE DOCUMENTOS POR CLIENTE	"},
+          {"id":	58	,"value":"fd-fh","description":"	RELACIÓN DE DOSAS FACTURADAS POR CLIENTE	"},                           
         ];
       break;
       case "rec_clientes":
         this.REPORTES = [
-          {"id":	60	,"value":"	60	","description":"	CLIENTES ACTIVOS	"},
-          {"id":	61	,"value":"	61	","description":"	CLIENTES FIJOS	"},
-          {"id":	62	,"value":"	62	","description":"	CLIENTES TEMPORALES	"},
-          {"id":	63	,"value":"	63	","description":"	CLIENTES DECLARA INGRESOS BRUTOS	"},
-          {"id":	64	,"value":"	64	","description":"	SOLVENCIA DEL CLIENTE	"},                                    
+          {"id":	60	,"value":"na","description":"	CLIENTES ACTIVOS	"},
+          {"id":	61	,"value":"na","description":"	CLIENTES FIJOS	"},
+          {"id":	62	,"value":"na","description":"	CLIENTES TEMPORALES	"},
+          {"id":	63	,"value":"na","description":"	CLIENTES DECLARA INGRESOS BRUTOS	"},
+          {"id":	64	,"value":"cl-ts","description":"	SOLVENCIA DEL CLIENTE	"},                                    
         ];
       break;
       case "rec_listados":
         this.REPORTES = [
-          {"id":	66	,"value":"	66	","description":"	LISTADOS DE BANCOS	"},
-          {"id":	67	,"value":"	67	","description":"	LISTADO DE CLIENTES	"},
-          {"id":	68	,"value":"	68	","description":"	LISTADOS DE SERVICIOS	"},
-          {"id":	69	,"value":"	69	","description":"	LISTADOS DE CONCEPTOS	"},                                           
+          {"id":	66	,"value":"na","description":"	LISTADOS DE BANCOS	"},
+          {"id":	67	,"value":"na","description":"	LISTADO DE CLIENTES	"},
+          {"id":	68	,"value":"na","description":"	LISTADOS DE SERVICIOS	"},
+          {"id":	69	,"value":"na","description":"	LISTADOS DE CONCEPTOS	"},                                           
         ];
       break;
       case "rec_estado_cuenta":
         this.REPORTES = [
-          {"id":	71	,"value":"	71	","description":"	ESTADO DE CUENTA ACTUAL POR CLIENTE FIJO	"},
-          {"id":	72	,"value":"	72	","description":"	ESTADO DE CUENTA ACTUAL POR CLIENTE TEMPORAL	"},
-          {"id":	73	,"value":"	73	","description":"	ESTADO DE CUENTA POR FECHA CLIENTE FIJO -A -P	"},
-          {"id":	74	,"value":"	74	","description":"	ESTADO DE CUENTA POR FECHA CLIENTE FIJO -A -P	"},
-          {"id":	75	,"value":"	75	","description":"	SUMATORIA DE LOS SERVICIOS FACTURADOS Y COBRADOS	"},
-          {"id":	76	,"value":"	76	","description":"	ESTADO DE CUENTA GENERAL CLIENTES ACTIVOS	"},
-          {"id":	77	,"value":"	77	","description":"	ESTADO DE CUENTA GENERAL 30-60-90 POR CLIENTES	"},
-          {"id":	78	,"value":"	78	","description":"	ESTADO DE CUENTA GENERAL 30-60-90 POR CONCEPTOS	"},                                                  
+          {"id":	71	,"value":"cl","description":"	ESTADO DE CUENTA ACTUAL POR CLIENTE FIJO	"},
+          {"id":	72	,"value":"cl","description":"	ESTADO DE CUENTA ACTUAL POR CLIENTE TEMPORAL	"},
+          {"id":	73	,"value":"fd-fh-cl","description":"	ESTADO DE CUENTA POR FECHA CLIENTE FIJO -A "},
+          {"id":	74	,"value":"fd-fh-cl","description":"	ESTADO DE CUENTA POR FECHA CLIENTE FIJO -A -P	"},
+          {"id":	75	,"value":"fd-fh","description":"	SUMATORIA DE LOS SERVICIOS FACTURADOS Y COBRADOS	"},
+          {"id":	76	,"value":"fd-fh","description":"	ESTADO DE CUENTA GENERAL CLIENTES ACTIVOS	"},
+          {"id":	77	,"value":"fh-cl","description":"	ESTADO DE CUENTA GENERAL 30-60-90 POR CLIENTES	"},
+          {"id":	78	,"value":"fh-sv","description":"	ESTADO DE CUENTA GENERAL 30-60-90 POR CONCEPTOS	"},                                                  
         ];
       break;
       case "rec_resumen":
         this.REPORTES = [
-          {"id":	80	,"value":"	80	","description":"	RESUMEN DE DOCUMENTOS POR SERVICIO	"},
-          {"id":	81	,"value":"	81	","description":"	RESUMEN POR TIPO DE DOCUMENTO Y POR SERIE	"},
-          {"id":	82	,"value":"	82	","description":"	RESUMEN POR SERIE	"},                                                           
+          {"id":	80	,"value":"fd-fh-sv","description":"	RESUMEN DE DOCUMENTOS POR SERVICIO	"},
+          {"id":	81	,"value":"td-ts-fd-fh","description":"	RESUMEN POR TIPO DE DOCUMENTO Y POR SERIE	"},
+          {"id":	82	,"value":"cl-ts-fd-fh","description":"	RESUMEN POR SERIE	"},                                                           
         ];
       break;
       case "rec_relacion_dia":
         this.REPORTES = [
-          {"id":	84	,"value":"	84	","description":"	SERIE C	"},
-          {"id":	85	,"value":"	85	","description":"	SERIE D	"},
-          {"id":	86	,"value":"	86	","description":"	LISTADO DE PLANTILLA DE LOS CÁNONES	"},
-          {"id":	87	,"value":"	87	","description":"	FACTURADO POR RANGO DE FECHA	"},                                                                  
+          {"id":	84	,"value":"fd-fh","description":"	SERIE C	"},
+          {"id":	85	,"value":"fd-fh","description":"	SERIE D	"},
+          {"id":	86	,"value":"na","description":"	LISTADO DE PLANTILLA DE LOS CÁNONES	"},
+          {"id":	87	,"value":"fd-fh","description":"	FACTURADO POR RANGO DE FECHA	"},                                                                  
         ];
       break;
       case "rec_recibos":
         this.REPORTES = [
-          {"id":	89	,"value":"	89	","description":"	RECIBOS DE PAGOS EMITIDOS POR FECHA	"},
-          {"id":	90	,"value":"	90	","description":"	RECIBOS EMITIDOS POR CLIENTE EN UNA FECHA DETERMINADA	"},
-          {"id":	91	,"value":"	91	","description":"	RECIBOS EMITIDOS POR TAQUILLA U OFICINA	"},                                                                       
+          {"id":	89	,"value":"fd-fh","description":"	RECIBOS DE PAGOS EMITIDOS POR FECHA	"},
+          {"id":	90	,"value":"fd-fh-cl","description":"	RECIBOS EMITIDOS POR CLIENTE EN UNA FECHA DETERMINADA	"},
+          {"id":	91	,"value":"fd-fh","description":"	RECIBOS EMITIDOS POR TAQUILLA U OFICINA	"},                                                                       
         ];
       break;
       case "rec_nota_credito":
         this.REPORTES = [
-          {"id":	93	,"value":"	93	","description":"	NOTAS DE CRÉDITO Z ACTIVAS CLIENTES FIJOS	"},
-          {"id":	94	,"value":"	94	","description":"	NOTAS DE CRÉDITO Z ACTIVAS CLIENTES TEMPORALES	"},                                                                               
+          {"id":	93	,"value":"cl-ts","description":"	NOTAS DE CRÉDITO Z ACTIVAS CLIENTES FIJOS	"},
+          {"id":	94	,"value":"cl-ts","description":"	NOTAS DE CRÉDITO Z ACTIVAS CLIENTES TEMPORALES	"},                                                                               
         ];
       break;
       case "hab_cliente":
         this.REPORTES = [
-          {"id":	96	,"value":"	96	","description":"	CLIENTES	"},                                                                             
+          {"id":	96	,"value":"na","description":"	CLIENTES	"},                                                                             
         ];
       break;
       case "hab_facturas_anuladas":
         this.REPORTES = [
-          {"id":	98	,"value":"	98	","description":"	FACTURAS ANULADAS	"},                                                                      
+          {"id":	98	,"value":"na","description":"	ANULADAS	"},                                                                      
         ];
       break;
       case "hab_relacion_ingresos_diarios":
         this.REPORTES = [
-          {"id":	100	,"value":"	100	","description":"	RELACIÓN Y/O INGRESOS DIARIOS DE HABILITADO SERIE E	"},
-          {"id":	101	,"value":"	101	","description":"	RELACIÓN Y/O INGRESOS DIARIOS DE TAQUILLA SERIE C	"},                                                                           
+          {"id":	100	,"value":"fh","description":"	RELACIÓN Y/O INGRESOS DIARIOS DE HABILITADO SERIE E	"},
+          {"id":	101	,"value":"fh","description":"	RELACIÓN Y/O INGRESOS DIARIOS DE TAQUILLA SERIE C	"},                                                                           
         ];
       break;
       case "hab_resumen_documentos":
         this.REPORTES = [
-          {"id":	103	,"value":"	103	","description":"	RESUMEN DE DOCUMENTOS POR SERVICIO DE LA SERIE E	"},
-          {"id":	104	,"value":"	104	","description":"	RESUMEN DE DOCUMENTOS POR SERVICIO DE LA SERIE C	"},                                                                                 
+          {"id":	103	,"value":"fd-fh-td","description":"	RESUMEN DE DOCUMENTOS POR SERVICIO DE LA SERIE E	"},
+          {"id":	104	,"value":"fd-fh-td","description":"	RESUMEN DE DOCUMENTOS POR SERVICIO DE LA SERIE C	"},                                                                                 
         ];
       break;
 
@@ -323,21 +323,29 @@ toggleView() {
       this.loadservicio=false;
       this.loadserie=false;
       this.loadseniat=false;
-
     }
     if(value == "fd-fh-cl"){
-      this.loadrango=true
+      this.loadrango=true;
       this.loaddesde=true;
       this.loadhasta=true;
-      this.loadcliente=true
+      this.loadcliente=true;
       this.loaddocumento=false;
       this.loadservicio=false;
       this.loadserie=false;
       this.loadseniat=false;
-
+    }
+    if(value == "fd-fh-sv"){
+      this.loadrango=true;
+      this.loaddesde=true;
+      this.loadhasta=true;
+      this.loadcliente=false;
+      this.loaddocumento=false;
+      this.loadservicio=true;
+      this.loadserie=false;
+      this.loadseniat=false;
     }
     if(value == "cl"){
-      this.loadcliente=true
+      this.loadcliente=true;
       this.loaddocumento=false;
       this.loadservicio=false;
       this.loadserie=false;
@@ -347,27 +355,87 @@ toggleView() {
       this.loadhasta=false;
     }
     if(value == "fh-cl"){
-      this.loadcliente=true
-      this.loadrango=true
+      this.loadcliente=true;
+      this.loadrango=true;
       this.loaddesde=false;
       this.loadhasta=true;
       this.loaddocumento=false;
       this.loadservicio=false;
       this.loadserie=false;
       this.loadseniat=false;
-
+    }
+    if(value == "fh"){
+      this.loadcliente=false;
+      this.loadrango=true;
+      this.loaddesde=false;
+      this.loadhasta=true;
+      this.loaddocumento=false;
+      this.loadservicio=false;
+      this.loadserie=false;
+      this.loadseniat=false;
+    }
+    if(value == "fh-sv"){
+      this.loadcliente=false;
+      this.loadrango=true;
+      this.loaddesde=false;
+      this.loadhasta=true;
+      this.loaddocumento=false;
+      this.loadservicio=true;
+      this.loadserie=false;
+      this.loadseniat=false;
     }
     if(value == "fd-fh-td"){
-      this.loadrango=true
+      this.loadrango=true;
       this.loaddesde=true;
       this.loadhasta=true;
-      this.loaddocumento=true
+      this.loaddocumento=true;
       this.loadcliente=false;
       this.loadservicio=false;
       this.loadserie=false;
       this.loadseniat=false;
-
     }
+    if(value == "td-sv-fd-fh"){
+      this.loadrango=true;
+      this.loaddesde=true;
+      this.loadhasta=true;
+      this.loaddocumento=true;
+      this.loadcliente=false;
+      this.loadservicio=true;
+      this.loadserie=false;
+      this.loadseniat=false;
+    }
+    if(value == "td-ts-fd-fh"){
+      this.loadrango=true;
+      this.loaddesde=true;
+      this.loadhasta=true;
+      this.loaddocumento=true;
+      this.loadcliente=false;
+      this.loadservicio=false;
+      this.loadserie=true;
+      this.loadseniat=false;
+    }
+    if(value == "cl-ts-fd-fh"){
+      this.loadrango=true
+      this.loaddesde=true;
+      this.loadhasta=true;
+      this.loaddocumento=false
+      this.loadcliente=true;
+      this.loadservicio=false;
+      this.loadserie=true;
+      this.loadseniat=false;
+    }
+    if(value == "cl-ts"){
+      this.loadrango=false
+      this.loaddesde=false;
+      this.loadhasta=false;
+      this.loaddocumento=false
+      this.loadcliente=true;
+      this.loadservicio=false;
+      this.loadserie=true;
+      this.loadseniat=false;
+    }
+    
+
 
     //console.log(value);
   }
