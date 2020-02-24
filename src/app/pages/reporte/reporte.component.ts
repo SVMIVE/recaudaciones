@@ -315,7 +315,7 @@ toggleView() {
     this.loadrango=false;
 */
     if(value == "fd-fh"){
-      this.loadrango=true
+      this.loadrango=true;
       this.loaddesde=true;
       this.loadhasta=true;
       this.loadcliente=false;
@@ -334,6 +334,97 @@ toggleView() {
       this.loadserie=false;
       this.loadseniat=false;
     }
+    if(value == "cl"){
+      this.loadrango=false;
+      this.loaddesde=false;
+      this.loadhasta=false;
+      this.loadcliente=true;
+      this.loaddocumento=false;
+      this.loadservicio=false;
+      this.loadserie=false;
+      this.loadseniat=false;
+    }
+    if(value == "fh-cl"){
+      this.loadrango=true;
+      this.loaddesde=false;
+      this.loadhasta=true;
+      this.loadcliente=true;
+      this.loaddocumento=false;
+      this.loadservicio=false;
+      this.loadserie=false;
+      this.loadseniat=false;
+    }
+    if(value == "fd-fh-td"){
+      this.loadrango=true;
+      this.loaddesde=true;
+      this.loadhasta=true;
+      this.loadcliente=false;
+      this.loaddocumento=true;
+      this.loadservicio=false;
+      this.loadserie=false;
+      this.loadseniat=false;
+    }
+    if(value == "fd"){
+      this.loadrango=true;
+      this.loaddesde=true;
+      this.loadhasta=false;
+      this.loadcliente=false;
+      this.loaddocumento=false;
+      this.loadservicio=false;
+      this.loadserie=false;
+      this.loadseniat=false;
+    }
+    if(value == "td-sv-fd-fh"){
+      this.loadrango=true;
+      this.loaddesde=true;
+      this.loadhasta=true;
+      this.loadcliente=false;
+      this.loaddocumento=true;
+      this.loadservicio=true;
+      this.loadserie=false;
+      this.loadseniat=false;
+    }
+    if(value == "cl-ts"){
+      this.loadrango=false;
+      this.loaddesde=false;
+      this.loadhasta=false;
+      this.loadcliente=true;
+      this.loaddocumento=false;
+      this.loadservicio=false;
+      this.loadserie=true;
+      this.loadseniat=false;
+    }
+    if(value == "fh-sv"){
+      this.loadrango=true;
+      this.loaddesde=false;
+      this.loadhasta=true;
+      this.loadcliente=false;
+      this.loaddocumento=false;
+      this.loadservicio=true;
+      this.loadserie=false;
+      this.loadseniat=false;
+    }
+    if(value == "td-ts-fd-fh"){
+      this.loadrango=true;
+      this.loaddesde=true;
+      this.loadhasta=true;
+      this.loadcliente=false;
+      this.loaddocumento=true;
+      this.loadservicio=false;
+      this.loadserie=true;
+      this.loadseniat=false;
+    }
+    if(value == "cl-ts-fd-fh"){
+      this.loadrango=true;
+      this.loaddesde=true;
+      this.loadhasta=true;
+      this.loadcliente=true;
+      this.loaddocumento=false;
+      this.loadservicio=false;
+      this.loadserie=true;
+      this.loadseniat=false;
+    }
+
     if(value == "fd-fh-sv"){
       this.loadrango=true;
       this.loaddesde=true;
@@ -344,97 +435,6 @@ toggleView() {
       this.loadserie=false;
       this.loadseniat=false;
     }
-    if(value == "cl"){
-      this.loadcliente=true;
-      this.loaddocumento=false;
-      this.loadservicio=false;
-      this.loadserie=false;
-      this.loadseniat=false;
-      this.loadrango=false;
-      this.loaddesde=false;
-      this.loadhasta=false;
-    }
-    if(value == "fh-cl"){
-      this.loadcliente=true;
-      this.loadrango=true;
-      this.loaddesde=false;
-      this.loadhasta=true;
-      this.loaddocumento=false;
-      this.loadservicio=false;
-      this.loadserie=false;
-      this.loadseniat=false;
-    }
-    if(value == "fh"){
-      this.loadcliente=false;
-      this.loadrango=true;
-      this.loaddesde=false;
-      this.loadhasta=true;
-      this.loaddocumento=false;
-      this.loadservicio=false;
-      this.loadserie=false;
-      this.loadseniat=false;
-    }
-    if(value == "fh-sv"){
-      this.loadcliente=false;
-      this.loadrango=true;
-      this.loaddesde=false;
-      this.loadhasta=true;
-      this.loaddocumento=false;
-      this.loadservicio=true;
-      this.loadserie=false;
-      this.loadseniat=false;
-    }
-    if(value == "fd-fh-td"){
-      this.loadrango=true;
-      this.loaddesde=true;
-      this.loadhasta=true;
-      this.loaddocumento=true;
-      this.loadcliente=false;
-      this.loadservicio=false;
-      this.loadserie=false;
-      this.loadseniat=false;
-    }
-    if(value == "td-sv-fd-fh"){
-      this.loadrango=true;
-      this.loaddesde=true;
-      this.loadhasta=true;
-      this.loaddocumento=true;
-      this.loadcliente=false;
-      this.loadservicio=true;
-      this.loadserie=false;
-      this.loadseniat=false;
-    }
-    if(value == "td-ts-fd-fh"){
-      this.loadrango=true;
-      this.loaddesde=true;
-      this.loadhasta=true;
-      this.loaddocumento=true;
-      this.loadcliente=false;
-      this.loadservicio=false;
-      this.loadserie=true;
-      this.loadseniat=false;
-    }
-    if(value == "cl-ts-fd-fh"){
-      this.loadrango=true
-      this.loaddesde=true;
-      this.loadhasta=true;
-      this.loaddocumento=false
-      this.loadcliente=true;
-      this.loadservicio=false;
-      this.loadserie=true;
-      this.loadseniat=false;
-    }
-    if(value == "cl-ts"){
-      this.loadrango=false
-      this.loaddesde=false;
-      this.loadhasta=false;
-      this.loaddocumento=false
-      this.loadcliente=true;
-      this.loadservicio=false;
-      this.loadserie=true;
-      this.loadseniat=false;
-    }
-    
 
 
     //console.log(value);
