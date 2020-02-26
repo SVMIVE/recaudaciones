@@ -77,7 +77,7 @@ export class PagosComponent implements OnInit {
   Maestro = {}
   DetalleFact = []
   DetalleDoc = []
-
+  montoTotal = 0
 
 
   displayedColumns: string[] = ['select', 'Reglon', 'Control', 'Seniat', 'Servicio', 'Tipo', 'Moneda', 'Fecha', 'Monto'];
@@ -100,14 +100,23 @@ export class PagosComponent implements OnInit {
    isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSources.data.length;
+    
     return numSelected === numRows;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSources.data.forEach(row => this.selection.select(row));
+    if ( this.isAllSelected() ){
+      this.selection.clear() 
+
+    }else {
+      this.dataSources.data.forEach(row => { 
+        console.info(row)
+        this.selection.select(row) 
+      });     
+
+    }
+    
   }
 
   /** The label for the checkbox on the passed row */
@@ -115,6 +124,7 @@ export class PagosComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
+    // console.log( this.selection.isSelected(row) ) 
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.Reglon + 1}`;
   }
 
@@ -137,6 +147,14 @@ export class PagosComponent implements OnInit {
   }
 
 
+  clickMontoTotal(row){
+    if ( this.selection.isSelected( row ) ) {
+      this.montoTotal -= row.Monto 
+    }else{
+      this.montoTotal += parseFloat ( parseFloat( row.Monto ).toFixed(2) )
+    }
+    
+  }
 
   Procesar() {
 

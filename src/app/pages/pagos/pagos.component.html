@@ -4,6 +4,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
+                    <label>Codigo</label>
                     <input placeholder="Codigo" 
                         nbInput fullWidth 
                         [(ngModel)]="codigo" 
@@ -15,6 +16,7 @@
             </div>
             <div class="col-md-8">
                 <div class="form-group">
+                    <label>Datos del Cliente</label>
                     <input placeholder="Cliente" nbInput fullWidth  
                     [(ngModel)]="cliente"                                                     
                     [disabled] = "ngFactura" disabled>
@@ -25,12 +27,14 @@
         <div class="row" >
             <div class="col-md-4">
                 <div class="form-group">
+                    <label>Rif</label>
                     <input nbInput fullWidth [(ngModel)]="rif" disabled>
                     
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="form-group">
+                    <label>Dirección</label>
                     <input nbInput fullWidth  [(ngModel)]="direccion" disabled>
                 </div>
             </div>
@@ -42,20 +46,27 @@
                         Documentos Pendientes <nb-icon icon="search-outline"></nb-icon>
                     </button>
             </div>
+            <div class="col-md-6">
+                
+            </div>
+            
         </div>
 
         
 
         <hr>
+        <div class="row">     
+            <div class="col-md-9">
                 
-        
-
-
+            </div>      
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Monto total</label>
+                    <input nbInput fullWidth  [(ngModel)]="montoTotal" disabled>
+                </div>
+            </div>
+        </div>
         <br>
-
-
-        <br><br>
-
         <table mat-table [dataSource]="dataSources" class="mat-elevation-z8">
 
             <!-- Checkbox Column -->
@@ -68,7 +79,7 @@
                     </mat-checkbox>
                 </th>
                 <td mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()"
+                    <mat-checkbox (click)="$event.stopPropagation(); clickMontoTotal(row)"
                                     (change)="$event ? selection.toggle(row) : null"
                                     [checked]="selection.isSelected(row)"
                                     [aria-label]="checkboxLabel(row)">
