@@ -4,8 +4,10 @@
     <nb-card-body>
       <nb-list>
         <nb-list-item *ngFor="let lst of lstTasa">
-          <nb-user [name]="lst.descripcion" [title]="lst.monto" color="#30D165">
+          <!--<nb-user [name]="lst.descripcion" [title]="lst.monto" color="#30D165"> -->
+          <nb-user [name]="lst.descripcion"  color="#30D165">
           </nb-user>
+          <p style="float: left;padding-left: 50px;">{{ lst.monto | currency:'BS' }} {{ lst.fecha }}</p>
         </nb-list-item>
       </nb-list>
     </nb-card-body>
