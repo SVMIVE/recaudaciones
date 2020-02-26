@@ -148,20 +148,24 @@ export class NumerosService {
         enteros: Math.floor(num),
         centavos: (((Math.round(num * 100)) - (Math.floor(num) * 100))),
         letrasCentavos: "",
-        letrasMonedaPlural: 'Bolívares',//"PESOS", 'Dólares', 'Bolívares', 'etcs'
-        letrasMonedaSingular: 'Bolivar', //"PESO", 'Dólar', 'Bolivar', 'etc'
+        letrasMonedaPlural: 'BOLÍVARES',//"PESOS", 'Dólares', 'Bolívares', 'etcs'
+        letrasMonedaSingular: 'BOLIVAR', //"PESO", 'Dólar', 'Bolivar', 'etc'
 
-        letrasMonedaCentavoPlural: "CENTAVOS",
-        letrasMonedaCentavoSingular: "CENTAVO"
+        letrasMonedaCentavoPlural: "CENTIMOS",
+        letrasMonedaCentavoSingular: "CENTIMO"
     }
+    var resultado = ''
 
     if (data.centavos > 0) {
-        data.letrasCentavos = "CON " + ( function (){
-            if (data.centavos == 1)
-                return this.Millones(data.centavos) + " " + data.letrasMonedaCentavoSingular
-            else
-                return this.Millones(data.centavos) + " " + data.letrasMonedaCentavoPlural
-            })()
+        var texto = ''
+        
+        if (data.centavos == 1) {
+          texto = this.Millones(data.centavos) + " " + data.letrasMonedaCentavoSingular
+        }else{
+          texto = this.Millones(data.centavos) + " " + data.letrasMonedaCentavoPlural
+        }
+        data.letrasCentavos = "CON " + texto
+        resultado =  data.letrasCentavos
     }
 
     if(data.enteros == 0)

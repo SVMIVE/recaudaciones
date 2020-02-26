@@ -4,6 +4,7 @@ import { LoginService, Usuario } from '../../servicio/auth/login.service';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../@core/data/users';
 import { NbToastrService } from '@nebular/theme';
+import { NumerosService } from '../../servicio/util/numeros.service';
 
 
 @Component({
@@ -32,10 +33,12 @@ export class LoginComponent implements OnInit {
     index = 0;
 
     // tslint:disable-next-line: one-line
-    constructor(private loginServicio: LoginService, private router: Router, private toastrService: NbToastrService){ }
+    constructor(private loginServicio: LoginService, private router: Router, 
+      private toastrService: NbToastrService,
+      private numeroletras: NumerosService){ }
 
   ngOnInit() {
-
+    //console.log ( this.numeroletras.NumeroALetras(120.98) )
   }
 
   showToast(position, status, msj) {
