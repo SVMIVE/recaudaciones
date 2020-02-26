@@ -5,6 +5,7 @@ import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { LoginService } from '../../../servicio/auth/login.service';
 
 @Component({
   selector: 'ngx-header',
@@ -40,17 +41,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Perfil' }, { title: 'Cerrar sesión' } ];
+  userMenu = [ 
+    { title: 'Cerrar sesión', link: '/home/salir' } 
+  ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private usrService : LoginService
+              ) {
   }
 
   ngOnInit() {
+    var usr = this.usrService.obtenerUsuario()
+    this.nombre = usr.usuario
+
     this.currentTheme = this.themeService.currentTheme;
 
     this.userService.getUsers()
@@ -93,4 +101,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.navigateHome();
     return false;
   }
+
 }

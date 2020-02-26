@@ -15,7 +15,7 @@ interface Tasa {
 export class TasaComponent implements OnInit {
 
   lstTasa = []
-  
+
   constructor(private tasaService : TasaService) { }
 
   ngOnInit() {
@@ -24,18 +24,22 @@ export class TasaComponent implements OnInit {
         this.lstTasa = [
           {
             descripcion : "Dolar ",
-            fecha : resp[0].fecha_aplica_dol,
-            monto : parseFloat( resp[0].ta_dollar ).toFixed(2) + ' Bs. ' + resp[0].fecha_aplica_dol.substring(0, 10),
+            fecha : resp[0].fecha_aplica_dol.substring(0, 10),
+            //monto : parseFloat( resp[0].ta_dollar ).toFixed(2) + ' Bs. ' + resp[0].fecha_aplica_dol.substring(0, 10),
+            monto : parseFloat( resp[0].ta_dollar ).toFixed(2),
           },
           {
             descripcion : "Euro ",
-            fecha : resp[0].fecha_aplica_eur,
-            monto : parseFloat(  resp[0].mn_euro ).toFixed(2) + ' Bs.  ' +  resp[0].fecha_aplica_eur.substring(0, 10),
+            fecha : resp[0].fecha_aplica_eur.substring(0, 10),
+            //monto : parseFloat(  resp[0].mn_euro ).toFixed(2) + ' Bs.  ' +  resp[0].fecha_aplica_eur.substring(0, 10),
+            monto : parseFloat(  resp[0].mn_euro ).toFixed(2),
+
           },
           {
             descripcion : "Petro ",
-            fecha : resp[0].fecha_aplica_ptr,
-            monto : parseFloat( resp[0].mn_petro ).toFixed(2) + ' Bs.  ' +  resp[0].fecha_aplica_ptr.substring(0, 10),
+            fecha : resp[0].fecha_aplica_ptr.substring(0, 10),
+            //monto : parseFloat( resp[0].mn_petro ).toFixed(2) + ' Bs.  ' +  resp[0].fecha_aplica_ptr.substring(0, 10),
+            monto : parseFloat( resp[0].mn_petro ).toFixed(2),
           }        
         ]
       },

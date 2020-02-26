@@ -115,7 +115,7 @@ export class DocumentosComponent implements OnInit {
   serviciox = ''
   baseimponiblex = 0
   selectedItem= '';
-  pcIva = 0 //Iva global del servicio
+  pcIva = "" //Iva global del servicio
 
   displayedColumnx: string[] = ['button','Codigo', 'Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva', 'Exento', 'MontoIva', 'Total']
   displayedColumnCliente: string[] = ['Codigo', 'Nombre', 'Rif']
@@ -133,6 +133,7 @@ export class DocumentosComponent implements OnInit {
   fnumero = "0000000"
   ffecha = "0000000" 
   fcontrol = "000000"
+  serie = ""
   fserie = ""
   fcodigocliente = ""
   fcliente = ""
@@ -293,6 +294,7 @@ export class DocumentosComponent implements OnInit {
 
     ) 
   }
+  
   cargarConcepto() {
     return this.conceptos.listar().subscribe(
       (resp) => { 
@@ -335,8 +337,8 @@ export class DocumentosComponent implements OnInit {
     }  
     this.concepto.forEach(e => {
       if(this.conceptox == e.cd_concepto){        
-        //console.log(e);
-        var monto = Math.round(e.mn_monto_bf) * this.cantidad
+        console.log(e.mn_monto_bf)
+        var monto = e.mn_monto_bf * this.cantidad
         this.ivaf = e.pc_iva
 
         if ( e.in_iva == "0" ){
@@ -344,13 +346,12 @@ export class DocumentosComponent implements OnInit {
           this.exentox = monto
         }else{
           //this.baseImponible += this.monto
-          this.baseimponiblex = Math.round(  monto * this.Petro)
+          this.baseimponiblex =  monto * this.Petro
         }
         var valor = monto * this.Petro
-
-        this.monto = Math.round( monto )
-        this.total = Math.round( valor )
-        this.ivat = Math.round(( valor * this.ivaf ) / 100)
+        this.monto =  monto 
+        this.total = valor 
+        this.ivat = ( valor * this.ivaf ) / 100
         this.cuenta = e.cd_cuenta
 
       }
@@ -494,6 +495,7 @@ export class DocumentosComponent implements OnInit {
       { title: 'Número de Factura', hasBackdrop: true },
     );
   }
+  
   facturar(e){
     this.seniat = "A000000568"
     this.lblresultado = "Control Seniat: "
@@ -543,7 +545,9 @@ export class DocumentosComponent implements OnInit {
       Total:  0,
     } )
 
-    if( this.ivaf > 0 ) this.pcIva = this.ivaf
+    if( this.ivaf > 0 ) { 
+     this.pcIva = this.ivaf.toString()
+    }
     this.montoTotal += this.total
     this.dataSourcesx.data = ELEMENT_DATA
     this.index++
@@ -557,7 +561,7 @@ export class DocumentosComponent implements OnInit {
         "mn_monto_bf": this.total,
         "mn_monto_s": this.totalus,       
         "exentos": this.exentox,
-        "pc_iva": this.iva,
+        "pc_iva": this.ivat,
         "moneda": 'B',
         "tp_cambio":"BS",
         "cd_cuenta": this.cuenta        
@@ -583,10 +587,8 @@ export class DocumentosComponent implements OnInit {
 
   guardar(){
     var usr = this.usrService.obtenerUsuario()
-    if( this.cantidad <= 0 ) { 
-      this.cantidad = 0
-      return false
-    }
+    this.serie = usr.serie
+    
     if(this.cliente == "")return false
     var d = new Date()
     var fe =  d.toISOString().substring(0,10)
@@ -601,7 +603,7 @@ export class DocumentosComponent implements OnInit {
       "cd_cliente": this.codigo,
       "st_documento":"O",
       "cd_usuario": usr.usuario,
-      "pc_iva": this.pcIva,
+      "pc_iva":  parseFloat(this.pcIva),
       "mn_documento_bf": this.exento + this.baseImponible,
       "baseimponible": this.baseImponible,
       "exentos": this.exento,
@@ -622,20 +624,14 @@ export class DocumentosComponent implements OnInit {
           this.limpiarCampos()    
       },
       (err) => { 
+        console.info(obj)
+        console.log(err)
         this.showToast('top-right', 'warning')
+        console.info( JSON.stringify( obj ) )
       }
     ) 
 
-    this.iva = 0
-    this.monto = 0
-    this.codigo = ""
-    this.cliente = ""
-    this.tipo = "FAC"
-    this.cantidad = 0
-    this.cuenta = ""
-    this.monto = 0
-    this.total = 0
-    this.esVisible = true
+   
 
   }
 
@@ -663,8 +659,8 @@ export class DocumentosComponent implements OnInit {
       html += `<tr>
       <td class="codigo">${e.Cuenta}</td>
       <td class="descripcion">${e.Concepto}</td>
-      <td class="num">${e.Iva}</td>
-      <td class="num">${e.Iva}</td>
+      <td class="num" style="display: none">${e.Iva}</td>
+      <td class="num" style="display: none">${e.Iva}</td>
       <td class="num">${e.Iva}</td>
       <td class="num">${e.Monto}</td>
     </tr>`
