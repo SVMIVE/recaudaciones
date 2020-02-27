@@ -182,7 +182,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="form-group">
                 
                 <input nbInput fullWidth placeholder="Fecha" [(ngModel)]="fechadep" 
@@ -196,9 +196,7 @@
                 <input placeholder="Monto" 
                     nbInput fullWidth 
                     [(ngModel)]="montofact"                   
-                    [disabled] = "true"
-                >
-
+                    [disabled] = "true">
             </div>
         </div>
 
@@ -207,22 +205,92 @@
                 <input placeholder="Monto" 
                     nbInput fullWidth 
                     [(ngModel)]="montofactd"                   
-                    [disabled] = "true"
-                >
-
+                    [disabled] = "true">
+                    
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <button nbButton (click)="BtnAgregar( )"
+                        size="tiny"  status="primary">
+                    <nb-icon icon="plus-circle-outline" ></nb-icon>                        
+                </button>
             </div>
         </div>
 
-        <div class="col-md-9"></div>
-        <div class="col-md-3">
-                <button 
-                    nbButton fullWidth  (click)="Pagar()" type="submit" 
-                    class="home-button pull-right" status="success">
-                        Pagar
-                </button>
-
-        </div>
+        
+        
       
     </div>
+
+    <div class="row">
+            <div class="col-md-12" >
+                    <table mat-table [dataSource]="dataSourcesPagos" class="mat-elevation-z8" width="100%" height="100%">
+                                                    
+
+                            <!-- Checkbox Column -->
+                            <ng-container matColumnDef="button">
+                                <th mat-header-cell *matHeaderCellDef>#Acc
+                                   
+                                </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <button nbButton (click)="BtnEliminar( this.row )"
+                                            size="tiny" ghost status="danger">
+                                        <nb-icon icon="trash" ></nb-icon>
+                                        
+                                    </button>
+                                </td>
+                            </ng-container>
+                              <!-- Position Codigo -->
+                            <ng-container matColumnDef="Operacion">
+                                <th mat-header-cell *matHeaderCellDef  style="display: none">Operacion</th>
+                                <td mat-cell *matCellDef="let element" style="display: none">{{element.Operacion}}</td>
+                            </ng-container>
+                              <!-- Position Cuenta -->
+                            <ng-container matColumnDef="Banco">
+                                <th mat-header-cell *matHeaderCellDef>Banco</th>
+                                <td mat-cell *matCellDef="let element">{{element.Banco}}</td>
+                            </ng-container>
+
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="Referencia">
+                                <th mat-header-cell *matHeaderCellDef>Referencia</th>
+                                <td mat-cell *matCellDef="let element">{{element.Referencia}}</td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="Fecha">
+                                <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                                <td mat-cell *matCellDef="let element"> {{element.Fecha}} </td>
+                            </ng-container>
+
+                            <!-- Weight Column -->
+                            <ng-container matColumnDef="Monto">
+                                <th mat-header-cell *matHeaderCellDef> Monto </th>
+                                <td mat-cell *matCellDef="let element"> {{element.Monto}} </td>
+                            </ng-container>
+
+                          
+                            
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumnsPagos"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumnsPagos;"></tr>
+                        </table>
+                            
+                
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-md-9"></div>
+                <div class="col-md-3">
+                        <button 
+                            nbButton fullWidth  (click)="Pagar()" type="submit" 
+                            class="home-button pull-right" status="success">
+                                Pagar
+                        </button>
+        
+                </div>
+        </div>
 </ng-template>
 
