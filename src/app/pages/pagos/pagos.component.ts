@@ -38,14 +38,18 @@ export interface PeriodicElement {
   Monto ?: number
 }
 
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   {Reglon: 1, Numero: 'Hydrogen', Forma: 1.0079, Banco: 'H'},
-//   {Reglon: 2, Numero: 'Helium', Forma: 4.0026, Banco: 'He'},
-//   {Reglon: 3, Numero: 'Lithium', Forma: 6.941, Banco: 'Li'},
-//   {Reglon: 4, Numero: 'Beryllium', Forma: 9.0122, Banco: 'Be'},
-// ];
+//Forma de pago 
+export interface PeriodicPagos {
+  Operacion ?: number
+  Banco ?: string
+  Referencia ?: string
+  Fecha ?: string
+  Monto ?: number  
+}
+
 
 var ELEMENT_DATA: PeriodicElement[] = [];
+var ELEMENT_DATA_PAGOS: PeriodicPagos[] = [];
 
 @Component({
   selector: 'ngx-pagos',
@@ -84,6 +88,9 @@ export class PagosComponent implements OnInit {
   dataSources = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
+  displayedColumnsPagos: string[] = ['button', 'Operacion', 'Banco', 'Referencia', 'Fecha', 'Monto'];
+  dataSourcesPagos = new MatTableDataSource<PeriodicPagos>(ELEMENT_DATA_PAGOS);
+
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
     private docu: DocumentoService, 
@@ -92,6 +99,9 @@ export class PagosComponent implements OnInit {
     private bancoServicio: BancoService) {
       ELEMENT_DATA = []
       this.dataSources.data = []
+
+      ELEMENT_DATA_PAGOS = []
+      this.dataSourcesPagos.data = []
 
   }
 
@@ -149,7 +159,7 @@ export class PagosComponent implements OnInit {
 
   clickMontoTotal(row){
     if ( this.selection.isSelected( row ) ) {
-      this.montoTotal -= row.Monto 
+      this.montoTotal -= parseFloat ( parseFloat( row.Monto ).toFixed(2) )
     }else{
       this.montoTotal += parseFloat ( parseFloat( row.Monto ).toFixed(2) )
     }
