@@ -40,7 +40,7 @@ export interface PeriodicElement {
 
 //Forma de pago 
 export interface PeriodicPagos {
-  Operacion ?: number
+  Operacion ?: string
   Banco ?: string
   Referencia ?: string
   Fecha ?: string
@@ -75,6 +75,11 @@ export class PagosComponent implements OnInit {
   montofact = 0.00
   montofactd = 0.00
   ngFactura = false;
+  monto = 0.00
+  referencia = ''
+  operacion = ''
+  fecha = ''
+
 
   lstBancos = []
 
@@ -312,5 +317,16 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     }
 
   }
-  Pagar() {}
+  BtnAgregar(){
+    ELEMENT_DATA_PAGOS.push( {
+      Operacion : this.operacion,
+      Banco : this.banco,
+      Referencia: this.referencia, 
+      Fecha: this.fecha, 
+      Monto: this.monto,
+    } )
+    this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
+    }
+
+  Pagar(){}
 }
