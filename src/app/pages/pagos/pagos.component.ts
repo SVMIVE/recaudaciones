@@ -61,7 +61,9 @@ export class PagosComponent implements OnInit {
   @ViewChild('escClose', { read: TemplateRef  , static: false }) escCloseTemplate: TemplateRef<HTMLElement>;
   @ViewChild('disabledEsc', { read: TemplateRef, static: false }) disabledEscTemplate: TemplateRef<HTMLElement>;
 
-  
+  concepto = []
+  conceptox = ""
+
   codigo = ""
   cliente = ""
   rif = ''
@@ -95,6 +97,7 @@ export class PagosComponent implements OnInit {
 
   displayedColumnsPagos: string[] = ['button', 'Operacion', 'Banco', 'Referencia', 'Fecha', 'Monto'];
   dataSourcesPagos = new MatTableDataSource<PeriodicPagos>(ELEMENT_DATA_PAGOS);
+  toastrService: any;
 
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
@@ -172,6 +175,12 @@ export class PagosComponent implements OnInit {
   }
 
   Procesar() {
+  if ( this.montoTotal <= 0 ) {
+      this.montoTotal = 0;
+      return false;
+    }
+
+
 
     //console.log ( this.selection.selected )
 
@@ -272,7 +281,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
             Tipo: e.tp_documento,
             Moneda: e.moneda,
             Fecha: e.fe_documento.substr(0,10),
-            Monto: monto  
+            Monto: monto,
           } )
         });
        
@@ -317,7 +326,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     }
 
   }
-  BtnAgregar(){
+  BtnAgregar() {
     ELEMENT_DATA_PAGOS.push( {
       Operacion : this.operacion,
       Banco : this.banco,
@@ -327,6 +336,8 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     } )
     this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
     }
+    BtnEliminar() {}
 
-  Pagar(){}
+  Pagar() {}
+  Cancelar() {}
 }
