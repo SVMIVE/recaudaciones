@@ -43,7 +43,7 @@ export interface PeriodicPagos {
   Operacion ?: string
   Banco ?: string
   Referencia ?: string
-  Fecha ?: string
+  FechadPag ?: string
   Monto ?: number  
 }
 
@@ -67,7 +67,7 @@ export class PagosComponent implements OnInit {
   rif = ''
   direccion = ''
   selectedItem = ''
-  cantidad = '';
+  cantidad = ''
   selectedItemx = ''
   forma = ''
   banco = ''
@@ -78,10 +78,10 @@ export class PagosComponent implements OnInit {
   monto = 0.00
   referencia = ''
   operacion = ''
-  fecha = ''
 
 
   lstBancos = []
+  lstFPago = []
 
   Maestro = {}
   DetalleFact = []
@@ -317,16 +317,30 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     }
 
   }
+    lstFormPago() {
+      console.info("Procesando Forma Pago")
+      this.servicioCliente.lstFormaPago().subscribe(     
+        (resp) => {          
+            this.lstFPago = resp;
+         },
+        (err) => {
+          console.error("Error lista de Forma de Pago")
+        }
+  
+      ) 
+    }
   BtnAgregar(){
+    
     ELEMENT_DATA_PAGOS.push( {
-      Operacion : this.operacion,
-      Banco : this.banco,
-      Referencia: this.referencia, 
-      Fecha: this.fecha, 
-      Monto: this.monto,
-    } )
+    Operacion : this.operacion,
+    Banco : this.banco,
+    Referencia: this.referencia, 
+    FechadPag: this.fechadep, 
+    Monto: this.monto,
+     } )
+    
     this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
     }
-
+   
   Pagar(){}
 }

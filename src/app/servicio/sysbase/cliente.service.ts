@@ -68,6 +68,10 @@ export class ClienteService {
     return this.httpClient.get<any>(this.url +  "sybase/cliente/lstactividad")
   }
 
+  lstFormaPago() : any{
+    return this.httpClient.get<any>(this.url +  "sybase/cliente/formaPago")
+  }
+
   agregar(wC : WCliente){
     var wAdmin : WAdminUsuario  = {
       tbl: 'dbo.admin_personas_juridicas',

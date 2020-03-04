@@ -527,18 +527,18 @@ export class DocumentosComponent implements OnInit {
     });
 
 
-    this.baseImponible += this.baseimponiblex
-    this.exento += this.exentox
-    this.montoivax +=  this.ivat
-    this.montobaseimponiblex = this.baseImponible
+    this.baseImponible += parseFloat(this.baseimponiblex.toFixed(2) )
+    this.exento += parseFloat(this.exentox.toFixed(2) )
+    this.montoivax +=  parseFloat(this.ivat.toFixed(2) )
+    this.montobaseimponiblex = parseFloat(this.baseImponible.toFixed(2) )
     this.montototalx = this.exento + this.baseImponible + this.montoivax
-
+    this.montototalx = parseFloat(this.montototalx.toFixed(2) )
     ELEMENT_DATA.push( {
       Codigo : this.conceptox,
       Cuenta : this.cuenta,
       Cantidad: this.cantidad, 
       Concepto: concepto, 
-      Monto: this.total,
+      Monto: parseFloat(this.total.toFixed(2)),
       Iva: this.ivaf, 
       MontoIva: this.ivat,
       Exento : this.exentox,
@@ -548,7 +548,7 @@ export class DocumentosComponent implements OnInit {
     if( this.ivaf > 0 ) { 
      this.pcIva = this.ivaf.toString()
     }
-    this.montoTotal += this.total
+    this.montoTotal += parseFloat(this.total.toFixed(2) )
     this.dataSourcesx.data = ELEMENT_DATA
     this.index++
     LSTDetalles.push( {      
