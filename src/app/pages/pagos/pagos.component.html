@@ -62,7 +62,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Monto total</label>
-                    <input nbInput fullWidth  [(ngModel)]="montoTotal" disabled>
+                    <input nbInput fullWidth  type="number" [(ngModel)]="montoTotal" disabled step="0.01">
                 </div>
             </div>
         </div>
@@ -138,11 +138,14 @@
                 (click)="selection.toggle(row)">
             </tr>
             </table>
-
-             <button nbButton fullWidth  (click)="Procesar()" type="submit" class="home-button pull-right" status="primary">
-                Procesar
+            <br>
+            <div class="row">
+            <div class="col-md-3" >
+             <button nbButton size="large" width="100%" shape="semi-round" (click)="Procesar('top-right','success')" type="submit" status="success">
+                Procesar Facturación<nb-icon icon="file-text-outline"></nb-icon>
             </button>
-
+            </div>
+            </div>
     </nb-card-body>
 </nb-card>
 
