@@ -69,7 +69,7 @@ export class ClienteService {
   }
 
   lstFormaPago() : any{
-    return this.httpClient.get<any>(this.url +  "sybase/cliente/formaPago")
+    return this.httpClient.get<any>(this.url +  "sybase/admincontrol/formapago")
   }
 
   agregar(wC : WCliente){

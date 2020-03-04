@@ -173,7 +173,8 @@
                 <nb-select placeholder="Forma de Pago"(selected)="selectedItem" 
                 fullWidth  
                 [(ngModel)]="forma" >
-                    <nb-option *ngFor = "let pag of lstFPago"  value="{{pag.tp_pago}}"> {{ pag.tp_pago + ' - ' + pag.ds_pago}} </nb-option>
+                    <nb-option *ngFor = "let pag of lstFPago"  
+                    value="{{pag.tp_pago}}"> {{ pag.tp_pago + ' - ' + pag.ds_pago}} </nb-option>
                 </nb-select>
             </div>
         </div>
@@ -264,7 +265,7 @@
                             <!-- Name Column -->
                             <ng-container matColumnDef="Fecha">
                                 <th mat-header-cell *matHeaderCellDef>Fecha</th>
-                                <td mat-cell *matCellDef="let element"> {{element.FechaFpago}} </td>
+                                <td mat-cell *matCellDef="let element"> {{element.FechadPag}} </td>
                             </ng-container>
 
                             <!-- Weight Column -->

@@ -162,6 +162,7 @@ export class PagosComponent implements OnInit {
         console.error('No se logro conectar...');
       },
     );
+    this.lstFormPago()
   }
 
 
@@ -326,25 +327,26 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     }
 
   }
-    lstFormPago() {
-      console.info("Procesando Forma Pago")
+  lstFormPago() {
+      
       this.servicioCliente.lstFormaPago().subscribe(     
         (resp) => {          
             this.lstFPago = resp;
+            console.info(resp)
          },
         (err) => {
-          console.error("Error lista de Forma de Pago")
+          console.error("Error lista de Forma de Pago") 
         }
   
       ) 
     }
   BtnAgregar() {
     ELEMENT_DATA_PAGOS.push( {
-    Operacion : this.operacion,
-    Banco : this.banco,
-    Referencia: this.referencia, 
-    FechadPag: this.fechadep, 
-    Monto: this.monto,
+      Operacion : this.operacion,
+      Banco : this.banco,
+      Referencia: this.referencia, 
+      FechadPag: this.fechadep, 
+      Monto: this.monto,
      } )
     
     this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
