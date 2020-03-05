@@ -359,6 +359,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     
     this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
     }
+  
     BtnEliminar(element){
       var i = 0
       var eliminar = 0
@@ -373,5 +374,14 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       ELEMENT_DATA_PAGOS.splice(eliminar, 1) //Elimino
 
       this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
+    }
+
+
+    SeleccionarMontoTotal(e){
+      console.log(e)
+      this.montoTotal = 0
+      ELEMENT_DATA.forEach(el => {
+        this.montoTotal += el.Monto
+      } )
     }
 }
