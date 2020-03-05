@@ -89,6 +89,7 @@ export class PagosComponent implements OnInit {
   DetalleFact = []
   DetalleDoc = []
   montoTotal = 0
+  clickBox = false;
 
 
   displayedColumns: string[] = ['select', 'Reglon', 'Control', 'Seniat', 'Servicio', 'Tipo', 'Moneda', 'Fecha', 'Monto'];
@@ -267,6 +268,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     ELEMENT_DATA = []
     this.dataSources.data = []
     this.montoTotal = 0
+    this.clickBox = false;
     return this.servicioCliente.lstPagos(this.codigo).subscribe(
       (resp) => { 
         console.log(resp )
@@ -378,10 +380,12 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
 
 
     SeleccionarMontoTotal(e){
+      if ( this.clickBox = true ) { return this.clickBox = false;
+      }  else {
       console.log(e)
-      this.montoTotal = 0
+      this.montoTotal = 0;
       ELEMENT_DATA.forEach(el => {
-        this.montoTotal += el.Monto
-      } )
+        this.montoTotal +=  (el.Monto); });
     }
+}
 }
