@@ -341,15 +341,31 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       ) 
     }
   BtnAgregar() {
+    var fe = new Date(this.fechadep)
     ELEMENT_DATA_PAGOS.push( {
       Operacion : this.operacion,
       Banco : this.banco,
       Referencia: this.referencia, 
-      FechadPag: this.fechadep, 
+      FechadPag:fe.toLocaleDateString('en-GB').substring(0,10),
+
       Monto: this.monto,
      } )
     
     this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
     }
+    BtnEliminar(element){
+      var i = 0
+      var eliminar = 0
+  
+      ELEMENT_DATA_PAGOS.forEach(e => {
+        if(e.Banco == element.Banco){ 
+          eliminar = i 
+        }
+        i++
+      });
+      
+      ELEMENT_DATA_PAGOS.splice(eliminar, 1) //Elimino
 
+      this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
+    }
 }
