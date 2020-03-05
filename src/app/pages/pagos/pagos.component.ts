@@ -143,7 +143,7 @@ export class PagosComponent implements OnInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     // console.log( this.selection.isSelected(row) ) 
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.Reglon + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.Reglon +1}`;
   }
 
 
@@ -169,7 +169,7 @@ export class PagosComponent implements OnInit {
   clickMontoTotal(row){
     if ( this.selection.isSelected( row ) ) {
       this.montoTotal -= parseFloat ( parseFloat( row.Monto ).toFixed(2) )
-    }else{
+    } else {
       this.montoTotal += parseFloat ( parseFloat( row.Monto ).toFixed(2) )
     }
     console.log(row)
