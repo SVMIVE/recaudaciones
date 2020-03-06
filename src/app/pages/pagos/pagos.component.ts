@@ -177,6 +177,11 @@ export class PagosComponent implements OnInit {
     }else{
       this.montoTotal += parseFloat ( parseFloat( row.Monto ).toFixed(2) )
     }
+    console.log(row)
+  }
+
+  clickMontoTotalFila(row){
+    console.log(row)
     
   }
 
@@ -266,6 +271,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
   lstPagos(){
     ELEMENT_DATA = []
     this.dataSources.data = []
+    this.montoTotal = 0
     return this.servicioCliente.lstPagos(this.codigo).subscribe(
       (resp) => { 
         console.log(resp )
@@ -287,7 +293,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
             Tipo: e.tp_documento,
             Moneda: e.moneda,
             Fecha: e.fe_documento.substr(0,10),
-            Monto: monto,
+            Monto: parseFloat (parseFloat(monto).toPrecision(2)),
           } )
         });
        
@@ -359,6 +365,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     
 
     this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
+<<<<<<< HEAD
   }
   validarbtnpagar(): boolean{
     var pagar = false
@@ -373,6 +380,11 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
 
   //Eliminar elementos del pagos
   BtnEliminar(element){
+=======
+    }
+  
+    BtnEliminar(element){
+>>>>>>> a7e761e1e0e1baba10e1d2c2506d7a60f459524d
       var i = 0
       var eliminar = 0
   
@@ -392,9 +404,20 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
 
       this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
     }
+<<<<<<< HEAD
     Pagar(){    
       if ( this.validarbtnpagar() ) {
         console.log(this.validarbtnpagar())
       }
+=======
+
+
+    SeleccionarMontoTotal(e){
+      console.log(e)
+      this.montoTotal = 0
+      ELEMENT_DATA.forEach(el => {
+        this.montoTotal += el.Monto
+      } )
+>>>>>>> a7e761e1e0e1baba10e1d2c2506d7a60f459524d
     }
 }
