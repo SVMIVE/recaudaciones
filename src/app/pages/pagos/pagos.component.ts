@@ -81,6 +81,9 @@ export class PagosComponent implements OnInit {
   referencia = ''
   operacion = ''
 
+  montodet= 0.00
+  totaldet= 0.00
+  Monto= 0.00
 
   lstBancos = []
   lstFPago = []
@@ -88,7 +91,9 @@ export class PagosComponent implements OnInit {
   Maestro = {}
   DetalleFact = []
   DetalleDoc = []
-  montoTotal = 0
+  montoTotal = 0.00
+  montoTotalPagos = 0.00
+  montoAcumulado = 0.00
 
 
   displayedColumns: string[] = ['select', 'Reglon', 'Control', 'Seniat', 'Servicio', 'Tipo', 'Moneda', 'Fecha', 'Monto'];
@@ -110,7 +115,7 @@ export class PagosComponent implements OnInit {
 
       ELEMENT_DATA_PAGOS = []
       this.dataSourcesPagos.data = []
-
+      this.totaldet = 0
   }
 
 
@@ -342,18 +347,32 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     }
   BtnAgregar() {
     var fe = new Date(this.fechadep)
+    this.montoAcumulado = ( ( this.montofactd * 1 ) + (this.montoAcumulado * 1) )
     ELEMENT_DATA_PAGOS.push( {
       Operacion : this.operacion,
       Banco : this.banco,
       Referencia: this.referencia, 
       FechadPag:fe.toLocaleDateString('en-GB').substring(0,10),
-
-      Monto: this.monto,
+      Monto: this.montofactd,
      } )
     
+    
+
     this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
-    }
-    BtnEliminar(element){
+  }
+  validarbtnpagar(): boolean{
+    var pagar = false
+    
+    ELEMENT_DATA_PAGOS.forEach(e => {
+      if(this.montoAcumulado == e.Monto) pagar = true
+      console.log(this.montoAcumulado)   
+      console.log(e.Monto)  
+    });
+    return pagar
+  }
+
+  //Eliminar elementos del pagos
+  BtnEliminar(element){
       var i = 0
       var eliminar = 0
   
@@ -365,7 +384,17 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       });
       
       ELEMENT_DATA_PAGOS.splice(eliminar, 1) //Elimino
+      
+      ELEMENT_DATA_PAGOS.forEach(x => {
+        this.montodet += this.totaldet
+       
+      });  
 
       this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
+    }
+    Pagar(){    
+      if ( this.validarbtnpagar() ) {
+        console.log(this.validarbtnpagar())
+      }
     }
 }

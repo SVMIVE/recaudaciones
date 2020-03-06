@@ -62,7 +62,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Monto total</label>
-                    <input nbInput fullWidth  type="number" [(ngModel)]="montoTotal" disabled step="0.01">
+                    <input nbInput fullWidth  type="number" [(ngModel)]="montoTotal" disabled >
                 </div>
             </div>
         </div>
@@ -186,7 +186,7 @@
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="form-group">
                 
                 <input nbInput fullWidth placeholder="Fecha" [(ngModel)]="fechadep" 
@@ -208,12 +208,21 @@
             <div class="form-group">
                 <input placeholder="Monto" 
                     nbInput fullWidth 
-                    [(ngModel)]="montofactd"                   
-                    [disabled] = "true">
+                    [(ngModel)]="montofactd">
                     
             </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-3">
+            <div class="form-group">
+                
+                    <label>Monto total</label>
+                    <input nbInput fullWidth  type="number" [(ngModel)]="montoTotal" disabled >
+              
+            </div>
+
+            
+        </div>
+        <div class="col-md-2">
             <div class="form-group">
                 <button nbButton (click)="BtnAgregar( )" 
                     class='home-button pull-left' status="primary">
@@ -225,6 +234,14 @@
         
         
       
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label>Total Acumulado</label>
+                <input nbInput fullWidth  type="number" [(ngModel)]="montoAcumulado" disabled >
+            </div>
+        </div>
     </div>
 
     <div class="row">
