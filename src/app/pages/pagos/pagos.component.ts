@@ -378,8 +378,8 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     return pagar
   }
 
-  //Eliminar elementos del pagos
-  BtnEliminar(element){
+  //Eliminar elementos del pagos  
+    BtnEliminar(element){
       var i = 0
       var eliminar = 0
   
@@ -399,12 +399,11 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
 
       this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
     }
-
     Pagar(){    
-      if ( this.validarbtnpagar() ) 
+      if ( this.validarbtnpagar() ) {
         console.log(this.validarbtnpagar())
       }
-
+    }
 
 
     SeleccionarMontoTotal(e) {
@@ -414,7 +413,6 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       ELEMENT_DATA.forEach(el => {
         this.montoTotal += el.Monto;
       } )
-
     }
 }
 
