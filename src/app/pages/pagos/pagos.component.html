@@ -62,7 +62,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Monto total</label>
-                    <input nbInput fullWidth  type="number" [(ngModel)]="montoTotal" disabled >
+                    <input nbInput fullWidth  type="number" [(ngModel)]="montoTotal" disabled step="0.01">
                 </div>
             </div>
         </div>
@@ -84,7 +84,6 @@
                     <mat-checkbox (click)="$event.stopPropagation(); clickMontoTotal(row); "
                                     (change)="$event ? selection.toggle(row) : null"
                                     [checked]="selection.isSelected(row)"
-                                    
                                     [aria-label]="checkboxLabel(row)">
                     </mat-checkbox>
                 </td>
@@ -189,7 +188,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="form-group">
                 
                 <input nbInput fullWidth placeholder="Fecha" [(ngModel)]="fechadep" 
@@ -211,21 +210,12 @@
             <div class="form-group">
                 <input placeholder="Monto" 
                     nbInput fullWidth 
-                    [(ngModel)]="montofactd">
+                    [(ngModel)]="montofactd"                   
+                    [disabled] = "true">
                     
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                
-                    <label>Monto total</label>
-                    <input nbInput fullWidth  type="number" [(ngModel)]="montoTotal" disabled >
-              
-            </div>
-
-            
-        </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
             <div class="form-group">
                 <button nbButton (click)="BtnAgregar( )" 
                     class='home-button pull-left' status="primary">
@@ -237,14 +227,6 @@
         
         
    
-    </div>
-    <div class="row">
-        <div class="col-md-5">
-            <div class="form-group">
-                <label>Total Acumulado</label>
-                <input nbInput fullWidth  type="number" [(ngModel)]="montoAcumulado" disabled >
-            </div>
-        </div>
     </div>
 
     <div class="row">

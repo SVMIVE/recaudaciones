@@ -92,6 +92,7 @@ export class PagosComponent implements OnInit {
   DetalleFact = []
   DetalleDoc = []
   montoTotal = 0.00
+  clickbox = false;
   montoTotalPagos = 0.00
   montoAcumulado = 0.00
 
@@ -406,13 +407,19 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     }
 
 
-    SeleccionarMontoTotal(e) {
-      
+    SeleccionarMontoTotal(e){
+    
+      if (this.clickbox = false) {
+        return this.clickbox = true;
+      }
+      else {
       console.log(e)
       this.montoTotal = 0;
       ELEMENT_DATA.forEach(el => {
-        this.montoTotal += el.Monto;
-      } )
+      this.montoTotal += el.Monto;
+      } );
+      }
+
     }
 }
 
