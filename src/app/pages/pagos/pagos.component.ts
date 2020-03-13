@@ -368,7 +368,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
 
     this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
   }
-  validarbtnpagar(): boolean{
+  Pagar(): boolean{
     var pagar = false
     
     ELEMENT_DATA_PAGOS.forEach(e => {
@@ -400,24 +400,18 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
 
       this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
     }
-    Pagar(){    
-      if ( this.validarbtnpagar() ) {
-        console.log(this.validarbtnpagar())
-      }
-    }
-
 
     SeleccionarMontoTotal(e){
     
       if (this.clickbox = false) {
+        
         return this.clickbox = true;
-      }
-      else {
-      console.log(e)
-      this.montoTotal = 0;
-      ELEMENT_DATA.forEach(el => {
-      this.montoTotal += el.Monto;
-      } );
+      }else{
+          this.montoTotal = 0;
+          ELEMENT_DATA.forEach(el => {
+          var mon =this.montoTotal += el.Monto;
+          console.log(mon)
+          } );
       }
       
     }
