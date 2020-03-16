@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import {  NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, 
   NbWindowService, NbTreeGridDataSource, NbToastrService, NbSearchService } from '@nebular/theme';
 
