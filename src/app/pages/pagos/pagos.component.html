@@ -130,7 +130,7 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="Monto">
                 <th mat-header-cell *matHeaderCellDef> Monto </th>
-                <td mat-cell *matCellDef="let element"> {{element.Monto}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.Monto  | currency:'BS' }} </td>
             </ng-container>
 
 

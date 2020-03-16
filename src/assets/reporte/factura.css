@@ -15,6 +15,9 @@
     font-style: normal;
 }
 
+@media print {
+   
+}
 p{
 margin-bottom: 0;
 padding-bottom: 0;
