@@ -309,15 +309,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     )
   }
 
-  guardar(){
-
-    /**
-     *  INSERT INTO dbo.admin_pagos (nu_pago,fe_pago,cd_cliente,
-     * cd_usuario,st_pago,ds_observaciones,
-     * st_reversa,mn_pago_bf,oficina,mn_pago_dol,moneda,fe_pago_servidor,nu_sobrante,mn_sobrante)
-
-        VALUES('299401','2020-01-10 10:55:04.38','10773','AMARRERO',1,NULL,0,3620800.00,'2',0.00,'B','2020-01-10 10:55:04.38',NULL,0.00)
-     */
+  ProcesarPago(){
     var Pago = {     
       "call_back": "AutoIncrementoPagos", 
       "tbl" : "dbo.admin_pagos",
@@ -364,25 +356,26 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       Monto: this.montofactd,
       
      } )
-    
-    
-
     this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
   }
   Pagar(): boolean{
     var pagar = false
-    
+    if(this.codigo == "")return false
     ELEMENT_DATA_PAGOS.forEach(e => {
       if(this.montoAcumulado ==this.montoTotal){
-      pagar = true
-      console.log(this.montoAcumulado)   
-      console.log(this.montoTotal) } else{
-        console.error("lista de Forma de Pago") 
+        this.ProcesarPago()
+        console.log(this.montoAcumulado)   
+        console.log(this.montoTotal) 
+        pagar = true
+      } else{
+        console.log(this.montoAcumulado)   
+        console.log(this.montoTotal) 
+        console.error("Error Al Guardar Registro de Pago") 
       }
     });
     return pagar
   }
-
+  
   //Eliminar elementos del pagos  
     BtnEliminar(element){
       var i = 0
@@ -406,16 +399,17 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     }
 
     SeleccionarMontoTotal(e){
-    
+      this.montoTotal = 0;
       if (this.clickbox = false) {
-        
         return this.clickbox = true;
+        this.montoTotal = 0;
       }else{
-          this.montoTotal = 0;
+          
           ELEMENT_DATA.forEach(el => {
           var mon =this.montoTotal += el.Monto;
-          console.log(mon)
+           console.log(mon)
           } );
+         
       }
       
     }
