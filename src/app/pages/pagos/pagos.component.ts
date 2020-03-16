@@ -44,7 +44,7 @@ export interface PeriodicPagos {
   Banco ?: string
   Referencia ?: string
   FechadPag ?: string
-  Monto ?: number  
+  Monto ?: number 
 }
 
 
@@ -362,6 +362,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       Referencia: this.referencia, 
       FechadPag:fe.toLocaleDateString('en-GB').substring(0,10),
       Monto: this.montofactd,
+      
      } )
     
     
@@ -372,9 +373,12 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
     var pagar = false
     
     ELEMENT_DATA_PAGOS.forEach(e => {
-      if(this.montoAcumulado == e.Monto) pagar = true
+      if(this.montoAcumulado ==this.montoTotal){
+      pagar = true
       console.log(this.montoAcumulado)   
-      console.log(e.Monto)  
+      console.log(this.montoTotal) } else{
+        console.error("lista de Forma de Pago") 
+      }
     });
     return pagar
   }
