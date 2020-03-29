@@ -39,13 +39,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { PasswordValidationDirective } from './validations/password-validation.directive';
 import { LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CurrencyPipe } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 registerLocaleData(localePt, 'pt-BR');
 @NgModule({
-  providers: [
-    { provide: LOCALE_ID, useValue: 'pt-BR' }    
-  ], 
+  
+  providers: [CurrencyPipe],
   declarations: [
     AppComponent,
      NotadebitoComponent,

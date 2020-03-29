@@ -316,7 +316,7 @@
                                                     <!-- Weight Column -->
                                                     <ng-container matColumnDef="Monto">
                                                         <th mat-header-cell *matHeaderCellDef> Monto </th>
-                                                        <td mat-cell *matCellDef="let element"> {{element.Monto | currency:'BS' }} </td>
+                                                        <td mat-cell *matCellDef="let element"> {{element.Monto}} </td>
                                                     </ng-container>
 
                                                     <!-- Symbol Column -->
@@ -664,17 +664,17 @@
                             <Label class="label_right">BASE IMPONIBLE:</Label>
                         </td>
                         <td class="num">
-                            <label id="fbaseimponiblebolivares">{{montobaseimponiblex  | currency:'BS' }}</label>
+                            <label id="fbaseimponiblebolivares">{{montobaseimponiblex  | currency:'BS':'BS':'4.2-2':'pt-BR' }}</label>
                         </td>
                         <td class="cell2">
-                            <Label class="label_right">IVA BS:
-                                <Label class="pinline" id="fivabolivares">{{ iva | currency:'BS' }}%</Label>
+                            <Label class="label_right">IVA:
+                                <Label class="pinline" id="fivabolivares">{{ iva | currency:'BS':'BS':'4.2-2':'pt-BR' }}%</Label>
                             </Label>
                             
                         </td>
                         <td class="num">
                            <b>
-                            <Label id="fivabolivares">{{montototalx | currency:'BS' }}</Label>
+                            <Label id="fivabolivares">{{montototalx | currency:'BS':'BS':'4.2-2':'pt-BR' }}</Label>
                            </b> 
                         </td>
                     </tr>
@@ -699,11 +699,11 @@
                     <tr style="border-bottom: 3px solid black;">
                         <td colspan="2"></td>
                         <td class="cell2">
-                            <Label class="label_right">TOTAL (BS):</Label>
+                            <Label class="label_right">TOTAL:</Label>
                         </td>
                         <td class="num">
                            <b>
-                            <Label id="ftotalbolivares">{{montototalx | currency:'BS' }}</Label>
+                            <Label id="ftotalbolivares">{{montototalx | currency:'BS':'BS':'4.2-2':'pt-BR' }}</Label>
                            </b> 
                         </td>
                     </tr>

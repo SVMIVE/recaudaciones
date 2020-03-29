@@ -12,6 +12,8 @@ import { TasaService } from '../../servicio/tasa/tasa.service';
 import { Subscription } from 'rxjs';
 import { WindowRef } from '@agm/core/utils/browser-globals';
 import { LoginService } from '../../servicio/auth/login.service';
+import { CurrencyPipe } from '@angular/common'
+
 
 
 
@@ -154,6 +156,9 @@ export class DocumentosComponent implements OnInit {
   windowRef: any
   windowClient: any
   windowProcesar: any
+  tempmonto: any;
+  temptotal: any;
+
 
   
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>, 
@@ -165,7 +170,8 @@ export class DocumentosComponent implements OnInit {
     private servicioCliente : ClienteService ,
     private tasaService : TasaService,
     private usrService : LoginService,
-    private nbSearch : NbSearchService) {
+    private nbSearch : NbSearchService,
+    private cp: CurrencyPipe) {
     
       //this.cargarConcepto()
       ELEMENT_DATA = []
@@ -355,8 +361,8 @@ export class DocumentosComponent implements OnInit {
         this.cuenta = e.cd_cuenta
 
       }
-      
-      console.error('Base Imponible: ', this.baseimponiblex)
+      //this.tempmonto = this.cp.transform(this.baseimponiblex, '', 'BS', '1.2-2','pt-BR');
+      console.error('Base Imponible: ', this.tempmonto)
 
     });
     
@@ -526,19 +532,21 @@ export class DocumentosComponent implements OnInit {
       }
     });
 
-
+    
     this.baseImponible += parseFloat(this.baseimponiblex.toFixed(2) )
     this.exento += parseFloat(this.exentox.toFixed(2) )
     this.montoivax +=  parseFloat(this.ivat.toFixed(2) )
     this.montobaseimponiblex = parseFloat(this.baseImponible.toFixed(2) )
     this.montototalx = this.exento + this.baseImponible + this.montoivax
     this.montototalx = parseFloat(this.montototalx.toFixed(2) )
+    this.temptotal = parseFloat(this.total.toFixed(2)),
+    this.tempmonto = this.cp.transform(this.temptotal, '', 'BS', '1.2-2','pt-BR');
     ELEMENT_DATA.push( {
       Codigo : this.conceptox,
       Cuenta : this.cuenta,
       Cantidad: this.cantidad, 
       Concepto: concepto, 
-      Monto: parseFloat(this.total.toFixed(2)),
+      Monto: this.tempmonto,
       Iva: this.ivaf, 
       MontoIva: this.ivat,
       Exento : this.exentox,
