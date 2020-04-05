@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 export const environment = {
-  production: true,
-  url : "https://192.168.41.14:2608/iaim/api/",
+  production: false,
+  //url : 'https://192.168.10.82:2608/iaim/api/',
+  //url : 'https://192.168.41.28:2608/iaim/api/',
+  configWindow : { },
 };

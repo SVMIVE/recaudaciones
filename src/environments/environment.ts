@@ -10,6 +10,7 @@
 
 export const environment = {
   production: false,
-  url : 'https://192.168.10.82:2608/iaim/api/',
+ // url : 'https://192.168.10.82:2608/iaim/api/',
+  url : 'https://192.168.41.28:2608/iaim/api/',
   configWindow : { },
 };

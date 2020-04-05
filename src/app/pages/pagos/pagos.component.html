@@ -297,7 +297,7 @@
                 <div class="col-md-6"></div>
                 <div class="col-md-3"><br>
                         <button 
-                            nbButton fullWidth  (click)="Pagar()" type="submit" 
+                            nbButton fullWidth  (click)="ProcesarPagar()" type="submit" 
                             class="home-button pull-right" status="success">
                                 Pagar
                         </button>
@@ -305,12 +305,69 @@
                 </div>
                 <div class="col-md-3"><br>
                     <button 
-                        nbButton fullWidth  (click)="Cancelar()" type="submit" 
+                        nbButton fullWidth  (click)="cancelarPago()" type="submit" 
                         class="home-button pull-right" status="danger">
                             Cancelar
                     </button>
     
             </div>
         </div>
+</ng-template>
+
+<ng-template #frmCancelaPago>
+    <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">    
+                    ¿ Estás seguro que deseas cancelar esta operación ?<br><br>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <button nbButton   (click)="siCancelar( this )" class="btn-pull-rigth"
+                                size="small"  status="success">
+                            Aceptar
+                    </button>
+                </div>
+                <div class="col-md-4">
+                    <button nbButton   (click)="noCancelar( $event )" class="btn-pull-rigth"
+                                size="small"  status="danger">
+                            Cancelar
+                    </button>
+    
+                </div>
+               
+            </div>
+    </div>
+</ng-template>
+<ng-template #frmProcesarPago>
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-md-12">
+                <label>Numero Pago:&nbsp;</label>
+                <h1>{{lblNumeroPago}}</h1>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4">
+                <button nbButton   (click)="aceptarDocumento( this )" class="btn-pull-rigth"
+                            size="small"  status="success">
+                        Aceptar
+                </button>
+            </div>
+            
+            
+        </div>
+
+    </div>
 </ng-template>
 

@@ -10,6 +10,8 @@ import { DocumentoService } from '../../servicio/sysbase/documento.service';
 import { ClienteService } from '../../servicio/sysbase/cliente.service';
 import { BancoService } from '../../servicio/sysbase/banco.service';
 import { PagadoresComponent } from '../pagadores/pagadores.component';
+import { WindowRef } from '@agm/core/utils/browser-globals';
+//import { LoginService } from '../../servicio/auth/login.service';
 
 interface TreeNode<T> {
   data: T;
@@ -60,6 +62,8 @@ export class PagosComponent implements OnInit {
 
   @ViewChild('escClose', { read: TemplateRef  , static: false }) escCloseTemplate: TemplateRef<HTMLElement>;
   @ViewChild('disabledEsc', { read: TemplateRef, static: false }) disabledEscTemplate: TemplateRef<HTMLElement>;
+  @ViewChild('frmCancelaPago', { read: TemplateRef  , static: false }) frmCancelaPago: TemplateRef<HTMLElement>;
+  @ViewChild('frmProcesarPago', { read: TemplateRef  , static: false }) frmProcesarPagoTemplate: TemplateRef<HTMLElement>;
 
   concepto = []
   conceptox = ""
@@ -80,7 +84,7 @@ export class PagosComponent implements OnInit {
   monto = 0.00
   referencia = ''
   operacion = ''
-
+  seriepago = ''
   montodet= 0.00
   totaldet= 0.00
   Monto= 0.00
@@ -96,6 +100,11 @@ export class PagosComponent implements OnInit {
   montoTotalPagos = 0.00
   montoAcumulado = 0.00
 
+  lblNumeroPago = ''
+
+  windowRef: any
+  windowClient: any
+  windowProcesar: any
 
   displayedColumns: string[] = ['select', 'Reglon', 'Control', 'Seniat', 'Servicio', 'Tipo', 'Moneda', 'Fecha', 'Monto'];
   dataSources = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
@@ -109,6 +118,7 @@ export class PagosComponent implements OnInit {
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
     private docu: DocumentoService, 
     private windowService: NbWindowService,
+    //private usrService : LoginService,
     private servicioCliente : ClienteService,
     private bancoServicio: BancoService) {
       ELEMENT_DATA = []
@@ -117,6 +127,8 @@ export class PagosComponent implements OnInit {
       ELEMENT_DATA_PAGOS = []
       this.dataSourcesPagos.data = []
       this.totaldet = 0
+
+      this.lblNumeroPago = ''
   }
 
 
@@ -169,6 +181,12 @@ export class PagosComponent implements OnInit {
       },
     );
     this.lstFormPago()
+  }
+  showToast(position, status) {
+    this.toastrService.show(
+      status || 'Success',
+      `Proceso finalizado`,
+      { position, status });
   }
 
 
@@ -224,6 +242,8 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       */
      this.montofact = monto
      this.montofactd = montodol
+     var d = new Date()
+     var fe =  d.toISOString().substring(0,10)
      this.DetalleFact.push(
         {                
           "tbl" : "dbo.admin_detpagos",
@@ -231,7 +251,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
           "nu_renglon": e.Reglon,
           "tp_pago": this.forma,
           "id_banco": this.banco,
-          "fe_tppago": "2020-01-02 00:00:00.0",
+          "fe_tppago": fe,
           "nu_docpago": "",
           "mn_pago_bf": this.montofact,
           "mn_pago_dol": this.montofactd,
@@ -310,13 +330,18 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
   }
 
   ProcesarPago(){
-    var Pago = {     
+    //var usr = this.usrService.obtenerUsuario()
+    //this.seriepago = usr.serie
+    if(this.codigo == "")return false
+    var d = new Date()
+    var fe =  d.toISOString().substring(0,10)
+    var obj = {     
       "call_back": "AutoIncrementoPagos", 
       "tbl" : "dbo.admin_pagos",
       "nu_pago": "",
-      "fe_pago": "",
+      "fe_pago": fe + " " + d.toLocaleTimeString('en-US', { hour12: false }),
       "cd_cliente": this.codigo,
-      "cd_usuario": "TUPA",
+      "cd_usuario": "",
       "st_pago": "1",
       "ds_observaciones": "",
       "st_reversa": 0,
@@ -328,9 +353,26 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       "nu_sobrante": "",
       "mn_sobrante": "",
       "onetomany": this.DetalleFact,
-      "manytomany": this.DetalleDoc,
-    }
-
+      //"manytomany": this.DetalleDoc,
+      }
+    this.docu.agregar(obj).subscribe(
+      (data) => {    
+        this.showToast('top-right', 'success')
+        this.lblNumeroPago = data.resp
+        this.windowProcesar = this.windowService.open(
+          this.frmProcesarPagoTemplate,
+          { title: 'Pago Generado', hasBackdrop: true, closeOnEsc: true },
+          );
+          
+          this.limpiarCampos()    
+      },
+      (err) => { 
+        console.info(obj)
+        console.log(err)
+        this.showToast('top-right', 'warning')
+        console.info( JSON.stringify( obj ) )
+      }
+    ) 
   }
   lstFormPago() {
       
@@ -358,24 +400,6 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
      } )
     this.dataSourcesPagos.data = ELEMENT_DATA_PAGOS
   }
-  Pagar(): boolean{
-    var pagar = false
-    if(this.codigo == "")return false
-    ELEMENT_DATA_PAGOS.forEach(e => {
-      if(this.montoAcumulado ==this.montoTotal){
-        this.ProcesarPago()
-        console.log(this.montoAcumulado)   
-        console.log(this.montoTotal) 
-        pagar = true
-      } else{
-        console.log(this.montoAcumulado)   
-        console.log(this.montoTotal) 
-        console.error("Error Al Guardar Registro de Pago") 
-      }
-    });
-    return pagar
-  }
-  
   //Eliminar elementos del pagos  
     BtnEliminar(element){
       var i = 0
@@ -413,5 +437,28 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       }
       
     }
+    cancelarPago(){
+      this.windowRef = this.windowService.open(
+        this.frmCancelaPago,
+        { title: 'Cancelar proceso', hasBackdrop: true, closeOnEsc: true },
+      );
+      
+    }
+    limpiarCampos(){
+      this.operacion = ""
+      this.banco = ""
+      this.referencia = ""
+      this.fechadep = ""
+      this.montofactd = 0
+      this.montoAcumulado = 0
+      this.dataSourcesPagos.data = []
+    }
+  
+    siCancelar(e){
+      this.limpiarCampos()
+      this.windowRef.close()
+    }
+    noCancelar(e){
+      this.windowRef.close()
+    }
 }
-
