@@ -7,11 +7,12 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { NbSortDirection, NbTreeGridDataSourceBuilder, NbSortRequest, NbWindowService, NbTreeGridDataSource } from '@nebular/theme';
 import { FormControl, FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../servicio/sysbase/documento.service';
+import { PagoService } from '../../servicio/sysbase/pago.service';
 import { ClienteService } from '../../servicio/sysbase/cliente.service';
 import { BancoService } from '../../servicio/sysbase/banco.service';
 import { PagadoresComponent } from '../pagadores/pagadores.component';
 import { WindowRef } from '@agm/core/utils/browser-globals';
-//import { LoginService } from '../../servicio/auth/login.service';
+import { LoginService } from '../../servicio/auth/login.service';
 
 interface TreeNode<T> {
   data: T;
@@ -117,8 +118,9 @@ export class PagosComponent implements OnInit {
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>,
     private docu: DocumentoService, 
+    private pago: PagoService, 
     private windowService: NbWindowService,
-    //private usrService : LoginService,
+    private usrService : LoginService,
     private servicioCliente : ClienteService,
     private bancoServicio: BancoService) {
       ELEMENT_DATA = []
@@ -182,12 +184,12 @@ export class PagosComponent implements OnInit {
     );
     this.lstFormPago()
   }
-  showToast(position, status) {
+  /*showToast(position, status) {
     this.toastrService.show(
       status || 'Success',
       `Proceso finalizado`,
       { position, status });
-  }
+  }*/
 
 
   clickMontoTotal(row){
@@ -300,11 +302,6 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
         var i = 0
         resp.data.forEach(e => {
           var monto = e.moneda == "B"? e.mn_documento_bf:e.mn_documento_dol
-          // if(e.moneda == "B"){
-          //   monto = e.mn_documento_bf
-          // }else {
-          //   monto = e.mn_documento_dol
-          // }
 
           i++
           ELEMENT_DATA.push( {
@@ -330,8 +327,8 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
   }
 
   ProcesarPago(){
-    //var usr = this.usrService.obtenerUsuario()
-    //this.seriepago = usr.serie
+    var usr = this.usrService.obtenerUsuario()
+    this.seriepago = usr.serie
     if(this.codigo == "")return false
     var d = new Date()
     var fe =  d.toISOString().substring(0,10)
@@ -341,23 +338,22 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       "nu_pago": "",
       "fe_pago": fe + " " + d.toLocaleTimeString('en-US', { hour12: false }),
       "cd_cliente": this.codigo,
-      "cd_usuario": "",
+      "cd_usuario": usr.usuario,
       "st_pago": "1",
-      "ds_observaciones": "",
+      "ds_observaciones": "PRUEBA",
       "st_reversa": 0,
-      "mn_pago_bf": "",
-      "oficina": "",
-      "mn_pago_dol": "",
-      "moneda": "",
-      "fe_pago_servidor": "",
-      "nu_sobrante": "",
-      "mn_sobrante": "",
+      "mn_pago_bf": 0,
+      "oficina": "2",
+      "mn_pago_dol": 0,
+      "moneda": "B",
+      "fe_pago_servidor": "2020-04-27",
+      "nu_sobrante": 0,
+      "mn_sobrante": 0,
       "onetomany": this.DetalleFact,
-      //"manytomany": this.DetalleDoc,
       }
-    this.docu.agregar(obj).subscribe(
+    this.pago.agregar(obj).subscribe(
       (data) => {    
-        this.showToast('top-right', 'success')
+        //this.showToast('top-right', 'success')
         this.lblNumeroPago = data.resp
         this.windowProcesar = this.windowService.open(
           this.frmProcesarPagoTemplate,
@@ -369,7 +365,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       (err) => { 
         console.info(obj)
         console.log(err)
-        this.showToast('top-right', 'warning')
+        //this.showToast('top-right', 'warning')
         console.info( JSON.stringify( obj ) )
       }
     ) 
