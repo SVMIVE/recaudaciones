@@ -566,10 +566,10 @@ export class DocumentosComponent implements OnInit {
         "cd_concepto": this.conceptox,
         "ds_concepto": concepto,
         "nu_cantidad": this.cantidad,
-        "mn_monto_bf": this.total,
-        "mn_monto_s": this.totalus,       
-        "exentos": this.exentox,
-        "pc_iva": this.ivat,
+        "mn_monto_bf": parseFloat(this.total.toFixed(2) ),
+        "mn_monto_s": parseFloat(this.totalus.toFixed(2) ),       
+        "exentos": parseFloat(this.exentox.toFixed(2) ),
+        "pc_iva": this.iva,
         "moneda": 'B',
         "tp_cambio":"BS",
         "cd_cuenta": this.cuenta        
@@ -628,7 +628,7 @@ export class DocumentosComponent implements OnInit {
           this.frmProcesarTemplate,
           { title: 'Documento Generado', hasBackdrop: true, closeOnEsc: true },
           );
-          
+          console.info(data)
           this.limpiarCampos()    
       },
       (err) => { 
