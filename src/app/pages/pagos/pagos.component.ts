@@ -255,8 +255,8 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
           "id_banco": this.banco,
           "fe_tppago": fe,
           "nu_docpago": "",
-          "mn_pago_bf": this.montofact,
-          "mn_pago_dol": this.montofactd,
+          "mn_pago_bf": parseFloat(this.montofact.toFixed(2) ),
+          "mn_pago_dol": parseFloat(this.montofactd.toFixed(2) ),
           "moneda": e.Moneda,
         }
         
@@ -340,7 +340,7 @@ VALUES('299083','00322774',1,1443638.40,0.00,'B')
       "cd_cliente": this.codigo,
       "cd_usuario": usr.usuario,
       "st_pago": "1",
-      "ds_observaciones": "PRUEBA",
+      "ds_observaciones": "PRUEBA PAGO",
       "st_reversa": 0,
       "mn_pago_bf": 0,
       "oficina": "2",

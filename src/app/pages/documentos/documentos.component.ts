@@ -69,7 +69,6 @@ var LSTDetalles = []
 })
 export class DocumentosComponent implements OnInit {
 
-  
   @ViewChild('escClose', { read: TemplateRef  , static: false }) escCloseTemplate: TemplateRef<HTMLElement>;
   @ViewChild('disabledEsc', { read: TemplateRef, static: false }) disabledEscTemplate: TemplateRef<HTMLElement>;
   @ViewChild('frmMensaje', { read: TemplateRef  , static: false }) frmMensajeTemplate: TemplateRef<HTMLElement>;
@@ -81,11 +80,13 @@ export class DocumentosComponent implements OnInit {
   customColumn = 'Opciones';
   defaultColumns = [ 'Numero', 'Fecha', 'Tipo', 'Cliente', 'Codigo', 'Estatus', 'Monto' , 'Iva', 'Moneda'];
   allColumns = [ this.customColumn, ...this.defaultColumns ];
-
   dataSource: NbTreeGridDataSource<FSEntry>;
-
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
+  displayedColumnx: string[] = ['button','Codigo', 'Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva', 'Exento', 'MontoIva', 'Total']
+  displayedColumnCliente: string[] = ['Codigo', 'Nombre', 'Rif']
+  dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
+  dataCliente = new MatTableDataSource<PeriodicCliente>(ELEMENT_CLIENTE)
 
   cantidad = 0
   monto = 0.00
@@ -118,20 +119,12 @@ export class DocumentosComponent implements OnInit {
   baseimponiblex = 0
   selectedItem= '';
   pcIva = "" //Iva global del servicio
-
-  displayedColumnx: string[] = ['button','Codigo', 'Cuenta', 'Concepto', 'Cantidad', 'Monto', 'Iva', 'Exento', 'MontoIva', 'Total']
-  displayedColumnCliente: string[] = ['Codigo', 'Nombre', 'Rif']
-
-  dataSourcesx = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA)
-  dataCliente = new MatTableDataSource<PeriodicCliente>(ELEMENT_CLIENTE)
-
-
+  nfact = ""
   lblcodigo = "" //Codigo de facturar actual seleccionado
   lblresultado = ""
   flipped = false
   lblNumeroDocumento = ''
   esVisible = false
-
   fnumero = "0000000"
   ffecha = "0000000" 
   fcontrol = "000000"
@@ -147,6 +140,7 @@ export class DocumentosComponent implements OnInit {
   ivat = 0
   montobaseimponiblex = 0
   montoivax = 0
+  nu_seniat=""
 
   subscription: Subscription;
 
@@ -503,9 +497,32 @@ export class DocumentosComponent implements OnInit {
   }
   
   facturar(e){
-    this.seniat = "A000000568"
-    this.lblresultado = "Control Seniat: "
     
+    var usr = this.usrService.obtenerUsuario()
+    var d = new Date()
+    var fe =  d.toISOString().substring(0,10)
+    var obj = {
+      "nu_documento": e.lblcodigo,
+      "fe_documento": fe,
+      "st_documento": "A",
+      "cd_usuario": usr.usuario,
+    }
+    //if(e.lblcodigo == "")return false
+    return this.docu.CtrlSeniat(obj).subscribe(
+      
+
+      (data) => { 
+          console.log(data)
+          this.nu_seniat = data.nu_seniat
+          this.seniat = this.nu_seniat
+          this.lblresultado = "Control Seniat: "
+          
+       },
+      (err) => {
+        
+          console.log(err)
+      }
+    )
 
   }
 

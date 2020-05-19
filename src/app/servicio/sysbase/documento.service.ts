@@ -42,5 +42,7 @@ export class DocumentoService {
   agregar(obj : any) : any {
     return this.httpClient.post<any>(this.url +  "sybase/admincontrol/insertjoin", obj)
   }
-
+  CtrlSeniat(obj : any) : any {
+    return this.httpClient.post<any>(this.url +  "sybase/admincontrol/updseniat", obj)
+  }
 }
